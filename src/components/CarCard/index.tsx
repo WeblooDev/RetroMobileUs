@@ -82,13 +82,13 @@ export default function CarCard({
             isHovered ? 'text-[#121221]' : 'text-white'
           }`}
         >
-          <h3 className="font-ivar text-[24px] lg:text-[32px]">{fullModel}</h3>
+          <h3 className=" text-[24px] lg:text-[32px]">{fullModel}</h3>
 
           <div className="mt-2">
-            <p className="font-ivar text-[20px] lg:text-[28px]">
+            <p className=" text-[20px] lg:text-[28px]">
               {hidePrice ? 'Contact for Price' : `$${price.toLocaleString()}/month +TTL`}
             </p>
-            <p className="font-ivar text-[14px] lg:text-[20px]">
+            <p className=" text-[14px] lg:text-[20px]">
               {hidePrice
                 ? ''
                 : `$${downPayment.toLocaleString()} Down Payment / Subject to approval`}

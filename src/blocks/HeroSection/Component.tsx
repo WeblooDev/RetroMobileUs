@@ -36,7 +36,7 @@ export const CustomHeroBlock: React.FC<CustomHeroBlockProps> = ({
       <div className="relative z-20 text-white h-full w-full flex flex-col justify-between md:p-10">
         {/* Top Row */}
         <div className="pt-[150px] flex flex-col xl:flex-row items-center xl:items-center justify-between gap-4 xl:gap-0 text-center xl:text-left w-full">
-          <span className="font-ivar text-2xl md:text-[48px]">{leftText}</span>
+          <span className=" text-2xl md:text-[48px]">{leftText}</span>
 
           <div className="hidden md:block w-1/4 h-px bg-white xl:mx-4" />
 
@@ -45,7 +45,7 @@ export const CustomHeroBlock: React.FC<CustomHeroBlockProps> = ({
 
         {/* Title */}
         <div className="text-center mb-16">
-          <h1 className="font-ivar text-[36px] md:text-[52px] xl:text-[96px] leading-[118%] text-center">
+          <h1 className=" text-[36px] md:text-[52px] xl:text-[96px] leading-[118%] text-center">
             {titleLine1}
             <br />
             {titleLine2}

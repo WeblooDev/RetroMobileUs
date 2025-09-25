@@ -57,11 +57,11 @@ export default function FeatureHighlight({
         <div
           className={`space-y-4 flex flex-col gap-6 justify-between h-full ${imagePosition === 'right' ? 'lg:order-2' : 'lg:order-1'}`}
         >
-          <h2 className="text-4xl font-ivar leading-tight sm:text-5xl md:text-6xl ">{heading}</h2>
+          <h2 className="text-4xl  leading-tight sm:text-5xl md:text-6xl ">{heading}</h2>
           <div className="space-y-6 divide-y divide-white ">
             {features.map((feature, index) => (
               <div key={index} className={index === 0 ? 'pt-0' : 'pt-6'}>
-                <h3 className="text-3xl font-ivar leading-tight">{feature.title}</h3>
+                <h3 className="text-3xl  leading-tight">{feature.title}</h3>
                 <p className="font-inter color-black text-sm md:text-base mt-2">
                   {feature.description}
                 </p>

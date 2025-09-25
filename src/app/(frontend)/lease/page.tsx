@@ -81,7 +81,7 @@ export default async function LeasePage({
       )}
       <div className="container flex flex-1 p-4 lg:p-6 2xl:p-8 flex-col lg:flex-row py-4 lg:py-6 2xl:py-8">
         <div className="flex-1 py-4">
-          <h1 className="text-4xl md:text-6xl font-ivar text-white w-full">
+          <h1 className="text-4xl md:text-6xl  text-white w-full">
             Leasing Made Easy -
             <br />
             Begin Your Next Drive

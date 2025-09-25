@@ -15,7 +15,7 @@ export function TradeIn({ form }: { form: UseFormReturn<any> }) {
         name="hasTrade"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="font-ivar text-lg text-[#121212]">
+            <FormLabel className=" text-lg text-[#121212]">
               Do you have a vehicle to trade in?
             </FormLabel>
             <FormControl>

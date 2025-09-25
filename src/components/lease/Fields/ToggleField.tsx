@@ -15,7 +15,7 @@ export function ToggleField({ form, name, label }: ToggleFieldProps) {
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="font-ivar text-xl text-black">{label}</FormLabel>
+          <FormLabel className=" text-xl text-black">{label}</FormLabel>
           <FormControl>
             <div className="flex gap-4">
               {[true, false].map((val) => (

@@ -104,10 +104,8 @@ const config = {
         warning: 'hsl(var(--warning))',
       },
       fontFamily: {
-        mono: ['var(--font-geist-mono)'],
-        sans: ['var(--font-geist-sans)'],
-        inter: ['var(--font-inter)', 'sans-serif'],
-        ivar: ['IvarDisplayHydro', 'serif'],
+        ivar: ['Ivar', 'serif'],
+        helvetica: ['HelveticaCustom', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {

@@ -110,7 +110,7 @@ export const BestDealStar: React.FC = () => {
             </radialGradient>
           </defs>
         </svg>
-        <div className="absolute flex inset-0 items-center justify-center text-white font-ivar leading-tight text-lg md:text-xl lg:text-2xl pointer-events-none">
+        <div className="absolute flex inset-0 items-center justify-center text-white  leading-tight text-lg md:text-xl lg:text-2xl pointer-events-none">
           <div className="transform rotate-[-5deg]">
             <span className="block">BEST</span>
             <span className="block">DEALS</span>

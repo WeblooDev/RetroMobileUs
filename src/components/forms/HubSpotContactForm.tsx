@@ -104,7 +104,7 @@ const HubSpotContactForm: React.FC<HubSpotContactFormProps> = ({
       />
       <div id={targetId} ref={containerRef} className="w-full h-full ">
         {isLoading && (
-          <div className="w-full h-full flex-1 flex items-center justify-center font-ivar text-xl">
+          <div className="w-full h-full flex-1 flex items-center justify-center  text-xl">
             <div className="flex flex-col items-center justify-center px-4">
               <div className="relative w-24 h-24">
                 {/* Outer circle */}

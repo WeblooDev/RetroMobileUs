@@ -47,7 +47,7 @@ export default function JourneyCTA({
       <section className="container">
         <div className="flex flex-col gap-6 max-w-4xl px-4 py-10 md:py-16">
           <div className="flex flex-col gap-6">
-            <h2 className="text-4xl md:text-6xl font-ivar font-medium">{title}</h2>
+            <h2 className="text-4xl md:text-6xl  font-medium">{title}</h2>
             <p className="max-w-md text-sm md:text-base font-inter">{description}</p>
           </div>
 
@@ -70,8 +70,8 @@ export default function JourneyCTA({
 
       {/* Contact Modal using shadcn Dialog */}
       <Dialog open={showContactModal} onOpenChange={setShowContactModal}>
-        <DialogContent className=" border border-white text-black p-4 md:p-6 lg:p-8 xl:p-10 2xl:p-12 2xl:px-14 shadow-lg max-w-[90%] md:max-w-lg lg:max-w-3xl bg-[#1b1a33] font-ivar">
-          <DialogHeader className=" mb-4 lg:mb-6 2xl:mb-8 flex items-start justify-start font-ivar">
+        <DialogContent className=" border border-white text-black p-4 md:p-6 lg:p-8 xl:p-10 2xl:p-12 2xl:px-14 shadow-lg max-w-[90%] md:max-w-lg lg:max-w-3xl bg-[#1b1a33] ">
+          <DialogHeader className=" mb-4 lg:mb-6 2xl:mb-8 flex items-start justify-start ">
             <DialogTitle className=" text-white text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl max-w-[90%] lg:max-w-full text-start tracking-wide">
               Choose your preferred contact method
             </DialogTitle>

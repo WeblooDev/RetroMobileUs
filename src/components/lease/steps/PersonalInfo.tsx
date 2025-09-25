@@ -6,7 +6,7 @@ import { FormLabel } from '@/components/ui/form'
 export function PersonalInfo({ form }: { form: UseFormReturn<any> }) {
   return (
     <div className="flex flex-col gap-4">
-      <FormLabel className="font-ivar text-lg lg:text-xl 2xl:text-2xl text-black font-thin">
+      <FormLabel className=" text-lg lg:text-xl 2xl:text-2xl text-black font-thin">
         Personal Information
       </FormLabel>
 

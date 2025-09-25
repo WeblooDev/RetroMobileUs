@@ -83,7 +83,7 @@ export const VideoBlockComponent: React.FC<VideoBlockProps> = ({
     <section className="p-4 md:p-8 ">
       <div className="flex flex-col items-center my-8 md:flex-row md:justify-between gap-8 md:my-16">
         <div className="md:w-2/5">
-          <h2 className="font-ivar text-4xl md:text-6xl xl:text-7xl">{title}</h2>
+          <h2 className=" text-4xl md:text-6xl xl:text-7xl">{title}</h2>
         </div>
         <div className="md:w-2/5 flex flex-col items-start">
           <p className="font-inter text-sm md:text-base mb-4">{text}</p>

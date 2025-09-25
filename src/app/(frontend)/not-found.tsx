@@ -31,7 +31,7 @@ export default function NotFound() {
       />
       <div className="absolute inset-0 bg-black bg-opacity-60 z-10" />
       <div className="relative z-20 text-center p-10">
-        <h1 className="font-ivar text-3xl md:text-5xl font-bold mb-4">
+        <h1 className=" text-3xl md:text-5xl font-bold mb-4">
           {'Your Page Cannot Be Located'}
         </h1>
         <p className="font-inter text-base md:text-lg mb-8">

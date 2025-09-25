@@ -12,7 +12,6 @@ import { BreadcrumbLayout } from '@/components/Breadcrumb/BreadcrumbLayout'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
-import LeaseNowButton from '@/components/LeaseNowButton'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -96,7 +95,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <Providers>
           <Header />
           <BreadcrumbLayout>{children}</BreadcrumbLayout>
-          <LeaseNowButton />
 
           <Footer />
         </Providers>

@@ -24,7 +24,7 @@ export function OptionGroup({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="font-ivar text-lg text-[#121212]">{label}</FormLabel>
+          <FormLabel className=" text-lg text-[#121212]">{label}</FormLabel>
           <div
             className={`grid gap-4 ${
               columns === 1

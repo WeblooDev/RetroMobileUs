@@ -2,12 +2,18 @@
 import { Header } from '@/payload-types'
 import { RowLabelProps, useRowLabel } from '@payloadcms/ui'
 
+type NavItem = NonNullable<Header['navItems']>[number]
+
 export const RowLabel: React.FC<RowLabelProps> = () => {
-  const data = useRowLabel<NonNullable<Header['navItems']>[number]>()
+  const row = useRowLabel<NavItem>()
 
-  const label = data?.data?.link?.label
-    ? `Nav item ${data.rowNumber !== undefined ? data.rowNumber + 1 : ''}: ${data?.data?.link?.label}`
-    : 'Row'
+  // Works for both old (link.label) and new (label) schemas
+  const label =
+    (row?.data && 'link' in (row.data as any) && (row.data as any).link?.label) ||
+    (row?.data as any)?.label ||
+    'Row'
 
-  return <div>{label}</div>
+  const index = row?.rowNumber !== undefined ? row.rowNumber + 1 : ''
+
+  return <div>{`Nav item ${index}: ${label}`}</div>
 }

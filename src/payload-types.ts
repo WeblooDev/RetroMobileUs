@@ -355,7 +355,7 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * 📁 Upload images and media files for your content. Images must be at least 300x300 pixels in size.
+ * 📁 Upload media. Raster images (PNG/JPEG/WebP/GIF) must be at least 300×300 px. SVGs and videos are exempt.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -2299,68 +2299,18 @@ export interface Header {
   logo?: (string | null) | Media;
   navItems?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
+        label: string;
         /**
-         * Define dropdown sections that appear when hovering over the main navigation item.
+         * If you leave this empty and add dropdownLinks below, this becomes a dropdown.
          */
-        children?:
+        url?: string | null;
+        /**
+         * If any items exist here, this nav item will render as a dropdown.
+         */
+        dropdownLinks?:
           | {
-              title: string;
-              /**
-               * Optional link for the section title.
-               */
-              link: {
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  newTab?: boolean | null;
-                  reference?:
-                    | ({
-                        relationTo: 'pages';
-                        value: string | Page;
-                      } | null)
-                    | ({
-                        relationTo: 'posts';
-                        value: string | Post;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-              };
-              description?: string | null;
-              links?:
-                | {
-                    link: {
-                      type?: ('reference' | 'custom') | null;
-                      newTab?: boolean | null;
-                      reference?:
-                        | ({
-                            relationTo: 'pages';
-                            value: string | Page;
-                          } | null)
-                        | ({
-                            relationTo: 'posts';
-                            value: string | Post;
-                          } | null);
-                      url?: string | null;
-                      label: string;
-                    };
-                    id?: string | null;
-                  }[]
-                | null;
+              label: string;
+              url: string;
               id?: string | null;
             }[]
           | null;
@@ -2368,9 +2318,29 @@ export interface Header {
       }[]
     | null;
   /**
-   * e.g., "Sign Up", "Get Started", etc.
+   * e.g., "Buy Ticket"
    */
   ctaLink: {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
+  /**
+   * e.g., "Apply to Exhibit"
+   */
+  secondaryCTA: {
     link: {
       type?: ('reference' | 'custom') | null;
       newTab?: boolean | null;
@@ -2467,6 +2437,20 @@ export interface HeaderSelect<T extends boolean = true> {
   navItems?:
     | T
     | {
+        label?: T;
+        url?: T;
+        dropdownLinks?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  ctaLink?:
+    | T
+    | {
         link?:
           | T
           | {
@@ -2476,43 +2460,8 @@ export interface HeaderSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
-        children?:
-          | T
-          | {
-              title?: T;
-              link?:
-                | T
-                | {
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                        };
-                  };
-              description?: T;
-              links?:
-                | T
-                | {
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          newTab?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                        };
-                    id?: T;
-                  };
-              id?: T;
-            };
-        id?: T;
       };
-  ctaLink?:
+  secondaryCTA?:
     | T
     | {
         link?:

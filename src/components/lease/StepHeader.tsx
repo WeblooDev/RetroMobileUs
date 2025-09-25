@@ -9,8 +9,8 @@ interface StepHeaderProps {
 export function StepHeader({ title, currentStep, totalSteps }: StepHeaderProps) {
   return (
     <div className="flex items-center justify-between">
-      <h2 className="font-ivar text-3xl text-[#121212]">{title}</h2>
-      <div className="font-ivar text-3xl ">
+      <h2 className=" text-3xl text-[#121212]">{title}</h2>
+      <div className=" text-3xl ">
         <span className="text-[#121212] ">{String(currentStep).padStart(2, '0')}</span>
         <span className="text-muted-foreground">/{String(totalSteps).padStart(2, '0')}</span>
       </div>

@@ -30,7 +30,7 @@ export const ImageSectionBlockComponent: React.FC<ImageSectionBlock> = ({
 
         {/* Text Content */}
         <div className="relative z-10  text-black">
-          <h2 className="font-ivar text-[36px] md:text-[48px] xl:text-[72px] leading-[100%] mb-8 w-auto md:w-[70%]">
+          <h2 className=" text-[36px] md:text-[48px] xl:text-[72px] leading-[100%] mb-8 w-auto md:w-[70%]">
             {heading}
           </h2>
           <p className="font-inter text-sm text-[18px] w-auto md:w-[40%]">{description}</p>

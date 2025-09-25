@@ -79,14 +79,14 @@ export default function InventoryCarCard({ car }: InventoryCarCardProps) {
           }`}
         >
           <Link href={`/inventory/car/${slug}`}>
-            <h3 className="font-ivar text-2xl lg:text-3xl 2xl:text-4xl cursor-pointer hover:underline">
+            <h3 className=" text-2xl lg:text-3xl 2xl:text-4xl cursor-pointer hover:underline">
               {year} {typeof brand === 'object' && brand ? brand.name : brand} {model}
             </h3>
           </Link>
 
           <div className="mt-2">
             <Link href={`/inventory/car/${slug}`}>
-              <p className="font-ivar text-xl lg:text-2xl cursor-pointer hover:underline">
+              <p className=" text-xl lg:text-2xl cursor-pointer hover:underline">
                 {formatCarPrice(car)}
               </p>
             </Link>

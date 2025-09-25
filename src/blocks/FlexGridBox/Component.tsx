@@ -75,7 +75,7 @@ export default function FlexGridBox({ matrix, className = '', gap = 4 }: FlexGri
                 <div
                   className={`relative z-10 p-4 md:p-8 lg:p-12 xl:p-16 2xl:p-20 h-full flex flex-col justify-end text-black  ${item.flex === 1 ? 'w-full bg-white' : 'w-[auto] md:w-[60%] text-white'}`}
                 >
-                  <h3 className="font-ivar text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-light mb-4 md:mb-6 lg:mb-8">
+                  <h3 className=" text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-light mb-4 md:mb-6 lg:mb-8">
                     {item.title}
                   </h3>
                   <p className="font-inter text-sm md:text-base lg:text-lg  opacity-90">

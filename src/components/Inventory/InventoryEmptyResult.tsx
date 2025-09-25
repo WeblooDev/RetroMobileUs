@@ -7,7 +7,7 @@ export function InventoryEmptyResult() {
   const button1Text: string = 'CONTACT US'
 
   return (
-    <div className="h-full min-h-[40vh] w-full flex items-center justify-center p-4 font-ivar">
+    <div className="h-full min-h-[40vh] w-full flex items-center justify-center p-4 ">
       {/* Content Container */}
       <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-4xl gap-8 sm:gap-6 text-center text-white py-12">
         {/* Title */}

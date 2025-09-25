@@ -38,7 +38,7 @@ export default function SoldCarDetailModal({ car, onClose }: SoldCarDetailModalP
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm font-ivar text-black">
+    <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm  text-black">
       <div className="flex h-screen w-screen items-center justify-center p-4 sm:p-6 md:p-10 lg:p-12">
         <div className="relative bg-white w-full rounded-lg shadow-2xl overflow-hidden flex flex-col lg:flex-row justify-center items-center">
           {/* Close Button */}

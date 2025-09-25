@@ -33,7 +33,7 @@ export default function ContactFormSection({ heading, backgroundImage }: Contact
 
       <div className="flex w-full h-full flex-col justify-center gap-4 min-h-[50vh]">
         {heading && (
-          <h1 className="text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl font-ivar ml-8">
+          <h1 className="text-4xl md:text-5xl xl:text-6xl 2xl:text-7xl  ml-8">
             {heading}
           </h1>
         )}

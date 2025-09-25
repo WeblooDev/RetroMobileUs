@@ -41,14 +41,14 @@ export const CarCarouselItem: FC<CarCarouselItemProps> = ({
             <div className="tracking-normal lg:tracking-widest xl:mt-20 font-bold">
               <div className="flex flex-col">
                 <div className="flex flex-col items-start justify-center gap-1 md:gap-2 lg:gap-3 xl:gap-4">
-                  <h1 className="uppercase font-ivar text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl tracking-widest lg:tracking-[15px]">
+                  <h1 className="uppercase  text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl tracking-widest lg:tracking-[15px]">
                     {car.model}
                   </h1>
-                  <h1 className="font-ivar text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl tracking-widest">
+                  <h1 className=" text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl tracking-widest">
                     ${car.price?.toLocaleString()}/month +TTL
                   </h1>
                 </div>
-                <p className="font-ivar text-base md:text-lg lg:text-xl xl:text-2xl mt-2 tracking-wider">
+                <p className=" text-base md:text-lg lg:text-xl xl:text-2xl mt-2 tracking-wider">
                   ${car.downPayment?.toLocaleString()} Down Payment / Subject to approval
                 </p>
               </div>

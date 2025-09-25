@@ -55,7 +55,7 @@ export default async function SuccessPage() {
       </div>
 
       <div className="flex flex-col items-center justify-center text-center gap-6 bg-white w-fit max-w-4xl p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16 rounded-lg shadow-2xl">
-        <h1 className="text-2xl lg:text-3xl  2xl:text-4xl font-ivar text-[#121212]">
+        <h1 className="text-2xl lg:text-3xl  2xl:text-4xl  text-[#121212]">
           {`Thank You for Your Inquiry!`}
           <br />
           {`We'll get in touch with you as soon as possible.`}

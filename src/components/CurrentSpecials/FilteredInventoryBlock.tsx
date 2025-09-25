@@ -470,7 +470,7 @@ export const FilteredInventoryBlock: React.FC<FilteredInventoryBlockProps> = ({
   return (
     <>
       <section
-        className="w-full flex flex-col h-full container gap-4 lg:gap-6 xl:gap-8 2xl:gap-10 font-ivar mb-8"
+        className="w-full flex flex-col h-full container gap-4 lg:gap-6 xl:gap-8 2xl:gap-10  mb-8"
         ref={topRef}
       >
         <InventoryHeader title={dynamicContent.h1Title} description={dynamicContent.description} />

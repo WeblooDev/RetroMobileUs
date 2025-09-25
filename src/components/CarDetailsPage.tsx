@@ -83,7 +83,7 @@ export default function CarDetailPage({ car }: CarDetailPageProps) {
   )
 
   return (
-    <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 container py-4 md:py-6 lg:py-8 xl:py-10 2xl:py-16 text-white font-ivar">
+    <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 container py-4 md:py-6 lg:py-8 xl:py-10 2xl:py-16 text-white ">
       <div className="grid lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 xl:gap-10 2xl:gap-12 items-start">
         <div className="relative lg:col-span-2">
           {allImages.length > 0 ? (

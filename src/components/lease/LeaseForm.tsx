@@ -76,7 +76,7 @@ export function LeaseForm({ initialData }: { initialData?: Record<string, any> }
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex-1 bg-white p-4 md:p-6 lg:p-8 gap-4 flex flex-col h-full justify-between"
       >
-        <FormLabel className="font-ivar text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl 2xl:mb-6 text-black">
+        <FormLabel className=" text-lg md:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl 2xl:mb-6 text-black">
           Complete And Submit This Form To Begin
         </FormLabel>
 

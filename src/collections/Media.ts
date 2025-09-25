@@ -18,8 +18,9 @@ export const Media: CollectionConfig = {
   },
   admin: {
     description:
-      '📁 Upload images and media files for your content. Images must be at least 300x300 pixels in size.',
+      '📁 Upload media. Raster images (PNG/JPEG/WebP/GIF) must be at least 300×300 px. SVGs and videos are exempt.',
   },
+  
   fields: [
     {
       name: 'alt',
@@ -47,29 +48,37 @@ export const Media: CollectionConfig = {
       },
       defaultValue: 'Validating...',
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // inside fields[].validate for `imageValidation`
       validate: async (value: any, { req }: { req: any }) => {
-        if (req.file) {
-          const validation = await validateImageWithWarnings({
-            file: {
-              buffer: req.file.data,
-              mimetype: req.file.mimetype,
-              size: req.file.size,
-              filename: req.file.name,
-            },
-          })
+        const file = req?.file
+        if (!file) return true
 
-          if (!validation.isValid || validation.warnings.length > 0) {
-            const errorMessage =
-              validation.warnings.length > 1
-                ? `Image too small: ${validation.details.dimensions?.width}×${validation.details.dimensions?.height}px. Minimum required: 300×300px.`
-                : (validation.warnings[0] || 'Image validation failed')
-                    .replace('Image width', 'Width')
-                    .replace('Image height', 'Height')
-            return errorMessage
-          }
+        const mime = String(file.mimetype || '')
+        // ✅ Skip pixel-size validation for SVGs and videos
+        if (mime === 'image/svg+xml' || mime.startsWith('video/')) return true
+
+        // Run your raster validation as-is
+        const validation = await validateImageWithWarnings({
+          file: {
+            buffer: file.data,
+            mimetype: file.mimetype,
+            size: file.size,
+            filename: file.name,
+          },
+        })
+
+        if (!validation.isValid || validation.warnings.length > 0) {
+          const errorMessage =
+            validation.warnings.length > 1
+              ? `Image too small: ${validation.details.dimensions?.width}×${validation.details.dimensions?.height}px. Minimum required: 300×300px.`
+              : (validation.warnings[0] || 'Image validation failed')
+                  .replace('Image width', 'Width')
+                  .replace('Image height', 'Height')
+          return errorMessage
         }
         return true
       },
+
     },
   ],
   upload: {

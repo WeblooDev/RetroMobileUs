@@ -30,7 +30,7 @@ export const FeatureSectionBlockComponent: React.FC<FeatureSectionBlock> = ({
       {/* Content */}
       <div className="relative z-20 container mx-auto px-4 text-center">
         <div className="max-w-3xl mx-auto mb-12">
-          <h2 className="font-ivar text-4xl md:text-5xl lg:text-6xl mb-4">{heading}</h2>
+          <h2 className=" text-4xl md:text-5xl lg:text-6xl mb-4">{heading}</h2>
           <p className="font-inter text-sm md:text-base">{description}</p>
         </div>
 

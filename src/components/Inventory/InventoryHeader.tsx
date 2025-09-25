@@ -48,7 +48,7 @@ const InventoryHeader: React.FC<Props> = ({ title, description, icons }) => {
     <div className="text-white flex flex-col justify-center items-center py-4 md:py-6 h-full">
       <div className="flex flex-col md:flex-row  justify-between items-center w-full">
         <div className="w-full md:w-1/2 lg:w-2/4">
-          <h1 className="font-ivar tracking-wide text-white text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl lg:leading-[50px]">
+          <h1 className=" tracking-wide text-white text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl lg:leading-[50px]">
             {title}
           </h1>
         </div>

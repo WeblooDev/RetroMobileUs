@@ -18,7 +18,7 @@ export const TwoImageColumn: React.FC<TwoImageColumnProps> = ({
       {/* Top section */}
       <div className="flex flex-col gap-5 md:flex-row p-6 md:pb-16 justify-between items-center">
         <div className="flex w-full">
-          <h1 className="w-full text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-ivar text-white">
+          <h1 className="w-full text-3xl md:text-4xl lg:text-5xl xl:text-6xl  text-white">
             {topTitle}
           </h1>
         </div>
@@ -43,7 +43,7 @@ export const TwoImageColumn: React.FC<TwoImageColumnProps> = ({
         {/* Text Block */}
         <div className="flex flex-col w-auto md:w-[35%] h-full">
           <div className="h-[65%] p-8 flex flex-col justify-center bg-[white]">
-            <h2 className="mb-3 text-4xl md:text-5xl xl:text-6xl font-ivar text-black">
+            <h2 className="mb-3 text-4xl md:text-5xl xl:text-6xl  text-black">
               {approachTitle}
             </h2>
             <p className="font-inter text-sm md:text-base text-black">{approachText}</p>
