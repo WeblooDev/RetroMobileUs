@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /search
+Disallow: /?s=
+Disallow: /page//?s=
+Disallow: /_next/
+Disallow: /api/
+Disallow: /.pdf$
+
+Allow: /_next/static/
+
+Sitemap: https://leasing.dupontregistry.com/sitemap.xml

@@ -12,6 +12,7 @@ import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { CustomHeroBlock } from '@/blocks/HeroSection/config'
 
 import {
   MetaDescriptionField,
@@ -20,6 +21,22 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { FlexGridBox } from '@/blocks/FlexGridBox/config'
+import { ImageSectionBlock } from '@/blocks/ImageSection/config'
+import { FeatureSectionBlock } from '@/blocks/FeatureSection/config'
+import { CarsCarousel } from '@/blocks/CarsCarousel/config'
+import AboutUsBlock from '@/blocks/AboutUsBlock/config'
+import JourneyCTA from '@/blocks/JourneyCTA/config'
+
+import { TwoImageColumn } from '@/blocks/TwoImageColumn/config'
+
+import TestimonialCarouselBlock from '@/blocks/TestimonialsCarousel/config'
+import FeatureHighlight from '@/blocks/FeatureHighlight/config'
+import { VideoBlock } from '@/blocks/VideoBlock/config'
+import SecondaryHeroBlock from '@/blocks/SecondaryHeroBlock/config'
+import ContactFormBlock from '@/blocks/ContactForm/config'
+import { InventoryBlock } from '@/blocks/InventoryBlock/config'
+import { HeroCarsCarousel } from '@/blocks/HeroCarsCarousel/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -75,7 +92,28 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                FormBlock,
+                CustomHeroBlock,
+                FlexGridBox,
+                ImageSectionBlock,
+                FeatureSectionBlock,
+                CarsCarousel,
+                AboutUsBlock,
+                JourneyCTA,
+                TwoImageColumn,
+                TestimonialCarouselBlock,
+                FeatureHighlight,
+                VideoBlock,
+                SecondaryHeroBlock,
+                ContactFormBlock,
+                InventoryBlock,
+                HeroCarsCarousel,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

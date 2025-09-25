@@ -9,8 +9,18 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
   ],
-  darkMode: ['selector', '[data-theme="dark"]'],
-  plugins: [tailwindcssAnimate, typography],
+  darkMode: ['selector', '[data-theme="dark"]', 'class'],
+  plugins: [
+    tailwindcssAnimate,
+    typography,
+    function ({ addComponents }) {
+      addComponents({
+        '.detail-row': {
+          '@apply flex justify-between border-b border-gray-700 pb-2': {},
+        },
+      })
+    },
+  ],
   prefix: '',
   safelist: [
     'lg:col-span-4',
@@ -38,9 +48,9 @@ const config = {
         xl: '2rem',
       },
       screens: {
-        '2xl': '86rem',
+        '2xl': '1700px',
         lg: '64rem',
-        md: '48rem',
+        md: '52rem',
         sm: '40rem',
         xl: '80rem',
       },
@@ -96,18 +106,28 @@ const config = {
       fontFamily: {
         mono: ['var(--font-geist-mono)'],
         sans: ['var(--font-geist-sans)'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        ivar: ['IvarDisplayHydro', 'serif'],
       },
       keyframes: {
         'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+          from: {
+            height: '0',
+          },
+          to: {
+            height: 'var(--radix-accordion-content-height)',
+          },
         },
         'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: {
+            height: '0',
+          },
         },
       },
-      typography: () => ({
+      typography: {
         DEFAULT: {
           css: [
             {
@@ -145,7 +165,7 @@ const config = {
             },
           ],
         },
-      }),
+      },
     },
   },
 }

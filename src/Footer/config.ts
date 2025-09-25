@@ -1,5 +1,4 @@
 import type { GlobalConfig } from 'payload'
-
 import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
 
@@ -10,20 +9,109 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: 'navItems',
+      name: 'logo',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      required: false,
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'secondaryDescription',
+      type: 'textarea',
+      required: false,
+      admin: {
+        hidden: true,
+      },
+    },
+    {
+      name: 'icons',
+      label: 'Social Icons',
       type: 'array',
+      required: false,
       fields: [
+        {
+          name: 'label',
+          label: 'Icon Label',
+          type: 'text',
+          required: false,
+          admin: {
+            placeholder: 'e.g., Instagram, LinkedIn, YouTube',
+          },
+        },
+        {
+          name: 'icon',
+          label: 'Icon Image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'url',
+          label: 'Icon URL',
+          type: 'text',
+          required: true,
+          admin: {
+            placeholder: 'https://your-link.com',
+          },
+        },
+      ],
+    },
+    {
+      name: 'cta',
+      type: 'group',
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          required: false,
+        },
         link({
           appearances: false,
         }),
       ],
-      maxRows: 6,
+    },
+    {
+      name: 'copyright',
+      label: 'Copyright Text',
+      type: 'text',
+      required: false,
+      admin: {
+        description: 'Enter full copyright line (e.g., © 2025 Your Brand. All rights reserved.)',
+      },
+    },
+    {
+      name: 'linkGroups',
+      type: 'array',
+      required: false,
       admin: {
         initCollapsed: true,
-        components: {
-          RowLabel: '@/Footer/RowLabel#RowLabel',
-        },
       },
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'links',
+          type: 'array',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            link({
+              appearances: false,
+            }),
+          ],
+        },
+      ],
     },
   ],
   hooks: {

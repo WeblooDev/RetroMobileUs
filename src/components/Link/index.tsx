@@ -32,34 +32,25 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     size: sizeFromProps,
     url,
   } = props
-
   const href =
     type === 'reference' && typeof reference?.value === 'object' && reference.value.slug
-      ? `${reference?.relationTo !== 'pages' ? `/${reference?.relationTo}` : ''}/${
-          reference.value.slug
-        }`
+      ? `${reference?.relationTo !== 'pages' ? `/${reference?.relationTo}` : ''}/${reference.value.slug}`
       : url
-
   if (!href) return null
-
-  const size = appearance === 'link' ? 'clear' : sizeFromProps
+  const size = sizeFromProps
+  const variant = appearance === 'inline' ? 'link' : appearance
   const newTabProps = newTab ? { rel: 'noopener noreferrer', target: '_blank' } : {}
-
-  /* Ensure we don't break any styles set by richText */
   if (appearance === 'inline') {
     return (
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
-        {label && label}
-        {children && children}
+      <Link className={cn(className)} href={href || ''} {...newTabProps}>
+        {children ?? label}
       </Link>
     )
   }
-
   return (
-    <Button asChild className={className} size={size} variant={appearance}>
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
-        {label && label}
-        {children && children}
+    <Button asChild className={className} size={size} variant={variant}>
+      <Link className={cn(className)} href={href || ''} {...newTabProps}>
+        {children ?? label}
       </Link>
     </Button>
   )

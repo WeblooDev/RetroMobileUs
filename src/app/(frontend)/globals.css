@@ -89,7 +89,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    @apply bg-[#121221] !text-white text-foreground min-h-[100vh] flex flex-col;
   }
 }
 
@@ -100,4 +100,17 @@ html {
 html[data-theme='dark'],
 html[data-theme='light'] {
   opacity: initial;
+}
+
+.transition-all {
+  transition-property: all;
+  transition-duration: 300ms;
+}
+
+@font-face {
+  font-family: 'IvarDisplayHydro';
+  src: url('/fonts/IvarDisplayHydro-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }

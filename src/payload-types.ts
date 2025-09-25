@@ -72,6 +72,10 @@ export interface Config {
     media: Media;
     categories: Category;
     users: User;
+    cars: Car;
+    brands: Brand;
+    reviews: Review;
+    'page-settings': PageSetting;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -88,6 +92,10 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    cars: CarsSelect<false> | CarsSelect<true>;
+    brands: BrandsSelect<false> | BrandsSelect<true>;
+    reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    'page-settings': PageSettingsSelect<false> | PageSettingsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -154,7 +162,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: any;
+          type: string;
           version: number;
           [k: string]: unknown;
         }[];
@@ -191,7 +199,99 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | CustomHeroBlock
+    | FlexGridBoxBlock
+    | ImageSectionBlock
+    | FeatureSectionBlock
+    | CarsCarousel
+    | {
+        title: string;
+        description?: string | null;
+        button?: {
+          label?: string | null;
+          href?: string | null;
+        };
+        image: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'aboutUsBlock';
+      }
+    | {
+        title: string;
+        description?: string | null;
+        buttons?:
+          | {
+              label: string;
+              href: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'journeyCTA';
+      }
+    | TwoImageColumn
+    | {
+        backgroundImage: string | Media;
+        title: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'testimonialCarousel';
+      }
+    | {
+        heading: string;
+        image: string | Media;
+        features?:
+          | {
+              title: string;
+              description: string;
+              id?: string | null;
+            }[]
+          | null;
+        button?: {
+          label?: string | null;
+          href?: string | null;
+        };
+        imagePosition: 'left' | 'right';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featureHighlight';
+      }
+    | VideoBlock
+    | {
+        /**
+         * Full-width background image
+         */
+        backgroundImage: string | Media;
+        /**
+         * Main heading text (e.g. “Everything you Need to Know”)
+         */
+        title: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'secondaryHero';
+      }
+    | {
+        heading?: string | null;
+        backgroundImage: string | Media;
+        cardTitle?: string | null;
+        cardPhone?: string | null;
+        cardEmail?: string | null;
+        cardAddress1?: string | null;
+        cardAddress2?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contactForm';
+      }
+    | InventoryBlock
+    | HeroCarsCarousel
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -219,7 +319,7 @@ export interface Post {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -255,17 +355,19 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * 📁 Upload images and media files for your content. Images must be at least 300x300 pixels in size.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: string;
-  alt?: string | null;
+  alt: string;
   caption?: {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -276,6 +378,10 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * This field validates that uploaded images meet the minimum size requirements.
+   */
+  imageValidation?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -376,6 +482,9 @@ export interface User {
   name?: string | null;
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -383,13 +492,6 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
   password?: string | null;
 }
 /**
@@ -401,7 +503,7 @@ export interface CallToActionBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -452,7 +554,7 @@ export interface ContentBlock {
           root: {
             type: string;
             children: {
-              type: any;
+              type: string;
               version: number;
               [k: string]: unknown;
             }[];
@@ -509,7 +611,7 @@ export interface ArchiveBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -545,7 +647,7 @@ export interface FormBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -602,7 +704,7 @@ export interface Form {
               root: {
                 type: string;
                 children: {
-                  type: any;
+                  type: string;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -685,7 +787,7 @@ export interface Form {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
@@ -717,7 +819,7 @@ export interface Form {
           root: {
             type: string;
             children: {
-              type: any;
+              type: string;
               version: number;
               [k: string]: unknown;
             }[];
@@ -731,6 +833,306 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CustomHeroBlock".
+ */
+export interface CustomHeroBlock {
+  backgroundImage: string | Media;
+  leftText: string;
+  rightSmallText?: string | null;
+  titleLine1: string;
+  titleLine2: string;
+  link?: string | null;
+  linkText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'customhero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FlexGridBoxBlock".
+ */
+export interface FlexGridBoxBlock {
+  gap?: number | null;
+  matrix?:
+    | {
+        items?:
+          | {
+              title: string;
+              subtitle: string;
+              flex: number;
+              bgColor?: string | null;
+              textAlign?: ('start' | 'end') | null;
+              img?: (string | null) | Media;
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose how the link should be rendered.
+                 */
+                appearance?: ('default' | 'outline') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'flexGridBox';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSectionBlock".
+ */
+export interface ImageSectionBlock {
+  backgroundImage: string | Media;
+  heading: string;
+  description: string;
+  link: string;
+  linkText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'image-section';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureSectionBlock".
+ */
+export interface FeatureSectionBlock {
+  backgroundImage: string | Media;
+  heading: string;
+  description: string;
+  link: string;
+  features: {
+    icon: string | Media;
+    title: string;
+    id?: string | null;
+  }[];
+  buttonText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featureSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarsCarousel".
+ */
+export interface CarsCarousel {
+  title: string;
+  subTitle: string;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'carsCarousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TwoImageColumn".
+ */
+export interface TwoImageColumn {
+  topTitle: string;
+  topText: string;
+  image1: string | Media;
+  image2: string | Media;
+  approachTitle: string;
+  approachText: string;
+  quote: string;
+  quoteAttribution?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'twoImageColumn';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoBlock".
+ */
+export interface VideoBlock {
+  title: string;
+  text: string;
+  buttonText: string;
+  buttonLink: string;
+  video: string | Media;
+  poster?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'videoblock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InventoryBlock".
+ */
+export interface InventoryBlock {
+  title: string;
+  description: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'inventoryBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroCarsCarousel".
+ */
+export interface HeroCarsCarousel {
+  image: string | Media;
+  header: string;
+  title: string;
+  innerTitle?: string | null;
+  text?: string | null;
+  inventoryStyle?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroCarsCarousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cars".
+ */
+export interface Car {
+  id: string;
+  model: string;
+  trim?: string | null;
+  slug: string;
+  description?: string | null;
+  year: number;
+  price: number;
+  msrp?: number | null;
+  annualMileage?: number | null;
+  term?: number | null;
+  downPayment: number;
+  /**
+   * Choose how this vehicle will be leased
+   */
+  leaseType: 'monthly' | 'single-pay';
+  /**
+   * Enter the total one-pay lease amount (upfront)
+   */
+  onePayAmount?: number | null;
+  /**
+   * Optional: Enter specific TTL amount, or leave blank to show "+TTL"
+   */
+  ttlAmount?: number | null;
+  /**
+   * Main image for the vehicle (legacy field - consider using Images Gallery below for multiple photos)
+   */
+  image?: (string | null) | Media;
+  /**
+   * Upload multiple images for this vehicle. You can select and upload multiple files at once.
+   */
+  images?:
+    | {
+        /**
+         * Select multiple files to upload them all at once
+         */
+        image: string | Media;
+        /**
+         * Alternative text for accessibility (optional)
+         */
+        alt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  availability: 'available' | 'sold' | 'new_arrival' | 'best_deal';
+  condition: 'new' | 'preowned' | 'demo';
+  brand?: (string | null) | Brand;
+  lease_term?: number | null;
+  /**
+   * When enabled, the price will be hidden and "Contact for Price" will be displayed instead.
+   */
+  hidePrice: boolean;
+  hidden: boolean;
+  /**
+   * Add custom notes that will appear in the Details section
+   */
+  notes?:
+    | {
+        note: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
+export interface Brand {
+  id: string;
+  name: string;
+  slug: string;
+  logo?: (string | null) | Media;
+  cars?: (string | Car)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews".
+ */
+export interface Review {
+  id: string;
+  profilePic: string | Media;
+  name: string;
+  address: string;
+  date: string;
+  /**
+   * Rating from 1 to 5 stars
+   */
+  rating: number;
+  text: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-settings".
+ */
+export interface PageSetting {
+  id: string;
+  page: string;
+  title: string;
+  background?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -800,9 +1202,8 @@ export interface Search {
   categories?:
     | {
         relationTo?: string | null;
-        categoryID?: string | null;
-        title?: string | null;
         id?: string | null;
+        title?: string | null;
       }[]
     | null;
   updatedAt: string;
@@ -928,6 +1329,22 @@ export interface PayloadLockedDocument {
         value: string | User;
       } | null)
     | ({
+        relationTo: 'cars';
+        value: string | Car;
+      } | null)
+    | ({
+        relationTo: 'brands';
+        value: string | Brand;
+      } | null)
+    | ({
+        relationTo: 'reviews';
+        value: string | Review;
+      } | null)
+    | ({
+        relationTo: 'page-settings';
+        value: string | PageSetting;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: string | Redirect;
       } | null)
@@ -1025,6 +1442,96 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        customhero?: T | CustomHeroBlockSelect<T>;
+        flexGridBox?: T | FlexGridBoxBlockSelect<T>;
+        'image-section'?: T | ImageSectionBlockSelect<T>;
+        featureSection?: T | FeatureSectionBlockSelect<T>;
+        carsCarousel?: T | CarsCarouselSelect<T>;
+        aboutUsBlock?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        journeyCTA?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              buttons?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        twoImageColumn?: T | TwoImageColumnSelect<T>;
+        testimonialCarousel?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featureHighlight?:
+          | T
+          | {
+              heading?: T;
+              image?: T;
+              features?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              button?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              imagePosition?: T;
+              id?: T;
+              blockName?: T;
+            };
+        videoblock?: T | VideoBlockSelect<T>;
+        secondaryHero?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactForm?:
+          | T
+          | {
+              heading?: T;
+              backgroundImage?: T;
+              cardTitle?: T;
+              cardPhone?: T;
+              cardEmail?: T;
+              cardAddress1?: T;
+              cardAddress2?: T;
+              id?: T;
+              blockName?: T;
+            };
+        inventoryBlock?: T | InventoryBlockSelect<T>;
+        heroCarsCarousel?: T | HeroCarsCarouselSelect<T>;
       };
   meta?:
     | T
@@ -1126,6 +1633,169 @@ export interface FormBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CustomHeroBlock_select".
+ */
+export interface CustomHeroBlockSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  leftText?: T;
+  rightSmallText?: T;
+  titleLine1?: T;
+  titleLine2?: T;
+  link?: T;
+  linkText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FlexGridBoxBlock_select".
+ */
+export interface FlexGridBoxBlockSelect<T extends boolean = true> {
+  gap?: T;
+  matrix?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              flex?: T;
+              bgColor?: T;
+              textAlign?: T;
+              img?: T;
+              enableLink?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSectionBlock_select".
+ */
+export interface ImageSectionBlockSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  heading?: T;
+  description?: T;
+  link?: T;
+  linkText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeatureSectionBlock_select".
+ */
+export interface FeatureSectionBlockSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  heading?: T;
+  description?: T;
+  link?: T;
+  features?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        id?: T;
+      };
+  buttonText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CarsCarousel_select".
+ */
+export interface CarsCarouselSelect<T extends boolean = true> {
+  title?: T;
+  subTitle?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TwoImageColumn_select".
+ */
+export interface TwoImageColumnSelect<T extends boolean = true> {
+  topTitle?: T;
+  topText?: T;
+  image1?: T;
+  image2?: T;
+  approachTitle?: T;
+  approachText?: T;
+  quote?: T;
+  quoteAttribution?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoBlock_select".
+ */
+export interface VideoBlockSelect<T extends boolean = true> {
+  title?: T;
+  text?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  video?: T;
+  poster?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InventoryBlock_select".
+ */
+export interface InventoryBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroCarsCarousel_select".
+ */
+export interface HeroCarsCarouselSelect<T extends boolean = true> {
+  image?: T;
+  header?: T;
+  title?: T;
+  innerTitle?: T;
+  text?: T;
+  inventoryStyle?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1162,6 +1832,7 @@ export interface PostsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  imageValidation?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -1276,6 +1947,9 @@ export interface UsersSelect<T extends boolean = true> {
   name?: T;
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
@@ -1283,13 +1957,84 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
-  sessions?:
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cars_select".
+ */
+export interface CarsSelect<T extends boolean = true> {
+  model?: T;
+  trim?: T;
+  slug?: T;
+  description?: T;
+  year?: T;
+  price?: T;
+  msrp?: T;
+  annualMileage?: T;
+  term?: T;
+  downPayment?: T;
+  leaseType?: T;
+  onePayAmount?: T;
+  ttlAmount?: T;
+  image?: T;
+  images?:
     | T
     | {
+        image?: T;
+        alt?: T;
         id?: T;
-        createdAt?: T;
-        expiresAt?: T;
       };
+  availability?: T;
+  condition?: T;
+  brand?: T;
+  lease_term?: T;
+  hidePrice?: T;
+  hidden?: T;
+  notes?:
+    | T
+    | {
+        note?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands_select".
+ */
+export interface BrandsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  logo?: T;
+  cars?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "reviews_select".
+ */
+export interface ReviewsSelect<T extends boolean = true> {
+  profilePic?: T;
+  name?: T;
+  address?: T;
+  date?: T;
+  rating?: T;
+  text?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "page-settings_select".
+ */
+export interface PageSettingsSelect<T extends boolean = true> {
+  page?: T;
+  title?: T;
+  background?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1476,9 +2221,8 @@ export interface SearchSelect<T extends boolean = true> {
     | T
     | {
         relationTo?: T;
-        categoryID?: T;
-        title?: T;
         id?: T;
+        title?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1552,6 +2296,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  logo?: (string | null) | Media;
   navItems?:
     | {
         link: {
@@ -1569,9 +2314,79 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        /**
+         * Define dropdown sections that appear when hovering over the main navigation item.
+         */
+        children?:
+          | {
+              title: string;
+              /**
+               * Optional link for the section title.
+               */
+              link: {
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  newTab?: boolean | null;
+                  reference?:
+                    | ({
+                        relationTo: 'pages';
+                        value: string | Page;
+                      } | null)
+                    | ({
+                        relationTo: 'posts';
+                        value: string | Post;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+              };
+              description?: string | null;
+              links?:
+                | {
+                    link: {
+                      type?: ('reference' | 'custom') | null;
+                      newTab?: boolean | null;
+                      reference?:
+                        | ({
+                            relationTo: 'pages';
+                            value: string | Page;
+                          } | null)
+                        | ({
+                            relationTo: 'posts';
+                            value: string | Post;
+                          } | null);
+                      url?: string | null;
+                      label: string;
+                    };
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
+  /**
+   * e.g., "Sign Up", "Get Started", etc.
+   */
+  ctaLink: {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1581,23 +2396,62 @@ export interface Header {
  */
 export interface Footer {
   id: string;
-  navItems?:
+  logo?: (string | null) | Media;
+  description?: string | null;
+  secondaryDescription?: string | null;
+  icons?:
     | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
+        label?: string | null;
+        icon: string | Media;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  cta: {
+    label?: string | null;
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+  };
+  /**
+   * Enter full copyright line (e.g., © 2025 Your Brand. All rights reserved.)
+   */
+  copyright?: string | null;
+  linkGroups?:
+    | {
+        title: string;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1609,6 +2463,7 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
   navItems?:
     | T
     | {
@@ -1621,18 +2476,43 @@ export interface HeaderSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        children?:
+          | T
+          | {
+              title?: T;
+              link?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                  };
+              description?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
         id?: T;
       };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "footer_select".
- */
-export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  ctaLink?:
     | T
     | {
         link?:
@@ -1643,6 +2523,60 @@ export interface FooterSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  description?: T;
+  secondaryDescription?: T;
+  icons?:
+    | T
+    | {
+        label?: T;
+        icon?: T;
+        url?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+      };
+  copyright?: T;
+  linkGroups?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };
@@ -1682,7 +2616,7 @@ export interface BannerBlock {
     root: {
       type: string;
       children: {
-        type: any;
+        type: string;
         version: number;
         [k: string]: unknown;
       }[];
