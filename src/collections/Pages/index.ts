@@ -37,6 +37,10 @@ import SecondaryHeroBlock from '@/blocks/SecondaryHeroBlock/config'
 import ContactFormBlock from '@/blocks/ContactForm/config'
 import { InventoryBlock } from '@/blocks/InventoryBlock/config'
 import { HeroCarsCarousel } from '@/blocks/HeroCarsCarousel/config'
+import { ComingSoonBlock } from '@/blocks/ComingSoonBlock/config'
+import { TwoColumnCTA } from '@/blocks/TwoColumnCTA/config'
+import { LineBlock } from '@/blocks/LineBlock/config'
+import { VideoCta } from '@/blocks/VideoCta/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -113,6 +117,10 @@ export const Pages: CollectionConfig<'pages'> = {
                 ContactFormBlock,
                 InventoryBlock,
                 HeroCarsCarousel,
+                ComingSoonBlock,
+                TwoColumnCTA,
+                LineBlock,
+                VideoCta
               ],
               required: true,
               admin: {

@@ -5,6 +5,11 @@ import { Button } from '@/components/ui/button'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useScrollHeader } from './useScrollHeader'
+import { Media } from '@/components/Media'
+import { useRef } from 'react'
+
+import { CTAButton } from '@/components/CTAButton'
+
 
 export type V0DropdownItem = { name: string; href: string }
 export type V0NavItem = {
@@ -14,20 +19,41 @@ export type V0NavItem = {
   dropdownItems?: V0DropdownItem[]
 }
 
+// Component.client.tsx (or shared types)
+// HeaderClientV0.tsx
 export type HeaderV0Props = {
-  logo?: { title: string; subtitle?: string } | null
-  nav: V0NavItem[]
+  logoResource: any;            // Payload media relation (populated doc or ID)
+  nav: V0NavItem[];
   ctas?: {
-    primary?: { label: string; href: string }
-    secondary?: { label: string; href: string }
-  }
+    primary?: { label: string; href: string };
+    secondary?: { label: string; href: string };
+  };
 }
 
-export default function HeaderClientV0({ logo, nav, ctas }: HeaderV0Props) {
+
+
+export default function HeaderClientV0({ logoResource, nav, ctas }: HeaderV0Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null)
   const isVisible = useScrollHeader()
+
+
+    // inside component
+    const closeTimerRef = useRef<number | null>(null)
+    const GAP_PX = 30 // <-- control the gap here (px)
+
+    const open = (name: string) => {
+      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+      setOpenDropdown(name)
+    }
+    const scheduleClose = () => {
+      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = window.setTimeout(() => setOpenDropdown(null), 120)
+    }
+    const cancelClose = () => {
+      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+    }
 
   return (
     <header
@@ -36,82 +62,94 @@ export default function HeaderClientV0({ logo, nav, ctas }: HeaderV0Props) {
         isVisible ? 'translate-y-0' : '-translate-y-full',
       )}
     >
-      <div className="bg-black text-white backdrop-blur-sm border-b border-header-muted/20 font-ivar">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div className="bg-black/60 backdrop-blur-[20px] text-white">
+     <div className="px-8 py-2">
           <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
-            <div className="flex-shrink-0 text-header-foreground">
-              <div className="text-xl font-bold tracking-tight">{logo?.title ?? 'SITE NAME'}</div>
-              {logo?.subtitle ? (
-                <div className="text-xs text-header-muted tracking-wider">{logo.subtitle}</div>
-              ) : null}
+
+            <div>            
+              <a href="/" >
+                <Media
+                  resource={logoResource}
+                  alt="Logo"
+                  priority
+                  imgClassName="h-auto w-auto "
+                />
+              </a>
             </div>
 
-            {/* Desktop Navigation */}
+
             <nav className=" hidden md:flex justify-center items-center ">
               {nav.map((item) => (
-                <div key={item.name} className="relative flex items-center justify-center">
-                  {item.hasDropdown && item.dropdownItems?.length ? (
-                    <div
-                      className="relative flex"
-                      onMouseEnter={() => setOpenDropdown(item.name)}
-                      onMouseLeave={() => setOpenDropdown((v) => (v === item.name ? null : v))}
-                    >
-                      <button className="!font-ivar flex items-center text-sm py-2 px-4 hover:bg-[#8B9B5C]">
-                        {item.name}
-                        <ChevronDown className="ml-1 h-4 w-4" />
-                      </button>
-                      {openDropdown === item.name && (
-                        <div className="absolute mt-[4rem] left-0 bg-[#8B9B5C6B] backdrop-blur-sm border border-[#8B9B5C] rounded-md shadow-lg p-4">
-                          <div className="absolute -top-6 left-0 right-0 h-4 bg-transparent" />
-                          <div className="py-2">
-                            {item.dropdownItems.map((dd) => (
-                              <a
-                                key={dd.name}
-                                href={dd.href}
-                                className="!font-ivar block text-sm hover:bg-[#8B9B5C] px-4 py-2   uppercase "
-                              >
-                                {dd.name}
-                              </a>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <a
-                      href={item.href ?? '#'}
-                      className="!font-ivar text-sm uppercase hover:bg-[#8B9B5C] px-4 py-2"
-                    >
-                      {item.name}
-                    </a>
-                  )}
-                </div>
+             <div key={item.name} className="relative flex items-center justify-center">
+             {item.hasDropdown && item.dropdownItems?.length ? (
+               <div
+                 className="relative"
+                 onMouseEnter={() => { cancelClose(); open(item.name) }}
+                 onMouseLeave={scheduleClose}
+               >
+                 <button className="!font-ivar flex items-center text-sm py-2 px-4 hover:bg-[#8B9B5C]">
+                   {item.name}
+                   <ChevronDown className="ml-1 h-4 w-4" />
+                 </button>
+           
+                 {openDropdown === item.name && (
+                   <div
+                     // real gap using calc so we don't rely on margin
+                     className="absolute left-0"
+                     style={{ top: `calc(100% + ${GAP_PX}px)` }}
+                     onMouseEnter={cancelClose}
+                     onMouseLeave={scheduleClose}
+                   >
+                     {/* Invisible hover bridge that fills the gap exactly */}
+                     <div
+                       className="absolute left-0 right-0 bg-transparent"
+                       style={{ height: GAP_PX, top: `-${GAP_PX}px` }}
+                       aria-hidden
+                     />
+           
+                     <div className="bg-[#8B9B5C6B] backdrop-blur-sm border border-[#8B9B5C] ">
+                       <div className="">
+                         {item.dropdownItems.map((dd) => (
+                           <a
+                             key={dd.name}
+                             href={dd.href}
+                             className="!font-ivar block text-sm hover:bg-[#8B9B5C] px-6 py-2 uppercase"
+                           >
+                             {dd.name}
+                           </a>
+                         ))}
+                       </div>
+                     </div>
+                   </div>
+                 )}
+               </div>
+             ) : (
+               <a
+                 href={item.href ?? '#'}
+                 className="!font-ivar text-sm uppercase hover:bg-[#8B9B5C] px-4 py-2"
+               >
+                 {item.name}
+               </a>
+             )}
+           </div>
+             
               ))}
             </nav>
 
             {/* Desktop CTAs */}
             <div className="hidden md:flex md:items-center md:space-x-4">
-              {ctas?.primary && (
-                <Button
-                  asChild
-                  className="bg-header-accent hover:bg-header-accent/90 text-header-background font-medium px-6"
-                  size="sm"
-                >
-                  <a href={ctas.primary.href}>{ctas.primary.label}</a>
-                </Button>
-              )}
-              {ctas?.secondary && (
-                <Button
-                  asChild
-                  variant="outline"
-                  className="border-header-muted text-header-foreground hover:bg-header-muted/10 font-medium px-6 bg-transparent"
-                  size="sm"
-                >
-                  <a href={ctas.secondary.href}>{ctas.secondary.label}</a>
-                </Button>
-              )}
-            </div>
+          {ctas?.primary && (
+            <CTAButton href={ctas.primary.href} variant="olive">
+              {ctas.primary.label}
+            </CTAButton>
+          )}
+          {ctas?.secondary && (
+            <CTAButton href={ctas.secondary.href} variant="outlineWhite">
+              {ctas.secondary.label}
+            </CTAButton>
+          )}
+        </div>
+
 
             {/* Mobile Toggle */}
             <div className="md:hidden">

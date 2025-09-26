@@ -291,6 +291,63 @@ export interface Page {
       }
     | InventoryBlock
     | HeroCarsCarousel
+    | {
+        backgroundImage: string | Media;
+        title: string;
+        countdownMonth: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
+        /**
+         * Day of month (1–31). We will clamp to valid days for the chosen month.
+         */
+        countdownDay: number;
+        primaryButton: {
+          label: string;
+          url: string;
+        };
+        secondaryButton: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'comingSoonBlock';
+      }
+    | {
+        title: string;
+        button: {
+          label: string;
+          url: string;
+        };
+        /**
+         * Enter plain text only (no formatting).
+         */
+        paragraph: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'twoColumnCTA';
+      }
+    | {
+        color?: string | null;
+        duration?: number | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'lineBlock';
+      }
+    | {
+        video: string | Media;
+        poster?: (string | null) | Media;
+        title: string;
+        /**
+         * Plain text only.
+         */
+        paragraph: string;
+        button: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'videoCta';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -1532,6 +1589,66 @@ export interface PagesSelect<T extends boolean = true> {
             };
         inventoryBlock?: T | InventoryBlockSelect<T>;
         heroCarsCarousel?: T | HeroCarsCarouselSelect<T>;
+        comingSoonBlock?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              countdownMonth?: T;
+              countdownDay?: T;
+              primaryButton?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        twoColumnCTA?:
+          | T
+          | {
+              title?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              paragraph?: T;
+              id?: T;
+              blockName?: T;
+            };
+        lineBlock?:
+          | T
+          | {
+              color?: T;
+              duration?: T;
+              id?: T;
+              blockName?: T;
+            };
+        videoCta?:
+          | T
+          | {
+              video?: T;
+              poster?: T;
+              title?: T;
+              paragraph?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T

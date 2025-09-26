@@ -1,0 +1,99 @@
+"use client"
+
+import { useEffect } from "react"
+import { CTAButton } from "@/components/CTAButton"
+
+type TwoColumnCTAProps = {
+  title: string
+  button?: { label: string; url: string }
+  paragraph?: unknown // accept unknown to be safe
+}
+
+// minimal Lexical-to-plain-text extractor
+function lexicalToPlainText(node: any): string {
+  if (!node) return ""
+  // node may be the whole doc or node.root
+  const root = node.root ?? node
+  let out = ""
+
+  const visit = (n: any) => {
+    if (!n) return
+    if (Array.isArray(n)) {
+      n.forEach(visit)
+      return
+    }
+    if (n.type === "text" && typeof n.text === "string") {
+      out += n.text
+    }
+    if (n.children) visit(n.children)
+    if (n.type === "paragraph") out += "\n"
+  }
+
+  visit(root.children ?? [])
+  return out.trim()
+}
+
+export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAProps) {
+  // Coerce to a safe string
+  const paraText =
+    typeof paragraph === "string"
+      ? paragraph
+      : paragraph && typeof paragraph === "object" && "root" in (paragraph as any)
+      ? lexicalToPlainText(paragraph)
+      : ""
+
+  useEffect(() => {
+    const container = document.getElementById("weblooParagraph")
+    if (!container) return
+
+    const p = container.querySelector("h3")
+    if (!p) return
+
+    // Split into spans
+    const words = (p.textContent ?? "").split(" ")
+    p.innerHTML = words.map((w) => `<span style="opacity:0">${w}</span>`).join(" ")
+
+    const spans = container.querySelectorAll("span")
+
+    const revealSpans = () => {
+      spans.forEach((span) => {
+        const rect = (span as HTMLElement).getBoundingClientRect()
+        if (rect.top < window.innerHeight) {
+          let { left, top } = rect
+          top = top - window.innerHeight * 0.7
+          let opacityValue =
+            1 - (top * 0.01 + left * 0.001) < 0.1
+              ? 0.1
+              : 1 - (top * 0.01 + left * 0.001)
+          opacityValue = Math.min(1, Math.max(0.1, +opacityValue.toFixed(3)))
+          ;(span as HTMLElement).style.opacity = String(opacityValue)
+        }
+      })
+    }
+
+    window.addEventListener("scroll", revealSpans)
+    revealSpans()
+    return () => window.removeEventListener("scroll", revealSpans)
+  }, [paraText])
+
+  return (
+    <section className="relative py-16 px-6 md:px-12 lg:px-24">
+      <div className="flex  justify-between gap-10 items-stretch h-full">
+        {/* Left */}
+        <div className="flex w-[22%] justify-between flex-col h-auto items-start">
+          <h2 className="text-3xl">{title}</h2>
+          {button && (
+            <CTAButton href={button.url} variant="black" size="big">
+              {button.label}
+            </CTAButton>
+          )}
+        </div>
+
+        {/* Right */}
+        <div id="weblooParagraph" className=" w-[70%]">
+          {paraText && <h3 className="text-2xl md:text-4xl !leading-[3.2rem]">{paraText}</h3>}
+        </div>
+      </div>
+    </section>
+  )
+}

@@ -22,6 +22,11 @@ import SecondaryHero from './SecondaryHeroBlock/component'
 import ContactFormSection from './ContactForm/component'
 import { InventoryBlock } from './InventoryBlock/Component'
 import { HeroCarsCarousel } from './HeroCarsCarousel/component'
+import { ComingSoonBlock as ComingSoonBlockComponent } from '@/blocks/ComingSoonBlock/Component'
+import TwoColumnCTA from './TwoColumnCTA/Component'
+import LineBlock from './LineBlock/Component'
+import VideoCta from './VideoCta/Component'
+
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -44,6 +49,12 @@ const blockComponents = {
   contactForm: ContactFormSection,
   inventoryBlock: InventoryBlock,
   heroCarsCarousel: HeroCarsCarousel,
+  comingSoonBlock: ComingSoonBlockComponent,
+  twoColumnCTA: TwoColumnCTA,
+  lineBlock: LineBlock,
+  videoCta: VideoCta,
+
+
 }
 
 export const RenderBlocks: React.FC<{

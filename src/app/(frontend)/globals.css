@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-  h1, h2, h3, h4 {
+  h1, h2, h3, h4,span {
     font-family: 'Ivar', serif;
   }
 
-  body, p, h5, h6, span, div {
+  body, p, h5, h6, div {
     font-family: 'HelveticaCustom', sans-serif;
   }
 }
