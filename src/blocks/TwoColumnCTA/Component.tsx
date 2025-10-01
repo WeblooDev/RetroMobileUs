@@ -12,8 +12,7 @@ type TwoColumnCTAProps = {
 // minimal Lexical-to-plain-text extractor
 function lexicalToPlainText(node: any): string {
   if (!node) return ""
-  // node may be the whole doc or node.root
-  const root = node.root ?? node
+  const root = (node as any).root ?? node
   let out = ""
 
   const visit = (n: any) => {
@@ -34,11 +33,10 @@ function lexicalToPlainText(node: any): string {
 }
 
 export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAProps) {
-  // Coerce to a safe string
   const paraText =
     typeof paragraph === "string"
       ? paragraph
-      : paragraph && typeof paragraph === "object" && "root" in (paragraph as any)
+      : paragraph && typeof paragraph === "object" && "root" in (paragraph as Record<string, unknown>)
       ? lexicalToPlainText(paragraph)
       : ""
 
@@ -59,12 +57,15 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
       spans.forEach((span) => {
         const rect = (span as HTMLElement).getBoundingClientRect()
         if (rect.top < window.innerHeight) {
-          let { left, top } = rect
+          const { left } = rect            // ← const (never reassigned)
+          let top = rect.top               // ← let (we mutate below)
           top = top - window.innerHeight * 0.7
+
           let opacityValue =
             1 - (top * 0.01 + left * 0.001) < 0.1
               ? 0.1
               : 1 - (top * 0.01 + left * 0.001)
+
           opacityValue = Math.min(1, Math.max(0.1, +opacityValue.toFixed(3)))
           ;(span as HTMLElement).style.opacity = String(opacityValue)
         }
@@ -77,8 +78,8 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
   }, [paraText])
 
   return (
-    <section className="relative py-16 px-6 md:px-12 lg:px-24">
-      <div className="flex  justify-between gap-10 items-stretch h-full">
+    <section className="container relative py-16">
+      <div className="flex justify-between gap-10 items-stretch h-full">
         {/* Left */}
         <div className="flex w-[22%] justify-between flex-col h-auto items-start">
           <h2 className="text-3xl">{title}</h2>
@@ -90,7 +91,7 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
         </div>
 
         {/* Right */}
-        <div id="weblooParagraph" className=" w-[70%]">
+        <div id="weblooParagraph" className="w-[70%]">
           {paraText && <h3 className="text-2xl md:text-4xl !leading-[3.2rem]">{paraText}</h3>}
         </div>
       </div>

@@ -13,7 +13,7 @@ export function VehicleInfo({
   form: UseFormReturn<any>
   initialCarData?: Record<string, any>
 }) {
-  const { brands, cars, loading, errors, fetchBrands, fetchCars } = useBrandsCars()
+  const { brands, cars, loading, fetchBrands, fetchCars } = useBrandsCars()
   const initialLoadRef = useRef(false)
   const [isInitializing, setIsInitializing] = useState(true)
 

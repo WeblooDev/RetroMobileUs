@@ -9,6 +9,7 @@ import { Media } from '@/components/Media'
 import { useRef } from 'react'
 
 import { CTAButton } from '@/components/CTAButton'
+import Link from 'next/link'
 
 
 export type V0DropdownItem = { name: string; href: string }
@@ -67,14 +68,14 @@ export default function HeaderClientV0({ logoResource, nav, ctas }: HeaderV0Prop
           <div className="flex h-16 items-center justify-between">
 
             <div>            
-              <a href="/" >
+              <Link href="/" >
                 <Media
                   resource={logoResource}
                   alt="Logo"
                   priority
                   imgClassName="h-auto w-auto "
                 />
-              </a>
+              </Link>
             </div>
 
 

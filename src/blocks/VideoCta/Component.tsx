@@ -44,11 +44,11 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
   }
 
   return (
-    <section className="w-full py-12 px-6 md:px-12 lg:px-24">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <section className="container py-24">
+      <div className="flex gap-10 items-center w-full">
         {/* Left: Video */}
         <div
-          className="relative group overflow-hidden bg-black/5"
+          className="w-[50%] relative group overflow-hidden bg-black/5"
           onMouseEnter={() => isPlaying && setShowHoverPause(true)}
           onMouseLeave={() => setShowHoverPause(false)}
         >
@@ -82,13 +82,13 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
           </button> 
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 w-[50%]">
           <h2 className="text-3xl md:text-5xl ">{title}</h2>
           <p className="text-base md:text-base ">{paragraph}</p>
 
           {button && (
             <div>
-              <CTAButton href={button.url} variant="olive" aria-label={button.label}>
+              <CTAButton href={button.url} variant="olive" aria-label={button.label} size="big">
                 {button.label}
               </CTAButton>
             </div>

@@ -348,6 +348,104 @@ export interface Page {
         blockName?: string | null;
         blockType: 'videoCta';
       }
+    | {
+        backgroundImage: string | Media;
+        title: string;
+        description: string;
+        button: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageHero';
+      }
+    | {
+        backgroundImage: string | Media;
+        leftTitle: string;
+        primaryButton: {
+          label: string;
+          url: string;
+        };
+        secondaryButton: {
+          label: string;
+          url: string;
+        };
+        rightHeading: string;
+        rightParagraph: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'twoColumnHero';
+      }
+    | {
+        backgroundImage: string | Media;
+        title: string;
+        description?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'centeredHero';
+      }
+    | {
+        /**
+         * How many columns on md+ screens.
+         */
+        columnsDesktop: '1' | '2';
+        cards?:
+          | {
+              image: string | Media;
+              title: string;
+              description: string;
+              button: {
+                label: string;
+                url: string;
+              };
+              spanFullOnDesktop?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'cardGrid';
+      }
+    | {
+        image: string | Media;
+        imageAlt?: string | null;
+        title: string;
+        text: string;
+        reverse?: boolean | null;
+        textAlign: 'left' | 'center';
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageText';
+      }
+    | {
+        title: string;
+        description?: string | null;
+        images?:
+          | {
+              image: string | Media;
+              alt?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'missionGallery';
+      }
+    | {
+        title: string;
+        description: string;
+        button: {
+          label: string;
+          url: string;
+        };
+        image: string | Media;
+        imageAlt?: string | null;
+        reverse?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'split4060';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -412,7 +510,7 @@ export interface Post {
   _status?: ('draft' | 'published') | null;
 }
 /**
- * 📁 Upload media. Raster images (PNG/JPEG/WebP/GIF) must be at least 300×300 px. SVGs and videos are exempt.
+ * 📁 Upload media.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
@@ -435,10 +533,6 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
-  /**
-   * This field validates that uploaded images meet the minimum size requirements.
-   */
-  imageValidation?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -1649,6 +1743,118 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        imageHero?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        twoColumnHero?:
+          | T
+          | {
+              backgroundImage?: T;
+              leftTitle?: T;
+              primaryButton?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              rightHeading?: T;
+              rightParagraph?: T;
+              id?: T;
+              blockName?: T;
+            };
+        centeredHero?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+              blockName?: T;
+            };
+        cardGrid?:
+          | T
+          | {
+              columnsDesktop?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    description?: T;
+                    button?:
+                      | T
+                      | {
+                          label?: T;
+                          url?: T;
+                        };
+                    spanFullOnDesktop?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        imageText?:
+          | T
+          | {
+              image?: T;
+              imageAlt?: T;
+              title?: T;
+              text?: T;
+              reverse?: T;
+              textAlign?: T;
+              id?: T;
+              blockName?: T;
+            };
+        missionGallery?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              images?:
+                | T
+                | {
+                    image?: T;
+                    alt?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        split4060?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              image?: T;
+              imageAlt?: T;
+              reverse?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1949,7 +2155,6 @@ export interface PostsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
-  imageValidation?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;

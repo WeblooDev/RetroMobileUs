@@ -37,7 +37,7 @@ export default function LineBlock({ color = "#8B9B5C", duration = 1 }: LineBlock
       <div className="w-full h-[1px] bg-muted overflow-hidden">
         <div
           ref={barRef}
-          className="h-[2px]"
+          className="h-[3px]"
           style={{ backgroundColor: color, width: "0%" }}
         />
       </div>

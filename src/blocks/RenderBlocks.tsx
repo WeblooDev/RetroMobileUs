@@ -26,6 +26,14 @@ import { ComingSoonBlock as ComingSoonBlockComponent } from '@/blocks/ComingSoon
 import TwoColumnCTA from './TwoColumnCTA/Component'
 import LineBlock from './LineBlock/Component'
 import VideoCta from './VideoCta/Component'
+import ImageHero from './ImageHero/Component'
+import TwoColumnHero from './TwoColumnHero/Component'
+import CenteredHero from './CenteredHero/Component'
+import CardGrid from './CardGrid/Component'
+import ImageText from './ImageText/Component'
+import MissionGallery from './MissionGallery/Component'
+import Split4060 from './Split4060/Component'
+import CharityPartners from './CharityPartners/Component'
 
 
 const blockComponents = {
@@ -53,6 +61,17 @@ const blockComponents = {
   twoColumnCTA: TwoColumnCTA,
   lineBlock: LineBlock,
   videoCta: VideoCta,
+  imageHero: ImageHero,
+  twoColumnHero: TwoColumnHero,
+  centeredHero: CenteredHero,
+  cardGrid: CardGrid,
+  imageText: ImageText,
+  missionGallery: MissionGallery,
+  split4060: Split4060,
+  charityPartners: CharityPartners,
+
+
+
 
 
 }

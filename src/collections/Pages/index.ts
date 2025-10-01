@@ -41,6 +41,13 @@ import { ComingSoonBlock } from '@/blocks/ComingSoonBlock/config'
 import { TwoColumnCTA } from '@/blocks/TwoColumnCTA/config'
 import { LineBlock } from '@/blocks/LineBlock/config'
 import { VideoCta } from '@/blocks/VideoCta/config'
+import { ImageHero } from '@/blocks/ImageHero/config'
+import { TwoColumnHero } from '@/blocks/TwoColumnHero/config'
+import { CenteredHero } from '@/blocks/CenteredHero/config'
+import { CardGrid } from '@/blocks/CardGrid/config'
+import { ImageText } from '@/blocks/ImageText/config'
+import { MissionGallery } from '@/blocks/MissionGallery/config'
+import { Split4060 } from '@/blocks/Split4060/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -120,7 +127,14 @@ export const Pages: CollectionConfig<'pages'> = {
                 ComingSoonBlock,
                 TwoColumnCTA,
                 LineBlock,
-                VideoCta
+                VideoCta,
+                ImageHero,
+                TwoColumnHero,
+                CenteredHero,
+                CardGrid,
+                ImageText,
+                MissionGallery,
+                Split4060,
               ],
               required: true,
               admin: {
