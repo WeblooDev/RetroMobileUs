@@ -34,6 +34,17 @@ import ImageText from './ImageText/Component'
 import MissionGallery from './MissionGallery/Component'
 import Split4060 from './Split4060/Component'
 import CharityPartners from './CharityPartners/Component'
+import LinkBanner from './LinkBanner/Component'
+import WhenToVisit from './WhenToVisit/Component'
+import EventLocation from './EventLocation/Component'
+import ImageTextCTA from './ImageTextCTA/Component'
+import ContactBanner from './ContactBanner/Component'
+import SimpleHeading from './SimpleHeading/Component'
+import CharityCards from './CharityCards/Component'
+import TextImageBlock from './TextImageBlock/Component'
+import ExpectCards from './ExpectCards/Component'
+import LogoTextCTA from './LogoTextCTA/Component'
+import TextWithCTAs from './TextWithCTAs/Component'
 
 
 const blockComponents = {
@@ -69,8 +80,17 @@ const blockComponents = {
   missionGallery: MissionGallery,
   split4060: Split4060,
   charityPartners: CharityPartners,
-
-
+  linkBanner: LinkBanner,
+  whenToVisit: WhenToVisit,
+  eventLocation: EventLocation, 
+  imageTextCTA: ImageTextCTA,
+  contactBanner: ContactBanner,
+  simpleHeading: SimpleHeading,
+  charityCards: CharityCards,
+  textImageBlock: TextImageBlock,
+  expectCards: ExpectCards,
+  logoTextCTA: LogoTextCTA,
+  textWithCTAs: TextWithCTAs,
 
 
 

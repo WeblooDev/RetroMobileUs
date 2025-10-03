@@ -2,45 +2,35 @@ import type { Block } from "payload"
 
 export const MissionGallery: Block = {
   slug: "missionGallery",
-  labels: {
-    singular: "Mission Gallery",
-    plural: "Mission Galleries",
-  },
+  labels: { singular: "Mission Gallery", plural: "Mission Galleries" },
   fields: [
+    { name: "title", type: "text", required: true, label: "Title", defaultValue: "Our Mission" },
+    { name: "description", type: "textarea", label: "Description (optional)" },
+
+    // Exactly three fixed images
     {
-      name: "title",
-      type: "text",
+      name: "image1",
+      type: "upload",
+      relationTo: "media",
       required: true,
-      label: "Title",
-      defaultValue: "Our Mission",
+      label: "Image 1",
     },
     {
-      name: "description",
-      type: "textarea",
-      required: false,
-      label: "Description (optional)",
+      name: "image2",
+      type: "upload",
+      relationTo: "media",
+      required: true,
+      label: "Image 2",
     },
     {
-      name: "images",
-      type: "array",
-      minRows: 3,
-      maxRows: 3, // exactly three like the design
-      labels: { singular: "Image", plural: "Images" },
-      fields: [
-        {
-          name: "image",
-          type: "upload",
-          relationTo: "media",
-          required: true,
-          label: "Image",
-        },
-        {
-          name: "alt",
-          type: "text",
-          label: "Alt text",
-        },
-      ],
+      name: "image3",
+      type: "upload",
+      relationTo: "media",
+      required: true,
+      label: "Image 3",
     },
+    { name: "alt1", type: "text", label: "Alt text (Image 1)" },
+    { name: "alt2", type: "text", label: "Alt text (Image 2)" },
+    { name: "alt3", type: "text", label: "Alt text (Image 3)" },
   ],
 }
-

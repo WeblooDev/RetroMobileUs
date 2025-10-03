@@ -11,7 +11,7 @@ type ImageHeroProps = {
 
 export default function ImageHero({ backgroundImage, title, description, button }: ImageHeroProps) {
   return (
-    <section className="container relative min-h-[90vh] flex items-center">
+    <section className="container relative min-h-[90vh] flex items-center my-12">
       {/* Background image */}
       {backgroundImage?.url && (
         <div

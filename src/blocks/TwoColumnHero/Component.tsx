@@ -20,7 +20,7 @@ export default function TwoColumnHero({
   rightParagraph,
 }: TwoColumnHeroProps) {
   return (
-    <section className="relative min-h-[80vh] flex items-center my-24">
+    <section className="relative min-h-[80vh] flex items-center ">
       {/* Background */}
       {backgroundImage?.url && (
         <div

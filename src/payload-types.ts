@@ -313,9 +313,9 @@ export interface Page {
       }
     | {
         title: string;
-        button: {
-          label: string;
-          url: string;
+        button?: {
+          label?: string | null;
+          url?: string | null;
         };
         /**
          * Enter plain text only (no formatting).
@@ -421,13 +421,12 @@ export interface Page {
     | {
         title: string;
         description?: string | null;
-        images?:
-          | {
-              image: string | Media;
-              alt?: string | null;
-              id?: string | null;
-            }[]
-          | null;
+        image1: string | Media;
+        image2: string | Media;
+        image3: string | Media;
+        alt1?: string | null;
+        alt2?: string | null;
+        alt3?: string | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'missionGallery';
@@ -445,6 +444,138 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'split4060';
+      }
+    | {
+        title: string;
+        link: {
+          label: string;
+          url: string;
+          bgColor?: string | null;
+        };
+        rightImage?: (string | null) | Media;
+        rightImageAlt?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'linkBanner';
+      }
+    | {
+        backgroundImage: string | Media;
+        title: string;
+        month: string;
+        dateRange: string;
+        year: number;
+        openHour: string;
+        closeHour: string;
+        bandColor?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'whenToVisit';
+      }
+    | {
+        backgroundImage: string | Media;
+        ribbonText: string;
+        title: string;
+        button: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'eventLocation';
+      }
+    | {
+        image: string | Media;
+        title: string;
+        description?: string | null;
+        button: {
+          label: string;
+          url: string;
+        };
+        reverse?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageTextCTA';
+      }
+    | {
+        title: string;
+        subtitle?: string | null;
+        backgroundColor?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contactBanner';
+      }
+    | {
+        title: string;
+        backgroundColor?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'simpleHeading';
+      }
+    | {
+        title: string;
+        backgroundImage: string | Media;
+        cards?:
+          | {
+              title: string;
+              description: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'charityCards';
+      }
+    | {
+        title: string;
+        description?: string | null;
+        image: string | Media;
+        reverse?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'textImageBlock';
+      }
+    | {
+        title: string;
+        cards?:
+          | {
+              image: string | Media;
+              title: string;
+              description: string;
+              url?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'expectCards';
+      }
+    | {
+        image: string | Media;
+        imageAlt?: string | null;
+        title: string;
+        description?: string | null;
+        button: {
+          label: string;
+          url: string;
+        };
+        reverse?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'logoTextCTA';
+      }
+    | {
+        title: string;
+        primaryButton: {
+          label: string;
+          url: string;
+        };
+        secondaryButton: {
+          label: string;
+          url: string;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'textWithCTAs';
       }
   )[];
   meta?: {
@@ -1828,13 +1959,12 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               description?: T;
-              images?:
-                | T
-                | {
-                    image?: T;
-                    alt?: T;
-                    id?: T;
-                  };
+              image1?: T;
+              image2?: T;
+              image3?: T;
+              alt1?: T;
+              alt2?: T;
+              alt3?: T;
               id?: T;
               blockName?: T;
             };
@@ -1852,6 +1982,161 @@ export interface PagesSelect<T extends boolean = true> {
               image?: T;
               imageAlt?: T;
               reverse?: T;
+              id?: T;
+              blockName?: T;
+            };
+        linkBanner?:
+          | T
+          | {
+              title?: T;
+              link?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    bgColor?: T;
+                  };
+              rightImage?: T;
+              rightImageAlt?: T;
+              id?: T;
+              blockName?: T;
+            };
+        whenToVisit?:
+          | T
+          | {
+              backgroundImage?: T;
+              title?: T;
+              month?: T;
+              dateRange?: T;
+              year?: T;
+              openHour?: T;
+              closeHour?: T;
+              bandColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        eventLocation?:
+          | T
+          | {
+              backgroundImage?: T;
+              ribbonText?: T;
+              title?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        imageTextCTA?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              reverse?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactBanner?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        simpleHeading?:
+          | T
+          | {
+              title?: T;
+              backgroundColor?: T;
+              id?: T;
+              blockName?: T;
+            };
+        charityCards?:
+          | T
+          | {
+              title?: T;
+              backgroundImage?: T;
+              cards?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        textImageBlock?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              image?: T;
+              reverse?: T;
+              id?: T;
+              blockName?: T;
+            };
+        expectCards?:
+          | T
+          | {
+              title?: T;
+              cards?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    description?: T;
+                    url?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        logoTextCTA?:
+          | T
+          | {
+              image?: T;
+              imageAlt?: T;
+              title?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              reverse?: T;
+              id?: T;
+              blockName?: T;
+            };
+        textWithCTAs?:
+          | T
+          | {
+              title?: T;
+              primaryButton?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
+              secondaryButton?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                  };
               id?: T;
               blockName?: T;
             };
@@ -2618,6 +2903,14 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Header {
   id: string;
+  /**
+   * Optional announcement banner above the header.
+   */
+  banner?: {
+    enabled?: boolean | null;
+    p1?: string | null;
+    p2?: string | null;
+  };
   logo?: (string | null) | Media;
   navItems?:
     | {
@@ -2755,6 +3048,13 @@ export interface Footer {
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
+  banner?:
+    | T
+    | {
+        enabled?: T;
+        p1?: T;
+        p2?: T;
+      };
   logo?: T;
   navItems?:
     | T

@@ -48,6 +48,17 @@ import { CardGrid } from '@/blocks/CardGrid/config'
 import { ImageText } from '@/blocks/ImageText/config'
 import { MissionGallery } from '@/blocks/MissionGallery/config'
 import { Split4060 } from '@/blocks/Split4060/config'
+import { LinkBanner } from '@/blocks/LinkBanner/config'
+import { WhenToVisit } from '@/blocks/WhenToVisit/config'
+import { EventLocation } from '@/blocks/EventLocation/config'
+import { ImageTextCTA } from '@/blocks/ImageTextCTA/config'
+import { ContactBanner } from '@/blocks/ContactBanner/config'
+import { SimpleHeading } from '@/blocks/SimpleHeading/config'
+import { CharityCards } from '@/blocks/CharityCards/config'
+import { TextImageBlock } from '@/blocks/TextImageBlock/config'
+import ExpectCards from '@/blocks/ExpectCards/config'
+import LogoTextCTA from '@/blocks/LogoTextCTA/config'
+import TextWithCTAs from '@/blocks/TextWithCTAs/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -135,6 +146,18 @@ export const Pages: CollectionConfig<'pages'> = {
                 ImageText,
                 MissionGallery,
                 Split4060,
+                LinkBanner,
+                WhenToVisit,
+                EventLocation,
+                ImageTextCTA,
+                ContactBanner,
+                SimpleHeading,
+                CharityCards,
+                TextImageBlock,
+                ExpectCards,
+                LogoTextCTA,
+                TextWithCTAs,
+                
               ],
               required: true,
               admin: {

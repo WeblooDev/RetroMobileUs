@@ -33,7 +33,7 @@ export default function LineBlock({ color = "#8B9B5C", duration = 1 }: LineBlock
   }, [duration])
 
   return (
-    <section className="w-full px-6 md:px-12 lg:px-24 py-8">
+    <section className="container w-full  py-8">
       <div className="w-full h-[1px] bg-muted overflow-hidden">
         <div
           ref={barRef}

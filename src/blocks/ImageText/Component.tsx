@@ -21,7 +21,7 @@ export default function ImageText({
   const align = textAlign === "center" ? "text-center items-center" : "text-left items-start"
 
   return (
-    <section className="w-full px-6 md:px-12 lg:px-24 py-14">
+    <section className="container px-6 md:px-12 lg:px-24 py-14">
       <div className={`flex flex-col ${dir} gap-10 md:gap-16`}>
         {/* Image */}
         <div className="md:w-1/2">

@@ -24,11 +24,11 @@ export default function Split4060({
   const imageOrder = reverse ? "md:order-1" : "md:order-2"
 
   return (
-    <section className="w-full px-6 md:px-12 lg:px-24 py-14">
+    <section className="container  py-14">
       <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12">
         {/* Text column (40%) */}
         <div
-          className={`w-full flex flex-col gap-4 items-start ${textOrder}`}
+          className={`w-full flex flex-col gap-6 items-start ${textOrder}`}
           style={{ flexBasis: "45%" }}
         >
           <h2 className="font-ivar text-3xl md:text-6xl">
