@@ -21,13 +21,13 @@ export const TwoColumnCTA: Block = {
         {
           name: "label",
           type: "text",
-          required: true,
+          required: false,
           label: "Button Label",
         },
         {
           name: "url",
           type: "text",
-          required: true,
+          required: false,
           label: "Button URL",
         },
       ],

@@ -52,7 +52,7 @@ const config = {
         lg: '64rem',
         md: '52rem',
         sm: '40rem',
-        xl: '80rem',
+        xl: '85rem',
       },
     },
     extend: {

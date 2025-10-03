@@ -29,32 +29,34 @@ export type HeaderV0Props = {
     primary?: { label: string; href: string };
     secondary?: { label: string; href: string };
   };
+  banner?: { enabled?: boolean; p1?: string; p2?: string }
+
 }
 
 
 
-export default function HeaderClientV0({ logoResource, nav, ctas }: HeaderV0Props) {
+export default function HeaderClientV0({ logoResource, nav, ctas, banner }: HeaderV0Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null)
   const isVisible = useScrollHeader()
 
+  const closeTimerRef = useRef<number | null>(null)
+  const GAP_PX = 30
 
-    // inside component
-    const closeTimerRef = useRef<number | null>(null)
-    const GAP_PX = 30 // <-- control the gap here (px)
+  const open = (name: string) => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+    setOpenDropdown(name)
+  }
+  const scheduleClose = () => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = window.setTimeout(() => setOpenDropdown(null), 120)
+  }
+  const cancelClose = () => {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+  }
 
-    const open = (name: string) => {
-      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
-      setOpenDropdown(name)
-    }
-    const scheduleClose = () => {
-      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
-      closeTimerRef.current = window.setTimeout(() => setOpenDropdown(null), 120)
-    }
-    const cancelClose = () => {
-      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
-    }
+  const showBanner = Boolean(banner?.enabled && (banner?.p1 || banner?.p2))
 
   return (
     <header
@@ -63,6 +65,12 @@ export default function HeaderClientV0({ logoResource, nav, ctas }: HeaderV0Prop
         isVisible ? 'translate-y-0' : '-translate-y-full',
       )}
     >
+      {showBanner && (
+        <div className="w-full bg-[#8B9B5C] flex gap-4 items-center justify-center text-white p-2">
+            {banner?.p1 ? <p className="text-lg font-bold ">{banner.p1}</p> : null}
+            {banner?.p2 ? <p className="text-lg font-light ">{banner.p2}</p> : null}
+        </div>
+      )}
     <div className="bg-black/60 backdrop-blur-[20px] text-white">
      <div className="px-8 py-2">
           <div className="flex h-16 items-center justify-between">
@@ -108,13 +116,13 @@ export default function HeaderClientV0({ logoResource, nav, ctas }: HeaderV0Prop
                        aria-hidden
                      />
            
-                     <div className="bg-[#8B9B5C6B] backdrop-blur-sm border border-[#8B9B5C] ">
+                     <div className="bg-[#8B9B5C6B] backdrop-blur-sm border border-[#8B9B5C] min-w-[130px] ">
                        <div className="">
                          {item.dropdownItems.map((dd) => (
                            <a
                              key={dd.name}
                              href={dd.href}
-                             className="!font-ivar block text-sm hover:bg-[#8B9B5C] px-6 py-2 uppercase"
+                             className="!font-ivar block text-[13px] hover:bg-[#8B9B5C] px-6 py-2 uppercase"
                            >
                              {dd.name}
                            </a>

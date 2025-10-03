@@ -11,7 +11,7 @@ export const LineBlock: Block = {
       name: "color",
       type: "text",
       label: "Line Color",
-      defaultValue: "#8B9B5C",
+      defaultValue: "#0000004D",
     },
     {
       name: "duration",
