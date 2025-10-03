@@ -80,15 +80,7 @@ export async function Footer() {
               </div>
             ))}
 
-            <div className='flex flex-col items-start gap-4'>
-              <div>
-                <h4 className="text-sm uppercase ">locations </h4>
-                </div>
-                <div className="space-y-1 text-sm">
-                <p>Paris, France</p>
-                <p>New York, USA</p>
-                </div>
-            </div>
+           
             
             </div>
             <div className="flex sm:hidden justify-between flex-col items-center font-inter text-center gap-2 ">
