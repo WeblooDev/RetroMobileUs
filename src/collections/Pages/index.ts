@@ -59,6 +59,9 @@ import { TextImageBlock } from '@/blocks/TextImageBlock/config'
 import ExpectCards from '@/blocks/ExpectCards/config'
 import LogoTextCTA from '@/blocks/LogoTextCTA/config'
 import TextWithCTAs from '@/blocks/TextWithCTAs/config'
+import ReachTextCards from '@/blocks/ReachTextCards/config'
+import PartnerBenefits from '@/blocks/PartnerBenefits/config'
+import RightImageCTA from '@/blocks/RightImageCTA/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -157,6 +160,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 ExpectCards,
                 LogoTextCTA,
                 TextWithCTAs,
+                ReachTextCards,
+                PartnerBenefits,
+                RightImageCTA,
                 
               ],
               required: true,

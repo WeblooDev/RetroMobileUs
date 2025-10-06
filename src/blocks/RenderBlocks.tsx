@@ -45,6 +45,9 @@ import TextImageBlock from './TextImageBlock/Component'
 import ExpectCards from './ExpectCards/Component'
 import LogoTextCTA from './LogoTextCTA/Component'
 import TextWithCTAs from './TextWithCTAs/Component'
+import ReachTextCards from './ReachTextCards/Component'
+import PartnerBenefits from './PartnerBenefits/Component'
+import RightImageCTA from './RightImageCTA/Component'
 
 
 const blockComponents = {
@@ -91,6 +94,9 @@ const blockComponents = {
   expectCards: ExpectCards,
   logoTextCTA: LogoTextCTA,
   textWithCTAs: TextWithCTAs,
+  reachTextCards: ReachTextCards,
+  partnerBenefits: PartnerBenefits,
+  rightImageCTA: RightImageCTA,
 
 
 
