@@ -1,11 +1,11 @@
+// src/payload/blocks/TextWithCTAs.ts
 import type { Block } from "payload"
+import { linkGroup } from "@/fields/linkGroup"
 
 export const TextWithCTAs: Block = {
   slug: "textWithCTAs",
-  labels: {
-    singular: "Text with CTAs",
-    plural: "Text with CTAs",
-  },
+  interfaceName: "TextWithCTAs", // <-- generates a named TS interface
+  labels: { singular: "Text with CTAs", plural: "Text with CTAs" },
   fields: [
     {
       name: "title",
@@ -14,25 +14,17 @@ export const TextWithCTAs: Block = {
       label: "Heading",
       defaultValue: "Official Auction House of the Rétromobile Show",
     },
-    {
-      name: "primaryButton",
-      type: "group",
-      label: "Primary Button",
-      fields: [
-        { name: "label", type: "text", required: true, defaultValue: "CONSIGN NOW" },
-        { name: "url", type: "text", required: true, defaultValue: "#" },
-      ],
-    },
-    {
-      name: "secondaryButton",
-      type: "group",
-      label: "Secondary Button (optional)",
-      fields: [
-        { name: "label", type: "text", required: true, defaultValue: "REGISTER TO BID" },
-        { name: "url", type: "text", required: true, defaultValue: "#" },
-      ],
-    },
+    // Reuse the shared link field(s); allow 1–2 links
+    linkGroup({
+      appearances: false, // keep visual style in code, not CMS
+      overrides: {
+        name: "links",      // keep helper's default name for consistency
+        label: "CTAs",
+        minRows: 1,
+        maxRows: 2,
+        admin: { initCollapsed: false },
+      },
+    }),
   ],
 }
-
 export default TextWithCTAs

@@ -1,7 +1,10 @@
+// src/payload/blocks/EventLocation.ts
 import type { Block } from "payload"
+import { linkGroup } from "@/fields/linkGroup"
 
 export const EventLocation: Block = {
   slug: "eventLocation",
+  interfaceName: "EventLocation", // <-- generates a named TS interface
   labels: { singular: "Event Location", plural: "Event Locations" },
   fields: [
     {
@@ -25,16 +28,16 @@ export const EventLocation: Block = {
       defaultValue: "Javits Convention Center, New York City",
       label: "Center Title",
     },
-    {
-      name: "button",
-      type: "group",
-      label: "CTA Button",
-      fields: [
-        { name: "label", type: "text", required: true, defaultValue: "View Map" },
-        { name: "url", type: "text", required: true, defaultValue: "#" },
-      ],
-    },
+
+    linkGroup({
+      appearances: false, 
+      overrides: {
+        name: "ctas",
+        label: "CTA(s)",
+        minRows: 0,
+        admin: { initCollapsed: false },
+      },
+    }),
   ],
 }
-
 export default EventLocation

@@ -1,20 +1,20 @@
 "use client"
 
-type SimpleHeadingProps = {
-  title: string
-  backgroundColor?: string
-}
+import type { SimpleHeading as SimpleHeadingBlock } from "@/payload-types"
 
-export default function SimpleHeading({
-  title,
-  backgroundColor = "#8B9B5C",
-}: SimpleHeadingProps) {
+const SimpleHeading: React.FC<SimpleHeadingBlock> = ({ title, backgroundColor }) => {
+  const bg = backgroundColor?.trim() ? backgroundColor : "#8B9B5C"
+
   return (
-    <section
-      className="flex justify-start items-start my-4"         
- 
-    >
-      <h3 className="text-white text-xl md:text-6xl bg-[#8B9B5C] py-8 px-12">{title}</h3>
+    <section className="flex justify-start items-start my-4">
+      <h3
+        className="text-white text-xl md:text-6xl py-8 px-12"
+        style={{ backgroundColor: bg }}
+      >
+        {title}
+      </h3>
     </section>
   )
 }
+
+export default SimpleHeading

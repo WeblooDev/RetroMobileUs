@@ -1,39 +1,28 @@
+// src/payload/blocks/ImageTextCTA.ts
 import type { Block } from "payload"
+import { linkGroup } from "@/fields/linkGroup"
 
 export const ImageTextCTA: Block = {
   slug: "imageTextCTA",
-  labels: {
-    singular: "Image + Text CTA",
-    plural: "Image + Text CTAs",
-  },
+  interfaceName: "ImageTextCTA", // <-- generates a named TS interface
+  labels: { singular: "Image + Text CTA", plural: "Image + Text CTAs" },
   fields: [
-    {
-      name: "image",
-      type: "upload",
-      relationTo: "media",
-      required: true,
-      label: "Image",
-    },
-    {
-      name: "title",
-      type: "text",
-      required: true,
-      label: "Title",
-    },
-    {
-      name: "description",
-      type: "textarea",
-      label: "Description",
-    },
-    {
-      name: "button",
-      type: "group",
-      label: "CTA Button",
-      fields: [
-        { name: "label", type: "text", required: true, defaultValue: "Buy Tickets" },
-        { name: "url", type: "text", required: true, defaultValue: "#" },
-      ],
-    },
+    { name: "image", type: "upload", relationTo: "media", required: true, label: "Image" },
+    { name: "title", type: "text", required: true, label: "Title" },
+    { name: "description", type: "textarea", label: "Description" },
+
+    // Standardized CTA(s)
+    linkGroup({
+      appearances: false,
+      overrides: {
+        name: "ctas",
+        label: "CTA(s)",
+        minRows: 0,
+        maxRows: 1, // one button
+        admin: { initCollapsed: false },
+      },
+    }),
+
     {
       name: "reverse",
       type: "checkbox",
@@ -42,3 +31,4 @@ export const ImageTextCTA: Block = {
     },
   ],
 }
+export default ImageTextCTA

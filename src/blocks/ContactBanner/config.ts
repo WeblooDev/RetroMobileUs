@@ -1,7 +1,9 @@
+// src/payload/blocks/ContactBanner.ts
 import type { Block } from "payload"
 
 export const ContactBanner: Block = {
   slug: "contactBanner",
+  interfaceName: "ContactBanner", 
   labels: {
     singular: "Contact Banner",
     plural: "Contact Banners",
@@ -18,7 +20,8 @@ export const ContactBanner: Block = {
       name: "subtitle",
       type: "text",
       label: "Subtitle (optional)",
-      defaultValue: "Reach us at support@retromobileusa.com or call (888) 123-4567.",
+      defaultValue:
+        "Reach us at support@retromobileusa.com or call (888) 123-4567.",
     },
     {
       name: "backgroundColor",
