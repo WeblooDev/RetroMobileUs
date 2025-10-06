@@ -444,6 +444,9 @@ export interface Page {
     | ExpectCards
     | LogoTextCTA
     | TextWithCTAs
+    | ReachTextCards
+    | PartnerBenefits
+    | RightImageCTA
   )[];
   meta?: {
     title?: string | null;
@@ -1440,6 +1443,76 @@ export interface TextWithCTAs {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReachTextCards".
+ */
+export interface ReachTextCards {
+  title: string;
+  description?: string | null;
+  cards?:
+    | {
+        text: string;
+        backgroundColor?: string | null;
+        textColor?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'reachTextCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnerBenefits".
+ */
+export interface PartnerBenefits {
+  title: string;
+  description?: string | null;
+  cards?:
+    | {
+        image: string | Media;
+        heading: string;
+        body?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'partnerBenefits';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RightImageCTA".
+ */
+export interface RightImageCTA {
+  title: string;
+  description?: string | null;
+  image: string | Media;
+  cta?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'rightImageCTA';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cars".
  */
 export interface Car {
@@ -2115,6 +2188,9 @@ export interface PagesSelect<T extends boolean = true> {
         expectCards?: T | ExpectCardsSelect<T>;
         logoTextCTA?: T | LogoTextCTASelect<T>;
         textWithCTAs?: T | TextWithCTAsSelect<T>;
+        reachTextCards?: T | ReachTextCardsSelect<T>;
+        partnerBenefits?: T | PartnerBenefitsSelect<T>;
+        rightImageCTA?: T | RightImageCTASelect<T>;
       };
   meta?:
     | T
@@ -2584,6 +2660,67 @@ export interface LogoTextCTASelect<T extends boolean = true> {
 export interface TextWithCTAsSelect<T extends boolean = true> {
   title?: T;
   links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ReachTextCards_select".
+ */
+export interface ReachTextCardsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  cards?:
+    | T
+    | {
+        text?: T;
+        backgroundColor?: T;
+        textColor?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PartnerBenefits_select".
+ */
+export interface PartnerBenefitsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  cards?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        body?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "RightImageCTA_select".
+ */
+export interface RightImageCTASelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  cta?:
     | T
     | {
         link?:
