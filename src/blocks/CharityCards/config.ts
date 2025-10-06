@@ -1,7 +1,9 @@
+// src/payload/blocks/CharityCards.ts
 import type { Block } from "payload"
 
 export const CharityCards: Block = {
   slug: "charityCards",
+  interfaceName: "CharityCards", 
   labels: {
     singular: "Charity Cards",
     plural: "Charity Cards Blocks",
@@ -28,18 +30,8 @@ export const CharityCards: Block = {
       minRows: 1,
       maxRows: 3,
       fields: [
-        {
-          name: "title",
-          type: "text",
-          required: true,
-          label: "Card Title",
-        },
-        {
-          name: "description",
-          type: "textarea",
-          required: true,
-          label: "Card Description",
-        },
+        { name: "title", type: "text", required: true, label: "Card Title" },
+        { name: "description", type: "textarea", required: true, label: "Card Description" },
       ],
     },
   ],

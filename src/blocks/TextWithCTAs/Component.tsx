@@ -1,44 +1,37 @@
 "use client"
 
 import { CTAButton } from "@/components/CTAButton"
+import type { TextWithCTAs as TextWithCTAsBlock } from "@/payload-types"
 
-type TextWithCTAsProps = {
-  title: string
-  primaryButton?: { label: string; url: string }
-  secondaryButton?: { label: string; url: string }
-}
+const TextWithCTAs: React.FC<TextWithCTAsBlock> = ({ title, links }) => {
+  const normalized =
+    (links ?? [])
+      .map((row: any) => row?.link)
+      .filter((l: any) => l && l.label && l.url && l.url.trim())
 
-export default function TextWithCTAs({
-  title,
-  primaryButton,
-  secondaryButton,
-}: TextWithCTAsProps) {
+  const [primary, secondary] = normalized
+
   return (
     <section className="container py-12">
       <div className="flex items-center gap-6">
         {/* Left: text */}
-        <h2 className=" text-2xl md:text-6xl w-[50%]">
-          {title}
-        </h2>
+        <h2 className="text-2xl md:text-6xl w-[50%]">{title}</h2>
 
-        {/* Right: CTAs */}
         <div className="flex md:justify-end gap-3 w-[50%]">
-          {primaryButton && (
-            <CTAButton href={primaryButton.url} variant="olive" aria-label={primaryButton.label} size="big">
-              {primaryButton.label}
+          {primary && (
+            <CTAButton href={primary.url!} variant="olive" aria-label={primary.label} size="big">
+              {primary.label}
             </CTAButton>
           )}
 
-          {secondaryButton && (
-            // Use CTAButton but override colors to match green outline
+          {secondary && (
             <CTAButton
-              href={secondaryButton.url}
+              href={secondary.url!}
               variant="outlineWhite"
-              aria-label={secondaryButton.label}
+              aria-label={secondary.label}
               size="big"
-              className="border-[#8B9B5C] text-[#8B9B5C] hover:bg-[#8B9B5C] hover:text-white"
             >
-              {secondaryButton.label}
+              {secondary.label}
             </CTAButton>
           )}
         </div>
@@ -46,3 +39,5 @@ export default function TextWithCTAs({
     </section>
   )
 }
+
+export default TextWithCTAs

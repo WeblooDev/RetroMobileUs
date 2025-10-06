@@ -1,248 +1,241 @@
-'use client'
+// Component.client.tsx
+"use client"
 
-import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Menu, X, ChevronDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { useScrollHeader } from './useScrollHeader'
-import { Media } from '@/components/Media'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from "react"
+import Link from "next/link"
+import { ChevronDown, Menu, X } from "lucide-react"
+import type { Header as HeaderDoc } from "@/payload-types"
+import { Media } from "@/components/Media"
+import { CTAButton } from "@/components/CTAButton"
+import { cn } from "@/lib/utils"
+import { useScrollHeader } from "./useScrollHeader"
 
-import { CTAButton } from '@/components/CTAButton'
-import Link from 'next/link'
+type Props = HeaderDoc
 
-
-export type V0DropdownItem = { name: string; href: string }
-export type V0NavItem = {
-  name: string
-  href?: string
-  hasDropdown?: boolean
-  dropdownItems?: V0DropdownItem[]
-}
-
-// Component.client.tsx (or shared types)
-// HeaderClientV0.tsx
-export type HeaderV0Props = {
-  logoResource: any;            // Payload media relation (populated doc or ID)
-  nav: V0NavItem[];
-  ctas?: {
-    primary?: { label: string; href: string };
-    secondary?: { label: string; href: string };
-  };
-  banner?: { enabled?: boolean; p1?: string; p2?: string }
-
-}
-
-
-
-export default function HeaderClientV0({ logoResource, nav, ctas, banner }: HeaderV0Props) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null)
+export default function HeaderClient({
+  logo,
+  navItems,
+  ctaLink,
+  secondaryCTA,
+  banner,
+}: Props) {
   const isVisible = useScrollHeader()
+  const showBanner = Boolean(banner?.enabled && (banner?.p1 || banner?.p2))
 
-  const closeTimerRef = useRef<number | null>(null)
+  // Desktop dropdown state
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const closeTimer = useRef<number | null>(null)
   const GAP_PX = 30
 
   const open = (name: string) => {
-    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+    if (closeTimer.current) window.clearTimeout(closeTimer.current)
     setOpenDropdown(name)
   }
   const scheduleClose = () => {
-    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
-    closeTimerRef.current = window.setTimeout(() => setOpenDropdown(null), 120)
+    if (closeTimer.current) window.clearTimeout(closeTimer.current)
+    closeTimer.current = window.setTimeout(() => setOpenDropdown(null), 120)
   }
   const cancelClose = () => {
-    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current)
+    if (closeTimer.current) window.clearTimeout(closeTimer.current)
   }
 
-  const showBanner = Boolean(banner?.enabled && (banner?.p1 || banner?.p2))
+  // Mobile menu state
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null)
+
+  // Close mobile submenu when whole menu closes
+  useEffect(() => {
+    if (!mobileMenuOpen) setMobileOpenDropdown(null)
+  }, [mobileMenuOpen])
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out',
-        isVisible ? 'translate-y-0' : '-translate-y-full',
+        "fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out",
+        isVisible ? "translate-y-0" : "-translate-y-full",
       )}
     >
       {showBanner && (
         <div className="w-full bg-[#8B9B5C] flex gap-4 items-center justify-center text-white p-2">
-            {banner?.p1 ? <p className="text-lg font-bold ">{banner.p1}</p> : null}
-            {banner?.p2 ? <p className="text-lg font-light ">{banner.p2}</p> : null}
+          {banner?.p1 ? <p className="text-lg font-bold">{banner.p1}</p> : null}
+          {banner?.p2 ? <p className="text-lg font-light">{banner.p2}</p> : null}
         </div>
       )}
-    <div className="bg-black/60 backdrop-blur-[20px] text-white">
-     <div className="px-8 py-2">
+
+      <div className="bg-black/60 backdrop-blur-[20px] text-white">
+        <div className="px-6 md:px-8 py-2">
           <div className="flex h-16 items-center justify-between">
+            {/* Logo */}
+            <Link href="/" aria-label="Home">
+              <Media resource={logo} alt="Logo" priority imgClassName="h-auto w-auto" />
+            </Link>
 
-            <div>            
-              <Link href="/" >
-                <Media
-                  resource={logoResource}
-                  alt="Logo"
-                  priority
-                  imgClassName="h-auto w-auto "
-                />
-              </Link>
-            </div>
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-1">
+              {(navItems ?? []).map((item) => {
+                const hasDropdown = (item.dropdownLinks?.length ?? 0) > 0
+                const itemHref = item.url?.trim() || "#"
 
+                return (
+                  <div
+                    key={item.label}
+                    className="relative"
+                    onMouseEnter={() => { cancelClose(); open(item.label) }}
+                    onMouseLeave={scheduleClose}
+                  >
+                    <Link
+                      href={itemHref}
+                      className="!font-ivar flex items-center gap-1 text-sm uppercase py-2 px-4 hover:bg-[#8B9B5C]"
+                      onFocus={() => open(item.label)}
+                      onBlur={scheduleClose}
+                    >
+                      <span>{item.label}</span>
+                      {hasDropdown && <ChevronDown className="h-4 w-4" aria-hidden />}
+                    </Link>
 
-            <nav className=" hidden md:flex justify-center items-center ">
-              {nav.map((item) => (
-             <div key={item.name} className="relative flex items-center justify-center">
-             {item.hasDropdown && item.dropdownItems?.length ? (
-               <div
-                 className="relative"
-                 onMouseEnter={() => { cancelClose(); open(item.name) }}
-                 onMouseLeave={scheduleClose}
-               >
-                 <button className="!font-ivar flex items-center text-sm py-2 px-4 hover:bg-[#8B9B5C]">
-                   {item.name}
-                   <ChevronDown className="ml-1 h-4 w-4" />
-                 </button>
-           
-                 {openDropdown === item.name && (
-                   <div
-                     // real gap using calc so we don't rely on margin
-                     className="absolute left-0"
-                     style={{ top: `calc(100% + ${GAP_PX}px)` }}
-                     onMouseEnter={cancelClose}
-                     onMouseLeave={scheduleClose}
-                   >
-                     {/* Invisible hover bridge that fills the gap exactly */}
-                     <div
-                       className="absolute left-0 right-0 bg-transparent"
-                       style={{ height: GAP_PX, top: `-${GAP_PX}px` }}
-                       aria-hidden
-                     />
-           
-                     <div className="bg-[#8B9B5C6B] backdrop-blur-sm border border-[#8B9B5C] min-w-[130px] ">
-                       <div className="">
-                         {item.dropdownItems.map((dd) => (
-                           <a
-                             key={dd.name}
-                             href={dd.href}
-                             className="!font-ivar block text-[13px] hover:bg-[#8B9B5C] px-6 py-2 uppercase"
-                           >
-                             {dd.name}
-                           </a>
-                         ))}
-                       </div>
-                     </div>
-                   </div>
-                 )}
-               </div>
-             ) : (
-               <a
-                 href={item.href ?? '#'}
-                 className="!font-ivar text-sm uppercase hover:bg-[#8B9B5C] px-4 py-2"
-               >
-                 {item.name}
-               </a>
-             )}
-           </div>
-             
-              ))}
+                    {/* Dropdown */}
+                    {hasDropdown && openDropdown === item.label && (
+                      <div
+                        className="absolute left-0"
+                        style={{ top: `calc(100% + ${GAP_PX}px)` }}
+                        onMouseEnter={cancelClose}
+                        onMouseLeave={scheduleClose}
+                        onFocusCapture={() => cancelClose()}
+                        onBlurCapture={scheduleClose}
+                      >
+                        {/* gap bridge */}
+                        <div
+                          className="absolute left-0 right-0 bg-transparent"
+                          style={{ height: GAP_PX, top: `-${GAP_PX}px` }}
+                          aria-hidden
+                        />
+                        <div className="bg-[#8B9B5C]/40 backdrop-blur-sm border border-[#8B9B5C] min-w-[180px]">
+                          {(item.dropdownLinks ?? []).map((dd) => (
+                            <Link
+                              key={dd.label}
+                              href={dd.url}
+                              className="!font-ivar block text-[13px] hover:bg-[#8B9B5C] px-6 py-2 uppercase"
+                            >
+                              {dd.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </nav>
 
             {/* Desktop CTAs */}
-            <div className="hidden md:flex md:items-center md:space-x-4">
-          {ctas?.primary && (
-            <CTAButton href={ctas.primary.href} variant="olive">
-              {ctas.primary.label}
-            </CTAButton>
-          )}
-          {ctas?.secondary && (
-            <CTAButton href={ctas.secondary.href} variant="outlineWhite">
-              {ctas.secondary.label}
-            </CTAButton>
-          )}
-        </div>
+            <div className="hidden md:flex items-center gap-3">
+              {ctaLink?.link?.label && ctaLink.link.url && (
+                <CTAButton href={ctaLink.link.url} variant="olive">
+                  {ctaLink.link.label}
+                </CTAButton>
+              )}
+              {secondaryCTA?.link?.label && secondaryCTA.link.url && (
+                <CTAButton href={secondaryCTA.link.url} variant="outlineWhite">
+                  {secondaryCTA.link.label}
+                </CTAButton>
+              )}
+            </div>
 
-
-            {/* Mobile Toggle */}
+            {/* Mobile toggle */}
             <div className="md:hidden">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="text-header-foreground hover:bg-header-muted/10"
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen((v) => !v)}
+                aria-label="Toggle menu"
+                className="p-2"
               >
                 {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-              </Button>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-header-muted/20">
+          <div className="md:hidden border-t border-white/15">
             <div className="px-4 py-6 space-y-4">
-              {nav.map((item) => (
-                <div key={item.name}>
-                  {item.hasDropdown && item.dropdownItems?.length ? (
-                    <div>
-                      <button
-                        onClick={() =>
-                          setMobileOpenDropdown((v) => (v === item.name ? null : item.name))
-                        }
-                        className="flex items-center justify-between w-full text-header-foreground hover:text-header-accent transition-colors duration-200 text-base font-medium tracking-wide py-2"
-                      >
-                        {item.name}
-                        <ChevronDown
-                          className={cn(
-                            'h-4 w-4 transition-transform duration-200',
-                            mobileOpenDropdown === item.name && 'rotate-180',
-                          )}
-                        />
-                      </button>
-                      {mobileOpenDropdown === item.name && (
-                        <div className="ml-4 mt-2 space-y-2">
-                          {item.dropdownItems.map((dd) => (
-                            <a
-                              key={dd.name}
-                              href={dd.href}
-                              className="block text-header-muted hover:text-header-accent transition-colors duration-200 text-sm py-1"
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              {dd.name}
-                            </a>
-                          ))}
+              {(navItems ?? []).map((item) => {
+                const hasDropdown = (item.dropdownLinks?.length ?? 0) > 0
+                const itemHref = item.url?.trim() || "#"
+                const isOpen = mobileOpenDropdown === item.label
+
+                return (
+                  <div key={item.label}>
+                    {hasDropdown ? (
+                      <div>
+                        <div className="flex items-center justify-between">
+                          <Link
+                            href={itemHref}
+                            className="block text-sm py-1 px-2 !font-ivar uppercase hover:underline hover:bg-[#8B9B5C] w-fit"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {item.label}
+                          </Link>
+                          <button
+                            type="button"
+                            aria-expanded={isOpen}
+                            aria-label={`Toggle ${item.label} submenu`}
+                            className="p-2"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              e.stopPropagation()
+                              setMobileOpenDropdown((v) => (v === item.label ? null : item.label))
+                            }}
+                          >
+                            <ChevronDown
+                              className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")}
+                            />
+                          </button>
                         </div>
-                      )}
-                    </div>
-                  ) : (
-                    <a
-                      href={item.href ?? '#'}
-                      className="block text-header-foreground hover:text-header-accent transition-colors duration-200 text-base font-medium tracking-wide py-2"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.name}
-                    </a>
-                  )}
-                </div>
-              ))}
+                        {isOpen && (
+                          <div className="ml-4 mt-2 space-y-2">
+                            {(item.dropdownLinks ?? []).map((dd) => (
+                              <Link
+                                key={dd.label}
+                                href={dd.url}
+                                className="block text-sm py-1 px-2 !font-ivar uppercase hover:underline hover:bg-[#8B9B5C] w-fit"
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {dd.label}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <Link
+                        href={itemHref}
+                        className="block text-sm py-1 px-2 !font-ivar uppercase hover:underline hover:bg-[#8B9B5C] w-fit"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    )}
+                  </div>
+                )
+              })}
 
               {/* Mobile CTAs */}
               <div className="pt-4 space-y-3">
-                {ctas?.primary && (
-                  <Button
-                    asChild
-                    className="w-full bg-header-accent hover:bg-header-accent/90 text-header-background font-medium"
-                    size="sm"
-                  >
-                    <a href={ctas.primary.href}>{ctas.primary.label}</a>
-                  </Button>
+                {ctaLink?.link?.label && ctaLink.link.url && (
+                  <CTAButton href={ctaLink.link.url} className="w-full" variant="olive" size="normal">
+                    {ctaLink.link.label}
+                  </CTAButton>
                 )}
-                {ctas?.secondary && (
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full border-header-muted text-header-foreground hover:bg-header-muted/10 font-medium bg-transparent"
-                    size="sm"
+                {secondaryCTA?.link?.label && secondaryCTA.link.url && (
+                  <CTAButton
+                    href={secondaryCTA.link.url}
+                    className="w-full"
+                    variant="outlineWhite"
+                    size="normal"
                   >
-                    <a href={ctas.secondary.href}>{ctas.secondary.label}</a>
-                  </Button>
+                    {secondaryCTA.link.label}
+                  </CTAButton>
                 )}
               </div>
             </div>

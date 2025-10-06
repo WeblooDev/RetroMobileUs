@@ -418,19 +418,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'imageText';
       }
-    | {
-        title: string;
-        description?: string | null;
-        image1: string | Media;
-        image2: string | Media;
-        image3: string | Media;
-        alt1?: string | null;
-        alt2?: string | null;
-        alt3?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'missionGallery';
-      }
+    | MissionGallery
     | {
         title: string;
         description: string;
@@ -445,138 +433,17 @@ export interface Page {
         blockName?: string | null;
         blockType: 'split4060';
       }
-    | {
-        title: string;
-        link: {
-          label: string;
-          url: string;
-          bgColor?: string | null;
-        };
-        rightImage?: (string | null) | Media;
-        rightImageAlt?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'linkBanner';
-      }
-    | {
-        backgroundImage: string | Media;
-        title: string;
-        month: string;
-        dateRange: string;
-        year: number;
-        openHour: string;
-        closeHour: string;
-        bandColor?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'whenToVisit';
-      }
-    | {
-        backgroundImage: string | Media;
-        ribbonText: string;
-        title: string;
-        button: {
-          label: string;
-          url: string;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'eventLocation';
-      }
-    | {
-        image: string | Media;
-        title: string;
-        description?: string | null;
-        button: {
-          label: string;
-          url: string;
-        };
-        reverse?: boolean | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'imageTextCTA';
-      }
-    | {
-        title: string;
-        subtitle?: string | null;
-        backgroundColor?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'contactBanner';
-      }
-    | {
-        title: string;
-        backgroundColor?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'simpleHeading';
-      }
-    | {
-        title: string;
-        backgroundImage: string | Media;
-        cards?:
-          | {
-              title: string;
-              description: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'charityCards';
-      }
-    | {
-        title: string;
-        description?: string | null;
-        image: string | Media;
-        reverse?: boolean | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'textImageBlock';
-      }
-    | {
-        title: string;
-        cards?:
-          | {
-              image: string | Media;
-              title: string;
-              description: string;
-              url?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'expectCards';
-      }
-    | {
-        image: string | Media;
-        imageAlt?: string | null;
-        title: string;
-        description?: string | null;
-        button: {
-          label: string;
-          url: string;
-        };
-        reverse?: boolean | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'logoTextCTA';
-      }
-    | {
-        title: string;
-        primaryButton: {
-          label: string;
-          url: string;
-        };
-        secondaryButton: {
-          label: string;
-          url: string;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'textWithCTAs';
-      }
+    | LinkBanner
+    | WhenToVisit
+    | EventLocation
+    | ImageTextCTA
+    | ContactBanner
+    | SimpleHeading
+    | CharityCards
+    | TextImageBlock
+    | ExpectCards
+    | LogoTextCTA
+    | TextWithCTAs
   )[];
   meta?: {
     title?: string | null;
@@ -1308,6 +1175,271 @@ export interface HeroCarsCarousel {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionGallery".
+ */
+export interface MissionGallery {
+  title: string;
+  description?: string | null;
+  image1: string | Media;
+  image2: string | Media;
+  image3: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'missionGallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkBanner".
+ */
+export interface LinkBanner {
+  title: string;
+  ctas?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  linkBgColor?: string | null;
+  rightImage?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'linkBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WhenToVisit".
+ */
+export interface WhenToVisit {
+  backgroundImage: string | Media;
+  title: string;
+  month: string;
+  dateRange: string;
+  year: number;
+  openHour: string;
+  closeHour: string;
+  bandColor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'whenToVisit';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventLocation".
+ */
+export interface EventLocation {
+  backgroundImage: string | Media;
+  ribbonText: string;
+  title: string;
+  ctas?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'eventLocation';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextCTA".
+ */
+export interface ImageTextCTA {
+  image: string | Media;
+  title: string;
+  description?: string | null;
+  ctas?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  reverse?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageTextCTA';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBanner".
+ */
+export interface ContactBanner {
+  title: string;
+  subtitle?: string | null;
+  backgroundColor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SimpleHeading".
+ */
+export interface SimpleHeading {
+  title: string;
+  backgroundColor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'simpleHeading';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CharityCards".
+ */
+export interface CharityCards {
+  title: string;
+  backgroundImage: string | Media;
+  cards?:
+    | {
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'charityCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageBlock".
+ */
+export interface TextImageBlock {
+  title: string;
+  description?: string | null;
+  image: string | Media;
+  reverse?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textImageBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExpectCards".
+ */
+export interface ExpectCards {
+  title: string;
+  cards?:
+    | {
+        image: string | Media;
+        title: string;
+        description: string;
+        url?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'expectCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoTextCTA".
+ */
+export interface LogoTextCTA {
+  image: string | Media;
+  imageAlt?: string | null;
+  title: string;
+  description?: string | null;
+  ctas?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  reverse?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logoTextCTA';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextWithCTAs".
+ */
+export interface TextWithCTAs {
+  title: string;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textWithCTAs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cars".
  */
 export interface Car {
@@ -1954,20 +2086,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        missionGallery?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              image1?: T;
-              image2?: T;
-              image3?: T;
-              alt1?: T;
-              alt2?: T;
-              alt3?: T;
-              id?: T;
-              blockName?: T;
-            };
+        missionGallery?: T | MissionGallerySelect<T>;
         split4060?:
           | T
           | {
@@ -1985,161 +2104,17 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        linkBanner?:
-          | T
-          | {
-              title?: T;
-              link?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                    bgColor?: T;
-                  };
-              rightImage?: T;
-              rightImageAlt?: T;
-              id?: T;
-              blockName?: T;
-            };
-        whenToVisit?:
-          | T
-          | {
-              backgroundImage?: T;
-              title?: T;
-              month?: T;
-              dateRange?: T;
-              year?: T;
-              openHour?: T;
-              closeHour?: T;
-              bandColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        eventLocation?:
-          | T
-          | {
-              backgroundImage?: T;
-              ribbonText?: T;
-              title?: T;
-              button?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        imageTextCTA?:
-          | T
-          | {
-              image?: T;
-              title?: T;
-              description?: T;
-              button?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              reverse?: T;
-              id?: T;
-              blockName?: T;
-            };
-        contactBanner?:
-          | T
-          | {
-              title?: T;
-              subtitle?: T;
-              backgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        simpleHeading?:
-          | T
-          | {
-              title?: T;
-              backgroundColor?: T;
-              id?: T;
-              blockName?: T;
-            };
-        charityCards?:
-          | T
-          | {
-              title?: T;
-              backgroundImage?: T;
-              cards?:
-                | T
-                | {
-                    title?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        textImageBlock?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              image?: T;
-              reverse?: T;
-              id?: T;
-              blockName?: T;
-            };
-        expectCards?:
-          | T
-          | {
-              title?: T;
-              cards?:
-                | T
-                | {
-                    image?: T;
-                    title?: T;
-                    description?: T;
-                    url?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        logoTextCTA?:
-          | T
-          | {
-              image?: T;
-              imageAlt?: T;
-              title?: T;
-              description?: T;
-              button?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              reverse?: T;
-              id?: T;
-              blockName?: T;
-            };
-        textWithCTAs?:
-          | T
-          | {
-              title?: T;
-              primaryButton?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              secondaryButton?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
+        linkBanner?: T | LinkBannerSelect<T>;
+        whenToVisit?: T | WhenToVisitSelect<T>;
+        eventLocation?: T | EventLocationSelect<T>;
+        imageTextCTA?: T | ImageTextCTASelect<T>;
+        contactBanner?: T | ContactBannerSelect<T>;
+        simpleHeading?: T | SimpleHeadingSelect<T>;
+        charityCards?: T | CharityCardsSelect<T>;
+        textImageBlock?: T | TextImageBlockSelect<T>;
+        expectCards?: T | ExpectCardsSelect<T>;
+        logoTextCTA?: T | LogoTextCTASelect<T>;
+        textWithCTAs?: T | TextWithCTAsSelect<T>;
       };
   meta?:
     | T
@@ -2399,6 +2374,229 @@ export interface HeroCarsCarouselSelect<T extends boolean = true> {
   innerTitle?: T;
   text?: T;
   inventoryStyle?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionGallery_select".
+ */
+export interface MissionGallerySelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image1?: T;
+  image2?: T;
+  image3?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkBanner_select".
+ */
+export interface LinkBannerSelect<T extends boolean = true> {
+  title?: T;
+  ctas?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  linkBgColor?: T;
+  rightImage?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WhenToVisit_select".
+ */
+export interface WhenToVisitSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  title?: T;
+  month?: T;
+  dateRange?: T;
+  year?: T;
+  openHour?: T;
+  closeHour?: T;
+  bandColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "EventLocation_select".
+ */
+export interface EventLocationSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  ribbonText?: T;
+  title?: T;
+  ctas?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTextCTA_select".
+ */
+export interface ImageTextCTASelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
+  description?: T;
+  ctas?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  reverse?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBanner_select".
+ */
+export interface ContactBannerSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  backgroundColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SimpleHeading_select".
+ */
+export interface SimpleHeadingSelect<T extends boolean = true> {
+  title?: T;
+  backgroundColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CharityCards_select".
+ */
+export interface CharityCardsSelect<T extends boolean = true> {
+  title?: T;
+  backgroundImage?: T;
+  cards?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageBlock_select".
+ */
+export interface TextImageBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  reverse?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExpectCards_select".
+ */
+export interface ExpectCardsSelect<T extends boolean = true> {
+  title?: T;
+  cards?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        description?: T;
+        url?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogoTextCTA_select".
+ */
+export interface LogoTextCTASelect<T extends boolean = true> {
+  image?: T;
+  imageAlt?: T;
+  title?: T;
+  description?: T;
+  ctas?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  reverse?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextWithCTAs_select".
+ */
+export interface TextWithCTAsSelect<T extends boolean = true> {
+  title?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -2911,7 +3109,7 @@ export interface Header {
     p1?: string | null;
     p2?: string | null;
   };
-  logo?: (string | null) | Media;
+  logo: string | Media;
   navItems?:
     | {
         label: string;

@@ -25,6 +25,9 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60),
         })
+      } else {
+        // optional: clamp at zero once past target
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
       }
     }
 
@@ -33,37 +36,39 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
     return () => clearInterval(timer)
   }, [targetDate])
 
-  // ✅ use targetDate instead of new Date()
   const day = targetDate.getDate()
-  const month = targetDate.toLocaleDateString("en-US", { month: "long" }).toUpperCase()
+  const month = targetDate
+    .toLocaleDateString("en-US", { month: "long" })
+    .toUpperCase()
+
+  // optional: pad numbers (e.g., 03)
+  const pad = (n: number) => n.toString().padStart(2, "0")
 
   return (
     <div className="flex p-4 gap-4 ">
       {/* Left side - Target date */}
-      <div className="flex flex-col items-center justify-center min-w-[60px] text-white">
+      <div className="flex flex-col gap-2 items-center justify-center min-w-[60px] text-white">
         <h1 className="text-8xl ">{day}</h1>
         <h4 className="text-lg font-light ">{month}</h4>
+        <h4 className="text-4xl font-light ">2026</h4>
       </div>
 
-      {/* Divider */}
       <div className="w-px bg-white/50"></div>
 
-      {/* Right side - Countdown */}
       <div className="flex flex-col justify-between text-white gap-4">
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-5xl">{timeLeft.days}</h3>
-          <h3 className="text-4xl font-light ">Days </h3>
-
-
+          <h3 className="text-5xl">{pad(timeLeft.days)}</h3>
+          <h3 className="text-4xl font-light uppercase ">Days</h3>
         </div>
-        <div className="flex items-center justify-between gap-4">
-          <h3 className="text-5xl">{timeLeft.minutes}</h3>
-          <h3 className="text-4xl font-light ">Mins</h3>
 
-        </div>
         <div className="flex items-center justify-between gap-4">
-          <h3 className="text-5xl">{timeLeft.seconds}</h3>
-          <h3 className="text-4xl font-light ">Secs</h3>
+          <h3 className="text-5xl">{pad(timeLeft.hours)}</h3>
+          <h3 className="text-4xl font-light uppercase ">Hrs</h3>
+        </div>
+
+        <div className="flex items-center justify-between gap-4">
+          <h3 className="text-5xl">{pad(timeLeft.minutes)}</h3>
+          <h3 className="text-4xl font-light uppercase ">Min</h3>
         </div>
       </div>
     </div>

@@ -38,9 +38,10 @@ export const Header: GlobalConfig = {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
-      required: false,
+      required: true, 
       admin: { position: 'sidebar' },
     },
+
     {
       name: 'navItems',
       label: 'Navigation Items',
@@ -52,7 +53,6 @@ export const Header: GlobalConfig = {
         {
           name: 'url',
           type: 'text',
-          required: false,
           admin: {
             description:
               'If you leave this empty and add dropdownLinks below, this becomes a dropdown.',
@@ -76,6 +76,7 @@ export const Header: GlobalConfig = {
         },
       ],
     },
+
     {
       name: 'ctaLink',
       label: 'Primary CTA',
@@ -83,6 +84,7 @@ export const Header: GlobalConfig = {
       fields: [link({ appearances: false })],
       admin: { description: 'e.g., "Buy Ticket"' },
     },
+
     {
       name: 'secondaryCTA',
       label: 'Secondary CTA',

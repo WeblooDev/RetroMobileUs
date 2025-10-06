@@ -21,7 +21,7 @@ export default function CardGrid({ columnsDesktop = "2", cards = [] }: CardGridP
       : "grid-cols-1 md:grid-cols-2"
 
   return (
-    <section className="w-full px-4 sm:px-6 md:px-12 lg:px-24 py-10">
+    <section className="container sm:px-6  py-12 ">
       <div className={`grid ${gridCols} gap-10`}>
         {cards.map((card, i) => (
           <article
@@ -30,11 +30,11 @@ export default function CardGrid({ columnsDesktop = "2", cards = [] }: CardGridP
           >
             {/* Image */}
             {card.image?.url && (
-              <div className="aspect-[16/9] w-full overflow-hidden">
+              <div className=" w-full overflow-hidden">
                 <img
                   src={card.image.url}
                   alt={card.title}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover max-h-[364px]"
                   loading="lazy"
                 />
               </div>

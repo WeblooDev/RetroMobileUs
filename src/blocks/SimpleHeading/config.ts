@@ -1,11 +1,10 @@
+// src/payload/blocks/SimpleHeading.ts
 import type { Block } from "payload"
 
 export const SimpleHeading: Block = {
   slug: "simpleHeading",
-  labels: {
-    singular: "Simple Heading",
-    plural: "Simple Headings",
-  },
+  interfaceName: "SimpleHeading", // <- generates a named TS interface
+  labels: { singular: "Simple Heading", plural: "Simple Headings" },
   fields: [
     {
       name: "title",
@@ -22,3 +21,4 @@ export const SimpleHeading: Block = {
     },
   ],
 }
+export default SimpleHeading

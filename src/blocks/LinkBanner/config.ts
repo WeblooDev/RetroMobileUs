@@ -1,11 +1,11 @@
+// src/payload/blocks/LinkBanner.ts
 import type { Block } from "payload"
+import { linkGroup } from "@/fields/linkGroup"
 
 export const LinkBanner: Block = {
   slug: "linkBanner",
-  labels: {
-    singular: "Link Banner",
-    plural: "Link Banners",
-  },
+  interfaceName: "LinkBanner", // generates a named TS interface you can import
+  labels: { singular: "Link Banner", plural: "Link Banners" },
   fields: [
     {
       name: "title",
@@ -14,33 +14,35 @@ export const LinkBanner: Block = {
       label: "Left Heading (H3)",
       defaultValue: "Retromobile Paris",
     },
+
+    // Standardized link (1 CTA)
+    linkGroup({
+      appearances: false,
+      overrides: {
+        name: "ctas",
+        label: "Right Link",
+        minRows: 0,
+        maxRows: 1,
+        admin: { initCollapsed: false },
+      },
+    }),
+
+    // Style for the link pill
     {
-      name: "link",
-      type: "group",
-      label: "Right Link",
-      fields: [
-        { name: "label", type: "text", required: true, defaultValue: "retromobile.com" },
-        { name: "url", type: "text", required: true, defaultValue: "https://retromobile.com" },
-        {
-          name: "bgColor",
-          type: "text",
-          label: "Link Background Color",
-          defaultValue: "#8B9B5C", // olive
-        },
-      ],
+      name: "linkBgColor",
+      type: "text",
+      label: "Link Background Color",
+      defaultValue: "#8B9B5C",
     },
+
+    // Optional right image/logo
     {
       name: "rightImage",
       type: "upload",
       relationTo: "media",
       label: "Optional Right Image / Logo",
-      required: false,
     },
-    {
-      name: "rightImageAlt",
-      type: "text",
-      label: "Right Image Alt",
-      required: false,
-    },
+  
   ],
 }
+export default LinkBanner

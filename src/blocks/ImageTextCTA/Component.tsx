@@ -1,53 +1,46 @@
 "use client"
 
+import Link from "next/link"
+import { Media } from "@/components/Media"
 import { CTAButton } from "@/components/CTAButton"
+import type { ImageTextCTA as ImageTextCTABlock } from "@/payload-types"
 
-type ImageTextCTAProps = {
-  image?: { url?: string }
-  title: string
-  description?: string
-  button?: { label: string; url: string }
-  reverse?: boolean
-}
-
-export default function ImageTextCTA({
+const ImageTextCTA: React.FC<ImageTextCTABlock> = ({
   image,
   title,
   description,
-  button,
-}: ImageTextCTAProps) {
+  ctas,
+  reverse,
+}) => {
+  // linkGroup rows: [{ link, id? }, ...]
+  const primary = ctas?.[0]?.link
+  const primaryUrl =
+    typeof primary?.url === "string" && primary.url.trim() ? primary.url : undefined
+
   return (
     <section className="w-full my-12">
-      <div
-        className="flex gap-8 items-center"
-         
-      >
-   
-        {image?.url && (
-          <div className="w-[45%]">
-            <img
-              src={image.url}
-              alt={title}
-              className="w-full h-auto object-cover rounded-lg shadow"
-            />
+      <div className={`flex gap-8 items-center ${reverse ? "flex-row-reverse" : ""}`}>
+        {/* Image */}
+        <div className="w-[45%]">
+          <div className="relative w-full aspect-[4/3] rounded-lg shadow overflow-hidden">
+            <Media resource={image} fill imgClassName="object-cover" />
           </div>
-        )}
+        </div>
 
-        {/* Text content */}
-        <div className="flex flex-col gap-4 w-[60%] justify-center items-center ">
-          <div className="flex flex-col gap-6 items-start">
-          <h2 className="text-2xl md:text-6xl ">{title}</h2>
-          {description && (
-            <p className="text-base md:text-base w-1/2">{description}</p>
+        {/* Text */}
+        <div className="flex flex-col gap-6 w-[55%] justify-center">
+          <h2 className="text-2xl md:text-6xl">{title}</h2>
+          {description && <p className="text-base md:text-base md:w-1/2">{description}</p>}
+
+          {primary?.label && primaryUrl && (
+            <Link href={primaryUrl} aria-label={primary.label}>
+              <CTAButton variant="olive" size="big">{primary.label}</CTAButton>
+            </Link>
           )}
-          {button && (
-            <CTAButton href={button.url} variant="olive" size="big">
-              {button.label}
-            </CTAButton>
-          )}
-          </div>
         </div>
       </div>
     </section>
   )
 }
+
+export default ImageTextCTA
