@@ -16,7 +16,7 @@ export const ReachTextCards: Block = {
       fields: [
         { name: "text", type: "text", required: true, label: "Card Text", defaultValue: "50,000+ expected attendees" },
         { name: "backgroundColor", type: "text", label: "Background Color (hex)", defaultValue: "#8B9B5C" },
-        { name: "textColor", type: "text", label: "Text Color (hex)", defaultValue: "#FFFFFF" }, // <-- NEW
+        { name: "textColor", type: "text", label: "Text Color (hex)", defaultValue: "#FFFFFF" }, 
       ],
     },
   ],

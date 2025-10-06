@@ -18,7 +18,7 @@ const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, c
       <div className="container py-10 md:py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {items.map((card, i) => (
-            <div key={card.id ?? i} className="relative h-[487px] overflow-hidden shadow-lg">
+            <div key={card.id ?? i} className="relative aspect-[228/487] overflow-hidden shadow-lg">
               <div className="absolute inset-0">
                 <Media resource={card.image} fill priority={i < 2} imgClassName="object-cover" />
               </div>
