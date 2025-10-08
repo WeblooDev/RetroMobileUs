@@ -444,6 +444,9 @@ export interface Page {
     | ExpectCards
     | LogoTextCTA
     | TextWithCTAs
+    | TextImageRight
+    | PackagesGrid
+    | AudienceGrid
     | ReachTextCards
     | PartnerBenefits
     | RightImageCTA
@@ -1443,6 +1446,67 @@ export interface TextWithCTAs {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageRight".
+ */
+export interface TextImageRight {
+  title: string;
+  /**
+   * Short paragraph under the heading.
+   */
+  description?: string | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textImageRight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PackagesGrid".
+ */
+export interface PackagesGrid {
+  title: string;
+  topRow?:
+    | {
+        text: string;
+        /**
+         * e.g. #4B6B3C or rgba(0,0,0,0.05)
+         */
+        backgroundColor?: string | null;
+        textColor?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  bottomRow?:
+    | {
+        text: string;
+        backgroundColor?: string | null;
+        textColor?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  showBottomDivider?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'packagesGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AudienceGrid".
+ */
+export interface AudienceGrid {
+  title: string;
+  cards: {
+    heading: string;
+    text: string;
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'audienceGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ReachTextCards".
  */
 export interface ReachTextCards {
@@ -2188,6 +2252,9 @@ export interface PagesSelect<T extends boolean = true> {
         expectCards?: T | ExpectCardsSelect<T>;
         logoTextCTA?: T | LogoTextCTASelect<T>;
         textWithCTAs?: T | TextWithCTAsSelect<T>;
+        textImageRight?: T | TextImageRightSelect<T>;
+        packagesGrid?: T | PackagesGridSelect<T>;
+        audienceGrid?: T | AudienceGridSelect<T>;
         reachTextCards?: T | ReachTextCardsSelect<T>;
         partnerBenefits?: T | PartnerBenefitsSelect<T>;
         rightImageCTA?: T | RightImageCTASelect<T>;
@@ -2671,6 +2738,60 @@ export interface TextWithCTAsSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageRight_select".
+ */
+export interface TextImageRightSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PackagesGrid_select".
+ */
+export interface PackagesGridSelect<T extends boolean = true> {
+  title?: T;
+  topRow?:
+    | T
+    | {
+        text?: T;
+        backgroundColor?: T;
+        textColor?: T;
+        id?: T;
+      };
+  bottomRow?:
+    | T
+    | {
+        text?: T;
+        backgroundColor?: T;
+        textColor?: T;
+        id?: T;
+      };
+  showBottomDivider?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AudienceGrid_select".
+ */
+export interface AudienceGridSelect<T extends boolean = true> {
+  title?: T;
+  cards?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        image?: T;
         id?: T;
       };
   id?: T;

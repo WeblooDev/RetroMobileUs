@@ -48,6 +48,10 @@ import TextWithCTAs from './TextWithCTAs/Component'
 import ReachTextCards from './ReachTextCards/Component'
 import PartnerBenefits from './PartnerBenefits/Component'
 import RightImageCTA from './RightImageCTA/Component'
+import TextImageRight from './TextImageRight/component'
+import PackagesGrid from './PackagesGrid/component'
+import AudienceGrid from './AudienceGrid/Component'
+
 
 
 const blockComponents = {
@@ -97,6 +101,12 @@ const blockComponents = {
   reachTextCards: ReachTextCards,
   partnerBenefits: PartnerBenefits,
   rightImageCTA: RightImageCTA,
+  textImageRight: TextImageRight,
+  packagesGrid: PackagesGrid,
+  audienceGrid: AudienceGrid,
+
+
+  
 
 
 
