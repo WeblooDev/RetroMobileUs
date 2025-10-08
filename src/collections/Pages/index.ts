@@ -65,6 +65,10 @@ import RightImageCTA from '@/blocks/RightImageCTA/config'
 import TextImageRight from '@/blocks/TextImageRight/config'
 import PackagesGrid from '@/blocks/PackagesGrid/config'
 import AudienceGrid from '@/blocks/AudienceGrid/confg'
+import TextCTAImageRight from '@/blocks/TextCTAImageRight/config'
+import ImageStepsRight from '@/blocks/ImageStepsRight/config'
+import { TextVideoRight } from '@/blocks/TextVideoRight/config'
+import CenteredBannerCTA from '@/blocks/CenteredBannerCTA/confif'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -168,7 +172,11 @@ export const Pages: CollectionConfig<'pages'> = {
                 RightImageCTA,
                 TextImageRight,
                 PackagesGrid,
-                AudienceGrid
+                AudienceGrid,
+                TextCTAImageRight,
+                ImageStepsRight,
+                TextVideoRight,
+                CenteredBannerCTA
                 
               ],
               required: true,
