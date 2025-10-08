@@ -14,11 +14,10 @@ export const TextWithCTAs: Block = {
       label: "Heading",
       defaultValue: "Official Auction House of the Rétromobile Show",
     },
-    // Reuse the shared link field(s); allow 1–2 links
     linkGroup({
-      appearances: false, // keep visual style in code, not CMS
+      appearances: false, 
       overrides: {
-        name: "links",      // keep helper's default name for consistency
+        name: "links",   
         label: "CTAs",
         minRows: 1,
         maxRows: 2,

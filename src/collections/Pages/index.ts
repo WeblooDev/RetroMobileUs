@@ -62,6 +62,9 @@ import TextWithCTAs from '@/blocks/TextWithCTAs/config'
 import ReachTextCards from '@/blocks/ReachTextCards/config'
 import PartnerBenefits from '@/blocks/PartnerBenefits/config'
 import RightImageCTA from '@/blocks/RightImageCTA/config'
+import TextImageRight from '@/blocks/TextImageRight/config'
+import PackagesGrid from '@/blocks/PackagesGrid/config'
+import AudienceGrid from '@/blocks/AudienceGrid/confg'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -163,6 +166,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 ReachTextCards,
                 PartnerBenefits,
                 RightImageCTA,
+                TextImageRight,
+                PackagesGrid,
+                AudienceGrid
                 
               ],
               required: true,
