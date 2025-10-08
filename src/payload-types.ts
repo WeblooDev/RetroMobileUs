@@ -444,12 +444,16 @@ export interface Page {
     | ExpectCards
     | LogoTextCTA
     | TextWithCTAs
-    | TextImageRight
-    | PackagesGrid
-    | AudienceGrid
     | ReachTextCards
     | PartnerBenefits
     | RightImageCTA
+    | TextImageRight
+    | PackagesGrid
+    | AudienceGrid
+    | TextCTAImageRight
+    | ImageStepsRight
+    | TextVideoRight
+    | CenteredBannerCTA
   )[];
   meta?: {
     title?: string | null;
@@ -1446,67 +1450,6 @@ export interface TextWithCTAs {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TextImageRight".
- */
-export interface TextImageRight {
-  title: string;
-  /**
-   * Short paragraph under the heading.
-   */
-  description?: string | null;
-  image: string | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'textImageRight';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PackagesGrid".
- */
-export interface PackagesGrid {
-  title: string;
-  topRow?:
-    | {
-        text: string;
-        /**
-         * e.g. #4B6B3C or rgba(0,0,0,0.05)
-         */
-        backgroundColor?: string | null;
-        textColor?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  bottomRow?:
-    | {
-        text: string;
-        backgroundColor?: string | null;
-        textColor?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  showBottomDivider?: boolean | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'packagesGrid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AudienceGrid".
- */
-export interface AudienceGrid {
-  title: string;
-  cards: {
-    heading: string;
-    text: string;
-    image: string | Media;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'audienceGrid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ReachTextCards".
  */
 export interface ReachTextCards {
@@ -1574,6 +1517,188 @@ export interface RightImageCTA {
   id?: string | null;
   blockName?: string | null;
   blockType: 'rightImageCTA';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageRight".
+ */
+export interface TextImageRight {
+  title: string;
+  /**
+   * Short paragraph under the heading.
+   */
+  description?: string | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textImageRight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PackagesGrid".
+ */
+export interface PackagesGrid {
+  title: string;
+  topRow?:
+    | {
+        text: string;
+        /**
+         * e.g. #4B6B3C or rgba(0,0,0,0.05)
+         */
+        backgroundColor?: string | null;
+        textColor?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  bottomRow?:
+    | {
+        text: string;
+        backgroundColor?: string | null;
+        textColor?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  showBottomDivider?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'packagesGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AudienceGrid".
+ */
+export interface AudienceGrid {
+  title: string;
+  cards: {
+    heading: string;
+    text: string;
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'audienceGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextCTAImageRight".
+ */
+export interface TextCTAImageRight {
+  title: string;
+  description?: string | null;
+  boldLine?: string | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textCtaImageRight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageStepsRight".
+ */
+export interface ImageStepsRight {
+  title: string;
+  steps?:
+    | {
+        heading: string;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageStepsRight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextVideoRight".
+ */
+export interface TextVideoRight {
+  title: string;
+  description?: string | null;
+  smallText1?: string | null;
+  smallText2?: string | null;
+  /**
+   * Upload a video file in the Media collection.
+   */
+  video: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textVideoRight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CenteredBannerCTA".
+ */
+export interface CenteredBannerCTA {
+  title: string;
+  description?: string | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  showTopLine?: boolean | null;
+  showBottomLine?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'centeredBannerCta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2252,12 +2377,16 @@ export interface PagesSelect<T extends boolean = true> {
         expectCards?: T | ExpectCardsSelect<T>;
         logoTextCTA?: T | LogoTextCTASelect<T>;
         textWithCTAs?: T | TextWithCTAsSelect<T>;
-        textImageRight?: T | TextImageRightSelect<T>;
-        packagesGrid?: T | PackagesGridSelect<T>;
-        audienceGrid?: T | AudienceGridSelect<T>;
         reachTextCards?: T | ReachTextCardsSelect<T>;
         partnerBenefits?: T | PartnerBenefitsSelect<T>;
         rightImageCTA?: T | RightImageCTASelect<T>;
+        textImageRight?: T | TextImageRightSelect<T>;
+        packagesGrid?: T | PackagesGridSelect<T>;
+        audienceGrid?: T | AudienceGridSelect<T>;
+        textCtaImageRight?: T | TextCTAImageRightSelect<T>;
+        imageStepsRight?: T | ImageStepsRightSelect<T>;
+        textVideoRight?: T | TextVideoRightSelect<T>;
+        centeredBannerCta?: T | CenteredBannerCTASelect<T>;
       };
   meta?:
     | T
@@ -2745,60 +2874,6 @@ export interface TextWithCTAsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TextImageRight_select".
- */
-export interface TextImageRightSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  image?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "PackagesGrid_select".
- */
-export interface PackagesGridSelect<T extends boolean = true> {
-  title?: T;
-  topRow?:
-    | T
-    | {
-        text?: T;
-        backgroundColor?: T;
-        textColor?: T;
-        id?: T;
-      };
-  bottomRow?:
-    | T
-    | {
-        text?: T;
-        backgroundColor?: T;
-        textColor?: T;
-        id?: T;
-      };
-  showBottomDivider?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "AudienceGrid_select".
- */
-export interface AudienceGridSelect<T extends boolean = true> {
-  title?: T;
-  cards?:
-    | T
-    | {
-        heading?: T;
-        text?: T;
-        image?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ReachTextCards_select".
  */
 export interface ReachTextCardsSelect<T extends boolean = true> {
@@ -2855,6 +2930,156 @@ export interface RightImageCTASelect<T extends boolean = true> {
             };
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageRight_select".
+ */
+export interface TextImageRightSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "PackagesGrid_select".
+ */
+export interface PackagesGridSelect<T extends boolean = true> {
+  title?: T;
+  topRow?:
+    | T
+    | {
+        text?: T;
+        backgroundColor?: T;
+        textColor?: T;
+        id?: T;
+      };
+  bottomRow?:
+    | T
+    | {
+        text?: T;
+        backgroundColor?: T;
+        textColor?: T;
+        id?: T;
+      };
+  showBottomDivider?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AudienceGrid_select".
+ */
+export interface AudienceGridSelect<T extends boolean = true> {
+  title?: T;
+  cards?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextCTAImageRight_select".
+ */
+export interface TextCTAImageRightSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  boldLine?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageStepsRight_select".
+ */
+export interface ImageStepsRightSelect<T extends boolean = true> {
+  title?: T;
+  steps?:
+    | T
+    | {
+        heading?: T;
+        text?: T;
+        id?: T;
+      };
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextVideoRight_select".
+ */
+export interface TextVideoRightSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  smallText1?: T;
+  smallText2?: T;
+  video?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CenteredBannerCTA_select".
+ */
+export interface CenteredBannerCTASelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  showTopLine?: T;
+  showBottomLine?: T;
   id?: T;
   blockName?: T;
 }

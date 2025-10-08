@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { CTAButton } from "@/components/CTAButton"
-import { Pause } from "lucide-react"
+import PauseSrc from "../../../public/pause.svg" 
 import playSrc from "../../../public/play.svg" 
 import Image from "next/image"
 
@@ -74,7 +74,7 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
             ].join(" ")}
           >
             <span className="flex gap-4 items-center absolute top-[20%] -right-[5%] text-white rotate-90">
-              {isPlaying ? <Pause className="h-4 w-4" /> : <Image src={playSrc} alt="Play" width={16} height={16} className="h-auto w-auto" />}
+              {isPlaying ? <Image src={PauseSrc} alt="Play" width={16} height={16} className="h-auto w-auto"  /> : <Image src={playSrc} alt="Play" width={16} height={16} className="h-auto w-auto" />}
               <p className="text-base  tracking-widest">
                 {isPlaying ? "PAUSE VIDEO" : "PLAY THE VIDEO"}
               </p>

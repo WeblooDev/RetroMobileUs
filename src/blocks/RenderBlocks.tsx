@@ -51,6 +51,10 @@ import RightImageCTA from './RightImageCTA/Component'
 import TextImageRight from './TextImageRight/component'
 import PackagesGrid from './PackagesGrid/component'
 import AudienceGrid from './AudienceGrid/Component'
+import TextCTAImageRight from './TextCTAImageRight/Component'
+import ImageStepsRight from './ImageStepsRight/Component'
+import TextVideoRight from './TextVideoRight/Component'
+import CenteredBannerCTA from './CenteredBannerCTA/Component'
 
 
 
@@ -104,10 +108,10 @@ const blockComponents = {
   textImageRight: TextImageRight,
   packagesGrid: PackagesGrid,
   audienceGrid: AudienceGrid,
-
-
-  
-
+  textCtaImageRight: TextCTAImageRight,
+  imageStepsRight: ImageStepsRight,
+  textVideoRight: TextVideoRight,
+  centeredBannerCta: CenteredBannerCTA,
 
 
 }
