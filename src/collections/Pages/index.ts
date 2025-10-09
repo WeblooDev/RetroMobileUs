@@ -65,6 +65,9 @@ import RightImageCTA from '@/blocks/RightImageCTA/config'
 import TextImageRight from '@/blocks/TextImageRight/config'
 import PackagesGrid from '@/blocks/PackagesGrid/config'
 import AudienceGrid from '@/blocks/AudienceGrid/confg'
+import MerchShowcase from '@/blocks/MerchShowcase/config'
+import ImageOverlayText from '@/blocks/ImageOverlayText/config'
+import TextImageRightLite from '@/blocks/TextImageRightLite/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -168,7 +171,10 @@ export const Pages: CollectionConfig<'pages'> = {
                 RightImageCTA,
                 TextImageRight,
                 PackagesGrid,
-                AudienceGrid
+                AudienceGrid,
+                MerchShowcase,
+                ImageOverlayText,
+                TextImageRightLite
                 
               ],
               required: true,
