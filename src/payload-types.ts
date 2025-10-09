@@ -450,6 +450,9 @@ export interface Page {
     | TextImageRight
     | PackagesGrid
     | AudienceGrid
+    | MerchShowcase
+    | ImageOverlayText
+    | TextImageRightLite
     | TextCTAImageRight
     | ImageStepsRight
     | TextVideoRight
@@ -1581,6 +1584,68 @@ export interface AudienceGrid {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MerchShowcase".
+ */
+export interface MerchShowcase {
+  title: string;
+  description?: string | null;
+  items?:
+    | {
+        title: string;
+        image: string | Media;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'merchShowcase';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageOverlayText".
+ */
+export interface ImageOverlayText {
+  title: string;
+  description?: string | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageOverlayText';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageRightLite".
+ */
+export interface TextImageRightLite {
+  title: string;
+  description?: string | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textImageRightLite';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TextCTAImageRight".
  */
 export interface TextCTAImageRight {
@@ -2383,6 +2448,9 @@ export interface PagesSelect<T extends boolean = true> {
         textImageRight?: T | TextImageRightSelect<T>;
         packagesGrid?: T | PackagesGridSelect<T>;
         audienceGrid?: T | AudienceGridSelect<T>;
+        merchShowcase?: T | MerchShowcaseSelect<T>;
+        imageOverlayText?: T | ImageOverlayTextSelect<T>;
+        textImageRightLite?: T | TextImageRightLiteSelect<T>;
         textCtaImageRight?: T | TextCTAImageRightSelect<T>;
         imageStepsRight?: T | ImageStepsRightSelect<T>;
         textVideoRight?: T | TextVideoRightSelect<T>;
@@ -2984,6 +3052,59 @@ export interface AudienceGridSelect<T extends boolean = true> {
         image?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MerchShowcase_select".
+ */
+export interface MerchShowcaseSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageOverlayText_select".
+ */
+export interface ImageOverlayTextSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextImageRightLite_select".
+ */
+export interface TextImageRightLiteSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
   id?: T;
   blockName?: T;
 }

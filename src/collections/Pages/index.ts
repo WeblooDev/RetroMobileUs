@@ -65,6 +65,9 @@ import RightImageCTA from '@/blocks/RightImageCTA/config'
 import TextImageRight from '@/blocks/TextImageRight/config'
 import PackagesGrid from '@/blocks/PackagesGrid/config'
 import AudienceGrid from '@/blocks/AudienceGrid/confg'
+import MerchShowcase from '@/blocks/MerchShowcase/config'
+import ImageOverlayText from '@/blocks/ImageOverlayText/config'
+import TextImageRightLite from '@/blocks/TextImageRightLite/config'
 import TextCTAImageRight from '@/blocks/TextCTAImageRight/config'
 import ImageStepsRight from '@/blocks/ImageStepsRight/config'
 import { TextVideoRight } from '@/blocks/TextVideoRight/config'
@@ -173,6 +176,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextImageRight,
                 PackagesGrid,
                 AudienceGrid,
+                MerchShowcase,
+                ImageOverlayText,
+                TextImageRightLite,
                 TextCTAImageRight,
                 ImageStepsRight,
                 TextVideoRight,
