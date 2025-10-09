@@ -51,6 +51,9 @@ import RightImageCTA from './RightImageCTA/Component'
 import TextImageRight from './TextImageRight/component'
 import PackagesGrid from './PackagesGrid/component'
 import AudienceGrid from './AudienceGrid/Component'
+import MerchShowcase from './MerchShowcase/Component'
+import ImageOverlayText from './ImageOverlayText/Component'
+import TextImageRightLite from './TextImageRightLite/Component'
 
 
 
@@ -104,6 +107,9 @@ const blockComponents = {
   textImageRight: TextImageRight,
   packagesGrid: PackagesGrid,
   audienceGrid: AudienceGrid,
+  merchShowcase: MerchShowcase,
+  imageOverlayText: ImageOverlayText,
+  textImageRightLite: TextImageRightLite
 
 
   
