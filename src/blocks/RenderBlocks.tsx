@@ -55,6 +55,9 @@ import TextCTAImageRight from './TextCTAImageRight/Component'
 import ImageStepsRight from './ImageStepsRight/Component'
 import TextVideoRight from './TextVideoRight/Component'
 import CenteredBannerCTA from './CenteredBannerCTA/Component'
+import MerchShowcase from './MerchShowcase/Component'
+import ImageOverlayText from './ImageOverlayText/Component'
+import TextImageRightLite from './TextImageRightLite/Component'
 
 
 
@@ -112,6 +115,13 @@ const blockComponents = {
   imageStepsRight: ImageStepsRight,
   textVideoRight: TextVideoRight,
   centeredBannerCta: CenteredBannerCTA,
+  merchShowcase: MerchShowcase,
+  imageOverlayText: ImageOverlayText,
+  textImageRightLite: TextImageRightLite
+
+
+  
+
 
 
 }
