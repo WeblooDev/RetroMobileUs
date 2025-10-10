@@ -51,6 +51,8 @@ import RightImageCTA from './RightImageCTA/Component'
 import TextImageRight from './TextImageRight/component'
 import PackagesGrid from './PackagesGrid/component'
 import AudienceGrid from './AudienceGrid/Component'
+import ScheduleSplit from './ScheduleSplit/component'
+import ImageLeftCenteredList from './ImageLeftCenteredList/Component'
 
 
 
@@ -104,6 +106,9 @@ const blockComponents = {
   textImageRight: TextImageRight,
   packagesGrid: PackagesGrid,
   audienceGrid: AudienceGrid,
+  scheduleSplit: ScheduleSplit,
+  imageLeftCenteredList: ImageLeftCenteredList,
+
 
 
   

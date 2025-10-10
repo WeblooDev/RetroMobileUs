@@ -65,6 +65,8 @@ import RightImageCTA from '@/blocks/RightImageCTA/config'
 import TextImageRight from '@/blocks/TextImageRight/config'
 import PackagesGrid from '@/blocks/PackagesGrid/config'
 import AudienceGrid from '@/blocks/AudienceGrid/confg'
+import ScheduleSplit from '@/blocks/ScheduleSplit/config'
+import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -168,7 +170,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 RightImageCTA,
                 TextImageRight,
                 PackagesGrid,
-                AudienceGrid
+                AudienceGrid,
+                ScheduleSplit,
+                ImageLeftCenteredList
                 
               ],
               required: true,
