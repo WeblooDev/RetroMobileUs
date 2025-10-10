@@ -58,6 +58,8 @@ import CenteredBannerCTA from './CenteredBannerCTA/Component'
 import MerchShowcase from './MerchShowcase/Component'
 import ImageOverlayText from './ImageOverlayText/Component'
 import TextImageRightLite from './TextImageRightLite/Component'
+import ScheduleSplit from './ScheduleSplit/component'
+import ImageLeftCenteredList from './ImageLeftCenteredList/Component'
 
 
 
@@ -117,11 +119,9 @@ const blockComponents = {
   centeredBannerCta: CenteredBannerCTA,
   merchShowcase: MerchShowcase,
   imageOverlayText: ImageOverlayText,
-  textImageRightLite: TextImageRightLite
-
-
-  
-
+  textImageRightLite: TextImageRightLite,
+  scheduleSplit: ScheduleSplit,
+  imageLeftCenteredList: ImageLeftCenteredList,
 
 
 }

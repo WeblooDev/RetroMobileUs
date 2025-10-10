@@ -72,6 +72,8 @@ import TextCTAImageRight from '@/blocks/TextCTAImageRight/config'
 import ImageStepsRight from '@/blocks/ImageStepsRight/config'
 import { TextVideoRight } from '@/blocks/TextVideoRight/config'
 import CenteredBannerCTA from '@/blocks/CenteredBannerCTA/confif'
+import ScheduleSplit from '@/blocks/ScheduleSplit/config'
+import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -176,6 +178,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextImageRight,
                 PackagesGrid,
                 AudienceGrid,
+                ScheduleSplit,
+                ImageLeftCenteredList,
                 MerchShowcase,
                 ImageOverlayText,
                 TextImageRightLite,
