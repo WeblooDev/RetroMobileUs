@@ -20,7 +20,7 @@ const base =
 
 const sizes: Record<NonNullable<CTAButtonProps['size']>, string> = {
   normal: 'text-[17px] px-3 py-1',
-  big: 'text-[27px] px-4 py-1', // +0.5rem padding each way
+  big: 'text-[27px] px-4 py-1', 
 }
 
 const variants: Record<NonNullable<CTAButtonProps['variant']>, string> = {

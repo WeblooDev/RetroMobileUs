@@ -51,6 +51,8 @@ export const Media: CollectionConfig = {
       'video/webm',
       'video/ogg',
       'video/*',
+      'application/pdf',
+
     ],
     adminThumbnail: 'thumbnail',
     focalPoint: true,
