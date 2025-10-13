@@ -72,8 +72,10 @@ import TextCTAImageRight from '@/blocks/TextCTAImageRight/config'
 import ImageStepsRight from '@/blocks/ImageStepsRight/config'
 import { TextVideoRight } from '@/blocks/TextVideoRight/config'
 import CenteredBannerCTA from '@/blocks/CenteredBannerCTA/confif'
+import QuickDownloads from '@/blocks/QuickDownloads/config'
 import ScheduleSplit from '@/blocks/ScheduleSplit/config'
 import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
+import HelpfulLinksGrid from '@/blocks/HelpfulLinksGrid/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -186,7 +188,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextCTAImageRight,
                 ImageStepsRight,
                 TextVideoRight,
-                CenteredBannerCTA
+                CenteredBannerCTA,
+                QuickDownloads,
+                HelpfulLinksGrid
                 
               ],
               required: true,
