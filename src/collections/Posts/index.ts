@@ -35,9 +35,6 @@ export const Posts: CollectionConfig<'posts'> = {
     read: authenticatedOrPublished,
     update: authenticated,
   },
-  // This config controls what's populated by default when a post is referenced
-  // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'posts'>
   defaultPopulate: {
     title: true,
     slug: true,
@@ -50,15 +47,12 @@ export const Posts: CollectionConfig<'posts'> = {
   admin: {
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
-      url: ({ data, req }) => {
-        const path = generatePreviewPath({
+      url: ({ data, req }) =>
+        generatePreviewPath({
           slug: typeof data?.slug === 'string' ? data.slug : '',
           collection: 'posts',
           req,
-        })
-
-        return path
-      },
+        }),
     },
     preview: (data, { req }) =>
       generatePreviewPath({
@@ -69,72 +63,140 @@ export const Posts: CollectionConfig<'posts'> = {
     useAsTitle: 'title',
   },
   fields: [
-    {
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
+    { name: 'title', type: 'text', required: true },
+
     {
       type: 'tabs',
       tabs: [
+        // --- Card shown on the archive / listing ---
         {
+          label: 'Listing Card',
           fields: [
             {
-              name: 'heroImage',
+              name: 'cardThumbnail',
               type: 'upload',
               relationTo: 'media',
+              required: true,
+              label: 'Card Thumbnail',
             },
+            {
+              name: 'cardExcerpt',
+              type: 'textarea',
+              label: 'Card Excerpt',
+              admin: { rows: 3 },
+            },
+          ],
+        },
+
+        // --- Post Template blocks (page layout) ---
+        {
+          label: 'Template',
+          fields: [
+            // Block #1: image background + title + description
+            {
+              name: 'hero',
+              type: 'group',
+              label: 'Hero Overlay',
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                  label: 'Background Image',
+                },
+                { name: 'heroTitle', type: 'text', required: true, label: 'Title' },
+                { name: 'heroDescription', type: 'textarea', label: 'Description', admin: { rows: 3 } },
+              ],
+            },
+
+            // Block #2: split body — left column is a sequence; right is related posts (max 3)
+            {
+              name: 'bodyLeft',
+              type: 'array',
+              label: 'Left Column Sections',
+              labels: { singular: 'Section', plural: 'Sections' },
+              admin: { initCollapsed: false },
+              fields: [
+                {
+                  name: 'kind',
+                  type: 'select',
+                  required: true,
+                  options: [
+                    { label: 'Text', value: 'text' },
+                    { label: 'Image with Caption', value: 'image' },
+                  ],
+                  defaultValue: 'text',
+                },
+                {
+                  name: 'text',
+                  type: 'textarea',
+                  label: 'Text',
+                  admin: { rows: 6, condition: (_data, siblingData) => siblingData?.kind === 'text' },
+                },
+                {
+                  name: 'img',
+                  type: 'upload',
+                  relationTo: 'media',
+                  label: 'Image',
+                  admin: { condition: (_data, siblingData) => siblingData?.kind === 'image' },
+                },
+                {
+                  name: 'caption',
+                  type: 'text',
+                  label: 'Image Caption',
+                  admin: { condition: (_data, siblingData) => siblingData?.kind === 'image' },
+                },
+              ],
+            },
+
+            // Keep a rich text field optional if you still want it (not used by the new template)
             {
               name: 'content',
               type: 'richText',
+              required: false,
               editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ]
-                },
+                features: ({ rootFeatures }) => [
+                  ...rootFeatures,
+                  HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+                  BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+                  FixedToolbarFeature(),
+                  InlineToolbarFeature(),
+                  HorizontalRuleFeature(),
+                ],
               }),
-              label: false,
-              required: true,
+              label: 'Optional Rich Text (legacy)',
             },
           ],
-          label: 'Content',
         },
+
         {
+          label: 'Meta',
           fields: [
             {
               name: 'relatedPosts',
               type: 'relationship',
+              relationTo: 'posts',
+              hasMany: true,
               admin: {
                 position: 'sidebar',
+                description: 'Select up to 3 related posts (shown on the post page right column).',
               },
-              filterOptions: ({ id }) => {
-                return {
-                  id: {
-                    not_in: [id],
-                  },
-                }
-              },
-              hasMany: true,
-              relationTo: 'posts',
+              filterOptions: ({ id }) => ({ id: { not_in: [id] } }),
+              validate: (val) =>
+                (Array.isArray(val) ? val.length <= 3 : true) || 'Select up to 3 related posts.',
             },
             {
               name: 'categories',
               type: 'relationship',
-              admin: {
-                position: 'sidebar',
-              },
               hasMany: true,
               relationTo: 'categories',
+              admin: { position: 'sidebar' },
             },
           ],
-          label: 'Meta',
         },
+
+        // --- SEO tab (unchanged) ---
         {
           name: 'meta',
           label: 'SEO',
@@ -144,19 +206,11 @@ export const Posts: CollectionConfig<'posts'> = {
               descriptionPath: 'meta.description',
               imagePath: 'meta.image',
             }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
-            }),
-
+            MetaTitleField({ hasGenerateFn: true }),
+            MetaImageField({ relationTo: 'media' }),
             MetaDescriptionField({}),
             PreviewField({
-              // if the `generateUrl` function is configured
               hasGenerateFn: true,
-
-              // field paths to match the target field for data
               titlePath: 'meta.title',
               descriptionPath: 'meta.description',
             }),
@@ -164,21 +218,19 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
+
+    // --- Boilerplate fields you already had ---
     {
       name: 'publishedAt',
       type: 'date',
       admin: {
-        date: {
-          pickerAppearance: 'dayAndTime',
-        },
+        date: { pickerAppearance: 'dayAndTime' },
         position: 'sidebar',
       },
       hooks: {
         beforeChange: [
           ({ siblingData, value }) => {
-            if (siblingData._status === 'published' && !value) {
-              return new Date()
-            }
+            if (siblingData._status === 'published' && !value) return new Date()
             return value
           },
         ],
@@ -187,36 +239,21 @@ export const Posts: CollectionConfig<'posts'> = {
     {
       name: 'authors',
       type: 'relationship',
-      admin: {
-        position: 'sidebar',
-      },
       hasMany: true,
       relationTo: 'users',
+      admin: { position: 'sidebar' },
     },
-    // This field is only used to populate the user data via the `populateAuthors` hook
-    // This is because the `user` collection has access control locked to protect user privacy
-    // GraphQL will also not return mutated user data that differs from the underlying schema
     {
       name: 'populatedAuthors',
       type: 'array',
-      access: {
-        update: () => false,
-      },
-      admin: {
-        disabled: true,
-        readOnly: true,
-      },
+      access: { update: () => false },
+      admin: { disabled: true, readOnly: true },
       fields: [
-        {
-          name: 'id',
-          type: 'text',
-        },
-        {
-          name: 'name',
-          type: 'text',
-        },
+        { name: 'id', type: 'text' },
+        { name: 'name', type: 'text' },
       ],
     },
+
     ...slugField(),
   ],
   hooks: {
@@ -226,9 +263,7 @@ export const Posts: CollectionConfig<'posts'> = {
   },
   versions: {
     drafts: {
-      autosave: {
-        interval: 100, // We set this interval for optimal live preview
-      },
+      autosave: { interval: 100 },
       schedulePublish: true,
     },
     maxPerDoc: 50,
