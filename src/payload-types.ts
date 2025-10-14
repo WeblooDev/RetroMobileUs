@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    tags: Tag;
     media: Media;
     categories: Category;
     users: User;
@@ -89,6 +90,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -459,6 +461,10 @@ export interface Page {
     | ImageStepsRight
     | TextVideoRight
     | CenteredBannerCTA
+    | NewsHeroFilter
+    | BlogTwoColumn
+    | BannerBlock
+    | InlineTeaser
   )[];
   meta?: {
     title?: string | null;
@@ -482,22 +488,20 @@ export interface Page {
 export interface Post {
   id: string;
   title: string;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  thumbnail: string | Media;
+  /**
+   * Overlay badges on the thumbnail (e.g., THE SHOW)
+   */
+  tags?: (string | Tag)[] | null;
+  /**
+   * Optional override text if you don’t want to manage Tags
+   */
+  thumbnailBadge?: string | null;
+  /**
+   * Short description for the card
+   */
+  excerpt?: string | null;
+  layout: (BlogHero | BlogTwoColumn)[];
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -615,6 +619,83 @@ export interface Media {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  name: string;
+  slug: string;
+  color?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogHero".
+ */
+export interface BlogHero {
+  background: string | Media;
+  title: string;
+  description?: string | null;
+  darken?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'blogHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogTwoColumn".
+ */
+export interface BlogTwoColumn {
+  left: (TextSlice | ImageSlice)[];
+  right?: {
+    /**
+     * Pick up to 3 related posts
+     */
+    relatedPosts?: (string | Post)[] | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'blogTwoColumn';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextSlice".
+ */
+export interface TextSlice {
+  text: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'textSlice';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSlice".
+ */
+export interface ImageSlice {
+  image: string | Media;
+  caption: string;
+  description: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageSlice';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1810,6 +1891,76 @@ export interface CenteredBannerCTA {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsHeroFilter".
+ */
+export interface NewsHeroFilter {
+  background: string | Media;
+  title: string;
+  showExcerpt?: boolean | null;
+  limit?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'newsHeroFilter';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BannerBlock".
+ */
+export interface BannerBlock {
+  style: 'info' | 'warning' | 'error' | 'success';
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InlineTeaser".
+ */
+export interface InlineTeaser {
+  image: string | Media;
+  title: string;
+  description?: string | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'inlineTeaser';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cars".
  */
 export interface Car {
@@ -2099,6 +2250,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'tags';
+        value: string | Tag;
       } | null)
     | ({
         relationTo: 'media';
@@ -2500,6 +2655,10 @@ export interface PagesSelect<T extends boolean = true> {
         imageStepsRight?: T | ImageStepsRightSelect<T>;
         textVideoRight?: T | TextVideoRightSelect<T>;
         centeredBannerCta?: T | CenteredBannerCTASelect<T>;
+        newsHeroFilter?: T | NewsHeroFilterSelect<T>;
+        blogTwoColumn?: T | BlogTwoColumnSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
+        inlineTeaser?: T | InlineTeaserSelect<T>;
       };
   meta?:
     | T
@@ -3287,12 +3446,106 @@ export interface CenteredBannerCTASelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NewsHeroFilter_select".
+ */
+export interface NewsHeroFilterSelect<T extends boolean = true> {
+  background?: T;
+  title?: T;
+  showExcerpt?: T;
+  limit?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogTwoColumn_select".
+ */
+export interface BlogTwoColumnSelect<T extends boolean = true> {
+  left?:
+    | T
+    | {
+        textSlice?: T | TextSliceSelect<T>;
+        imageSlice?: T | ImageSliceSelect<T>;
+      };
+  right?:
+    | T
+    | {
+        relatedPosts?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TextSlice_select".
+ */
+export interface TextSliceSelect<T extends boolean = true> {
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageSlice_select".
+ */
+export interface ImageSliceSelect<T extends boolean = true> {
+  image?: T;
+  caption?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BannerBlock_select".
+ */
+export interface BannerBlockSelect<T extends boolean = true> {
+  style?: T;
+  content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InlineTeaser_select".
+ */
+export interface InlineTeaserSelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
+  description?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
-  heroImage?: T;
-  content?: T;
+  thumbnail?: T;
+  tags?: T;
+  thumbnailBadge?: T;
+  excerpt?: T;
+  layout?:
+    | T
+    | {
+        blogHero?: T | BlogHeroSelect<T>;
+        blogTwoColumn?: T | BlogTwoColumnSelect<T>;
+      };
   relatedPosts?: T;
   categories?: T;
   meta?:
@@ -3315,6 +3568,29 @@ export interface PostsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BlogHero_select".
+ */
+export interface BlogHeroSelect<T extends boolean = true> {
+  background?: T;
+  title?: T;
+  description?: T;
+  darken?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  color?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4059,42 +4335,6 @@ export interface TaskSchedulePublish {
     user?: (string | null) | User;
   };
   output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "BannerBlock".
- */
-export interface BannerBlock {
-  style: 'info' | 'warning' | 'error' | 'success';
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'banner';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CodeBlock".
- */
-export interface CodeBlock {
-  language?: ('typescript' | 'javascript' | 'css') | null;
-  code: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'code';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

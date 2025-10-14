@@ -9,6 +9,7 @@ import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { FacebookPixelScript } from '@/components/FaceBookScript'
 import { BreadcrumbLayout } from '@/components/Breadcrumb/BreadcrumbLayout'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'

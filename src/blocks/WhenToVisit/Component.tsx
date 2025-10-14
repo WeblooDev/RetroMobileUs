@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import type { WhenToVisit as WhenToVisitBlock, Media } from "@/payload-types"
+import type { WhenToVisit as WhenToVisitBlock, Media } from '@/payload-types'
 
 const WhenToVisit: React.FC<WhenToVisitBlock> = ({
   backgroundImage,
@@ -13,11 +13,11 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
   bandColor,
 }) => {
   const bgUrl =
-    backgroundImage && typeof backgroundImage === "object"
+    backgroundImage && typeof backgroundImage === 'object'
       ? (backgroundImage as Media)?.url
       : undefined
 
-  const band = bandColor?.trim() ? bandColor : "#8B9B5C"
+  const band = bandColor?.trim() ? bandColor : '#8B9B5C'
 
   return (
     <section className="container relative w-full">
@@ -29,13 +29,11 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
           <div className="absolute inset-0 bg-black/45" />
 
           <div className="absolute inset-x-0 top-10 md:top-10 flex justify-center px-6">
-            <h2 className="text-3xl md:text-5xl lg:text-[84px] text-white text-center">
-              {title}
-            </h2>
+            <h2 className="text-3xl md:text-5xl lg:text-[84px] text-white text-center">{title}</h2>
           </div>
           <div
             className="absolute left-0 right-0"
-            style={{ top: "50%", transform: "translateY(-50%)", backgroundColor: band }}
+            style={{ top: '50%', transform: 'translateY(-50%)', backgroundColor: band }}
           >
             <div className="flex items-center text-white justify-center">
               {/* Left column */}

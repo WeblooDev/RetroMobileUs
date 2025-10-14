@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { useEffect } from "react"
-import { CTAButton } from "@/components/CTAButton"
+import { useEffect } from 'react'
+import { CTAButton } from '@/components/CTAButton'
 
 type TwoColumnCTAProps = {
   title: string
@@ -11,9 +11,9 @@ type TwoColumnCTAProps = {
 
 // minimal Lexical-to-plain-text extractor
 function lexicalToPlainText(node: any): string {
-  if (!node) return ""
+  if (!node) return ''
   const root = (node as any).root ?? node
-  let out = ""
+  let out = ''
 
   const visit = (n: any) => {
     if (!n) return
@@ -21,11 +21,11 @@ function lexicalToPlainText(node: any): string {
       n.forEach(visit)
       return
     }
-    if (n.type === "text" && typeof n.text === "string") {
+    if (n.type === 'text' && typeof n.text === 'string') {
       out += n.text
     }
     if (n.children) visit(n.children)
-    if (n.type === "paragraph") out += "\n"
+    if (n.type === 'paragraph') out += '\n'
   }
 
   visit(root.children ?? [])
@@ -34,37 +34,37 @@ function lexicalToPlainText(node: any): string {
 
 export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAProps) {
   const paraText =
-    typeof paragraph === "string"
+    typeof paragraph === 'string'
       ? paragraph
-      : paragraph && typeof paragraph === "object" && "root" in (paragraph as Record<string, unknown>)
-      ? lexicalToPlainText(paragraph)
-      : ""
+      : paragraph &&
+          typeof paragraph === 'object' &&
+          'root' in (paragraph as Record<string, unknown>)
+        ? lexicalToPlainText(paragraph)
+        : ''
 
   useEffect(() => {
-    const container = document.getElementById("weblooParagraph")
+    const container = document.getElementById('weblooParagraph')
     if (!container) return
 
-    const p = container.querySelector("h3")
+    const p = container.querySelector('h3')
     if (!p) return
 
     // Split into spans
-    const words = (p.textContent ?? "").split(" ")
-    p.innerHTML = words.map((w) => `<span style="opacity:0">${w}</span>`).join(" ")
+    const words = (p.textContent ?? '').split(' ')
+    p.innerHTML = words.map((w) => `<span style="opacity:0">${w}</span>`).join(' ')
 
-    const spans = container.querySelectorAll("span")
+    const spans = container.querySelectorAll('span')
 
     const revealSpans = () => {
       spans.forEach((span) => {
         const rect = (span as HTMLElement).getBoundingClientRect()
         if (rect.top < window.innerHeight) {
-          const { left } = rect            // ← const (never reassigned)
-          let top = rect.top               // ← let (we mutate below)
+          const { left } = rect // ← const (never reassigned)
+          let top = rect.top // ← let (we mutate below)
           top = top - window.innerHeight * 0.7
 
           let opacityValue =
-            1 - (top * 0.01 + left * 0.001) < 0.1
-              ? 0.1
-              : 1 - (top * 0.01 + left * 0.001)
+            1 - (top * 0.01 + left * 0.001) < 0.1 ? 0.1 : 1 - (top * 0.01 + left * 0.001)
 
           opacityValue = Math.min(1, Math.max(0.1, +opacityValue.toFixed(3)))
           ;(span as HTMLElement).style.opacity = String(opacityValue)
@@ -72,9 +72,9 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
       })
     }
 
-    window.addEventListener("scroll", revealSpans)
+    window.addEventListener('scroll', revealSpans)
     revealSpans()
-    return () => window.removeEventListener("scroll", revealSpans)
+    return () => window.removeEventListener('scroll', revealSpans)
   }, [paraText])
 
   return (

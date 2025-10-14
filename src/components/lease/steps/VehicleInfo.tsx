@@ -132,9 +132,7 @@ export function VehicleInfo({
   if (initialCarData) {
     return (
       <div className="flex flex-col gap-4">
-        <FormLabel className=" text-base lg:text-lg 2xl:text-xl text-black">
-          Vehicle
-        </FormLabel>
+        <FormLabel className=" text-base lg:text-lg 2xl:text-xl text-black">Vehicle</FormLabel>
 
         <FormField
           control={form.control}

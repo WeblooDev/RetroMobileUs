@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import type { PartnerBenefits as PartnerBenefitsBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import type { PartnerBenefits as PartnerBenefitsBlock } from '@/payload-types'
 
 const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, cards }) => {
   const items = cards ?? []
@@ -10,9 +10,7 @@ const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, c
     <section className="w-full">
       <div className="container  pt-10 md:pt-16">
         <h2 className="font-ivar text-4xl md:text-6xl ">{title}</h2>
-        {description && (
-          <p className="mt-4 text-base ">{description}</p>
-        )}
+        {description && <p className="mt-4 text-base ">{description}</p>}
       </div>
 
       <div className="container py-10 md:py-14">
@@ -23,12 +21,9 @@ const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, c
                 <Media resource={card.image} fill priority={i < 2} imgClassName="object-cover" />
               </div>
 
-
               <div className="absolute bottom-0 left-0 right-0 p-6 text-center text-white h-full flex flex-col justify-center items-center ">
                 <h3 className=" text-[200px]">{card.heading}</h3>
-                {card.body && (
-                  <p className="text-sm md:text-base ">{card.body}</p>
-                )}
+                {card.body && <p className="text-sm md:text-base ">{card.body}</p>}
               </div>
             </div>
           ))}

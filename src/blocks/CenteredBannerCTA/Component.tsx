@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { CTAButton } from "@/components/CTAButton"
-import type { CenteredBannerCTA as CenteredBannerCTABlock } from "@/payload-types"
+import { CTAButton } from '@/components/CTAButton'
+import type { CenteredBannerCTA as CenteredBannerCTABlock } from '@/payload-types'
 
 const CenteredBannerCTA: React.FC<CenteredBannerCTABlock> = ({
   title,
@@ -10,10 +10,9 @@ const CenteredBannerCTA: React.FC<CenteredBannerCTABlock> = ({
   showTopLine = true,
   showBottomLine = true,
 }) => {
-  const [primary] =
-    (links ?? [])
-      .map((row: any) => row?.link)
-      .filter((l: any) => l && l.label && l.url && l.url.trim())
+  const [primary] = (links ?? [])
+    .map((row: any) => row?.link)
+    .filter((l: any) => l && l.label && l.url && l.url.trim())
 
   return (
     <section className="w-full py-10 md:py-14 bg-[#8B9B5C] text-white">
@@ -23,11 +22,7 @@ const CenteredBannerCTA: React.FC<CenteredBannerCTABlock> = ({
       <div className="container py-8 md:py-16 flex flex-col text-center items-center gap-4">
         <h2 className="text-2xl md:text-5xl max-w-2xl">{title}</h2>
 
-        {description && (
-          <p className=" text-xs md:text-base  max-w-2xl mx-auto">
-            {description}
-          </p>
-        )}
+        {description && <p className=" text-xs md:text-base  max-w-2xl mx-auto">{description}</p>}
 
         {primary && (
           <div className="mt-6">

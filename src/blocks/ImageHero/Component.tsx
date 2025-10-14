@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { CTAButton } from "@/components/CTAButton"
+import { CTAButton } from '@/components/CTAButton'
 
 type ImageHeroProps = {
   backgroundImage?: { url?: string }

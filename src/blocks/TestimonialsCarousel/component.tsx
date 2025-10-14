@@ -115,9 +115,7 @@ const TestimonialCarouselBlock: React.FC<TestimonialCarouselProps> = ({
           >
             <div className="flex flex-col md:flex-row justify-between items-start md:items-start mb-8">
               <div className="text-white">
-                <h2 className=" text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4">
-                  {title}
-                </h2>
+                <h2 className=" text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-4">{title}</h2>
                 {/* <p className=" font-light text-2xl lg:text-4xl xl:text-6xl">
                   {testimonials?.length} Reviews | {getTestimonials()}
                 </p> */}

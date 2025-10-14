@@ -13,6 +13,7 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 import { CustomHeroBlock } from '@/blocks/HeroSection/config'
+import { BlogTwoColumn } from '@/blocks/BlogTwoColumn/config'
 
 import {
   MetaDescriptionField,
@@ -74,6 +75,9 @@ import { TextVideoRight } from '@/blocks/TextVideoRight/config'
 import CenteredBannerCTA from '@/blocks/CenteredBannerCTA/confif'
 import ScheduleSplit from '@/blocks/ScheduleSplit/config'
 import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
+import NewsHeroFilter from '@/blocks/NewsHeroFilter/config'
+import { Banner } from '@/blocks/Banner/config'
+import InlineTeaser from '@/blocks/InlineTeaser/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -186,8 +190,11 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextCTAImageRight,
                 ImageStepsRight,
                 TextVideoRight,
-                CenteredBannerCTA
-                
+                CenteredBannerCTA,
+                NewsHeroFilter,
+                BlogTwoColumn,
+                Banner,
+                InlineTeaser,
               ],
               required: true,
               admin: {

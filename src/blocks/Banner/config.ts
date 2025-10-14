@@ -8,6 +8,7 @@ import {
 
 export const Banner: Block = {
   slug: 'banner',
+
   fields: [
     {
       name: 'style',

@@ -15,73 +15,63 @@ export async function Footer() {
 
   return (
     <footer className="p-6 w-full">
+      <div className="container">
+        <div className=" border-t  sm:border-t-0  ">
+          <div className="flex mt-4 flex-col justify-center items-center gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-4 2xl:gap-6">
+            <div className="flex flex-col items-center xl:items-start gap-6 min-h-[250px] justify-between">
+              <div className="w-[60%] sm:w-full md:w-fit flex justify-center items-center mb-2">
+                {typeof footerData.logo === 'object' && footerData.logo?.url && (
+                  <Link href="/">
+                    <Media
+                      resource={footerData.logo}
+                      alt="Footer Logo"
+                      className="w-full min-w-[150px] max-w-[500px] md:max-w-[300px] h-auto object-contain cursor-pointer"
+                      imgClassName="w-full max-w-[500px] md:max-w-[300px] h-auto object-contain"
+                    />
+                  </Link>
+                )}
+              </div>
 
-      <div className='container'>
-
-      <div className=" border-t  sm:border-t-0  ">
-        <div className="flex mt-4 flex-col justify-center items-center gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-4 2xl:gap-6">
-          <div className="flex flex-col items-center xl:items-start gap-6 min-h-[250px] justify-between">
-            <div className="w-[60%] sm:w-full md:w-fit flex justify-center items-center mb-2">
-              {typeof footerData.logo === 'object' && footerData.logo?.url && (
-                <Link href="/">
-                  <Media
-                    resource={footerData.logo}
-                    alt="Footer Logo"
-                    className="w-full min-w-[150px] max-w-[500px] md:max-w-[300px] h-auto object-contain cursor-pointer"
-                    imgClassName="w-full max-w-[500px] md:max-w-[300px] h-auto object-contain"
-                  />
-                </Link>
+              {Array.isArray(footerData.icons) && footerData.icons.length > 0 && (
+                <div className="w-full xl:w-[80%] p-2 md:w-fit flex items-center justify-between  gap-6 lg:gap-8 xl:gap-10">
+                  {footerData.icons.map((iconObj, index) => (
+                    <Link
+                      href={iconObj.url}
+                      key={index}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
+                      <Media
+                        resource={iconObj.icon}
+                        alt={`Footer Icon ${index}`}
+                        className="flex gap-6 w-[23px] h-[23px] justify-center items-center  "
+                        imgClassName="h-auto w-auto w-[23px] h-[23px] "
+                      />
+                    </Link>
+                  ))}
+                </div>
               )}
             </div>
 
-            {Array.isArray(footerData.icons) && footerData.icons.length > 0 && (
-              <div className="w-full xl:w-[80%] p-2 md:w-fit flex items-center justify-between  gap-6 lg:gap-8 xl:gap-10">
-                {footerData.icons.map((iconObj, index) => (
-                  <Link
-                    href={iconObj.url}
-                    key={index}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center"
-                  >
-                    <Media
-                      resource={iconObj.icon}
-                      alt={`Footer Icon ${index}`}
-                      className="flex gap-6 w-[23px] h-[23px] justify-center items-center  "
-                      imgClassName="h-auto w-auto w-[23px] h-[23px] "
-                    />
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="flex justify-end w-full xl:w-[65%] gap-4 md:gap-6 lg:gap-20 px-4 md:px-0">
-            {linkGroups.map((group, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center justify-center text-center 
+            <div className="flex justify-end w-full xl:w-[65%] gap-4 md:gap-6 lg:gap-20 px-4 md:px-0">
+              {linkGroups.map((group, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center justify-center text-center 
                 lg:items-start lg:justify-start lg:text-left gap-4
              "
-              >
-                <h4 className=" text-sm uppercase  ">
-                  {group.title}
-                </h4>
-                <ul className="space-y-1 md:space-y-2">
-                  {group.links?.map(({ link }, i) => (
-                    <li key={i}>
-                      <CMSLink
-                        className="text-sm hover:underline font-inter"
-                        {...link}
-                      />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
-           
-            
+                >
+                  <h4 className=" text-sm uppercase  ">{group.title}</h4>
+                  <ul className="space-y-1 md:space-y-2">
+                    {group.links?.map(({ link }, i) => (
+                      <li key={i}>
+                        <CMSLink className="text-sm hover:underline font-inter" {...link} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
             <div className="flex sm:hidden justify-between flex-col items-center font-inter text-center gap-2 ">
               <Link
@@ -118,7 +108,7 @@ export async function Footer() {
                 rel="noopener noreferrer"
                 className="text-black hover:underline"
               >
-               RETRO MOBILE.
+                RETRO MOBILE.
               </a>{' '}
               All Rights Reserved.
             </p>
@@ -142,7 +132,7 @@ export async function Footer() {
             </Link>
           </div>
         </div>
-        </div>
+      </div>
     </footer>
   )
 }

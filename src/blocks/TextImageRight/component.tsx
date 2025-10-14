@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import type { TextImageRight as TextImageRightBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import type { TextImageRight as TextImageRightBlock } from '@/payload-types'
 
 const TextImageRight: React.FC<TextImageRightBlock> = ({ title, description, image }) => {
   return (
@@ -9,11 +9,7 @@ const TextImageRight: React.FC<TextImageRightBlock> = ({ title, description, ima
       <div className="flex items-center gap-8 md:gap-20">
         <div>
           <h2 className="text-3xl md:text-6xl ">{title}</h2>
-          {description && (
-            <p className="mt-4 text-sm md:text-base">
-              {description}
-            </p>
-          )}
+          {description && <p className="mt-4 text-sm md:text-base">{description}</p>}
         </div>
 
         <div className="relative w-full aspect-[638/262] overflow-hidden ">

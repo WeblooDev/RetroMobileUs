@@ -1,24 +1,18 @@
 // Component.client.tsx
-"use client"
+'use client'
 
-import { useEffect, useRef, useState } from "react"
-import Link from "next/link"
-import { ChevronDown, Menu, X } from "lucide-react"
-import type { Header as HeaderDoc } from "@/payload-types"
-import { Media } from "@/components/Media"
-import { CTAButton } from "@/components/CTAButton"
-import { cn } from "@/lib/utils"
-import { useScrollHeader } from "./useScrollHeader"
+import { useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import { ChevronDown, Menu, X } from 'lucide-react'
+import type { Header as HeaderDoc } from '@/payload-types'
+import { Media } from '@/components/Media'
+import { CTAButton } from '@/components/CTAButton'
+import { cn } from '@/lib/utils'
+import { useScrollHeader } from './useScrollHeader'
 
 type Props = HeaderDoc
 
-export default function HeaderClient({
-  logo,
-  navItems,
-  ctaLink,
-  secondaryCTA,
-  banner,
-}: Props) {
+export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, banner }: Props) {
   const isVisible = useScrollHeader()
   const showBanner = Boolean(banner?.enabled && (banner?.p1 || banner?.p2))
 
@@ -51,8 +45,8 @@ export default function HeaderClient({
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out",
-        isVisible ? "translate-y-0" : "-translate-y-full",
+        'fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out',
+        isVisible ? 'translate-y-0' : '-translate-y-full',
       )}
     >
       {showBanner && (
@@ -74,13 +68,16 @@ export default function HeaderClient({
             <nav className="hidden md:flex items-center gap-1">
               {(navItems ?? []).map((item) => {
                 const hasDropdown = (item.dropdownLinks?.length ?? 0) > 0
-                const itemHref = item.url?.trim() || "#"
+                const itemHref = item.url?.trim() || '#'
 
                 return (
                   <div
                     key={item.label}
                     className="relative"
-                    onMouseEnter={() => { cancelClose(); open(item.label) }}
+                    onMouseEnter={() => {
+                      cancelClose()
+                      open(item.label)
+                    }}
                     onMouseLeave={scheduleClose}
                   >
                     <Link
@@ -161,7 +158,7 @@ export default function HeaderClient({
             <div className="px-4 py-6 space-y-4">
               {(navItems ?? []).map((item) => {
                 const hasDropdown = (item.dropdownLinks?.length ?? 0) > 0
-                const itemHref = item.url?.trim() || "#"
+                const itemHref = item.url?.trim() || '#'
                 const isOpen = mobileOpenDropdown === item.label
 
                 return (
@@ -188,7 +185,7 @@ export default function HeaderClient({
                             }}
                           >
                             <ChevronDown
-                              className={cn("h-4 w-4 transition-transform", isOpen && "rotate-180")}
+                              className={cn('h-4 w-4 transition-transform', isOpen && 'rotate-180')}
                             />
                           </button>
                         </div>
@@ -223,7 +220,12 @@ export default function HeaderClient({
               {/* Mobile CTAs */}
               <div className="pt-4 space-y-3">
                 {ctaLink?.link?.label && ctaLink.link.url && (
-                  <CTAButton href={ctaLink.link.url} className="w-full" variant="olive" size="normal">
+                  <CTAButton
+                    href={ctaLink.link.url}
+                    className="w-full"
+                    variant="olive"
+                    size="normal"
+                  >
                     {ctaLink.link.label}
                   </CTAButton>
                 )}

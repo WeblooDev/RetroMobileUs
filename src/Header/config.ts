@@ -38,7 +38,7 @@ export const Header: GlobalConfig = {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
-      required: true, 
+      required: true,
       admin: { position: 'sidebar' },
     },
 
@@ -70,8 +70,7 @@ export const Header: GlobalConfig = {
           ],
           admin: {
             initCollapsed: true,
-            description:
-              'If any items exist here, this nav item will render as a dropdown.',
+            description: 'If any items exist here, this nav item will render as a dropdown.',
           },
         },
       ],

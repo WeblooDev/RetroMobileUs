@@ -1,19 +1,13 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import { CTAButton } from "@/components/CTAButton"
-import type { ImageStepsRight as ImageStepsRightBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import { CTAButton } from '@/components/CTAButton'
+import type { ImageStepsRight as ImageStepsRightBlock } from '@/payload-types'
 
-const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({
-  title,
-  steps,
-  links,
-  image,
-}) => {
-  const [primary] =
-    (links ?? [])
-      .map((row: any) => row?.link)
-      .filter((l: any) => l && l.label && l.url && l.url.trim())
+const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({ title, steps, links, image }) => {
+  const [primary] = (links ?? [])
+    .map((row: any) => row?.link)
+    .filter((l: any) => l && l.label && l.url && l.url.trim())
 
   const items = steps ?? []
 
@@ -34,9 +28,7 @@ const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({
                 {s?.heading && (
                   <h3 className="font-ivar text-4xl md:text-5xl leading-none">{s.heading}</h3>
                 )}
-                {s?.text && (
-                  <p className="mt-2 text-xs md:text-sm text-black/80">{s.text}</p>
-                )}
+                {s?.text && <p className="mt-2 text-xs md:text-sm text-black/80">{s.text}</p>}
               </div>
             ))}
           </div>

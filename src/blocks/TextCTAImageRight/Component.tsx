@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import { CTAButton } from "@/components/CTAButton"
-import type { TextCTAImageRight as TextCTAImageRightBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import { CTAButton } from '@/components/CTAButton'
+import type { TextCTAImageRight as TextCTAImageRightBlock } from '@/payload-types'
 
 const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
   title,
@@ -11,10 +11,9 @@ const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
   links,
   image,
 }) => {
-  const [primary] =
-    (links ?? [])
-      .map((row: any) => row?.link)
-      .filter((l: any) => l && l.label && l.url && l.url.trim())
+  const [primary] = (links ?? [])
+    .map((row: any) => row?.link)
+    .filter((l: any) => l && l.label && l.url && l.url.trim())
 
   return (
     <section className="w-[90%] ml-auto py-12 md:py-20">
@@ -22,17 +21,9 @@ const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
         <div className=" w-[50%]">
           <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
 
-          {description && (
-            <p className="mt-4 text-sm md:text-base w-[90%]">
-              {description}
-            </p>
-          )}
+          {description && <p className="mt-4 text-sm md:text-base w-[90%]">{description}</p>}
 
-          {boldLine && (
-            <p className="mt-3 font-semibold text-sm md:text-base">
-              {boldLine}
-            </p>
-          )}
+          {boldLine && <p className="mt-3 font-semibold text-sm md:text-base">{boldLine}</p>}
 
           {primary && (
             <div className="mt-6">
