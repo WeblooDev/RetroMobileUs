@@ -43,9 +43,7 @@ export const TwoImageColumn: React.FC<TwoImageColumnProps> = ({
         {/* Text Block */}
         <div className="flex flex-col w-auto md:w-[35%] h-full">
           <div className="h-[65%] p-8 flex flex-col justify-center bg-[white]">
-            <h2 className="mb-3 text-4xl md:text-5xl xl:text-6xl  text-black">
-              {approachTitle}
-            </h2>
+            <h2 className="mb-3 text-4xl md:text-5xl xl:text-6xl  text-black">{approachTitle}</h2>
             <p className="font-inter text-sm md:text-base text-black">{approachText}</p>
           </div>
           <div className="flex flex-col justify-center font-inter h-[35%] bg-black p-8 text-sm md:text-base text-white">

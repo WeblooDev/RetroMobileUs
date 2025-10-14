@@ -1,15 +1,13 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import type { ImageOverlayText as ImageOverlayTextBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import type { ImageOverlayText as ImageOverlayTextBlock } from '@/payload-types'
 
 const ImageOverlayText: React.FC<ImageOverlayTextBlock> = ({ title, description, image }) => {
   return (
     <section className="container py-8 md:py-12">
       <div className="relative w-full min-h-[597px] overflow-hidden ">
         {image && <Media resource={image} fill imgClassName="object-cover" />}
-
-    
 
         <div className="absolute inset-0 flex items-end p-12">
           <div className=" max-w-4xl text-white">

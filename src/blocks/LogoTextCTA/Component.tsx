@@ -1,23 +1,20 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { Media } from "@/components/Media"
-import { CTAButton } from "@/components/CTAButton"
-import type { LogoTextCTA as LogoTextCTABlock } from "@/payload-types"
+import Link from 'next/link'
+import { Media } from '@/components/Media'
+import { CTAButton } from '@/components/CTAButton'
+import type { LogoTextCTA as LogoTextCTABlock } from '@/payload-types'
 
-const LogoTextCTA: React.FC<LogoTextCTABlock> = ({
-  image,
-  title,
-  description,  
-  ctas,
-  reverse,
-}) => {
+const LogoTextCTA: React.FC<LogoTextCTABlock> = ({ image, title, description, ctas, reverse }) => {
   const primary = ctas?.[0]?.link
-  const primaryUrl = typeof primary?.url === "string" && primary.url.trim() ? primary.url : undefined
+  const primaryUrl =
+    typeof primary?.url === 'string' && primary.url.trim() ? primary.url : undefined
 
   return (
     <section className="container py-12">
-      <div className={`flex gap-10 items-center justify-between ${reverse ? "flex-row-reverse" : ""}`}>
+      <div
+        className={`flex gap-10 items-center justify-between ${reverse ? 'flex-row-reverse' : ''}`}
+      >
         {/* Image */}
         <div className="w-[45%]">
           <div className="relative w-full max-w-[420px] aspect-[4/3]">
@@ -36,7 +33,9 @@ const LogoTextCTA: React.FC<LogoTextCTABlock> = ({
           {primary?.label && primaryUrl && (
             <div className="pt-2">
               <Link href={primaryUrl} aria-label={primary.label}>
-                <CTAButton variant="black" size="big">{primary.label}</CTAButton>
+                <CTAButton variant="black" size="big">
+                  {primary.label}
+                </CTAButton>
               </Link>
             </div>
           )}

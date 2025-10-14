@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
 
 interface CountdownTimerProps {
   targetDate: Date
@@ -37,12 +37,10 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate])
 
   const day = targetDate.getDate()
-  const month = targetDate
-    .toLocaleDateString("en-US", { month: "long" })
-    .toUpperCase()
+  const month = targetDate.toLocaleDateString('en-US', { month: 'long' }).toUpperCase()
 
   // optional: pad numbers (e.g., 03)
-  const pad = (n: number) => n.toString().padStart(2, "0")
+  const pad = (n: number) => n.toString().padStart(2, '0')
 
   return (
     <div className="flex p-4 gap-4 ">

@@ -1,13 +1,12 @@
-"use client"
+'use client'
 
-import { CTAButton } from "@/components/CTAButton"
-import type { TextWithCTAs as TextWithCTAsBlock } from "@/payload-types"
+import { CTAButton } from '@/components/CTAButton'
+import type { TextWithCTAs as TextWithCTAsBlock } from '@/payload-types'
 
 const TextWithCTAs: React.FC<TextWithCTAsBlock> = ({ title, links }) => {
-  const normalized =
-    (links ?? [])
-      .map((row: any) => row?.link)
-      .filter((l: any) => l && l.label && l.url && l.url.trim())
+  const normalized = (links ?? [])
+    .map((row: any) => row?.link)
+    .filter((l: any) => l && l.label && l.url && l.url.trim())
 
   const [primary, secondary] = normalized
 

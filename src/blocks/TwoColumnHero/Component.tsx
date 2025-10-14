@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { CTAButton } from "@/components/CTAButton"
+import { CTAButton } from '@/components/CTAButton'
 
 type TwoColumnHeroProps = {
   backgroundImage?: { url?: string }
@@ -39,7 +39,12 @@ export default function TwoColumnHero({
 
           <div className="flex flex-col sm:flex-row gap-4">
             {primaryButton && (
-              <CTAButton href={primaryButton.url} variant="olive" aria-label={primaryButton.label} size="big">
+              <CTAButton
+                href={primaryButton.url}
+                variant="olive"
+                aria-label={primaryButton.label}
+                size="big"
+              >
                 {primaryButton.label}
               </CTAButton>
             )}

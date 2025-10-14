@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 type Partner = { heading: string; description: string }
 type CharityPartnersProps = {
@@ -15,9 +15,7 @@ export default function CharityPartners({
   return (
     <section className="w-full px-6 md:px-12 lg:px-24 py-14">
       {/* Title */}
-      <h2 className="font-ivar text-3xl md:text-5xl text-foreground mb-6 md:mb-8">
-        {title}
-      </h2>
+      <h2 className="font-ivar text-3xl md:text-5xl text-foreground mb-6 md:mb-8">{title}</h2>
 
       {/* Image with overlays */}
       <div className="relative w-full overflow-hidden rounded-none">
@@ -40,11 +38,9 @@ export default function CharityPartners({
                 key={i}
                 className="pointer-events-auto bg-white/10 backdrop-blur-sm border border-white/50 text-white px-6 py-5 md:px-8 md:py-6"
               >
-                <h3 className="font-ivar text-xl md:text-2xl mb-2">
-                  {p?.heading || "Partner"}
-                </h3>
+                <h3 className="font-ivar text-xl md:text-2xl mb-2">{p?.heading || 'Partner'}</h3>
                 <p className="text-sm md:text-base leading-relaxed text-white/90">
-                  {p?.description || "Description goes here."}
+                  {p?.description || 'Description goes here.'}
                 </p>
               </div>
             ))}

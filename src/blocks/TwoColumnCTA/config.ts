@@ -1,44 +1,44 @@
-import type { Block } from "payload"
+import type { Block } from 'payload'
 
 export const TwoColumnCTA: Block = {
-  slug: "twoColumnCTA",
+  slug: 'twoColumnCTA',
   labels: {
-    singular: "Two Column CTA",
-    plural: "Two Column CTAs",
+    singular: 'Two Column CTA',
+    plural: 'Two Column CTAs',
   },
   fields: [
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
-      label: "Title",
+      label: 'Title',
     },
     {
-      name: "button",
-      type: "group",
-      label: "Button",
+      name: 'button',
+      type: 'group',
+      label: 'Button',
       fields: [
         {
-          name: "label",
-          type: "text",
+          name: 'label',
+          type: 'text',
           required: false,
-          label: "Button Label",
+          label: 'Button Label',
         },
         {
-          name: "url",
-          type: "text",
+          name: 'url',
+          type: 'text',
           required: false,
-          label: "Button URL",
+          label: 'Button URL',
         },
       ],
     },
     {
-      name: "paragraph",
-      type: "textarea", // 👈 better than text, supports multi-line but still a string
-      label: "Paragraph",
+      name: 'paragraph',
+      type: 'textarea', // 👈 better than text, supports multi-line but still a string
+      label: 'Paragraph',
       required: true,
       admin: {
-        description: "Enter plain text only (no formatting).",
+        description: 'Enter plain text only (no formatting).',
       },
     },
   ],

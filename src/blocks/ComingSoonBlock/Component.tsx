@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { CountdownTimer } from "./countdown-timer"
-import { CTAButton } from "@/components/CTAButton"
+import { CountdownTimer } from './countdown-timer'
+import { CTAButton } from '@/components/CTAButton'
 
 type ComingSoonBlockProps = {
   backgroundImage?: { url: string }
@@ -9,7 +9,7 @@ type ComingSoonBlockProps = {
   primaryButton?: { label: string; url: string }
   secondaryButton?: { label: string; url: string }
   countdownMonth?: number // 1-12
-  countdownDay?: number   // 1-31
+  countdownDay?: number // 1-31
 }
 
 function daysInMonth(year: number, month1to12: number) {
@@ -57,13 +57,16 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockProps> = ({
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center min-h-screen px-6 md:px-12 lg:px-24">
         <div className="max-w-3xl">
-          <h2 className="text-white text-4xl md:text-6xl lg:text-7xl mb-6">
-            {title}
-          </h2>
+          <h2 className="text-white text-4xl md:text-6xl lg:text-7xl mb-6">{title}</h2>
 
           <div className="flex flex-col sm:flex-row gap-4">
             {primaryButton && (
-              <CTAButton href={primaryButton.url} variant="olive" aria-label={primaryButton.label} size="big">
+              <CTAButton
+                href={primaryButton.url}
+                variant="olive"
+                aria-label={primaryButton.label}
+                size="big"
+              >
                 {primaryButton.label}
               </CTAButton>
             )}

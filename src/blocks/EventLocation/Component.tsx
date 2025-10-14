@@ -1,12 +1,15 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { Media } from "@/components/Media"
-import { CTAButton } from "@/components/CTAButton"
-import type { EventLocation as EventLocationBlock } from "@/payload-types"
+import Link from 'next/link'
+import { Media } from '@/components/Media'
+import { CTAButton } from '@/components/CTAButton'
+import type { EventLocation as EventLocationBlock } from '@/payload-types'
 
 const isWebLink = (l: unknown): l is { url: string; label: string } =>
-  !!l && typeof (l as any).label === "string" && typeof (l as any).url === "string" && (l as any).url.trim().length > 0
+  !!l &&
+  typeof (l as any).label === 'string' &&
+  typeof (l as any).url === 'string' &&
+  (l as any).url.trim().length > 0
 
 const EventLocation: React.FC<EventLocationBlock> = ({
   backgroundImage,
@@ -38,7 +41,9 @@ const EventLocation: React.FC<EventLocationBlock> = ({
         <div className="flex gap-3">
           {isWebLink(primary) && (
             <Link href={primary.url} aria-label={primary.label}>
-              <CTAButton variant="olive" size="big">{primary.label}</CTAButton>
+              <CTAButton variant="olive" size="big">
+                {primary.label}
+              </CTAButton>
             </Link>
           )}
 

@@ -1,17 +1,12 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import type { TextImageBlock as TextImageBlockType } from "@/payload-types"
+import { Media } from '@/components/Media'
+import type { TextImageBlock as TextImageBlockType } from '@/payload-types'
 
-const TextImageBlock: React.FC<TextImageBlockType> = ({
-  title,
-  description,
-  image,
-  reverse,
-}) => {
+const TextImageBlock: React.FC<TextImageBlockType> = ({ title, description, image, reverse }) => {
   // For grid, use order utilities on children when reverse is true
-  const textOrder = reverse ? "md:order-2" : "md:order-1"
-  const imageOrder = reverse ? "md:order-1" : "md:order-2"
+  const textOrder = reverse ? 'md:order-2' : 'md:order-1'
+  const imageOrder = reverse ? 'md:order-1' : 'md:order-2'
 
   return (
     <section className="w-full bg-[#8B9B5C] text-white px-6 md:px-12 lg:px-24 py-16">

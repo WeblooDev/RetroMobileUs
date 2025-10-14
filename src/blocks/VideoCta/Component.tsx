@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
-import { useEffect, useRef, useState } from "react"
-import { CTAButton } from "@/components/CTAButton"
-import PauseSrc from "../../../public/pause.svg" 
-import playSrc from "../../../public/play.svg" 
-import Image from "next/image"
+import { useEffect, useRef, useState } from 'react'
+import { CTAButton } from '@/components/CTAButton'
+import PauseSrc from '../../../public/pause.svg'
+import playSrc from '../../../public/play.svg'
+import Image from 'next/image'
 
 type VideoCtaProps = {
   video?: { url?: string }
@@ -28,11 +28,11 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
 
     const onPlay = () => setIsPlaying(true)
     const onPause = () => setIsPlaying(false)
-    v.addEventListener("play", onPlay)
-    v.addEventListener("pause", onPause)
+    v.addEventListener('play', onPlay)
+    v.addEventListener('pause', onPause)
     return () => {
-      v.removeEventListener("play", onPlay)
-      v.removeEventListener("pause", onPause)
+      v.removeEventListener('play', onPlay)
+      v.removeEventListener('pause', onPause)
     }
   }, [])
 
@@ -62,24 +62,27 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
             preload="metadata"
           />
 
-
           <button
             ref={overlayRef}
             onClick={togglePlay}
-            aria-label={isPlaying ? "Pause video" : "Play video"}
+            aria-label={isPlaying ? 'Pause video' : 'Play video'}
             className={[
-              "absolute inset-0 flex items-center justify-center transition-opacity duration-200 ",
-              isPlaying ? (showHoverPause ? "opacity-100" : "opacity-0") : "opacity-100",
-              "bg-black/0 hover:bg-black/10",
-            ].join(" ")}
+              'absolute inset-0 flex items-center justify-center transition-opacity duration-200 ',
+              isPlaying ? (showHoverPause ? 'opacity-100' : 'opacity-0') : 'opacity-100',
+              'bg-black/0 hover:bg-black/10',
+            ].join(' ')}
           >
             <span className="flex gap-4 items-center absolute top-[20%] -right-[5%] text-white rotate-90">
-              {isPlaying ? <Image src={PauseSrc} alt="Play" width={16} height={16} className="h-auto w-auto"  /> : <Image src={playSrc} alt="Play" width={16} height={16} className="h-auto w-auto" />}
+              {isPlaying ? (
+                <Image src={PauseSrc} alt="Play" width={16} height={16} className="h-auto w-auto" />
+              ) : (
+                <Image src={playSrc} alt="Play" width={16} height={16} className="h-auto w-auto" />
+              )}
               <p className="text-base  tracking-widest">
-                {isPlaying ? "PAUSE VIDEO" : "PLAY THE VIDEO"}
+                {isPlaying ? 'PAUSE VIDEO' : 'PLAY THE VIDEO'}
               </p>
             </span>
-          </button> 
+          </button>
         </div>
 
         <div className="flex flex-col gap-6 w-[50%]">
