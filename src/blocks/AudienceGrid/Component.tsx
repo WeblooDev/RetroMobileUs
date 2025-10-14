@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import type { AudienceGrid as AudienceGridBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import type { AudienceGrid as AudienceGridBlock } from '@/payload-types'
 
 const AudienceGrid: React.FC<AudienceGridBlock> = ({ title, cards }) => {
   const items = cards ?? []
@@ -21,7 +21,7 @@ const AudienceGrid: React.FC<AudienceGridBlock> = ({ title, cards }) => {
               className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
               style={{
                 background:
-                  "linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0) 100%)",
+                  'linear-gradient(0deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 35%, rgba(0,0,0,0.15) 60%, rgba(0,0,0,0) 100%)',
               }}
               aria-hidden
             />
@@ -30,9 +30,7 @@ const AudienceGrid: React.FC<AudienceGridBlock> = ({ title, cards }) => {
               {card?.heading && (
                 <h3 className="font-ivar text-[64px] md:text-[200px] ">{card.heading}</h3>
               )}
-              {card?.text && (
-                <p className="mt-3 text-sm md:text-xl">{card.text}</p>
-              )}
+              {card?.text && <p className="mt-3 text-sm md:text-xl">{card.text}</p>}
             </div>
           </div>
         ))}

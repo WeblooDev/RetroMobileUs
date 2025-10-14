@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { Media } from "@/components/Media"
-import { CTAButton } from "@/components/CTAButton"
-import type { ImageTextCTA as ImageTextCTABlock } from "@/payload-types"
+import Link from 'next/link'
+import { Media } from '@/components/Media'
+import { CTAButton } from '@/components/CTAButton'
+import type { ImageTextCTA as ImageTextCTABlock } from '@/payload-types'
 
 const ImageTextCTA: React.FC<ImageTextCTABlock> = ({
   image,
@@ -15,11 +15,11 @@ const ImageTextCTA: React.FC<ImageTextCTABlock> = ({
   // linkGroup rows: [{ link, id? }, ...]
   const primary = ctas?.[0]?.link
   const primaryUrl =
-    typeof primary?.url === "string" && primary.url.trim() ? primary.url : undefined
+    typeof primary?.url === 'string' && primary.url.trim() ? primary.url : undefined
 
   return (
     <section className="w-full my-12">
-      <div className={`flex gap-8 items-center ${reverse ? "flex-row-reverse" : ""}`}>
+      <div className={`flex gap-8 items-center ${reverse ? 'flex-row-reverse' : ''}`}>
         {/* Image */}
         <div className="w-[45%]">
           <div className="relative w-full aspect-[4/3] rounded-lg shadow overflow-hidden">
@@ -34,7 +34,9 @@ const ImageTextCTA: React.FC<ImageTextCTABlock> = ({
 
           {primary?.label && primaryUrl && (
             <Link href={primaryUrl} aria-label={primary.label}>
-              <CTAButton variant="olive" size="big">{primary.label}</CTAButton>
+              <CTAButton variant="olive" size="big">
+                {primary.label}
+              </CTAButton>
             </Link>
           )}
         </div>

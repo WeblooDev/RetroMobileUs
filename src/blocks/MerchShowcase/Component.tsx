@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import { CTAButton } from "@/components/CTAButton"
-import type { MerchShowcase as MerchShowcaseBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import { CTAButton } from '@/components/CTAButton'
+import type { MerchShowcase as MerchShowcaseBlock } from '@/payload-types'
 
 const MerchShowcase: React.FC<MerchShowcaseBlock> = ({ title, description, items }) => {
   const cards = items ?? []
@@ -11,17 +11,14 @@ const MerchShowcase: React.FC<MerchShowcaseBlock> = ({ title, description, items
     <section className="container py-12 md:py-20">
       <div className="max-w-4xl">
         <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
-        {description && (
-          <p className="mt-3 text-sm md:text-base text-black/70">{description}</p>
-        )}
+        {description && <p className="mt-3 text-sm md:text-base text-black/70">{description}</p>}
       </div>
 
       <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {cards.map((card, i) => {
-          const [primary] =
-            (card?.links ?? [])
-              .map((row: any) => row?.link)
-              .filter((l: any) => l && l.label && l.url && l.url.trim())
+          const [primary] = (card?.links ?? [])
+            .map((row: any) => row?.link)
+            .filter((l: any) => l && l.label && l.url && l.url.trim())
 
           return (
             <div key={card?.id ?? i} className="flex flex-col">

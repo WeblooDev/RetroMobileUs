@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { Media } from "@/components/Media"
-import type { ExpectCards as ExpectCardsBlock } from "@/payload-types"
+import Link from 'next/link'
+import { Media } from '@/components/Media'
+import type { ExpectCards as ExpectCardsBlock } from '@/payload-types'
 
 const ExpectCards: React.FC<ExpectCardsBlock> = ({ title, cards }) => {
   const items = cards ?? []
@@ -28,7 +28,7 @@ const ExpectCards: React.FC<ExpectCardsBlock> = ({ title, cards }) => {
             </div>
           )
 
-          const href = typeof card.url === "string" && card.url.trim() ? card.url : undefined
+          const href = typeof card.url === 'string' && card.url.trim() ? card.url : undefined
           return href ? (
             <Link
               key={i}

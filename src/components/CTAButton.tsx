@@ -59,13 +59,7 @@ export function CTAButton({
 
   if (href) {
     return (
-      <a
-        href={href}
-        aria-label={ariaLabel}
-        onClick={onClick as any}
-        className={cls}
-        role="button"
-      >
+      <a href={href} aria-label={ariaLabel} onClick={onClick as any} className={cls} role="button">
         {children}
       </a>
     )

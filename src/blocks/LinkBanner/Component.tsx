@@ -1,21 +1,16 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { ArrowUpRight } from "lucide-react"
-import { Media } from "@/components/Media"
-import type { LinkBanner as LinkBannerBlock } from "@/payload-types"
+import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
+import { Media } from '@/components/Media'
+import type { LinkBanner as LinkBannerBlock } from '@/payload-types'
 
-const LinkBanner: React.FC<LinkBannerBlock> = ({
-  title,
-  ctas,
-  linkBgColor,
-  rightImage,
-}) => {
+const LinkBanner: React.FC<LinkBannerBlock> = ({ title, ctas, linkBgColor, rightImage }) => {
   // linkGroup rows look like: [{ link, id? }]
   const link = ctas?.[0]?.link
-  const bg = (linkBgColor && linkBgColor.trim()) || "#8B9B5C"
+  const bg = (linkBgColor && linkBgColor.trim()) || '#8B9B5C'
 
-  const hasWebUrl = typeof link?.url === "string" && link.url.trim().length > 0
+  const hasWebUrl = typeof link?.url === 'string' && link.url.trim().length > 0
 
   return (
     <section className="w-full px-6 md:px-12 lg:px-24 py-10">
@@ -39,8 +34,8 @@ const LinkBanner: React.FC<LinkBannerBlock> = ({
             <Link
               href={link.url!}
               // if your link() supports newTab, you can do:
-              target={link.newTab ? "_blank" : undefined}
-              rel={link.newTab ? "noopener noreferrer" : undefined}
+              target={link.newTab ? '_blank' : undefined}
+              rel={link.newTab ? 'noopener noreferrer' : undefined}
               aria-label={link.label}
               className="flex gap-4 items-center px-6 py-3 text-white"
               style={{ backgroundColor: bg }}

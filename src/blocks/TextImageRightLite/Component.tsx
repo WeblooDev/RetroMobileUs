@@ -1,7 +1,7 @@
-"use client"
+'use client'
 
-import { Media } from "@/components/Media"
-import type { TextImageRightLite as TextImageRightLiteBlock } from "@/payload-types"
+import { Media } from '@/components/Media'
+import type { TextImageRightLite as TextImageRightLiteBlock } from '@/payload-types'
 
 const TextImageRightLite: React.FC<TextImageRightLiteBlock> = ({ title, description, image }) => {
   return (
@@ -10,9 +10,7 @@ const TextImageRightLite: React.FC<TextImageRightLiteBlock> = ({ title, descript
         <div>
           <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
           {description && (
-            <p className="mt-4 text-sm md:text-base text-black/75 max-w-prose">
-              {description}
-            </p>
+            <p className="mt-4 text-sm md:text-base text-black/75 max-w-prose">{description}</p>
           )}
         </div>
 

@@ -60,8 +60,9 @@ import ImageOverlayText from './ImageOverlayText/Component'
 import TextImageRightLite from './TextImageRightLite/Component'
 import ScheduleSplit from './ScheduleSplit/component'
 import ImageLeftCenteredList from './ImageLeftCenteredList/Component'
-
-
+import NewsHeroFilter from './NewsHeroFilter/Component'
+import BlogTwoColumn from './BlogTwoColumn/Component'
+import { BannerBlock } from './Banner/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -98,7 +99,7 @@ const blockComponents = {
   charityPartners: CharityPartners,
   linkBanner: LinkBanner,
   whenToVisit: WhenToVisit,
-  eventLocation: EventLocation, 
+  eventLocation: EventLocation,
   imageTextCTA: ImageTextCTA,
   contactBanner: ContactBanner,
   simpleHeading: SimpleHeading,
@@ -122,8 +123,9 @@ const blockComponents = {
   textImageRightLite: TextImageRightLite,
   scheduleSplit: ScheduleSplit,
   imageLeftCenteredList: ImageLeftCenteredList,
-
-
+  newsHeroFilter: NewsHeroFilter,
+  blogTwoColumn: BlogTwoColumn,
+  banner: BannerBlock,
 }
 
 export const RenderBlocks: React.FC<{

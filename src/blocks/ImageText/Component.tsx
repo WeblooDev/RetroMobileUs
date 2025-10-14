@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
 type ImageTextProps = {
   image?: { url?: string }
   imageAlt?: string
   title: string
   text: string
-  reverse?: boolean            // flips columns on md+
-  textAlign?: "left" | "center"
+  reverse?: boolean // flips columns on md+
+  textAlign?: 'left' | 'center'
 }
 
 export default function ImageText({
@@ -15,10 +15,10 @@ export default function ImageText({
   title,
   text,
   reverse = false,
-  textAlign = "left",
+  textAlign = 'left',
 }: ImageTextProps) {
-  const dir = reverse ? "md:flex-row-reverse" : "md:flex-row"
-  const align = textAlign === "center" ? "text-center items-center" : "text-left items-start"
+  const dir = reverse ? 'md:flex-row-reverse' : 'md:flex-row'
+  const align = textAlign === 'center' ? 'text-center items-center' : 'text-left items-start'
 
   return (
     <section className="container px-6 md:px-12 lg:px-24 py-14">

@@ -1,36 +1,25 @@
-"use client"
+'use client'
 
-import React from "react"
-import { Media as MediaCmp } from "@/components/Media"
-import type { CharityCards as CharityCardsBlock, Media } from "@/payload-types"
+import React from 'react'
+import { Media as MediaCmp } from '@/components/Media'
+import type { CharityCards as CharityCardsBlock, Media } from '@/payload-types'
 
-const CharityCardsComponent: React.FC<CharityCardsBlock> = ({
-  title,
-  backgroundImage,
-  cards,
-}) => {
+const CharityCardsComponent: React.FC<CharityCardsBlock> = ({ title, backgroundImage, cards }) => {
   const bgUrl =
-    backgroundImage && typeof backgroundImage === "object"
+    backgroundImage && typeof backgroundImage === 'object'
       ? (backgroundImage as Media)?.url
       : undefined
 
   return (
     <section className="container relative w-full py-14">
- 
       <h2 className="text-6xl font-ivar mb-10">{title}</h2>
 
       <div className="relative w-full h-[350px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <MediaCmp
-            resource={backgroundImage}
-            fill
-            priority
-            imgClassName="object-cover"
-          />
+          <MediaCmp resource={backgroundImage} fill priority imgClassName="object-cover" />
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-       
         <div className="relative z-10 flex gap-6 px-6 max-w-6xl w-full justify-center">
           {cards?.map((card, i) => (
             <div
