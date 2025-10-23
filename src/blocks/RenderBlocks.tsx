@@ -63,6 +63,11 @@ import ImageLeftCenteredList from './ImageLeftCenteredList/Component'
 import NewsHeroFilter from './NewsHeroFilter/Component'
 import BlogTwoColumn from './BlogTwoColumn/Component'
 import { BannerBlock } from './Banner/Component'
+import InlineInfo from './InlineInfo/Component'
+import TicketIncludes from './TicketIncludes/Component'
+import ImageLeftTextRight from './ImageLeftTextRight/Component'
+import HelpfulReminders from './HelpfulReminders/Component'
+import FloorPlan from './FloorPlan/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -126,6 +131,13 @@ const blockComponents = {
   newsHeroFilter: NewsHeroFilter,
   blogTwoColumn: BlogTwoColumn,
   banner: BannerBlock,
+    inlineInfo: InlineInfo,
+    imageLeftTextRight: ImageLeftTextRight,
+    ticketIncludes: TicketIncludes,
+    helpfulReminders: HelpfulReminders,
+      floorPlan: FloorPlan,
+
+
 }
 
 export const RenderBlocks: React.FC<{
