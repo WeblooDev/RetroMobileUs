@@ -79,6 +79,11 @@ import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
 import HelpfulLinksGrid from '@/blocks/HelpfulLinksGrid/config'
 import NewsHeroFilter from '@/blocks/NewsHeroFilter/config'
 import { Banner } from '@/blocks/Banner/config'
+import InlineInfo from '@/blocks/InlineInfo/config'
+import TicketIncludes from '@/blocks/TicketIncludes/config'
+import ImageLeftTextRight from '@/blocks/ImageLeftTextRight/config'
+import HelpfulReminders from '@/blocks/HelpfulReminders/config'
+import FloorPlan from '@/blocks/FloorPlan/config'
 import StayClose from '@/blocks/StayClose/config'
 import { TravelCards } from '@/blocks/TravelCards/config'
 import { SideImageInfo } from '@/blocks/SideImageInfo/config'
@@ -206,6 +211,11 @@ export const Pages: CollectionConfig<'pages'> = {
                 NewsHeroFilter,
                 BlogTwoColumn,
                 Banner,
+                InlineInfo,
+                ImageLeftTextRight,
+                TicketIncludes,
+                HelpfulReminders,
+                FloorPlan,
                 StayClose,
                 TravelCards,
                 SideImageInfo,
