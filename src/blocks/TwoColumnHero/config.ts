@@ -18,6 +18,7 @@ export const TwoColumnHero: Block = {
       name: 'leftTitle',
       type: 'text',
       label: 'Left Title',
+      defaultValue: 'Join Us at the Next Show ',
       required: true,
     },
     {
@@ -25,7 +26,7 @@ export const TwoColumnHero: Block = {
       type: 'group',
       label: 'Primary Button',
       fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Get Started' },
+        { name: 'label', type: 'text', required: true, defaultValue: 'BUY TICKET' },
         { name: 'url', type: 'text', required: true, defaultValue: '#' },
       ],
     },
@@ -34,7 +35,7 @@ export const TwoColumnHero: Block = {
       type: 'group',
       label: 'Secondary Button',
       fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Learn More' },
+        { name: 'label', type: 'text', required: true, defaultValue: 'LOCATION' },
         { name: 'url', type: 'text', required: true, defaultValue: '#' },
       ],
     },
@@ -42,12 +43,14 @@ export const TwoColumnHero: Block = {
       name: 'rightHeading',
       type: 'text',
       label: 'Right Heading (H1)',
+      defaultValue: '19',
       required: true,
     },
     {
       name: 'rightParagraph',
       type: 'textarea',
       label: 'Right Paragraph',
+      defaultValue: 'november',
       required: true,
     },
   ],

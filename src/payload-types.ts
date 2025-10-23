@@ -464,6 +464,11 @@ export interface Page {
     | NewsHeroFilter
     | BlogTwoColumn
     | BannerBlock
+    | InlineInfo
+    | ImageLeftTextRight
+    | TicketIncludes
+    | HelpfulReminders
+    | FloorPlan
   )[];
   meta?: {
     title?: string | null;
@@ -1928,6 +1933,150 @@ export interface BannerBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InlineInfo".
+ */
+export interface InlineInfo {
+  items?:
+    | {
+        title: string;
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'inlineInfo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageLeftTextRight".
+ */
+export interface ImageLeftTextRight {
+  title: string;
+  description?: string | null;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageLeftTextRight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TicketIncludes".
+ */
+export interface TicketIncludes {
+  title: string;
+  items?:
+    | {
+        subtitle: string;
+        text?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  image: string | Media;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'ticketIncludes';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HelpfulReminders".
+ */
+export interface HelpfulReminders {
+  title: string;
+  intro?: string | null;
+  items?:
+    | {
+        subtitle: string;
+        id?: string | null;
+      }[]
+    | null;
+  image: string | Media;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  backgroundColor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'helpfulReminders';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FloorPlan".
+ */
+export interface FloorPlan {
+  title: string;
+  description?: string | null;
+  items?:
+    | {
+        subtitle: string;
+        id?: string | null;
+      }[]
+    | null;
+  image: string | Media;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  reverseLayout?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'floorPlan';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cars".
  */
 export interface Car {
@@ -2625,6 +2774,11 @@ export interface PagesSelect<T extends boolean = true> {
         newsHeroFilter?: T | NewsHeroFilterSelect<T>;
         blogTwoColumn?: T | BlogTwoColumnSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        inlineInfo?: T | InlineInfoSelect<T>;
+        imageLeftTextRight?: T | ImageLeftTextRightSelect<T>;
+        ticketIncludes?: T | TicketIncludesSelect<T>;
+        helpfulReminders?: T | HelpfulRemindersSelect<T>;
+        floorPlan?: T | FloorPlanSelect<T>;
       };
   meta?:
     | T
@@ -3468,6 +3622,127 @@ export interface ImageSliceSelect<T extends boolean = true> {
 export interface BannerBlockSelect<T extends boolean = true> {
   style?: T;
   content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InlineInfo_select".
+ */
+export interface InlineInfoSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageLeftTextRight_select".
+ */
+export interface ImageLeftTextRightSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TicketIncludes_select".
+ */
+export interface TicketIncludesSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        subtitle?: T;
+        text?: T;
+        id?: T;
+      };
+  image?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HelpfulReminders_select".
+ */
+export interface HelpfulRemindersSelect<T extends boolean = true> {
+  title?: T;
+  intro?: T;
+  items?:
+    | T
+    | {
+        subtitle?: T;
+        id?: T;
+      };
+  image?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  backgroundColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FloorPlan_select".
+ */
+export interface FloorPlanSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        subtitle?: T;
+        id?: T;
+      };
+  image?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  reverseLayout?: T;
   id?: T;
   blockName?: T;
 }

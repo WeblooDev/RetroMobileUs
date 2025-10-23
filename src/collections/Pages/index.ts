@@ -77,6 +77,11 @@ import ScheduleSplit from '@/blocks/ScheduleSplit/config'
 import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
 import NewsHeroFilter from '@/blocks/NewsHeroFilter/config'
 import { Banner } from '@/blocks/Banner/config'
+import InlineInfo from '@/blocks/InlineInfo/config'
+import TicketIncludes from '@/blocks/TicketIncludes/config'
+import ImageLeftTextRight from '@/blocks/ImageLeftTextRight/config'
+import HelpfulReminders from '@/blocks/HelpfulReminders/config'
+import FloorPlan from '@/blocks/FloorPlan/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -193,6 +198,11 @@ export const Pages: CollectionConfig<'pages'> = {
                 NewsHeroFilter,
                 BlogTwoColumn,
                 Banner,
+                InlineInfo,
+                ImageLeftTextRight,
+                TicketIncludes,
+                HelpfulReminders,
+                FloorPlan
               ],
               required: true,
               admin: {
