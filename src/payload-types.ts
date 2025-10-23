@@ -461,6 +461,8 @@ export interface Page {
     | ImageStepsRight
     | TextVideoRight
     | CenteredBannerCTA
+    | QuickDownloads
+    | HelpfulLinksGrid
     | NewsHeroFilter
     | BlogTwoColumn
     | BannerBlock
@@ -1890,6 +1892,62 @@ export interface CenteredBannerCTA {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuickDownloads".
+ */
+export interface QuickDownloads {
+  title: string;
+  items?:
+    | {
+        image: string | Media;
+        subtitle: string;
+        description?: string | null;
+        file?: (string | null) | Media;
+        externalUrl?: string | null;
+        linkLabel?: string | null;
+        newTab?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'quickDownloads';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HelpfulLinksGrid".
+ */
+export interface HelpfulLinksGrid {
+  title: string;
+  items: {
+    title: string;
+    description?: string | null;
+    image: string | Media;
+    links: {
+      link: {
+        type?: ('reference' | 'custom') | null;
+        newTab?: boolean | null;
+        reference?:
+          | ({
+              relationTo: 'pages';
+              value: string | Page;
+            } | null)
+          | ({
+              relationTo: 'posts';
+              value: string | Post;
+            } | null);
+        url?: string | null;
+        label: string;
+      };
+      id?: string | null;
+    }[];
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'helpfulLinksGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "NewsHeroFilter".
  */
 export interface NewsHeroFilter {
@@ -2622,6 +2680,8 @@ export interface PagesSelect<T extends boolean = true> {
         imageStepsRight?: T | ImageStepsRightSelect<T>;
         textVideoRight?: T | TextVideoRightSelect<T>;
         centeredBannerCta?: T | CenteredBannerCTASelect<T>;
+        quickDownloads?: T | QuickDownloadsSelect<T>;
+        helpfulLinksGrid?: T | HelpfulLinksGridSelect<T>;
         newsHeroFilter?: T | NewsHeroFilterSelect<T>;
         blogTwoColumn?: T | BlogTwoColumnSelect<T>;
         banner?: T | BannerBlockSelect<T>;
@@ -3407,6 +3467,58 @@ export interface CenteredBannerCTASelect<T extends boolean = true> {
       };
   showTopLine?: T;
   showBottomLine?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuickDownloads_select".
+ */
+export interface QuickDownloadsSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        subtitle?: T;
+        description?: T;
+        file?: T;
+        externalUrl?: T;
+        linkLabel?: T;
+        newTab?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HelpfulLinksGrid_select".
+ */
+export interface HelpfulLinksGridSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

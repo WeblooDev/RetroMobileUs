@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { Slot } from '@radix-ui/react-slot'
 import { cn } from '@/lib/utils'
 
 type CTAButtonProps = {
@@ -8,22 +9,23 @@ type CTAButtonProps = {
   variant?: 'olive' | 'black' | 'outlineWhite'
   size?: 'normal' | 'big'
   className?: string
-  href?: string
   onClick?: React.MouseEventHandler<HTMLElement>
   type?: 'button' | 'submit' | 'reset'
   ariaLabel?: string
   disabled?: boolean
+  /** when true, render styles onto the child element (e.g. CMSLink) */
+  asChild?: boolean
 }
 
 const base =
   'font-ivar uppercase rounded-[30px] inline-flex items-center justify-center whitespace-nowrap transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/70'
 
-const sizes: Record<NonNullable<CTAButtonProps['size']>, string> = {
+const sizes = {
   normal: 'text-[17px] px-3 py-1',
-  big: 'text-[27px] px-4 py-1', // +0.5rem padding each way
-}
+  big: 'text-[27px] px-4 py-1',
+} as const
 
-const variants: Record<NonNullable<CTAButtonProps['variant']>, string> = {
+const variants = {
   olive: `
     bg-[#8B9B5C] text-white
     hover:bg-white hover:text-black
@@ -42,38 +44,30 @@ const variants: Record<NonNullable<CTAButtonProps['variant']>, string> = {
     active:bg-white active:text-black
     disabled:opacity-60 disabled:pointer-events-none
   `,
-}
+} as const
 
 export function CTAButton({
   children,
   variant = 'olive',
   size = 'normal',
   className,
-  href,
   onClick,
   type = 'button',
   ariaLabel,
   disabled,
+  asChild = false,
 }: CTAButtonProps) {
+  const Comp = asChild ? Slot : 'button'
   const cls = cn(base, sizes[size], variants[variant], className)
 
-  if (href) {
-    return (
-      <a href={href} aria-label={ariaLabel} onClick={onClick as any} className={cls} role="button">
-        {children}
-      </a>
-    )
-  }
-
   return (
-    <button
-      type={type}
-      aria-label={ariaLabel}
+    <Comp
       className={cls}
       onClick={onClick}
-      disabled={disabled}
+      aria-label={ariaLabel}
+      {...(!asChild ? { type, disabled } : {})}
     >
       {children}
-    </button>
+    </Comp>
   )
 }

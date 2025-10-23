@@ -60,6 +60,8 @@ import ImageOverlayText from './ImageOverlayText/Component'
 import TextImageRightLite from './TextImageRightLite/Component'
 import ScheduleSplit from './ScheduleSplit/component'
 import ImageLeftCenteredList from './ImageLeftCenteredList/Component'
+import QuickDownloads from './QuickDownloads/Component'
+import HelpfulLinksGrid from './HelpfulLinksGrid/Component'
 import NewsHeroFilter from './NewsHeroFilter/Component'
 import BlogTwoColumn from './BlogTwoColumn/Component'
 import { BannerBlock } from './Banner/Component'
@@ -123,6 +125,8 @@ const blockComponents = {
   textImageRightLite: TextImageRightLite,
   scheduleSplit: ScheduleSplit,
   imageLeftCenteredList: ImageLeftCenteredList,
+  quickDownloads: QuickDownloads,
+  helpfulLinksGrid: HelpfulLinksGrid,
   newsHeroFilter: NewsHeroFilter,
   blogTwoColumn: BlogTwoColumn,
   banner: BannerBlock,
