@@ -79,6 +79,8 @@ import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
 import HelpfulLinksGrid from '@/blocks/HelpfulLinksGrid/config'
 import NewsHeroFilter from '@/blocks/NewsHeroFilter/config'
 import { Banner } from '@/blocks/Banner/config'
+import { PostsCarousel } from '@/blocks/PostsCarousel/config'
+import KnowBeforeYouGo from '@/blocks/KnowBeforeYouGo/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -197,6 +199,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 NewsHeroFilter,
                 BlogTwoColumn,
                 Banner,
+                PostsCarousel,
+                KnowBeforeYouGo,
               ],
               required: true,
               admin: {

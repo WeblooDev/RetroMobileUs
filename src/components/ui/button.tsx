@@ -18,9 +18,9 @@ export const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
 
         olive:
-          'bg-[#8B9B5C] text-white hover:bg-white hover:text-black active:bg-white active:text-[#8B9B5C] disabled:opacity-60',
+          'bg-[#8B9B5C] text-white border border-white hover:bg-white hover:border-black hover:text-black active:bg-white active:text-[#8B9B5C] disabled:opacity-60',
         black:
-          'bg-black text-white hover:bg-[#8B9B5C] hover:text-white active:bg-white active:text-black disabled:opacity-60',
+          'bg-black text-white border border-white hover:bg-[#8B9B5C] hover:text-white active:bg-white active:text-black disabled:opacity-60',
         outlineWhite:
           'bg-transparent text-white border border-white hover:bg-white hover:text-black active:bg-white active:text-black disabled:opacity-60',
       },
