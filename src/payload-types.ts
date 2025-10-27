@@ -466,6 +466,7 @@ export interface Page {
     | NewsHeroFilter
     | BlogTwoColumn
     | BannerBlock
+    | ExhibitorActivities
     | PostsCarousel
     | KnowBeforeYouGo
   )[];
@@ -1988,6 +1989,25 @@ export interface BannerBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExhibitorActivities".
+ */
+export interface ExhibitorActivities {
+  title: string;
+  items: {
+    title: string;
+    date?: string | null;
+    time?: string | null;
+    event?: string | null;
+    location?: string | null;
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'exhibitorActivities';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "PostsCarousel".
  */
 export interface PostsCarousel {
@@ -2757,6 +2777,7 @@ export interface PagesSelect<T extends boolean = true> {
         newsHeroFilter?: T | NewsHeroFilterSelect<T>;
         blogTwoColumn?: T | BlogTwoColumnSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        exhibitorActivities?: T | ExhibitorActivitiesSelect<T>;
         postsCarousel?: T | PostsCarouselSelect<T>;
         knowBeforeYouGo?: T | KnowBeforeYouGoSelect<T>;
       };
@@ -3654,6 +3675,26 @@ export interface ImageSliceSelect<T extends boolean = true> {
 export interface BannerBlockSelect<T extends boolean = true> {
   style?: T;
   content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExhibitorActivities_select".
+ */
+export interface ExhibitorActivitiesSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        title?: T;
+        date?: T;
+        time?: T;
+        event?: T;
+        location?: T;
+        image?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

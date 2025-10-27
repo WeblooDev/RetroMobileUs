@@ -65,6 +65,7 @@ import HelpfulLinksGrid from './HelpfulLinksGrid/Component'
 import NewsHeroFilter from './NewsHeroFilter/Component'
 import BlogTwoColumn from './BlogTwoColumn/Component'
 import { BannerBlock } from './Banner/Component'
+import ExhibitorActivities from './ExhibitorActivities/Component'
 import PostsCarousel from './PostsCarousel/Component'
 import KnowBeforeYouGo from './KnowBeforeYouGo/Component'
 
@@ -132,6 +133,7 @@ const blockComponents = {
   newsHeroFilter: NewsHeroFilter,
   blogTwoColumn: BlogTwoColumn,
   banner: BannerBlock,
+  exhibitorActivities: ExhibitorActivities,
   postsCarousel: PostsCarousel,
   knowBeforeYouGo: KnowBeforeYouGo,
 }
