@@ -466,6 +466,9 @@ export interface Page {
     | NewsHeroFilter
     | BlogTwoColumn
     | BannerBlock
+    | StayClose
+    | TravelCards
+    | SideImageInfo
     | ExhibitorActivities
     | PostsCarousel
     | KnowBeforeYouGo
@@ -1989,6 +1992,50 @@ export interface BannerBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StayClose".
+ */
+export interface StayClose {
+  title: string;
+  description: string;
+  slides: {
+    title?: string | null;
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'stayClose';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelCards".
+ */
+export interface TravelCards {
+  title: string;
+  items: {
+    subtitle: string;
+    description: string;
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'travelCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideImageInfo".
+ */
+export interface SideImageInfo {
+  title: string;
+  description: string;
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sideImageInfo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ExhibitorActivities".
  */
 export interface ExhibitorActivities {
@@ -2777,6 +2824,9 @@ export interface PagesSelect<T extends boolean = true> {
         newsHeroFilter?: T | NewsHeroFilterSelect<T>;
         blogTwoColumn?: T | BlogTwoColumnSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        stayClose?: T | StayCloseSelect<T>;
+        travelCards?: T | TravelCardsSelect<T>;
+        sideImageInfo?: T | SideImageInfoSelect<T>;
         exhibitorActivities?: T | ExhibitorActivitiesSelect<T>;
         postsCarousel?: T | PostsCarouselSelect<T>;
         knowBeforeYouGo?: T | KnowBeforeYouGoSelect<T>;
@@ -3675,6 +3725,51 @@ export interface ImageSliceSelect<T extends boolean = true> {
 export interface BannerBlockSelect<T extends boolean = true> {
   style?: T;
   content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StayClose_select".
+ */
+export interface StayCloseSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  slides?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TravelCards_select".
+ */
+export interface TravelCardsSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        subtitle?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideImageInfo_select".
+ */
+export interface SideImageInfoSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  image?: T;
   id?: T;
   blockName?: T;
 }
