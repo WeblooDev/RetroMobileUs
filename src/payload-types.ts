@@ -466,13 +466,13 @@ export interface Page {
     | NewsHeroFilter
     | BlogTwoColumn
     | BannerBlock
-    | TeamGrid
     | StayClose
     | TravelCards
     | SideImageInfo
     | ExhibitorActivities
     | PostsCarousel
     | KnowBeforeYouGo
+    | TeamGrid
   )[];
   meta?: {
     title?: string | null;
@@ -1993,26 +1993,6 @@ export interface BannerBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TeamGrid".
- */
-export interface TeamGrid {
-  title: string;
-  description: string;
-  items: {
-    name: string;
-    role: string;
-    bio: string;
-    photo: string | Media;
-    hobDescription?: string | null;
-    email: string;
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'teamGrid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "StayClose".
  */
 export interface StayClose {
@@ -2080,30 +2060,28 @@ export interface ExhibitorActivities {
  */
 export interface PostsCarousel {
   title: string;
-  viewAll?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-          /**
-           * Choose how the link should be rendered.
-           */
-          appearance?: ('default' | 'outline') | null;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  viewAll: {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'outline') | null;
+    };
+    id?: string | null;
+  }[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'postsCarousel';
@@ -2114,35 +2092,52 @@ export interface PostsCarousel {
  */
 export interface KnowBeforeYouGo {
   title: string;
-  description?: string | null;
+  description: string;
   items: {
     title: string;
     image: string | Media;
     id?: string | null;
   }[];
-  cta?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  cta: {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+    id?: string | null;
+  }[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'knowBeforeYouGo';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamGrid".
+ */
+export interface TeamGrid {
+  title: string;
+  description: string;
+  items: {
+    name: string;
+    role: string;
+    photo: string | Media;
+    hobDescription?: string | null;
+    email?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamGrid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2845,13 +2840,13 @@ export interface PagesSelect<T extends boolean = true> {
         newsHeroFilter?: T | NewsHeroFilterSelect<T>;
         blogTwoColumn?: T | BlogTwoColumnSelect<T>;
         banner?: T | BannerBlockSelect<T>;
-        teamGrid?: T | TeamGridSelect<T>;
         stayClose?: T | StayCloseSelect<T>;
         travelCards?: T | TravelCardsSelect<T>;
         sideImageInfo?: T | SideImageInfoSelect<T>;
         exhibitorActivities?: T | ExhibitorActivitiesSelect<T>;
         postsCarousel?: T | PostsCarouselSelect<T>;
         knowBeforeYouGo?: T | KnowBeforeYouGoSelect<T>;
+        teamGrid?: T | TeamGridSelect<T>;
       };
   meta?:
     | T
@@ -3752,27 +3747,6 @@ export interface BannerBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TeamGrid_select".
- */
-export interface TeamGridSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  items?:
-    | T
-    | {
-        name?: T;
-        role?: T;
-        bio?: T;
-        photo?: T;
-        hobDescription?: T;
-        email?: T;
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "StayClose_select".
  */
 export interface StayCloseSelect<T extends boolean = true> {
@@ -3886,6 +3860,26 @@ export interface KnowBeforeYouGoSelect<T extends boolean = true> {
               url?: T;
               label?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamGrid_select".
+ */
+export interface TeamGridSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        photo?: T;
+        hobDescription?: T;
+        email?: T;
         id?: T;
       };
   id?: T;
