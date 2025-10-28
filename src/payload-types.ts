@@ -77,6 +77,8 @@ export interface Config {
     brands: Brand;
     reviews: Review;
     'page-settings': PageSetting;
+    partnerCategories: PartnerCategory;
+    partners: Partner;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -98,6 +100,8 @@ export interface Config {
     brands: BrandsSelect<false> | BrandsSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     'page-settings': PageSettingsSelect<false> | PageSettingsSelect<true>;
+    partnerCategories: PartnerCategoriesSelect<false> | PartnerCategoriesSelect<true>;
+    partners: PartnersSelect<false> | PartnersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -472,6 +476,8 @@ export interface Page {
     | ExhibitorActivities
     | PostsCarousel
     | KnowBeforeYouGo
+    | SponsorsFilterGrid
+    | LogosCarousel
     | TeamGrid
   )[];
   meta?: {
@@ -2122,6 +2128,44 @@ export interface KnowBeforeYouGo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SponsorsFilterGrid".
+ */
+export interface SponsorsFilterGrid {
+  /**
+   * Optional: pick a subset to highlight elsewhere. Tabs here will still show all categories.
+   */
+  categories?: (string | PartnerCategory)[] | null;
+  showDescriptions: boolean;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sponsorsFilterGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerCategories".
+ */
+export interface PartnerCategory {
+  id: string;
+  name: string;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogosCarousel".
+ */
+export interface LogosCarousel {
+  items: {
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'logosCarousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TeamGrid".
  */
 export interface TeamGrid {
@@ -2248,6 +2292,20 @@ export interface PageSetting {
   page: string;
   title: string;
   background?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
+export interface Partner {
+  id: string;
+  name: string;
+  categories: (string | PartnerCategory)[];
+  logo: string | Media;
+  backgroundImage: string | Media;
+  description: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -2462,6 +2520,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'page-settings';
         value: string | PageSetting;
+      } | null)
+    | ({
+        relationTo: 'partnerCategories';
+        value: string | PartnerCategory;
+      } | null)
+    | ({
+        relationTo: 'partners';
+        value: string | Partner;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2846,6 +2912,8 @@ export interface PagesSelect<T extends boolean = true> {
         exhibitorActivities?: T | ExhibitorActivitiesSelect<T>;
         postsCarousel?: T | PostsCarouselSelect<T>;
         knowBeforeYouGo?: T | KnowBeforeYouGoSelect<T>;
+        sponsorsFilterGrid?: T | SponsorsFilterGridSelect<T>;
+        logosCarousel?: T | LogosCarouselSelect<T>;
         teamGrid?: T | TeamGridSelect<T>;
       };
   meta?:
@@ -3867,6 +3935,30 @@ export interface KnowBeforeYouGoSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SponsorsFilterGrid_select".
+ */
+export interface SponsorsFilterGridSelect<T extends boolean = true> {
+  categories?: T;
+  showDescriptions?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LogosCarousel_select".
+ */
+export interface LogosCarouselSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TeamGrid_select".
  */
 export interface TeamGridSelect<T extends boolean = true> {
@@ -4154,6 +4246,29 @@ export interface PageSettingsSelect<T extends boolean = true> {
   page?: T;
   title?: T;
   background?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partnerCategories_select".
+ */
+export interface PartnerCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners_select".
+ */
+export interface PartnersSelect<T extends boolean = true> {
+  name?: T;
+  categories?: T;
+  logo?: T;
+  backgroundImage?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -71,6 +71,8 @@ import SideImageInfoComponent from './SideImageInfo/Component'
 import ExhibitorActivities from './ExhibitorActivities/Component'
 import PostsCarousel from './PostsCarousel/Component'
 import KnowBeforeYouGo from './KnowBeforeYouGo/Component'
+import SponsorsFilterGrid from './SponsorsFilterGrid/Component'
+import LogosCarousel from './LogosCarousel/Component'
 import TeamGridComponent from './TeamGrid/Component'
 
 const blockComponents = {
@@ -143,6 +145,8 @@ const blockComponents = {
   exhibitorActivities: ExhibitorActivities,
   postsCarousel: PostsCarousel,
   knowBeforeYouGo: KnowBeforeYouGo,
+  sponsorsFilterGrid: SponsorsFilterGrid,
+  logosCarousel: LogosCarousel,
     teamGrid: TeamGridComponent,
 
 }

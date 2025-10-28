@@ -22,6 +22,8 @@ import { Brands } from './collections/Brands'
 import { Reviews } from './collections/Reviews'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { PageSettings } from './collections/PageSettings'
+import { Partners } from './collections/Partners'
+import { PartnerCategories } from './collections/partnerCategories'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -60,7 +62,8 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
-  collections: [Pages, Posts, Tags, Media, Categories, Users, Cars, Brands, Reviews, PageSettings],
+  collections: [Pages, Posts, Tags, Media, Categories, Users, Cars, Brands, Reviews, PageSettings, PartnerCategories,
+    Partners,],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
