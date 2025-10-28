@@ -85,6 +85,8 @@ import { SideImageInfo } from '@/blocks/SideImageInfo/config'
 import ExhibitorActivities from '@/blocks/ExhibitorActivities/config'
 import { PostsCarousel } from '@/blocks/PostsCarousel/config'
 import KnowBeforeYouGo from '@/blocks/KnowBeforeYouGo/config'
+import PartnersFilterGrid, { SponsorsFilterGrid } from '@/blocks/SponsorsFilterGrid/config'
+import LogosCarousel from '@/blocks/LogosCarousel/config'
 import TeamGrid from '@/blocks/TeamGrid/config'
 
 export const Pages: CollectionConfig<'pages'> = {
@@ -210,6 +212,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 ExhibitorActivities,
                 PostsCarousel,
                 KnowBeforeYouGo,
+                SponsorsFilterGrid,
+                LogosCarousel,
+                
                 TeamGrid,
               ],
               required: true,
