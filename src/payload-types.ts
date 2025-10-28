@@ -466,6 +466,7 @@ export interface Page {
     | NewsHeroFilter
     | BlogTwoColumn
     | BannerBlock
+    | TeamGrid
     | StayClose
     | TravelCards
     | SideImageInfo
@@ -1992,6 +1993,26 @@ export interface BannerBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamGrid".
+ */
+export interface TeamGrid {
+  title: string;
+  description: string;
+  items: {
+    name: string;
+    role: string;
+    bio: string;
+    photo: string | Media;
+    hobDescription?: string | null;
+    email: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamGrid';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "StayClose".
  */
 export interface StayClose {
@@ -2824,6 +2845,7 @@ export interface PagesSelect<T extends boolean = true> {
         newsHeroFilter?: T | NewsHeroFilterSelect<T>;
         blogTwoColumn?: T | BlogTwoColumnSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        teamGrid?: T | TeamGridSelect<T>;
         stayClose?: T | StayCloseSelect<T>;
         travelCards?: T | TravelCardsSelect<T>;
         sideImageInfo?: T | SideImageInfoSelect<T>;
@@ -3725,6 +3747,27 @@ export interface ImageSliceSelect<T extends boolean = true> {
 export interface BannerBlockSelect<T extends boolean = true> {
   style?: T;
   content?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamGrid_select".
+ */
+export interface TeamGridSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  items?:
+    | T
+    | {
+        name?: T;
+        role?: T;
+        bio?: T;
+        photo?: T;
+        hobDescription?: T;
+        email?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

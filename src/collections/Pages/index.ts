@@ -79,6 +79,7 @@ import ImageLeftCenteredList from '@/blocks/ImageLeftCenteredList/config'
 import HelpfulLinksGrid from '@/blocks/HelpfulLinksGrid/config'
 import NewsHeroFilter from '@/blocks/NewsHeroFilter/config'
 import { Banner } from '@/blocks/Banner/config'
+import { TeamGrid } from '@/blocks/TeamGrid/config'
 import StayClose from '@/blocks/StayClose/config'
 import { TravelCards } from '@/blocks/TravelCards/config'
 import { SideImageInfo } from '@/blocks/SideImageInfo/config'
@@ -209,6 +210,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ExhibitorActivities,
                 PostsCarousel,
                 KnowBeforeYouGo,
+                TeamGrid,
               ],
               required: true,
               admin: {

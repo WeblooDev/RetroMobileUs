@@ -65,6 +65,7 @@ import HelpfulLinksGrid from './HelpfulLinksGrid/Component'
 import NewsHeroFilter from './NewsHeroFilter/Component'
 import BlogTwoColumn from './BlogTwoColumn/Component'
 import { BannerBlock } from './Banner/Component'
+import TeamGridComponent from './TeamGrid/Component'
 import StayClose from './StayClose/Component'
 import TravelCardsComponent from './TravelCards/Component'
 import SideImageInfoComponent from './SideImageInfo/Component'
@@ -136,6 +137,7 @@ const blockComponents = {
   newsHeroFilter: NewsHeroFilter,
   blogTwoColumn: BlogTwoColumn,
   banner: BannerBlock,
+  teamGrid: TeamGridComponent,
   stayClose: StayClose,
   travelCards: TravelCardsComponent,
   sideImageInfo: SideImageInfoComponent,
