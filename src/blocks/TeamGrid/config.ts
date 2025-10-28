@@ -1,5 +1,4 @@
 import type { Block } from 'payload'
-
 export const TeamGrid: Block = {
   slug: 'teamGrid',
   interfaceName: 'TeamGrid',
@@ -41,13 +40,6 @@ export const TeamGrid: Block = {
           required: true,
         },
         {
-          name: 'bio',
-          type: 'textarea',
-          label: 'Short Description',
-          admin: { rows: 3 },
-          required: true,
-        },
-        {
           name: 'photo',
           type: 'upload',
           relationTo: 'media',
@@ -58,13 +50,12 @@ export const TeamGrid: Block = {
           name: 'hobDescription',
           type: 'text',
           label: 'Hob Description',
-          required: false, // optional
+          required: false, 
         },
         {
           name: 'email',
           type: 'email',
           label: 'Gmail',
-          required: true, // required for all members
         },
       ],
       defaultValue: [
@@ -102,5 +93,4 @@ export const TeamGrid: Block = {
     },
   ],
 }
-
 export default TeamGrid

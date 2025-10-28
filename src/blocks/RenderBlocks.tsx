@@ -65,13 +65,13 @@ import HelpfulLinksGrid from './HelpfulLinksGrid/Component'
 import NewsHeroFilter from './NewsHeroFilter/Component'
 import BlogTwoColumn from './BlogTwoColumn/Component'
 import { BannerBlock } from './Banner/Component'
-import TeamGridComponent from './TeamGrid/Component'
 import StayClose from './StayClose/Component'
 import TravelCardsComponent from './TravelCards/Component'
 import SideImageInfoComponent from './SideImageInfo/Component'
 import ExhibitorActivities from './ExhibitorActivities/Component'
 import PostsCarousel from './PostsCarousel/Component'
 import KnowBeforeYouGo from './KnowBeforeYouGo/Component'
+import TeamGridComponent from './TeamGrid/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -137,13 +137,14 @@ const blockComponents = {
   newsHeroFilter: NewsHeroFilter,
   blogTwoColumn: BlogTwoColumn,
   banner: BannerBlock,
-  teamGrid: TeamGridComponent,
   stayClose: StayClose,
   travelCards: TravelCardsComponent,
   sideImageInfo: SideImageInfoComponent,
   exhibitorActivities: ExhibitorActivities,
   postsCarousel: PostsCarousel,
   knowBeforeYouGo: KnowBeforeYouGo,
+    teamGrid: TeamGridComponent,
+
 }
 
 export const RenderBlocks: React.FC<{
