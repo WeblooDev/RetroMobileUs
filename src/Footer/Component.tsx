@@ -18,7 +18,7 @@ export async function Footer() {
       <div className="container">
         <div className=" border-t  sm:border-t-0  ">
           <div className="flex mt-4 flex-col justify-center items-center gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-4 2xl:gap-6">
-            <div className="flex flex-col items-center xl:items-start gap-6 min-h-[250px] justify-between">
+            <div className="flex flex-col items-center xl:items-start gap-4   min-h-auto lg:min-h-[250px] justify-between">
               <div className="w-[60%] sm:w-full md:w-fit flex justify-center items-center mb-2">
                 {typeof footerData.logo === 'object' && footerData.logo?.url && (
                   <Link href="/">
@@ -54,7 +54,7 @@ export async function Footer() {
               )}
             </div>
 
-            <div className="flex justify-end w-full xl:w-[65%] gap-4 md:gap-6 lg:gap-20 px-4 md:px-0">
+            <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start w-full xl:w-[65%] gap-12  md:gap-6 lg:gap-20 px-4 md:px-0">
               {linkGroups.map((group, index) => (
                 <div
                   key={index}

@@ -1,16 +1,6 @@
-'use client'
-
+import type { ComingSoonBlock as ComingSoonBlockType, Media } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 import { CountdownTimer } from './countdown-timer'
-import { CTAButton } from '@/components/CTAButton'
-
-type ComingSoonBlockProps = {
-  backgroundImage?: { url: string }
-  title: string
-  primaryButton?: { label: string; url: string }
-  secondaryButton?: { label: string; url: string }
-  countdownMonth?: number // 1-12
-  countdownDay?: number // 1-31
-}
 
 function daysInMonth(year: number, month1to12: number) {
   return new Date(year, month1to12, 0).getDate()
@@ -19,11 +9,8 @@ function daysInMonth(year: number, month1to12: number) {
 function nextOccurrence(month1to12: number, day: number) {
   const now = new Date()
   const y = now.getFullYear()
-
-  // Clamp day to valid range for this month/year
   const safeDay = Math.min(day, daysInMonth(y, month1to12))
   let target = new Date(y, month1to12 - 1, safeDay, 23, 59, 59)
-
   if (target.getTime() <= now.getTime()) {
     const y2 = y + 1
     const safeDay2 = Math.min(day, daysInMonth(y2, month1to12))
@@ -32,7 +19,7 @@ function nextOccurrence(month1to12: number, day: number) {
   return target
 }
 
-export const ComingSoonBlock: React.FC<ComingSoonBlockProps> = ({
+export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   backgroundImage,
   title,
   primaryButton,
@@ -40,50 +27,52 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockProps> = ({
   countdownMonth = 12,
   countdownDay = 31,
 }) => {
-  const targetDate = nextOccurrence(countdownMonth, countdownDay)
+  const bg = backgroundImage as Media | null
+  const bgUrl = (bg as any)?.url as string | undefined
+  const targetDate = nextOccurrence(Number(countdownMonth), Number(countdownDay))
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      {/* Background */}
-      {backgroundImage?.url && (
+      {bgUrl && (
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${backgroundImage.url})` }}
+          style={{ backgroundImage: `url(${bgUrl})` }}
+          aria-hidden
         >
           <div className="absolute inset-0 bg-background/80 grid-pattern" />
         </div>
       )}
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center min-h-screen px-6 md:px-12 lg:px-24">
-        <div className="max-w-3xl">
+      <div className="relative z-10 flex flex-col gap-12 lg:gap-0 mt-[40px] lg:mt-0 justify-center min-h-screen px-6 md:px-12 lg:px-24">
+        <div className="max-w-3xl flex flex-col items-start">
           <h2 className="text-white text-4xl md:text-6xl lg:text-7xl mb-6">{title}</h2>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            {primaryButton && (
-              <CTAButton
-                href={primaryButton.url}
-                variant="olive"
-                aria-label={primaryButton.label}
-                size="big"
-              >
-                {primaryButton.label}
-              </CTAButton>
+            {primaryButton?.url && primaryButton?.label && (
+              <CMSLink
+                type="custom"
+                url={primaryButton.url}
+                label={primaryButton.label}
+                appearance="olive"  
+                size="ctaBig"     
+                ariaLabel={primaryButton.label}
+                className="inline-flex"
+              />
             )}
-            {secondaryButton && (
-              <CTAButton
-                href={secondaryButton.url}
-                variant="outlineWhite"
-                aria-label={secondaryButton.label}
-                size="big"
-              >
-                {secondaryButton.label}
-              </CTAButton>
+            {secondaryButton?.url && secondaryButton?.label && (
+              <CMSLink
+                type="custom"
+                url={secondaryButton.url}
+                label={secondaryButton.label}
+                appearance="outlineWhite"
+                size="ctaBig"
+                ariaLabel={secondaryButton.label}
+                className="inline-flex"
+              />
             )}
           </div>
         </div>
 
-        {/* Countdown */}
         <div className="absolute bottom-8 right-8 hidden md:block">
           <CountdownTimer targetDate={targetDate} />
         </div>

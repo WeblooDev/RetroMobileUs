@@ -79,9 +79,8 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
 
   return (
     <section className="container relative py-16">
-      <div className="flex justify-between gap-10 items-stretch h-full">
-        {/* Left */}
-        <div className="flex w-[22%] justify-between flex-col h-auto items-start">
+      <div className="flex flex-col lg:flex-row justify-between gap-10 items-stretch h-full">
+        <div className="flex w-full lg:w-[22%] justify-between flex-row lg:flex-col h-auto items-start ">
           <h2 className="text-3xl">{title}</h2>
           {button && (
             <CTAButton href={button.url} variant="black" size="big">
@@ -91,8 +90,8 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
         </div>
 
         {/* Right */}
-        <div id="weblooParagraph" className="w-[70%]">
-          {paraText && <h3 className="text-2xl md:text-4xl !leading-[3.2rem]">{paraText}</h3>}
+        <div id="weblooParagraph" className="w-full lg:w-[70%]">
+          {paraText && <h3 className="text-2xl md:text-4xl !leading-[2.2rem] lg:!leading-[3.2rem]">{paraText}</h3>}
         </div>
       </div>
     </section>

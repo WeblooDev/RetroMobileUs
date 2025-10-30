@@ -1,6 +1,3 @@
-// src/blocks/KnowBeforeYouGo/Component.tsx
-'use client'
-
 import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
 import type { KnowBeforeYouGo as KnowBeforeYouGoBlock } from '@/payload-types'
@@ -15,12 +12,12 @@ const KnowBeforeYouGo: React.FC<KnowBeforeYouGoBlock> = ({
 
   return (
     <section className="py-12 md:py-20 my-20 bg-[#8B9B5C] text-white">
-      <div className="container mx-auto flex justify-between gap-8 md:gap-12 items-start px-6 md:px-12">
-        <h2 className="w-[40%] text-3xl md:text-6xl leading-tight">{title}</h2>
-        <p className="w-[30%] text-sm md:text-base  md:pt-3">{description}</p>
+      <div className="container mx-auto flex flex-col lg:flex-row justify-between gap-4 md:gap-8 items-start ">
+        <h2 className="w-full lg:w-[40%] text-3xl md:text-6xl leading-tight">{title}</h2>
+        <p className="w-full lg:w-[30%] text-sm md:text-base  md:pt-3">{description}</p>
       </div>
 
-      <div className="container mx-auto mt-10 md:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 ">
+      <div className="container mx-auto mt-10 md:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-0 lg:grid-cols-4 ">
         {cards.map((card, i) => (
           <article key={card?.id ?? i} className="group">
             <div className="mb-3 md:mb-4">

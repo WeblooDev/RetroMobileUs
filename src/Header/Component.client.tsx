@@ -56,15 +56,13 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
         </div>
       )}
 
-      <div className="bg-black/60 backdrop-blur-[20px] text-white">
+      <div className="bg-black/70 backdrop-blur-[30px] text-white">
         <div className="px-6 md:px-8 py-2">
           <div className="flex h-16 items-center justify-between">
-            {/* Logo */}
             <Link href="/" aria-label="Home">
               <Media resource={logo} alt="Logo" priority imgClassName="h-auto w-auto" />
             </Link>
 
-            {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-1">
               {(navItems ?? []).map((item) => {
                 const hasDropdown = (item.dropdownLinks?.length ?? 0) > 0
@@ -90,7 +88,6 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                       {hasDropdown && <ChevronDown className="h-4 w-4" aria-hidden />}
                     </Link>
 
-                    {/* Dropdown */}
                     {hasDropdown && openDropdown === item.label && (
                       <div
                         className="absolute left-0"
@@ -100,13 +97,12 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                         onFocusCapture={() => cancelClose()}
                         onBlurCapture={scheduleClose}
                       >
-                        {/* gap bridge */}
                         <div
                           className="absolute left-0 right-0 bg-transparent"
                           style={{ height: GAP_PX, top: `-${GAP_PX}px` }}
                           aria-hidden
                         />
-                        <div className="bg-[#8B9B5C]/40 backdrop-blur-sm border border-[#8B9B5C] min-w-[180px]">
+                        <div className="bg-[#8B9B5C]/60 backdrop-blur-sm border border-[#8B9B5C] min-w-[220px]">
                           {(item.dropdownLinks ?? []).map((dd) => (
                             <Link
                               key={dd.label}
@@ -124,7 +120,6 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
               })}
             </nav>
 
-            {/* Desktop CTAs */}
             <div className="hidden md:flex items-center gap-3">
               {ctaLink?.link?.label && ctaLink.link.url && (
                 <CTAButton href={ctaLink.link.url} variant="olive">
@@ -138,7 +133,6 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
               )}
             </div>
 
-            {/* Mobile toggle */}
             <div className="md:hidden">
               <button
                 type="button"
@@ -152,7 +146,6 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
           </div>
         </div>
 
-        {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/15">
             <div className="px-4 py-6 space-y-4">

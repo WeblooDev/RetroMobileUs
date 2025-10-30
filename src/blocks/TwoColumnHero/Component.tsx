@@ -1,70 +1,64 @@
 'use client'
 
-import { CTAButton } from '@/components/CTAButton'
+import * as React from 'react'
+import type { TwoColumnHero as TwoColumnHeroBlock, Media } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 
-type TwoColumnHeroProps = {
-  backgroundImage?: { url?: string }
-  leftTitle: string
-  primaryButton?: { label: string; url: string }
-  secondaryButton?: { label: string; url: string }
-  rightHeading: string
-  rightParagraph: string
-}
+export default function TwoColumnHero(props: TwoColumnHeroBlock) {
+  const { backgroundImage, leftTitle, primaryButton, secondaryButton, rightHeading, rightParagraph } = props
 
-export default function TwoColumnHero({
-  backgroundImage,
-  leftTitle,
-  primaryButton,
-  secondaryButton,
-  rightHeading,
-  rightParagraph,
-}: TwoColumnHeroProps) {
+  const bg = backgroundImage as Media | null
+  const bgUrl = (bg as any)?.url as string | undefined
+
   return (
     <section className="relative min-h-[80vh] flex items-center ">
-      {/* Background */}
-      {backgroundImage?.url && (
+      {bgUrl && (
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage.url})` }}
+          style={{ backgroundImage: `url(${bgUrl})` }}
+          aria-hidden
         >
-          <div className="absolute inset-0 bg-black/60" /> {/* overlay */}
+          <div className="absolute inset-0 bg-black/60" />
         </div>
       )}
 
-      {/* Content */}
-      <div className="relative z-10 w-full flex justify-between gap-12 px-6 md:px-12 lg:px-24">
-        {/* Left column */}
-        <div className="flex flex-col gap-6 w-[70%]">
-          <h2 className="text-2xl md:text-8xl text-white w-[70%]">{leftTitle}</h2>
+      <div className="relative z-10 w-full flex flex-col lg:flex-row justify-between gap-12 p-12 lg:p-24">
+        <div className="flex flex-col gap-6 w-full lg:w-[70%]">
+          <h2 className="text-5xl md:text-6xl lg:text-8xl text-white w-full lg:w-[70%]">
+            {leftTitle}
+          </h2>
 
-          <div className="flex flex-col sm:flex-row gap-4">
-            {primaryButton && (
-              <CTAButton
-                href={primaryButton.url}
-                variant="olive"
-                aria-label={primaryButton.label}
-                size="big"
-              >
-                {primaryButton.label}
-              </CTAButton>
+          <div className="flex flex-col items-start sm:flex-row gap-4">
+            {primaryButton?.url && primaryButton?.label && (
+              <CMSLink
+                type="custom"
+                url={primaryButton.url}
+                label={primaryButton.label}
+                appearance="olive"
+                size="ctaBig"
+                className="inline-flex"
+              />
             )}
-            {secondaryButton && (
-              <CTAButton
-                href={secondaryButton.url}
-                variant="black"
-                aria-label={secondaryButton.label}
-                size="big"
-              >
-                {secondaryButton.label}
-              </CTAButton>
+            {secondaryButton?.url && secondaryButton?.label && (
+              <CMSLink
+                type="custom"
+                url={secondaryButton.url}
+                label={secondaryButton.label}
+                appearance="black"
+                size="ctaBig"
+                className="inline-flex"
+              />
             )}
           </div>
         </div>
 
-        {/* Right column */}
         <div className="flex flex-col gap-4 items-center justify-end w-[30%]">
-          <h1 className="text-4xl md:text-[300px] leading-[14rem] text-white">{rightHeading}</h1>
-          <h3 className="text-lg md:text-5xl text-white/90 uppercase">{rightParagraph}</h3>
+          <h1 className="text-9xl md:text-[200px] lg:text-[300px] leading-[8rem] lg:leading-[14rem] text-white">
+            {rightHeading}
+          </h1>
+          <h3 className="text-3xl md:text-5xl lg:text-6xl text-white/90 uppercase">
+            {rightParagraph}
+          </h3>
         </div>
       </div>
     </section>

@@ -1,35 +1,38 @@
-'use client'
+import * as React from 'react'
+import type { ImageHero as ImageHeroBlock, Media } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 
-import { CTAButton } from '@/components/CTAButton'
+export default function ImageHero(props: ImageHeroBlock) {
+  const { backgroundImage, title, description, button } = props
 
-type ImageHeroProps = {
-  backgroundImage?: { url?: string }
-  title: string
-  description: string
-  button?: { label: string; url: string }
-}
+  const bg = backgroundImage as Media | null
+  const bgUrl = (bg as any)?.url as string | undefined
 
-export default function ImageHero({ backgroundImage, title, description, button }: ImageHeroProps) {
   return (
     <section className="container relative min-h-[90vh] flex items-center my-12">
-      {/* Background image */}
-      {backgroundImage?.url && (
+      {bgUrl && (
         <div
-          className="absolute inset-0  bg-center"
-          style={{ backgroundImage: `url(${backgroundImage.url})` }}
+          className="absolute inset-0 bg-center bg-cover bg-no-repeat"
+          style={{ backgroundImage: `url(${bgUrl})` }}
+          aria-hidden
         >
           <div className="absolute inset-0 bg-black/20" />
         </div>
       )}
 
-      {/* Content box on the left */}
-      <div className="relative z-10 w-[60%] px-6 ">
+      <div className="relative z-10 w-[90%] lg:w-[60%] px-6 ">
         <h1 className="text-4xl md:text-6xl text-white mb-6">{title}</h1>
-        <p className="text-lg  text-white mb-8 w-[70%]">{description}</p>
-        {button && (
-          <CTAButton href={button.url} variant="olive" aria-label={button.label} size="big">
-            {button.label}
-          </CTAButton>
+        <p className="text-lg text-white mb-8 w-[90%] lg:w-[70%]">{description}</p>
+
+        {button?.url && button?.label && (
+          <CMSLink
+            type="custom"
+            url={button.url}
+            label={button.label}
+            appearance="olive"     
+            size="ctaBig"        
+            className="inline-flex"
+          />
         )}
       </div>
     </section>

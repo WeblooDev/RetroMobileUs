@@ -1,7 +1,9 @@
+// src/blocks/ImageHero/config.ts
 import type { Block } from 'payload'
 
 export const ImageHero: Block = {
   slug: 'imageHero',
+  interfaceName: 'ImageHero', // <- generate TS type for the component
   labels: {
     singular: 'Image Hero',
     plural: 'Image Heroes',
@@ -37,3 +39,5 @@ export const ImageHero: Block = {
     },
   ],
 }
+
+export default ImageHero
