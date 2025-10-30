@@ -54,7 +54,7 @@ export async function Footer() {
               )}
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start w-full xl:w-[65%] gap-12  md:gap-6 lg:gap-20 px-4 md:px-0">
+            <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start w-full xl:w-[60%] gap-12  md:gap-6 lg:gap-20 px-4 md:px-0">
               {linkGroups.map((group, index) => (
                 <div
                   key={index}
@@ -118,7 +118,7 @@ export async function Footer() {
               href="https://www.dupontregistry.com/privacy"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm underline  text-[#9D9D9D]"
+              className="text-sm underline  text-[#9D9D9D] hover:text-black"
             >
               Privacy Policy
             </Link>
@@ -126,7 +126,7 @@ export async function Footer() {
               href="https://www.dupontregistry.com/participation"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm underline  text-[#9D9D9D]"
+              className="text-sm underline  text-[#9D9D9D] hover:text-black"
             >
               Terms & Conditions
             </Link>

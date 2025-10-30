@@ -16,14 +16,14 @@ const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, c
       <div className="container py-10 md:py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {items.map((card, i) => (
-            <div key={card.id ?? i} className="relative aspect-[228/487] overflow-hidden shadow-lg">
+            <div key={card.id ?? i} className="relative min-h-[200px] p-12 lg:aspect-[228/487] overflow-hidden shadow-lg">
               <div className="absolute inset-0">
                 <Media resource={card.image} fill priority={i < 2} imgClassName="object-cover" />
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-center text-white h-full flex flex-col justify-center items-center ">
-                <h3 className=" text-[200px]">{card.heading}</h3>
-                {card.body && <p className="text-sm md:text-base ">{card.body}</p>}
+              <div className="absolute bottom-0 left-0 right-0 py-16 px-8 text-center text-white h-full flex flex-col justify-center items-center ">
+                <h3 className=" text-6xl lg:text-[180px]">{card.heading}</h3>
+                {card.body && <p className="text-sm lg:text-base ">{card.body}</p>}
               </div>
             </div>
           ))}

@@ -1,6 +1,4 @@
-'use client'
-
-import { CTAButton } from '@/components/CTAButton'
+import { CMSLink } from '@/components/Link'
 import type { TextWithCTAs as TextWithCTAsBlock } from '@/payload-types'
 
 const TextWithCTAs: React.FC<TextWithCTAsBlock> = ({ title, links }) => {
@@ -12,26 +10,21 @@ const TextWithCTAs: React.FC<TextWithCTAsBlock> = ({ title, links }) => {
 
   return (
     <section className="container py-12">
-      <div className="flex items-center gap-6">
-        {/* Left: text */}
-        <h2 className="text-2xl md:text-6xl w-[50%]">{title}</h2>
+      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl w-full lg:w-[50%]">{title}</h2>
 
-        <div className="flex md:justify-end gap-3 w-[50%]">
+        <div className="flex items-start  flex-col md:flex-row justify-start lg:justify-end gap-2 lg:gap-6 w-full lg:w-[50%]">
           {primary && (
-            <CTAButton href={primary.url!} variant="olive" aria-label={primary.label} size="big">
-              {primary.label}
-            </CTAButton>
+            <CMSLink url={primary.url!} label={primary.label} appearance="black" size="ctaBig" />
           )}
 
           {secondary && (
-            <CTAButton
-              href={secondary.url!}
-              variant="outlineWhite"
-              aria-label={secondary.label}
-              size="big"
-            >
-              {secondary.label}
-            </CTAButton>
+            <CMSLink
+              url={secondary.url!}
+              label={secondary.label}
+              appearance="black"
+              size="ctaBig"
+            />
           )}
         </div>
       </div>

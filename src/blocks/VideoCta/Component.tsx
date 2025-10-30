@@ -85,7 +85,7 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
         </div>
 
         <div className="flex flex-col gap-6 w-full lg:w-[50%]">
-          <h2 className="text-3xl md:text-5xl ">{title}</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl ">{title}</h2>
           <p className="text-base md:text-base ">{paragraph}</p>
 
           {button && (

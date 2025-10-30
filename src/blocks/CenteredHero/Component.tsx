@@ -8,7 +8,7 @@ type CenteredHeroProps = {
 
 export default function CenteredHero({ backgroundImage, title, description }: CenteredHeroProps) {
   return (
-    <section className="relative min-h-[80vh] flex items-center justify-start text-start">
+    <section className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-start text-start">
       {/* Background image */}
       {backgroundImage?.url && (
         <div
@@ -19,7 +19,7 @@ export default function CenteredHero({ backgroundImage, title, description }: Ce
       )}
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl px-10">
+      <div className="relative z-10 max-w-5xl px-4 md:px-10">
         <h1 className="text-4xl md:text-[84px] leading-[4rem] md:leading-[6rem] text-white mb-6">{title}</h1>
         {description && <p className="text-lg md:text-xl text-white/90">{description}</p>}
       </div>

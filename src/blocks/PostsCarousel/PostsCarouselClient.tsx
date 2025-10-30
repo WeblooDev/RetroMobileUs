@@ -49,7 +49,7 @@ const PostsCarouselClient: React.FC<{
   return (
     <section className="container">
       <div className="flex items-center justify-between gap-4 py-6 md:py-8">
-        <h2 className="text-2xl md:text-4xl lg:text-6xl">{title}</h2>
+        <h2 className="text-2xl md:text-4xl lg:text-5xl">{title}</h2>
         <div className="flex gap-3">
           {viewAllLinks.map((l: any, i: number) => (
             <CMSLink key={i} {...l.link} type="custom" appearance="black" size="ctaBig" />
@@ -74,13 +74,20 @@ const PostsCarouselClient: React.FC<{
               >
                 <article className="group relative h-full overflow-hidden">
                   <div className="relative aspect-[16/9] w-full">
-                    {thumb && <Media resource={thumb} fill imgClassName="object-cover" />}
-                  </div>
+                  {thumb && (
+                    <Media
+                      resource={thumb}
+                      fill
+                      imgClassName="object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-300 will-change-[filter]"
+                    />
+                  )}
+                </div>
+
 
                   <div className="relative overflow-hidden">
                     <div className="pointer-events-none absolute inset-0 z-0 bg-black opacity-0 -translate-y-full transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0" />
                     <div className="relative z-10 p-4 md:p-6 flex flex-col gap-3">
-                      <h3 className="text-lg md:text-xl font-semibold line-clamp-2 transition-colors duration-300 group-hover:text-white">
+                      <h3 className="text-lg md:text-3xl  transition-colors duration-300 group-hover:text-white">
                         {p.title}
                       </h3>
                       {p.excerpt && (

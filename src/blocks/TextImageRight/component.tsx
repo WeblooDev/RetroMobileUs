@@ -6,7 +6,7 @@ import type { TextImageRight as TextImageRightBlock } from '@/payload-types'
 const TextImageRight: React.FC<TextImageRightBlock> = ({ title, description, image }) => {
   return (
     <section className="w-[90%] ml-auto py-12">
-      <div className="flex items-center gap-8 md:gap-20">
+      <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-20">
         <div>
           <h2 className="text-3xl md:text-6xl ">{title}</h2>
           {description && <p className="mt-4 text-sm md:text-base">{description}</p>}

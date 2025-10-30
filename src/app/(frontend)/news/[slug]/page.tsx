@@ -55,8 +55,9 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
                 )}
                 <div className="absolute inset-0 flex items-center w-full">
                   <div className="container mx-auto text-white">
-                    <h1 className="text-3xl md:text-[84px] leading-[6rem] w-[65%]">{hero.title}</h1>
-                    {hero.description && (
+                    <h1 className="text-3xl md:text-[84px] leading-[6rem] w-full lg:w-[65%]">{hero.title}</h1>
+                    
+                    {hero.description && ( 
                       <p className="mt-3 max-w-2xl text-white/90 text-base">{hero.description}</p>
                     )}
                   </div>
@@ -73,8 +74,8 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
               .filter(Boolean) as Post[]
 
             return (
-              <section key={i} className="container mx-auto flex justify-between gap-10">
-                <div className="prose prose-neutral w-[60%] max-w-none">
+              <section key={i} className="container mx-auto flex flex-col lg:flex-row justify-between gap-10">
+                <div className="prose prose-neutral w-full lg:w-[60%] max-w-none">
                   {left.map((slice, idx) => {
                     if (slice.blockType === 'textSlice') {
                       const s = slice as TextSliceBlock
@@ -108,7 +109,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
                   })}
                 </div>
 
-                <aside className="w-[30%]">
+                <aside className="w-full lg:w-[30%]">
                   <div className="grid gap-6">
                     {related.slice(0, 3).map((p) => {
                       const t = firstTagDoc(p.tags ?? undefined)
