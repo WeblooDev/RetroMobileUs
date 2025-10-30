@@ -188,11 +188,11 @@ const NewsHeroFilter: React.FC<NewsHeroFilterBlock> = ({
 
   return (
     <>
-      <section className="relative h-[80vh] w-full overflow-hidden">
+      <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
         {background && <Media resource={background} fill imgClassName="object-cover" />}
         <div className="absolute inset-0 flex flex-col items-start justify-center px-12 text-center text-white">
           <h1 className="text-3xl md:text-6xl">{title}</h1>
-          <div className="pointer-events-auto absolute bottom-6 w-[25%] max-w-[420px]">
+          <div className="pointer-events-auto absolute bottom-6 w-[25%] min-w-[200px]">
             <div className="relative">
               <select
                 value={selected}

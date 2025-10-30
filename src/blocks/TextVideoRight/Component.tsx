@@ -67,8 +67,8 @@ const TextMediaRight: React.FC<TextVideoRightBlock> = ({
 
   return (
     <section className="w-[90%] ml-auto py-12 md:py-20">
-      <div className="flex justify-center items-center gap-8 md:gap-12">
-        <div className="w-[50%]">
+      <div className="flex flex-col lg:flex-row justify-center items-center gap-8 md:gap-12">
+        <div className="w-full lg:w-[50%]">
           <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
 
           <p className="mt-6 text-sm md:text-base text-black/80 max-w-prose">{description}</p>
@@ -77,7 +77,7 @@ const TextMediaRight: React.FC<TextVideoRightBlock> = ({
         </div>
 
         <div
-          className="relative w-[50%] overflow-hidden"
+          className="relative w-full lg:w-[50%] overflow-hidden"
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
         >

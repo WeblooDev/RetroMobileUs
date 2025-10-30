@@ -13,9 +13,8 @@ const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({ title, steps, links, 
 
   return (
     <section className="w-[90%] mr-auto py-12 md:py-20">
-      <div className="flex items-center gap-8 md:gap-20">
-        {/* Left: image */}
-        <div className="relative aspect-[674/414] overflow-hidden w-[50%] ">
+      <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-20">
+        <div className="relative aspect-[674/414] overflow-hidden w-full lg:w-[50%] ">
           {image && <Media resource={image} fill imgClassName="object-cover" />}
         </div>
 

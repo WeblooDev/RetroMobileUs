@@ -1,6 +1,3 @@
-'use client'
-
-import * as React from 'react'
 import type { TwoColumnHero as TwoColumnHeroBlock, Media } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 
@@ -11,7 +8,7 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
   const bgUrl = (bg as any)?.url as string | undefined
 
   return (
-    <section className="relative min-h-[80vh] flex items-center ">
+    <section className="relative flex items-center my-16">
       {bgUrl && (
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -24,7 +21,7 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
 
       <div className="relative z-10 w-full flex flex-col lg:flex-row justify-between gap-12 p-12 lg:p-24">
         <div className="flex flex-col gap-6 w-full lg:w-[70%]">
-          <h2 className="text-5xl md:text-6xl lg:text-8xl text-white w-full lg:w-[70%]">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl text-white w-full lg:w-[70%]">
             {leftTitle}
           </h2>
 

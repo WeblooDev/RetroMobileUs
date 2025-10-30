@@ -50,9 +50,9 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
       )}
     >
       {showBanner && (
-        <div className="w-full bg-[#8B9B5C] flex gap-4 items-center justify-center text-white p-2">
-          {banner?.p1 ? <p className="text-lg font-bold">{banner.p1}</p> : null}
-          {banner?.p2 ? <p className="text-lg font-light">{banner.p2}</p> : null}
+        <div className="w-full bg-[#8B9B5C] flex flex-col md:flex-row gap-0 md:gap-4 items-center justify-center text-white p-2">
+          {banner?.p1 ? <p className="text-sm md:text-lg font-bold">{banner.p1}</p> : null}
+          {banner?.p2 ? <p className="text-sm md:text-lg font-light">{banner.p2}</p> : null}
         </div>
       )}
 

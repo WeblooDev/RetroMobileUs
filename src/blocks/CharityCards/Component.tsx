@@ -12,15 +12,15 @@ const CharityCardsComponent: React.FC<CharityCardsBlock> = ({ title, backgroundI
 
   return (
     <section className="container relative w-full py-14">
-      <h2 className="text-6xl font-ivar mb-10">{title}</h2>
+      <h2 className="text-4xl md:text-6xl font-ivar mb-10">{title}</h2>
 
-      <div className="relative w-full h-[350px] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full px-8 py-12 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <MediaCmp resource={backgroundImage} fill priority imgClassName="object-cover" />
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="relative z-10 flex gap-6 px-6 max-w-6xl w-full justify-center">
+        <div className="relative z-10 flex flex-col lg:flex-row gap-6 px-6 max-w-6xl w-full justify-center">
           {cards?.map((card, i) => (
             <div
               key={i}

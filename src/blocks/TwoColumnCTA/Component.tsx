@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import { CTAButton } from '@/components/CTAButton'
+import { CMSLink } from '@/components/Link'
 
 type TwoColumnCTAProps = {
   title: string
@@ -83,9 +84,8 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
         <div className="flex w-full lg:w-[22%] justify-between flex-row lg:flex-col h-auto items-start ">
           <h2 className="text-3xl">{title}</h2>
           {button && (
-            <CTAButton href={button.url} variant="black" size="big">
-              {button.label}
-            </CTAButton>
+            <CMSLink url={button.url} label={button.label} appearance="black" size="ctaBig">
+            </CMSLink>
           )}
         </div>
 

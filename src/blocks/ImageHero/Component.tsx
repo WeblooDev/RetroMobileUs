@@ -9,19 +9,18 @@ export default function ImageHero(props: ImageHeroBlock) {
   const bgUrl = (bg as any)?.url as string | undefined
 
   return (
-    <section className="container relative min-h-[90vh] flex items-center my-12">
+    <section className="container relative py-20 px-4 min-h-auto md:min-h-[60vh] lg:min-h-[80vh] flex items-center my-12">
       {bgUrl && (
         <div
           className="absolute inset-0 bg-center bg-cover bg-no-repeat"
           style={{ backgroundImage: `url(${bgUrl})` }}
           aria-hidden
         >
-          <div className="absolute inset-0 bg-black/20" />
         </div>
       )}
 
       <div className="relative z-10 w-[90%] lg:w-[60%] px-6 ">
-        <h1 className="text-4xl md:text-6xl text-white mb-6">{title}</h1>
+        <h1 className="text-3xl md:text-4xl lg:text-5xl text-white mb-6">{title}</h1>
         <p className="text-lg text-white mb-8 w-[90%] lg:w-[70%]">{description}</p>
 
         {button?.url && button?.label && (
