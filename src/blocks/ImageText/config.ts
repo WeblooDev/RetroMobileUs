@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 
 export const ImageText: Block = {
   slug: 'imageText',
+  interfaceName: 'ImageText', 
   labels: {
     singular: 'Image + Text',
     plural: 'Image + Text Blocks',
@@ -50,3 +51,5 @@ export const ImageText: Block = {
     },
   ],
 }
+
+export default ImageText

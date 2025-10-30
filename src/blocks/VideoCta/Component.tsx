@@ -45,16 +45,15 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
 
   return (
     <section className="container py-24">
-      <div className="flex gap-10 items-center w-full">
-        {/* Left: Video */}
+      <div className="flex flex-col lg:flex-row gap-10 items-center w-full">
         <div
-          className="w-[50%] relative group overflow-hidden bg-black/5"
+          className="w-full lg:w-[50%] relative group overflow-hidden bg-black/50"
           onMouseEnter={() => isPlaying && setShowHoverPause(true)}
           onMouseLeave={() => setShowHoverPause(false)}
         >
           <video
             ref={videoRef}
-            src={src}
+            src={src} 
             poster={poster?.url}
             className="w-full h-auto block max-h-[634px] object-cover"
             playsInline
@@ -85,7 +84,7 @@ export default function VideoCta({ video, poster, title, paragraph, button }: Vi
           </button>
         </div>
 
-        <div className="flex flex-col gap-6 w-[50%]">
+        <div className="flex flex-col gap-6 w-full lg:w-[50%]">
           <h2 className="text-3xl md:text-5xl ">{title}</h2>
           <p className="text-base md:text-base ">{paragraph}</p>
 

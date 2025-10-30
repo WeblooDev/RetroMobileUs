@@ -43,7 +43,6 @@ import { TwoColumnCTA } from '@/blocks/TwoColumnCTA/config'
 import { LineBlock } from '@/blocks/LineBlock/config'
 import { VideoCta } from '@/blocks/VideoCta/config'
 import { ImageHero } from '@/blocks/ImageHero/config'
-import { TwoColumnHero } from '@/blocks/TwoColumnHero/config'
 import { CenteredHero } from '@/blocks/CenteredHero/config'
 import { CardGrid } from '@/blocks/CardGrid/config'
 import { ImageText } from '@/blocks/ImageText/config'
@@ -93,6 +92,7 @@ import KnowBeforeYouGo from '@/blocks/KnowBeforeYouGo/config'
 import PartnersFilterGrid, { SponsorsFilterGrid } from '@/blocks/SponsorsFilterGrid/config'
 import LogosCarousel from '@/blocks/LogosCarousel/config'
 import TeamGrid from '@/blocks/TeamGrid/config'
+import TwoColumnHero from '@/blocks/TwoColumnHero/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',

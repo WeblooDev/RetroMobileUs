@@ -297,26 +297,7 @@ export interface Page {
       }
     | InventoryBlock
     | HeroCarsCarousel
-    | {
-        backgroundImage: string | Media;
-        title: string;
-        countdownMonth: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
-        /**
-         * Day of month (1–31). We will clamp to valid days for the chosen month.
-         */
-        countdownDay: number;
-        primaryButton: {
-          label: string;
-          url: string;
-        };
-        secondaryButton: {
-          label: string;
-          url: string;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'comingSoonBlock';
-      }
+    | ComingSoonBlock
     | {
         title: string;
         button?: {
@@ -354,35 +335,8 @@ export interface Page {
         blockName?: string | null;
         blockType: 'videoCta';
       }
-    | {
-        backgroundImage: string | Media;
-        title: string;
-        description: string;
-        button: {
-          label: string;
-          url: string;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'imageHero';
-      }
-    | {
-        backgroundImage: string | Media;
-        leftTitle: string;
-        primaryButton: {
-          label: string;
-          url: string;
-        };
-        secondaryButton: {
-          label: string;
-          url: string;
-        };
-        rightHeading: string;
-        rightParagraph: string;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'twoColumnHero';
-      }
+    | ImageHero
+    | TwoColumnHero
     | {
         backgroundImage: string | Media;
         title: string;
@@ -413,17 +367,7 @@ export interface Page {
         blockName?: string | null;
         blockType: 'cardGrid';
       }
-    | {
-        image: string | Media;
-        imageAlt?: string | null;
-        title: string;
-        text: string;
-        reverse?: boolean | null;
-        textAlign: 'left' | 'center';
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'imageText';
-      }
+    | ImageText
     | MissionGallery
     | {
         title: string;
@@ -1287,6 +1231,82 @@ export interface HeroCarsCarousel {
   id?: string | null;
   blockName?: string | null;
   blockType: 'heroCarsCarousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ComingSoonBlock".
+ */
+export interface ComingSoonBlock {
+  backgroundImage: string | Media;
+  title: string;
+  countdownMonth: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
+  /**
+   * Day of month (1–31). We will clamp to valid days for the chosen month.
+   */
+  countdownDay: number;
+  primaryButton: {
+    label: string;
+    url: string;
+  };
+  secondaryButton: {
+    label: string;
+    url: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comingSoonBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageHero".
+ */
+export interface ImageHero {
+  backgroundImage: string | Media;
+  title: string;
+  description: string;
+  button: {
+    label: string;
+    url: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TwoColumnHero".
+ */
+export interface TwoColumnHero {
+  backgroundImage: string | Media;
+  leftTitle: string;
+  primaryButton: {
+    label: string;
+    url: string;
+  };
+  secondaryButton: {
+    label: string;
+    url: string;
+  };
+  rightHeading: string;
+  rightParagraph: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'twoColumnHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageText".
+ */
+export interface ImageText {
+  image: string | Media;
+  imageAlt?: string | null;
+  title: string;
+  text: string;
+  reverse?: boolean | null;
+  textAlign: 'left' | 'center';
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageText';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2866,28 +2886,7 @@ export interface PagesSelect<T extends boolean = true> {
             };
         inventoryBlock?: T | InventoryBlockSelect<T>;
         heroCarsCarousel?: T | HeroCarsCarouselSelect<T>;
-        comingSoonBlock?:
-          | T
-          | {
-              backgroundImage?: T;
-              title?: T;
-              countdownMonth?: T;
-              countdownDay?: T;
-              primaryButton?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              secondaryButton?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
+        comingSoonBlock?: T | ComingSoonBlockSelect<T>;
         twoColumnCTA?:
           | T
           | {
@@ -2926,43 +2925,8 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        imageHero?:
-          | T
-          | {
-              backgroundImage?: T;
-              title?: T;
-              description?: T;
-              button?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        twoColumnHero?:
-          | T
-          | {
-              backgroundImage?: T;
-              leftTitle?: T;
-              primaryButton?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              secondaryButton?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              rightHeading?: T;
-              rightParagraph?: T;
-              id?: T;
-              blockName?: T;
-            };
+        imageHero?: T | ImageHeroSelect<T>;
+        twoColumnHero?: T | TwoColumnHeroSelect<T>;
         centeredHero?:
           | T
           | {
@@ -2994,18 +2958,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        imageText?:
-          | T
-          | {
-              image?: T;
-              imageAlt?: T;
-              title?: T;
-              text?: T;
-              reverse?: T;
-              textAlign?: T;
-              id?: T;
-              blockName?: T;
-            };
+        imageText?: T | ImageTextSelect<T>;
         missionGallery?: T | MissionGallerySelect<T>;
         split4060?:
           | T
@@ -3328,6 +3281,85 @@ export interface HeroCarsCarouselSelect<T extends boolean = true> {
   innerTitle?: T;
   text?: T;
   inventoryStyle?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ComingSoonBlock_select".
+ */
+export interface ComingSoonBlockSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  title?: T;
+  countdownMonth?: T;
+  countdownDay?: T;
+  primaryButton?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  secondaryButton?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageHero_select".
+ */
+export interface ImageHeroSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  title?: T;
+  description?: T;
+  button?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TwoColumnHero_select".
+ */
+export interface TwoColumnHeroSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  leftTitle?: T;
+  primaryButton?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  secondaryButton?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  rightHeading?: T;
+  rightParagraph?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageText_select".
+ */
+export interface ImageTextSelect<T extends boolean = true> {
+  image?: T;
+  imageAlt?: T;
+  title?: T;
+  text?: T;
+  reverse?: T;
+  textAlign?: T;
   id?: T;
   blockName?: T;
 }

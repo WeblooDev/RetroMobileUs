@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 
 export const ComingSoonBlock: Block = {
   slug: 'comingSoonBlock',
+  interfaceName: 'ComingSoonBlock', // <-- generate TS interface
   labels: { singular: 'Coming Soon Block', plural: 'Coming Soon Blocks' },
   fields: [
     {
@@ -22,7 +23,7 @@ export const ComingSoonBlock: Block = {
       type: 'select',
       required: true,
       label: 'Countdown Month',
-      defaultValue: 12,
+      defaultValue: '12',
       options: [
         { label: 'January', value: '1' },
         { label: 'February', value: '2' },
@@ -53,6 +54,7 @@ export const ComingSoonBlock: Block = {
     {
       name: 'primaryButton',
       type: 'group',
+      label: 'Primary Button',
       fields: [
         { name: 'label', type: 'text', required: true, defaultValue: 'Get Early Access' },
         { name: 'url', type: 'text', required: true, defaultValue: '#' },
@@ -61,6 +63,7 @@ export const ComingSoonBlock: Block = {
     {
       name: 'secondaryButton',
       type: 'group',
+      label: 'Secondary Button',
       fields: [
         { name: 'label', type: 'text', required: true, defaultValue: 'Learn More' },
         { name: 'url', type: 'text', required: true, defaultValue: '#' },
@@ -68,3 +71,5 @@ export const ComingSoonBlock: Block = {
     },
   ],
 }
+
+export default ComingSoonBlock

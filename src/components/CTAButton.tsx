@@ -26,6 +26,7 @@ const sizes: Record<NonNullable<CTAButtonProps['size']>, string> = {
 const variants: Record<NonNullable<CTAButtonProps['variant']>, string> = {
   olive: `
     bg-[#8B9B5C] text-white
+    border border-[#8B9B5C] hover:border-[black]
     hover:bg-white hover:text-black
     active:bg-white active:text-[#8B9B5C]
     disabled:opacity-60 disabled:pointer-events-none
