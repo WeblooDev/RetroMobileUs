@@ -1,27 +1,29 @@
-'use client'
+import type { CenteredHero as CenteredHeroFields } from '@/payload-types'
 
-type CenteredHeroProps = {
-  backgroundImage?: { url?: string }
-  title: string
-  description?: string
-}
+export default function CenteredHero({
+  backgroundImage,
+  title,
+  description,
+}: CenteredHeroFields) {
+  const bg = typeof backgroundImage === 'string' ? '' : (backgroundImage?.url ?? '')
 
-export default function CenteredHero({ backgroundImage, title, description }: CenteredHeroProps) {
   return (
     <section className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-start text-start">
-      {/* Background image */}
-      {backgroundImage?.url && (
+      {bg && (
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage.url})` }}
-        >
-        </div>
+          style={{ backgroundImage: `url(${bg})` }}
+          aria-hidden="true"
+        />
       )}
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl px-4 md:px-10">
-        <h1 className="text-4xl md:text-[84px] leading-[4rem] md:leading-[6rem] text-white mb-6">{title}</h1>
-        {description && <p className="text-lg md:text-xl text-white/90">{description}</p>}
+      <div className="relative z-10  container mx-auto">
+        <h1 className="text-6xl md:text-[84px] leading-[4rem] md:leading-[6rem] text-white mb-6">
+          {title}
+        </h1>
+        {description && (
+          <p className="text-lg md:text-xl text-white/90">{description}</p>
+        )}
       </div>
     </section>
   )

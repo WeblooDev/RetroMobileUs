@@ -2,10 +2,8 @@ import type { Block } from 'payload'
 
 export const CenteredHero: Block = {
   slug: 'centeredHero',
-  labels: {
-    singular: 'Centered Hero',
-    plural: 'Centered Heroes',
-  },
+  interfaceName: 'CenteredHero', 
+  labels: { singular: 'Centered Hero', plural: 'Centered Heroes' },
   fields: [
     {
       name: 'backgroundImage',
@@ -14,17 +12,12 @@ export const CenteredHero: Block = {
       label: 'Background Image',
       required: true,
     },
-    {
-      name: 'title',
-      type: 'text',
-      label: 'Title',
-      required: true,
-    },
+    { name: 'title', type: 'text', label: 'Title', required: true },
     {
       name: 'description',
       type: 'textarea',
       label: 'Description',
-      required: false, // 👈 not required
+      required: false,
     },
   ],
 }

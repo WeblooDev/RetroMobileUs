@@ -16,6 +16,9 @@ export default function ImageHero(props: ImageHeroBlock) {
           style={{ backgroundImage: `url(${bgUrl})` }}
           aria-hidden
         >
+
+                    <div className="absolute inset-0 bg-black/25" />
+
         </div>
       )}
 

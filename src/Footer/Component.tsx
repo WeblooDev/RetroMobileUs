@@ -102,14 +102,14 @@ export async function Footer() {
           {footerData?.copyright && (
             <p className="text-sm  text-[#9D9D9D] uppercase ">
               &copy; {new Date().getFullYear()}{' '}
-              <a
+              <Link
                 href="https://www.dupontregistrygroup.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-black hover:underline"
               >
                 RETRO MOBILE.
-              </a>{' '}
+              </Link>{' '}
               All Rights Reserved.
             </p>
           )}
