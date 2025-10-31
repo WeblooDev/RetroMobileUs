@@ -1,7 +1,9 @@
+// payload/blocks/VideoCta.ts
 import type { Block } from 'payload'
 
 export const VideoCta: Block = {
   slug: 'videoCta',
+  interfaceName: 'VideoCta', // <- generates the TS interface in payload-types
   labels: {
     singular: 'Video + CTA',
     plural: 'Video + CTAs',
@@ -29,7 +31,7 @@ export const VideoCta: Block = {
     },
     {
       name: 'paragraph',
-      type: 'textarea', // plain string
+      type: 'textarea',
       label: 'Paragraph',
       required: true,
       admin: { description: 'Plain text only.' },
@@ -38,6 +40,7 @@ export const VideoCta: Block = {
       name: 'button',
       type: 'group',
       label: 'Button',
+      admin: { description: 'Optional CTA.' },
       fields: [
         { name: 'label', type: 'text', required: true, defaultValue: 'Learn More' },
         { name: 'url', type: 'text', required: true, defaultValue: '#' },

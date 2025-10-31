@@ -2,6 +2,7 @@ import type { Block } from 'payload'
 
 export const CardGrid: Block = {
   slug: 'cardGrid',
+  interfaceName: 'CardGrid', 
   labels: { singular: 'Card Grid', plural: 'Card Grids' },
   fields: [
     {
@@ -18,11 +19,11 @@ export const CardGrid: Block = {
     },
     {
       name: 'cards',
+      required: true,
       type: 'array',
       label: 'Cards',
       labels: { singular: 'Card', plural: 'Cards' },
       fields: [
-        // reuse the same fields as Card (copy here to avoid nested blocks UI)
         { name: 'image', type: 'upload', relationTo: 'media', required: true, label: 'Image' },
         { name: 'title', type: 'text', required: true },
         { name: 'description', type: 'textarea', required: true },

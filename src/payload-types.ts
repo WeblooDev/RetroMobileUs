@@ -319,54 +319,11 @@ export interface Page {
         blockName?: string | null;
         blockType: 'lineBlock';
       }
-    | {
-        video: string | Media;
-        poster?: (string | null) | Media;
-        title: string;
-        /**
-         * Plain text only.
-         */
-        paragraph: string;
-        button: {
-          label: string;
-          url: string;
-        };
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'videoCta';
-      }
+    | VideoCta
     | ImageHero
     | TwoColumnHero
-    | {
-        backgroundImage: string | Media;
-        title: string;
-        description?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'centeredHero';
-      }
-    | {
-        /**
-         * How many columns on md+ screens.
-         */
-        columnsDesktop: '1' | '2';
-        cards?:
-          | {
-              image: string | Media;
-              title: string;
-              description: string;
-              button: {
-                label: string;
-                url: string;
-              };
-              spanFullOnDesktop?: boolean | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'cardGrid';
-      }
+    | CenteredHero
+    | CardGrid
     | ImageText
     | MissionGallery
     | {
@@ -1258,6 +1215,29 @@ export interface ComingSoonBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoCta".
+ */
+export interface VideoCta {
+  video: string | Media;
+  poster?: (string | null) | Media;
+  title: string;
+  /**
+   * Plain text only.
+   */
+  paragraph: string;
+  /**
+   * Optional CTA.
+   */
+  button: {
+    label: string;
+    url: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'videoCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ImageHero".
  */
 export interface ImageHero {
@@ -1292,6 +1272,42 @@ export interface TwoColumnHero {
   id?: string | null;
   blockName?: string | null;
   blockType: 'twoColumnHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CenteredHero".
+ */
+export interface CenteredHero {
+  backgroundImage: string | Media;
+  title: string;
+  description?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'centeredHero';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGrid".
+ */
+export interface CardGrid {
+  /**
+   * How many columns on md+ screens.
+   */
+  columnsDesktop: '1' | '2';
+  cards: {
+    image: string | Media;
+    title: string;
+    description: string;
+    button: {
+      label: string;
+      url: string;
+    };
+    spanFullOnDesktop?: boolean | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cardGrid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2909,55 +2925,11 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
-        videoCta?:
-          | T
-          | {
-              video?: T;
-              poster?: T;
-              title?: T;
-              paragraph?: T;
-              button?:
-                | T
-                | {
-                    label?: T;
-                    url?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
+        videoCta?: T | VideoCtaSelect<T>;
         imageHero?: T | ImageHeroSelect<T>;
         twoColumnHero?: T | TwoColumnHeroSelect<T>;
-        centeredHero?:
-          | T
-          | {
-              backgroundImage?: T;
-              title?: T;
-              description?: T;
-              id?: T;
-              blockName?: T;
-            };
-        cardGrid?:
-          | T
-          | {
-              columnsDesktop?: T;
-              cards?:
-                | T
-                | {
-                    image?: T;
-                    title?: T;
-                    description?: T;
-                    button?:
-                      | T
-                      | {
-                          label?: T;
-                          url?: T;
-                        };
-                    spanFullOnDesktop?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
+        centeredHero?: T | CenteredHeroSelect<T>;
+        cardGrid?: T | CardGridSelect<T>;
         imageText?: T | ImageTextSelect<T>;
         missionGallery?: T | MissionGallerySelect<T>;
         split4060?:
@@ -3310,6 +3282,24 @@ export interface ComingSoonBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoCta_select".
+ */
+export interface VideoCtaSelect<T extends boolean = true> {
+  video?: T;
+  poster?: T;
+  title?: T;
+  paragraph?: T;
+  button?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "ImageHero_select".
  */
 export interface ImageHeroSelect<T extends boolean = true> {
@@ -3346,6 +3336,41 @@ export interface TwoColumnHeroSelect<T extends boolean = true> {
       };
   rightHeading?: T;
   rightParagraph?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CenteredHero_select".
+ */
+export interface CenteredHeroSelect<T extends boolean = true> {
+  backgroundImage?: T;
+  title?: T;
+  description?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CardGrid_select".
+ */
+export interface CardGridSelect<T extends boolean = true> {
+  columnsDesktop?: T;
+  cards?:
+    | T
+    | {
+        image?: T;
+        title?: T;
+        description?: T;
+        button?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+        spanFullOnDesktop?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }

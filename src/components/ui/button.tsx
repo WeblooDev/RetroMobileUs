@@ -18,7 +18,7 @@ export const buttonVariants = cva(
         link: 'text-primary underline-offset-4 hover:underline',
 
         olive:
-          'bg-[#8B9B5C] text-white border border-[#8B9B5C] hover:border-red hover:bg-white hover:border-black hover:text-black active:bg-white active:text-[#8B9B5C] disabled:opacity-60',
+          'bg-[#8B9B5C]  text-white border border-[#8B9B5C] hover:border-red hover:bg-white hover:border-black hover:text-black active:bg-white active:text-[#8B9B5C] disabled:opacity-60',
         black:
           'bg-black text-white border border-white hover:bg-[#8B9B5C] hover:text-white active:bg-white active:text-black disabled:opacity-60',
         transparent:
@@ -32,7 +32,7 @@ export const buttonVariants = cva(
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
         ctaNormal: 'h-[2.25rem] px-3 py-1 text-[17px] rounded-[30px] font-ivar uppercase',
-        ctaBig: 'h-[2.75rem] px-4 py-1 text-[27px] rounded-[30px] font-ivar uppercase',
+        ctaBig: 'h-[2.75rem] px-6 py-1 text-[24px] rounded-[30px] font-ivar uppercase ',
       },
     },
     defaultVariants: {
