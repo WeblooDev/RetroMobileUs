@@ -13,7 +13,7 @@ const KnowBeforeYouGo: React.FC<KnowBeforeYouGoBlock> = ({
   return (
     <section className="py-12 md:py-20 my-20 bg-[#8B9B5C] text-white">
       <div className="container mx-auto flex flex-col lg:flex-row justify-between gap-2 md:gap-4 items-start ">
-        <h2 className="w-full lg:w-[40%] text-3xl md:text-4xl lg:text-5xl leading-tight">{title}</h2>
+        <h2 className="w-full lg:w-[40%] text-3xl md:text-4xl lg:text-4xl leading-tight">{title}</h2>
         <p className="w-full lg:w-[30%] text-sm md:text-base  md:pt-3">{description}</p>
       </div>
 

@@ -19,8 +19,8 @@ const base =
   'font-ivar uppercase rounded-[30px] inline-flex items-center justify-center whitespace-nowrap transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white/70'
 
 const sizes: Record<NonNullable<CTAButtonProps['size']>, string> = {
-  normal: 'text-[17px] px-3 py-1',
-  big: 'text-[26px] px-4 py-1', 
+  normal: 'text-[17px] px-5 py-1',
+  big: 'text-[17px] px-5 py-1', 
 }
 
 const variants: Record<NonNullable<CTAButtonProps['variant']>, string> = {

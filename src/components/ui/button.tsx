@@ -31,8 +31,8 @@ export const buttonVariants = cva(
         sm: 'h-9 rounded-md px-3',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
-        ctaNormal: 'h-[2.25rem] px-3 py-1 text-[17px] rounded-[30px] font-ivar uppercase',
-        ctaBig: 'h-[2.75rem] px-6 py-1 text-[24px] rounded-[30px] font-ivar uppercase ',
+        ctaNormal: 'h-[2.25rem] px-5 py-1 text-[17px] rounded-[30px] font-ivar uppercase',
+        ctaBig: 'h-[2.75rem] px-5 py-1 text-[17px] rounded-[30px] font-ivar uppercase ',
       },
     },
     defaultVariants: {
