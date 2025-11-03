@@ -18,7 +18,7 @@ export default function CenteredHero({
       )}
 
       <div className="relative z-10  container mx-auto">
-        <h1 className="text-6xl md:text-[84px] leading-[4rem] md:leading-[6rem] text-white mb-6">
+        <h1 className="text-6xl md:text-6xl leading-[4rem] md:leading-[6rem] text-white mb-6">
           {title}
         </h1>
         {description && (

@@ -50,10 +50,10 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
         </div>
 
         <div className="flex flex-col gap-4 items-center justify-end w-[30%]">
-          <h1 className="text-9xl md:text-[200px] lg:text-[300px] leading-[8rem] lg:leading-[14rem] text-white">
+          <h1 className="text-9xl md:text-[200px] lg:text-[200px] leading-[8rem] lg:leading-[12rem] text-white">
             {rightHeading}
           </h1>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl text-white/90 uppercase">
+          <h3 className="text-3xl md:text-5xl  text-white/90 uppercase">
             {rightParagraph}
           </h3>
         </div>

@@ -12,6 +12,8 @@ import {
 import type { Media as MediaType } from '@/payload-types'
 import type { LitePost } from './Component'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+
 
 const PostsCarouselClient: React.FC<{
   title?: string | null
@@ -45,11 +47,12 @@ const PostsCarouselClient: React.FC<{
   }, [api, computeEdges])
 
   const viewAllLinks = Array.isArray(viewAll) ? viewAll : []
+const router = useRouter()
 
   return (
     <section className="container">
       <div className="flex items-center justify-between gap-4 py-6 md:py-8">
-        <h2 className="text-2xl md:text-4xl lg:text-5xl">{title}</h2>
+        <h2 className="text-2xl md:text-4xl ">{title}</h2>
         <div className="flex gap-3">
           {viewAllLinks.map((l: any, i: number) => (
             <CMSLink key={i} {...l.link} type="custom" appearance="black" size="ctaBig" />
@@ -72,7 +75,18 @@ const PostsCarouselClient: React.FC<{
                 key={p.id}
                 className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 min-w-0"
               >
-                <article className="group relative h-full overflow-hidden">
+<article
+  className="group relative h-full overflow-hidden cursor-pointer rounded-xl "
+  role="link"
+  tabIndex={0}
+  onClick={() => router.push(slug)}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      router.push(slug)
+    }
+  }}
+>
                   <div className="relative aspect-[16/9] w-full">
                   {thumb && (
                     <Media
