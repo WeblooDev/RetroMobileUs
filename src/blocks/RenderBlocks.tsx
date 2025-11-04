@@ -79,6 +79,8 @@ import KnowBeforeYouGo from './KnowBeforeYouGo/Component'
 import SponsorsFilterGrid from './SponsorsFilterGrid/Component'
 import LogosCarousel from './LogosCarousel/Component'
 import TeamGridComponent from './TeamGrid/Component'
+import ImageTitle from './ImageTitle/Component'
+import ContactCards from './ContactCards/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -148,9 +150,7 @@ const blockComponents = {
     imageLeftTextRight: ImageLeftTextRight,
     ticketIncludes: TicketIncludes,
     helpfulReminders: HelpfulReminders,
-      floorPlan: FloorPlan,
-
-
+  floorPlan: FloorPlan,
   stayClose: StayClose,
   travelCards: TravelCardsComponent,
   sideImageInfo: SideImageInfoComponent,
@@ -160,6 +160,14 @@ const blockComponents = {
   sponsorsFilterGrid: SponsorsFilterGrid,
   logosCarousel: LogosCarousel,
     teamGrid: TeamGridComponent,
+    imageTitle: ImageTitle,
+      contactCards: ContactCards,
+
+
+
+
+
+
 
 }
 

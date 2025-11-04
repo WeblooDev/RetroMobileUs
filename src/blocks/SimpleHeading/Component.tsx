@@ -7,7 +7,7 @@ const SimpleHeading: React.FC<SimpleHeadingBlock> = ({ title, backgroundColor })
 
   return (
     <section className="flex justify-start items-start my-4">
-      <h3 className="text-white text-xl md:text-6xl py-8 px-12" style={{ backgroundColor: bg }}>
+      <h3 className="text-white text-2xl md:text-3xl lg:text-6xl py-8 px-12" style={{ backgroundColor: bg }}>
         {title}
       </h3>
     </section>

@@ -76,7 +76,7 @@ const router = useRouter()
                 className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 min-w-0"
               >
 <article
-  className="group relative h-full overflow-hidden cursor-pointer rounded-xl "
+  className="group relative h-full overflow-hidden cursor-pointer  "
   role="link"
   tabIndex={0}
   onClick={() => router.push(slug)}

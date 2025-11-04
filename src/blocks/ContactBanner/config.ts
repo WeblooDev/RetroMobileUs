@@ -4,10 +4,7 @@ import type { Block } from 'payload'
 export const ContactBanner: Block = {
   slug: 'contactBanner',
   interfaceName: 'ContactBanner',
-  labels: {
-    singular: 'Contact Banner',
-    plural: 'Contact Banners',
-  },
+  labels: { singular: 'Contact Banner', plural: 'Contact Banners' },
   fields: [
     {
       name: 'title',
@@ -20,7 +17,14 @@ export const ContactBanner: Block = {
       name: 'subtitle',
       type: 'text',
       label: 'Subtitle (optional)',
-      defaultValue: 'Reach us at support@retromobileusa.com or call (888) 123-4567.',
+    },
+  
+    {
+      name: 'phone',
+      type: 'text',
+      label: 'Contact Phone (optional)',
+      defaultValue: '(888) 123-4567',
+      admin: { description: 'Shown as text; auto-formatted for tel: link.' },
     },
     {
       name: 'backgroundColor',

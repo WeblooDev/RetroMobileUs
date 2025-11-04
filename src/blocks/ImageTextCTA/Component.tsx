@@ -19,7 +19,7 @@ const ImageTextCTA: React.FC<ImageTextCTABlock> = ({
 
   return (
     <section className="p-4 md:p-0 w-full my-12">
-      <div className={`flex flex-col lg:flex-row gap-8 items-center ${reverse ? 'flex-row-reverse' : ''}`}>
+      <div className={`flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 items-center ${reverse ? 'flex-row-reverse' : ''}`}>
         {/* Image */}
         <div className="w-full lg:w-[45%]">
           <div className="relative w-full aspect-[4/3] rounded-lg shadow overflow-hidden">

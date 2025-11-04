@@ -385,6 +385,8 @@ export interface Page {
     | SponsorsFilterGrid
     | LogosCarousel
     | TeamGrid
+    | ImageTitle
+    | ContactCards
   )[];
   meta?: {
     title?: string | null;
@@ -1198,9 +1200,18 @@ export interface ComingSoonBlock {
   title: string;
   countdownMonth: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12';
   /**
-   * Day of month (1–31). We will clamp to valid days for the chosen month.
+   * Day of month (1–31). The component will clamp to valid days for the chosen month.
    */
   countdownDay: number;
+  countdownTopText?: string | null;
+  /**
+   * If set, replaces the numeric day.
+   */
+  displayDayOverride?: string | null;
+  /**
+   * If set, replaces the automatic MONTH + YEAR.
+   */
+  displayMonthYearOverride?: string | null;
   primaryButton: {
     label: string;
     url: string;
@@ -1377,6 +1388,7 @@ export interface LinkBanner {
 export interface WhenToVisit {
   backgroundImage: string | Media;
   title: string;
+  subtitle: string;
   month: string;
   dateRange: string;
   year: number;
@@ -1459,6 +1471,10 @@ export interface ImageTextCTA {
 export interface ContactBanner {
   title: string;
   subtitle?: string | null;
+  /**
+   * Shown as text; auto-formatted for tel: link.
+   */
+  phone?: string | null;
   backgroundColor?: string | null;
   id?: string | null;
   blockName?: string | null;
@@ -2370,6 +2386,42 @@ export interface TeamGrid {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTitle".
+ */
+export interface ImageTitle {
+  eyebrow: string;
+  title: string;
+  description: string;
+  image: string | Media;
+  /**
+   * Optional CTA rendered with <CMSLink />
+   */
+  button: {
+    label: string;
+    url: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageTitle';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactCards".
+ */
+export interface ContactCards {
+  title: string;
+  cards: {
+    image: string | Media;
+    cardTitle: string;
+    email: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cars".
  */
 export interface Car {
@@ -2994,6 +3046,8 @@ export interface PagesSelect<T extends boolean = true> {
         sponsorsFilterGrid?: T | SponsorsFilterGridSelect<T>;
         logosCarousel?: T | LogosCarouselSelect<T>;
         teamGrid?: T | TeamGridSelect<T>;
+        imageTitle?: T | ImageTitleSelect<T>;
+        contactCards?: T | ContactCardsSelect<T>;
       };
   meta?:
     | T
@@ -3265,6 +3319,9 @@ export interface ComingSoonBlockSelect<T extends boolean = true> {
   title?: T;
   countdownMonth?: T;
   countdownDay?: T;
+  countdownTopText?: T;
+  displayDayOverride?: T;
+  displayMonthYearOverride?: T;
   primaryButton?:
     | T
     | {
@@ -3433,6 +3490,7 @@ export interface LinkBannerSelect<T extends boolean = true> {
 export interface WhenToVisitSelect<T extends boolean = true> {
   backgroundImage?: T;
   title?: T;
+  subtitle?: T;
   month?: T;
   dateRange?: T;
   year?: T;
@@ -3500,6 +3558,7 @@ export interface ImageTextCTASelect<T extends boolean = true> {
 export interface ContactBannerSelect<T extends boolean = true> {
   title?: T;
   subtitle?: T;
+  phone?: T;
   backgroundColor?: T;
   id?: T;
   blockName?: T;
@@ -4303,6 +4362,41 @@ export interface TeamGridSelect<T extends boolean = true> {
         role?: T;
         photo?: T;
         hobDescription?: T;
+        email?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageTitle_select".
+ */
+export interface ImageTitleSelect<T extends boolean = true> {
+  eyebrow?: T;
+  title?: T;
+  description?: T;
+  image?: T;
+  button?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactCards_select".
+ */
+export interface ContactCardsSelect<T extends boolean = true> {
+  title?: T;
+  cards?:
+    | T
+    | {
+        image?: T;
+        cardTitle?: T;
         email?: T;
         id?: T;
       };

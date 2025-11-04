@@ -11,6 +11,7 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
   openHour,
   closeHour,
   bandColor,
+  subtitle
 }) => {
   const bgUrl =
     backgroundImage && typeof backgroundImage === 'object'
@@ -23,7 +24,7 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
     <section className="container relative w-full">
       {bgUrl && (
         <div
-          className="relative w-full h-[440px] lg:h-[600px] bg-cover bg-center"
+          className="relative w-full h-[550px] lg:h-[600px] bg-cover bg-center"
           style={{ backgroundImage: `url(${bgUrl})` }}
         >
           <div className="absolute inset-0 bg-black/45" />
@@ -36,10 +37,9 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
             style={{ top: '50%', transform: 'translateY(-50%)', backgroundColor: band }}
           >
             <div className="flex flex-col lg:flex-row items-center text-white justify-center">
-              {/* Left column */}
               <div className="flex-1 px-6 md:px-10 py-6 md:py-8 flex items-start gap-6 justify-end">
                 <h4 className="uppercase text-lg">{month}</h4>
-                <h3 className="text-3xl md:text-6xl lg:text-8xl">{dateRange}</h3>
+                <h3 className="text-3xl md:text-4xl lg:text-8xl">{dateRange}</h3>
                 <h4 className="uppercase text-base lg:text-lg">{year}</h4>
               </div>
 
@@ -50,16 +50,21 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
 
                 <div className="flex flex-col gap-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="font-ivar text-2xl lg:text-3xl md:text-5xl leading-none">{openHour}</span>
+                    <span className="font-ivar text-2xl md:text-3xl lg:text-5xl leading-none">{openHour}</span>
                     <span className="uppercase text-sm md:text-base">AM</span>
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="font-ivar text-2xl lg:text-3xl md:text-5xl leading-none">{closeHour}</span>
+                    <span className="font-ivar text-2xl md:text-3xl lg:text-5xl leading-none">{closeHour}</span>
                     <span className="uppercase text-sm md:text-base">PM</span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+
+
+          <div className="absolute inset-x-0 bottom-10 md:bottom-10 flex justify-center px-6">
+            <h2 className="text-base md:text-lg lg:text-2xl text-white text-center w-[90%] md:w-[80%] lg:w-[60%]">{subtitle}</h2>
           </div>
         </div>
       )}
