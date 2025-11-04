@@ -16,7 +16,7 @@ const TeamGridComponent: React.FC<TeamGridBlock> = ({ title, description, items 
             <p className="text-sm md:text-base text-muted-foreground">{description}</p>
           )}
         </div>
-        <div className="grid grid-cols-1 min-[1200px]:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 min-[1200px]:grid-cols-2   gap-16 md:gap-20 lg:gap-32">
           {members.map((m, i) => {
             const isHero = i === 0
             const hasHobby = Boolean(m?.hobDescription && String(m.hobDescription).trim().length)
@@ -24,7 +24,7 @@ const TeamGridComponent: React.FC<TeamGridBlock> = ({ title, description, items 
               <article
                 key={m?.id ?? i}
                 className={[
-                  'flex flex-col items-center justify-center gap-6 md:gap-8 w-full',
+                  'flex flex-col-reverse items-center justify-center gap-6 md:gap-8 w-full',
                   i === 0 ? 'pt-0' : 'pt-8',
                   isHero ? 'min-[1200px]:col-span-2 min-[1200px]:mx-auto' : '',
                 ].join(' ')}
@@ -53,7 +53,7 @@ const TeamGridComponent: React.FC<TeamGridBlock> = ({ title, description, items 
                 <div className="w-full flex flex-col items-center justify-center">
                   {hasHobby && <AnimatedDivider />}
                   {hasHobby && (
-                    <div className="text-sm md:text-base text-white p-20 py-2 bg-[#8B9B5C] items-center justify-center w-fit text-center">
+                    <div className="text-sm md:text-base text-white p-20 py-2 bg-[#8B9B5C] items-center justify-center min-w-[300px] w-[340px] text-center">
                       {m.hobDescription}
                     </div>
                   )}

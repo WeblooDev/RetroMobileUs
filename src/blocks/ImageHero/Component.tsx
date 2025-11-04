@@ -24,7 +24,7 @@ export default function ImageHero(props: ImageHeroBlock) {
 
       <div className="relative z-10 w-[90%] lg:w-[60%] px-6 ">
         <h1 className="text-3xl md:text-4xl lg:text-5xl text-white mb-6">{title}</h1>
-        <p className="text-lg text-white mb-8 w-[90%] lg:w-[70%]">{description}</p>
+        <p className="text-base lg:text-lg text-white mb-8 w-[90%] lg:w-[70%]">{description}</p>
 
         {button?.url && button?.label && (
           <CMSLink

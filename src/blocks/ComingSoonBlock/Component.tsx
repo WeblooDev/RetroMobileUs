@@ -1,3 +1,7 @@
+// src/blocks/ComingSoonBlock/Component.tsx
+'use client'
+
+import React from 'react'
 import type { ComingSoonBlock as ComingSoonBlockType, Media } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { CountdownTimer } from './countdown-timer'
@@ -19,6 +23,8 @@ function nextOccurrence(month1to12: number, day: number) {
   return target
 }
 
+const norm = (s?: string | null) => (typeof s === 'string' && s.trim() ? s : undefined)
+
 export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   backgroundImage,
   title,
@@ -26,8 +32,13 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   secondaryButton,
   countdownMonth = 12,
   countdownDay = 31,
+
+  // new admin-driven fields
+  countdownTopText,
+  displayDayOverride,
+  displayMonthYearOverride,
 }) => {
-  const bg = backgroundImage as Media | null
+  const bg = (backgroundImage as Media) || null
   const bgUrl = (bg as any)?.url as string | undefined
   const targetDate = nextOccurrence(Number(countdownMonth), Number(countdownDay))
 
@@ -52,9 +63,9 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
               <CMSLink
                 type="custom"
                 url={primaryButton.url}
-                appearance="olive"  
-                size="ctaBig"   
-                label={primaryButton.label}  
+                appearance="olive"
+                size="ctaBig"
+                label={primaryButton.label}
                 ariaLabel={primaryButton.label}
               />
             )}
@@ -71,13 +82,28 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
           </div>
         </div>
 
+        {/* Desktop timer */}
         <div className="absolute bottom-8 right-8 hidden md:block">
-          <CountdownTimer targetDate={targetDate} />
+          <CountdownTimer
+            targetDate={targetDate}
+            topText={norm(countdownTopText)}
+            displayDayOverride={norm(displayDayOverride)}
+            displayMonthYearOverride={norm(displayMonthYearOverride)}
+          />
         </div>
+
+        {/* Mobile timer */}
         <div className="mt-12 md:hidden">
-          <CountdownTimer targetDate={targetDate} />
+          <CountdownTimer
+            targetDate={targetDate}
+            topText={norm(countdownTopText)}
+            displayDayOverride={norm(displayDayOverride)}
+            displayMonthYearOverride={norm(displayMonthYearOverride)}
+          />
         </div>
       </div>
     </main>
   )
 }
+
+export default ComingSoonBlock

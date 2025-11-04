@@ -93,6 +93,8 @@ import PartnersFilterGrid, { SponsorsFilterGrid } from '@/blocks/SponsorsFilterG
 import LogosCarousel from '@/blocks/LogosCarousel/config'
 import TeamGrid from '@/blocks/TeamGrid/config'
 import TwoColumnHero from '@/blocks/TwoColumnHero/config'
+import ImageTitle from '@/blocks/ImageTitle/config'
+import ContactCards from '@/blocks/ContactCards/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -226,6 +228,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 LogosCarousel,
                 
                 TeamGrid,
+                ImageTitle,
+                ContactCards,
               ],
               required: true,
               admin: {

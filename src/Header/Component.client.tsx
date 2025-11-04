@@ -1,4 +1,3 @@
-// Component.client.tsx
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
@@ -61,7 +60,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
           <div className="flex h-16 items-center justify-between">
             <Link href="/" aria-label="Home">
               <Media resource={logo} alt="Logo" priority imgClassName="h-auto w-auto" />
-            </Link>
+            </Link> 
 
             <nav className="hidden md:flex items-center gap-1">
               {(navItems ?? []).map((item) => {

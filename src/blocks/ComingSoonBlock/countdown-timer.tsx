@@ -1,17 +1,20 @@
+// countdown-timer.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
 
 interface CountdownTimerProps {
   targetDate: Date
-  displayDayOverride?: string         // e.g., "19 - 22"
-  displayMonthYearOverride?: string   // e.g., "november, 2016"
+  displayDayOverride?: string
+  displayMonthYearOverride?: string
+  topText?: string // <-- NEW
 }
 
 export function CountdownTimer({
   targetDate,
   displayDayOverride,
   displayMonthYearOverride,
+  topText, // <-- NEW
 }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 })
 
@@ -42,16 +45,20 @@ export function CountdownTimer({
   return (
     <div className="flex p-4 gap-4 ">
       <div className="flex flex-col gap-2 items-center justify-center min-w-[60px] text-white">
-        <h1 className="text-7xl md:text-[104px] leading-[60px] md:leading-[90px]">
-          {displayDayOverride ?? day}
-        </h1>
+        {topText?.trim() && (
+          <h2 className="text-5xl md:text-7xl lg:text-[88px] leading-[60px] lg:leading-[90px]">
+            {topText}
+          </h2>
+        )}
+
+     
 
         <div className="flex items-end gap-2">
           {displayMonthYearOverride ? (
             <h4 className="text-lg font-light ">{displayMonthYearOverride}</h4>
           ) : (
             <>
-              <h4 className="text-lg font-light ">{month.toUpperCase()}</h4>
+              <h4 className="text-2xl font-light ">{month.toUpperCase()}</h4>
               <h4 className="text-2xl font-light ">{year}</h4>
             </>
           )}
