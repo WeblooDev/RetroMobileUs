@@ -1,10 +1,9 @@
-// src/payload/blocks/LogoTextCTA.ts
 import type { Block } from 'payload'
-import { linkGroup } from '@/fields/linkGroup'
+import { link } from '@/fields/link'
 
 export const LogoTextCTA: Block = {
   slug: 'logoTextCTA',
-  interfaceName: 'LogoTextCTA', // <- so you can import the TS type
+  interfaceName: 'LogoTextCTA',
   labels: { singular: 'Logo + Text CTA', plural: 'Logo + Text CTAs' },
   fields: [
     {
@@ -22,17 +21,15 @@ export const LogoTextCTA: Block = {
       label: 'Title',
       defaultValue: "About Gooding Christie's",
     },
-    { name: 'description', type: 'textarea', label: 'Description' },
+    { name: 'description', type: 'textarea', label: 'Description', required: true },
 
-    // standardized CTA (1 row)
-    linkGroup({
-      appearances: false,
+    link({
+      appearances: ['default'],
+      disableLabel: false,
       overrides: {
-        name: 'ctas',
-        label: 'CTA',
-        minRows: 0,
-        maxRows: 1,
-        admin: { initCollapsed: false },
+        name: 'cta',
+        label: 'CTA Link',
+        admin: { description: 'Optional call-to-action link.' },
       },
     }),
 
@@ -44,4 +41,5 @@ export const LogoTextCTA: Block = {
     },
   ],
 }
+
 export default LogoTextCTA

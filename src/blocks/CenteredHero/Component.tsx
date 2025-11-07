@@ -8,7 +8,7 @@ export default function CenteredHero({
   const bg = typeof backgroundImage === 'string' ? '' : (backgroundImage?.url ?? '')
 
   return (
-    <section className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-start text-start">
+    <section className="relative min-h-[60vh] md:min-h-[80vh] flex items-center justify-start text-start mt-[50px]">
       {bg && (
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -18,7 +18,7 @@ export default function CenteredHero({
       )}
 
       <div className="relative z-10  container mx-auto">
-        <h1 className="text-6xl md:text-6xl leading-[4rem] md:leading-[6rem] text-white mb-6">
+        <h1 className="text-4xl md:text-6xl leading-[4rem] md:leading-[6rem] text-white mb-6">
           {title}
         </h1>
         {description && (

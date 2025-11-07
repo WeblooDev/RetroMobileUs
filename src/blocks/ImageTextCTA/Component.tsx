@@ -18,7 +18,7 @@ const ImageTextCTA: React.FC<ImageTextCTABlock> = ({
     typeof primary?.url === 'string' && primary.url.trim() ? primary.url : undefined
 
   return (
-    <section className="p-4 md:p-0 w-full my-12">
+    <section className="p-4 md:p-8 lg:p-0 w-full my-12">
       <div className={`flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 items-center ${reverse ? 'flex-row-reverse' : ''}`}>
         {/* Image */}
         <div className="w-full lg:w-[45%]">

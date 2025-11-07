@@ -64,7 +64,6 @@ export const ComingSoonBlock: Block = {
       ],
     },
 
-    // Display overrides (from admin)
     {
       name: 'countdownTopText',
       type: 'text',
@@ -79,7 +78,7 @@ export const ComingSoonBlock: Block = {
     {
       name: 'displayMonthYearOverride',
       type: 'text',
-      label: 'Override Month & Year (optional, e.g., "NOVEMBER 2025")',
+      label: 'Override Month & Year (optional, e.g., "NOVEMBER 2026")',
       admin: { description: 'If set, replaces the automatic MONTH + YEAR.' },
     },
 

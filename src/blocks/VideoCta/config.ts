@@ -1,27 +1,20 @@
-// payload/blocks/VideoCta.ts
 import type { Block } from 'payload'
+import { link } from '@/fields/link'
 
 export const VideoCta: Block = {
   slug: 'videoCta',
-  interfaceName: 'VideoCta', // <- generates the TS interface in payload-types
+  interfaceName: 'VideoCta',
   labels: {
-    singular: 'Video + CTA',
-    plural: 'Video + CTAs',
+    singular: 'Media + CTA',
+    plural: 'Media + CTAs',
   },
   fields: [
     {
-      name: 'video',
+      name: 'image',
       type: 'upload',
       relationTo: 'media',
-      label: 'Video (upload)',
+      label: 'Image (upload)',
       required: true,
-    },
-    {
-      name: 'poster',
-      type: 'upload',
-      relationTo: 'media',
-      label: 'Poster Image (optional)',
-      required: false,
     },
     {
       name: 'title',
@@ -36,15 +29,10 @@ export const VideoCta: Block = {
       required: true,
       admin: { description: 'Plain text only.' },
     },
-    {
-      name: 'button',
-      type: 'group',
-      label: 'Button',
-      admin: { description: 'Optional CTA.' },
-      fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Learn More' },
-        { name: 'url', type: 'text', required: true, defaultValue: '#' },
-      ],
-    },
+     link({
+      overrides: {
+        label: 'Button',
+      },
+    }),
   ],
 }

@@ -81,6 +81,8 @@ import LogosCarousel from './LogosCarousel/Component'
 import TeamGridComponent from './TeamGrid/Component'
 import ImageTitle from './ImageTitle/Component'
 import ContactCards from './ContactCards/Component'
+import ProgramHighlight from './ProgramHighlight/Component'
+import NumberedListMedia from './NumberedListMedia/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -162,6 +164,8 @@ const blockComponents = {
     teamGrid: TeamGridComponent,
     imageTitle: ImageTitle,
       contactCards: ContactCards,
+      programHighlight: ProgramHighlight, 
+      numberedListMedia: NumberedListMedia      
 
 
 

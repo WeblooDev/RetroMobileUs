@@ -95,6 +95,8 @@ import TeamGrid from '@/blocks/TeamGrid/config'
 import TwoColumnHero from '@/blocks/TwoColumnHero/config'
 import ImageTitle from '@/blocks/ImageTitle/config'
 import ContactCards from '@/blocks/ContactCards/config'
+import ProgramHighlight from '@/blocks/ProgramHighlight/Config'
+import NumberedListMedia from '@/blocks/NumberedListMedia/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -226,10 +228,11 @@ export const Pages: CollectionConfig<'pages'> = {
                 KnowBeforeYouGo,
                 SponsorsFilterGrid,
                 LogosCarousel,
-                
                 TeamGrid,
                 ImageTitle,
                 ContactCards,
+                ProgramHighlight,
+                NumberedListMedia,
               ],
               required: true,
               admin: {

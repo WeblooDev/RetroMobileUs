@@ -90,7 +90,7 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
         </div>
 
         {/* Right */}
-        <div id="weblooParagraph" className="w-full lg:w-[70%]">
+        <div id="weblooParagraph" className="w-full lg:w-[65%]">
           {paraText && <h3 className="text-2xl md:text-3xl !leading-[2.2rem] lg:!leading-[2.5rem]">{paraText}</h3>}
         </div>
       </div>
