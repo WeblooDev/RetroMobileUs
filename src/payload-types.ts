@@ -387,6 +387,8 @@ export interface Page {
     | TeamGrid
     | ImageTitle
     | ContactCards
+    | ProgramHighlight
+    | NumberedListMedia
   )[];
   meta?: {
     title?: string | null;
@@ -1229,19 +1231,30 @@ export interface ComingSoonBlock {
  * via the `definition` "VideoCta".
  */
 export interface VideoCta {
-  video: string | Media;
-  poster?: (string | null) | Media;
+  image: string | Media;
   title: string;
   /**
    * Plain text only.
    */
   paragraph: string;
-  /**
-   * Optional CTA.
-   */
-  button: {
+  link: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
     label: string;
-    url: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -1549,27 +1562,29 @@ export interface LogoTextCTA {
   image: string | Media;
   imageAlt?: string | null;
   title: string;
-  description?: string | null;
-  ctas?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
+  description: string;
+  /**
+   * Optional call-to-action link.
+   */
+  cta: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: 'default' | null;
+  };
   reverse?: boolean | null;
   id?: string | null;
   blockName?: string | null;
@@ -2393,12 +2408,24 @@ export interface ImageTitle {
   title: string;
   description: string;
   image: string | Media;
-  /**
-   * Optional CTA rendered with <CMSLink />
-   */
   button: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
     label: string;
-    url: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -2419,6 +2446,41 @@ export interface ContactCards {
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactCards';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramHighlight".
+ */
+export interface ProgramHighlight {
+  title: string;
+  intro: string;
+  bullets: {
+    text: string;
+    id?: string | null;
+  }[];
+  /**
+   * Displayed at 351/195 aspect.
+   */
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'programHighlight';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NumberedListMedia".
+ */
+export interface NumberedListMedia {
+  title: string;
+  subtext: string;
+  bullets: {
+    text: string;
+    id?: string | null;
+  }[];
+  image: string | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'numberedListMedia';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3048,6 +3110,8 @@ export interface PagesSelect<T extends boolean = true> {
         teamGrid?: T | TeamGridSelect<T>;
         imageTitle?: T | ImageTitleSelect<T>;
         contactCards?: T | ContactCardsSelect<T>;
+        programHighlight?: T | ProgramHighlightSelect<T>;
+        numberedListMedia?: T | NumberedListMediaSelect<T>;
       };
   meta?:
     | T
@@ -3342,15 +3406,18 @@ export interface ComingSoonBlockSelect<T extends boolean = true> {
  * via the `definition` "VideoCta_select".
  */
 export interface VideoCtaSelect<T extends boolean = true> {
-  video?: T;
-  poster?: T;
+  image?: T;
   title?: T;
   paragraph?: T;
-  button?:
+  link?:
     | T
     | {
-        label?: T;
+        type?: T;
+        newTab?: T;
+        reference?: T;
         url?: T;
+        label?: T;
+        appearance?: T;
       };
   id?: T;
   blockName?: T;
@@ -3629,19 +3696,15 @@ export interface LogoTextCTASelect<T extends boolean = true> {
   imageAlt?: T;
   title?: T;
   description?: T;
-  ctas?:
+  cta?:
     | T
     | {
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-            };
-        id?: T;
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
       };
   reverse?: T;
   id?: T;
@@ -4380,8 +4443,12 @@ export interface ImageTitleSelect<T extends boolean = true> {
   button?:
     | T
     | {
-        label?: T;
+        type?: T;
+        newTab?: T;
+        reference?: T;
         url?: T;
+        label?: T;
+        appearance?: T;
       };
   id?: T;
   blockName?: T;
@@ -4400,6 +4467,40 @@ export interface ContactCardsSelect<T extends boolean = true> {
         email?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProgramHighlight_select".
+ */
+export interface ProgramHighlightSelect<T extends boolean = true> {
+  title?: T;
+  intro?: T;
+  bullets?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "NumberedListMedia_select".
+ */
+export interface NumberedListMediaSelect<T extends boolean = true> {
+  title?: T;
+  subtext?: T;
+  bullets?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  image?: T;
   id?: T;
   blockName?: T;
 }

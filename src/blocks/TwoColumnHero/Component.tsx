@@ -19,7 +19,7 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
         </div>
       )}
 
-      <div className="relative z-10 w-full flex flex-col lg:flex-row justify-between gap-12 p-12 lg:p-24">
+      <div className="container mx-auto relative z-10 w-full flex flex-col lg:flex-row justify-between gap-0 lg:gap-12 py-24">
         <div className="flex flex-col gap-6 w-full lg:w-[70%]">
           <h2 className="text-5xl md:text-6xl lg:text-7xl text-white w-full lg:w-[70%]">
             {leftTitle}
@@ -49,8 +49,8 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 items-center justify-end w-[30%]">
-          <h1 className="text-9xl md:text-[200px] lg:text-[200px] leading-[8rem] lg:leading-[12rem] text-white">
+        <div className="flex flex-row lg:flex-col gap-4 items-center justify-start lg:justify-end w-full lg:w-[30%]">
+          <h1 className="text-7xl md:text-9xl lg:text-[200px] leading-[8rem] lg:leading-[12rem] text-white">
             {rightHeading}
           </h1>
           <h3 className="text-3xl md:text-5xl  text-white/90 uppercase">

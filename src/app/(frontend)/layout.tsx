@@ -12,6 +12,7 @@ import { BreadcrumbLayout } from '@/components/Breadcrumb/BreadcrumbLayout'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import FloatingTicketCTA from '@/components/FloatingTicketCTA'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -97,6 +98,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <BreadcrumbLayout>{children}</BreadcrumbLayout>
 
           <Footer />
+
+           <FloatingTicketCTA
+            title="TICKETS"
+            link={{ type: 'custom', url: '/tickets', label: 'Buy now' }}
+          />
         </Providers>
       </body>
     </html>

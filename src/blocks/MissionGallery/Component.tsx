@@ -17,7 +17,7 @@ const MissionGallery: React.FC<MissionGalleryBlock> = ({
       <div className="max-w-3xl mx-auto text-center mb-10 md:mb-14">
         <h2 className="text-4xl md:text-6xl">{title}</h2>
         {description && (
-          <p className="mt-4 text-sm md:text-base w-full md:w-1/2 mx-auto">{description}</p>
+          <p className="mt-4 text-sm md:text-base w-full md:w-[85%] mx-auto">{description}</p>
         )}
       </div>
 
