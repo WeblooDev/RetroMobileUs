@@ -20,9 +20,9 @@ export default function VideoCtaBlock({
           </div>
         </div>
 
-        <div className="flex flex-col gap-6 w-full lg:w-[50%]px-0 lg:px-10">
+        <div className="flex flex-col gap-6 w-full lg:w-[50%] px-0 lg:px-10">
           {title && <h2 className="text-3xl md:text-4xl lg:text-4xl">{title}</h2>}
-          {paragraph && <p className="text-base md:text-sm w-[80%]">{paragraph}</p>}
+          {paragraph && <p className="text-sm md:text-base w-[80%]">{paragraph}</p>}
 
             <div>
               <CMSLink

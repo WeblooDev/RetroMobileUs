@@ -7,30 +7,33 @@ import { CMSLink } from '@/components/Link'
 type Props = {
   title?: string
   link?: any
-  topThreshold?: number
+  /** Auto-open threshold in viewport heights (100 = 100vh) */
+  openAtVh?: number
 }
 
-const DURATION_MS = 500 
+const DURATION_MS = 500
 
 export default function FloatingTicketCTA({
   title = 'TICKETS',
   link,
-  topThreshold = 8,
+  openAtVh = 80,
 }: Props) {
   const [mounted, setMounted] = useState(false)
 
-  const [minimized, setMinimized] = useState(false)
+  // Shell/card state
+  const [minimized, setMinimized] = useState(true)   // start closed
+  const [showContent, setShowContent] = useState(false)
+  const [showLine, setShowLine] = useState(true)
 
-  const [showContent, setShowContent] = useState(true)
+  // If the user clicks (open/close), disable auto-open forever (until reload)
+  const [userInteracted, setUserInteracted] = useState(false)
 
-  const [showLine, setShowLine] = useState(false)
-
+  // Smooth content sizing
   const contentRef = useRef<HTMLDivElement>(null)
-  const [contentMax, setContentMax] = useState<number>(0)
+  const [contentMax, setContentMax] = useState(0)
 
-  // timeouts
+  // timers
   const openTimeout = useRef<number | null>(null)
-  const closeTimeout = useRef<number | null>(null)
   const lineInTimeout = useRef<number | null>(null)
 
   useLayoutEffect(() => {
@@ -41,27 +44,47 @@ export default function FloatingTicketCTA({
 
   const clearTimers = () => {
     if (openTimeout.current) window.clearTimeout(openTimeout.current)
-    if (closeTimeout.current) window.clearTimeout(closeTimeout.current)
     if (lineInTimeout.current) window.clearTimeout(lineInTimeout.current)
   }
 
-  const onScroll = useCallback(() => {
-    if (window.scrollY <= topThreshold) {
-      if (minimized) {
-        clearTimers()
-        setShowLine(false)
-        setShowContent(false)
-        setMinimized(false)
+  const openSequence = (markInteraction: boolean) => {
+    clearTimers()
+    if (markInteraction) setUserInteracted(true)
 
-        openTimeout.current = window.setTimeout(() => {
-          if (contentRef.current) setContentMax(contentRef.current.scrollHeight)
-          setShowContent(true)
-        }, DURATION_MS)
-      }
+    setShowLine(false)
+    setShowContent(false)
+    setMinimized(false)
+    openTimeout.current = window.setTimeout(() => {
+      if (contentRef.current) setContentMax(contentRef.current.scrollHeight)
+      setShowContent(true)
+    }, DURATION_MS)
+  }
+
+  const closeSequence = (markInteraction: boolean) => {
+    clearTimers()
+    if (markInteraction) setUserInteracted(true)
+
+    setShowContent(false)
+    requestAnimationFrame(() => {
+      setMinimized(true)
+      lineInTimeout.current = window.setTimeout(() => {
+        setShowLine(true)
+      }, DURATION_MS)
+    })
+  }
+
+  // Auto-open only once user passes the threshold and hasn't interacted
+  const onScroll = useCallback(() => {
+    if (userInteracted) return
+    const openPx = window.innerHeight * (openAtVh / 100)
+    if (window.scrollY >= openPx && minimized) {
+      openSequence(false) // auto (no interaction mark)
     }
-  }, [topThreshold, minimized])
+  }, [userInteracted, openAtVh, minimized])
 
   useEffect(() => {
+    // initialize state if landing mid-page
+    if (typeof window !== 'undefined') onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [onScroll])
@@ -70,31 +93,10 @@ export default function FloatingTicketCTA({
 
   if (!mounted) return null
 
-  const handleOpen = () => {
-    clearTimers()
-    setShowLine(false)   
-    setShowContent(false)
-    setMinimized(false)  
-    openTimeout.current = window.setTimeout(() => {
-      if (contentRef.current) setContentMax(contentRef.current.scrollHeight)
-      setShowContent(true)
-    }, DURATION_MS)
-  }
-
-  const handleClose = () => {
-    clearTimers()
-    setShowContent(false)
-    closeTimeout.current = window.setTimeout(() => {
-      setMinimized(true)  
-      lineInTimeout.current = window.setTimeout(() => {
-        setShowLine(true)
-      }, DURATION_MS)
-    }, Math.min(300, DURATION_MS))
-  }
-
   return (
     <div
       className={[
+        // mobile bottom-right, md+ right-middle
         'fixed right-4 bottom-4',
         'md:right-6 md:bottom-auto md:top-1/2 md:-translate-y-1/2',
         'z-[60]',
@@ -107,12 +109,10 @@ export default function FloatingTicketCTA({
         className={[
           'bg-[#7b8d53] text-white shadow-lg overflow-hidden',
           'transition-[border-radius,width,height,padding] duration-500 ease-out',
-          minimized
-            ? 'w-12 h-12 p-0'
-            : 'w-[220px] md:w-[260px] px-4 py-3',
+          minimized ? 'w-12 h-12 p-0' : 'w-[220px] md:w-[260px] px-4 py-3',
         ].join(' ')}
         style={{
-          borderRadius: minimized ? 9999 : 12, 
+          borderRadius: minimized ? 9999 : 12,
           willChange: 'border-radius, width, height, padding',
         }}
       >
@@ -120,7 +120,7 @@ export default function FloatingTicketCTA({
           <button
             type="button"
             aria-label="Open ticket banner"
-            onClick={handleOpen}
+            onClick={() => openSequence(true)}
             className="group grid place-items-center w-12 h-12"
           >
             <span
@@ -165,7 +165,7 @@ export default function FloatingTicketCTA({
             <button
               type="button"
               aria-label="Close ticket banner"
-              onClick={handleClose}
+              onClick={() => closeSequence(true)}
               className="shrink-0 mt-0.5"
             >
               <Image src="/closebutton.svg" alt="Close" width={16} height={16} />

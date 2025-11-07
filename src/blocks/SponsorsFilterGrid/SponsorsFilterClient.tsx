@@ -35,19 +35,19 @@ export default function SponsorsFilterClient({
 
   return (
     <section className="py-12 md:py-20">
-      <div className="max-w-[1500px] mx-auto p-4">
+      <div className="container mx-auto p-4">
         <CategoryFilter categories={categories} active={active} onChange={(id) => setActive(id)} />
 
         {filtered.length === 0 ? (
           <p className="text-muted-foreground mt-12">No sponsors found for this category.</p>
         ) : (
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-12">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 mt-8">
             {filtered.map((p) => {
               const bg = mediaUrl(p.backgroundImage)
               const logo = mediaUrl(p.logo)
               return (
                 <article key={p.id} className="group relative overflow-hidden rounded border border-[#B9B9B9] bg-white">
-                  <div className="relative aspect-[296/469] w-full">
+                  <div className="relative aspect-[280/200] w-full">
                     <div className="absolute inset-0 -translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
                       <Image
                         src={bg}
