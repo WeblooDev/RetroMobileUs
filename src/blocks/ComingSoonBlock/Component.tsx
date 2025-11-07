@@ -1,4 +1,3 @@
-// src/blocks/ComingSoonBlock/Component.tsx
 'use client'
 
 import React from 'react'
@@ -10,17 +9,12 @@ function daysInMonth(year: number, month1to12: number) {
   return new Date(year, month1to12, 0).getDate()
 }
 
-function nextOccurrence(month1to12: number, day: number) {
+/** Always build target date in NEXT calendar year (e.g., 2026 right now). */
+function targetInNextYear(month1to12: number, day: number) {
   const now = new Date()
-  const y = now.getFullYear()
+  const y = now.getFullYear() + 1
   const safeDay = Math.min(day, daysInMonth(y, month1to12))
-  let target = new Date(y, month1to12 - 1, safeDay, 23, 59, 59)
-  if (target.getTime() <= now.getTime()) {
-    const y2 = y + 1
-    const safeDay2 = Math.min(day, daysInMonth(y2, month1to12))
-    target = new Date(y2, month1to12 - 1, safeDay2, 23, 59, 59)
-  }
-  return target
+  return new Date(y, month1to12 - 1, safeDay, 23, 59, 59)
 }
 
 const norm = (s?: string | null) => (typeof s === 'string' && s.trim() ? s : undefined)
@@ -32,15 +26,15 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   secondaryButton,
   countdownMonth = 12,
   countdownDay = 31,
-
-  // new admin-driven fields
   countdownTopText,
   displayDayOverride,
   displayMonthYearOverride,
 }) => {
   const bg = (backgroundImage as Media) || null
   const bgUrl = (bg as any)?.url as string | undefined
-  const targetDate = nextOccurrence(Number(countdownMonth), Number(countdownDay))
+
+  // 👇 Always target next year
+  const targetDate = targetInNextYear(Number(countdownMonth), Number(countdownDay))
 
   return (
     <main className="relative min-h-screen overflow-hidden">

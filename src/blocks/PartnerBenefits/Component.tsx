@@ -10,7 +10,7 @@ const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, c
     <section className="w-full">
       <div className="container  pt-10 md:pt-16">
         <h2 className="font-ivar text-4xl md:text-6xl ">{title}</h2>
-        {description && <p className="mt-4 text-base ">{description}</p>}
+        {description && <p className="mt-4 text-base w-[40%]">{description}</p>}
       </div>
 
       <div className="container py-10 md:py-14">
@@ -21,7 +21,7 @@ const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, c
                 <Media resource={card.image} fill priority={i < 2} imgClassName="object-cover" />
               </div>
 
-              <div className="absolute bottom-0 left-0 right-0 py-16 px-8 text-center text-white h-full flex flex-col justify-center items-center ">
+              <div className="absolute bottom-0 left-0 right-0 py-16 px-2 text-center text-white h-full flex flex-col justify-center items-center ">
                 <h3 className=" text-6xl lg:text-[180px]">{card.heading}</h3>
                 {card.body && <p className="text-sm lg:text-base ">{card.body}</p>}
               </div>

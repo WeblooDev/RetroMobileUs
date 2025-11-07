@@ -82,7 +82,7 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
     <section className="container relative py-16">
       <div className="flex flex-col lg:flex-row justify-between gap-10 items-stretch h-full">
         <div className="flex w-full lg:w-[22%] justify-between flex-row lg:flex-col h-auto items-start ">
-          <h2 className="text-3xl">{title}</h2>
+          <h2 className="text-3xl md:text-5xl">{title}</h2>
           {button && (
             <CMSLink url={button.url} label={button.label} appearance="black" size="ctaBig">
             </CMSLink>

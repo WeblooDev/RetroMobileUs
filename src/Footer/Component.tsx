@@ -82,14 +82,7 @@ export async function Footer() {
               >
                 Privacy Policy
               </Link>
-              <Link
-                href="https://www.dupontregistry.com/participation"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm underline lg:text-[16px] hover:text-foreground"
-              >
-                Terms & Conditions
-              </Link>
+    
             </div>
           </div>
         </div>
@@ -108,7 +101,7 @@ export async function Footer() {
                 rel="noopener noreferrer"
                 className="text-black hover:underline"
               >
-                RETRO MOBILE.
+                RETROMOBILE.
               </Link>{' '}
               All Rights Reserved.
             </p>
@@ -122,14 +115,7 @@ export async function Footer() {
             >
               Privacy Policy
             </Link>
-            <Link
-              href="https://www.dupontregistry.com/participation"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm underline  text-[#9D9D9D] hover:text-black"
-            >
-              Terms & Conditions
-            </Link>
+         
           </div>
         </div>
       </div>

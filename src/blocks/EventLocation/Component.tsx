@@ -13,6 +13,7 @@ const EventLocation: React.FC<EventLocationBlock> = ({
   backgroundImage,
   ribbonText,
   title,
+  secondtitle,
   ctas,
 }) => {
   const rows = ctas ?? []
@@ -30,7 +31,9 @@ const EventLocation: React.FC<EventLocationBlock> = ({
       </div>
 
       <div className="relative z-10 text-white px-6 flex flex-col items-center gap-6">
-        <h2 className="font-ivar text-4xl md:text-6xl leading-tight max-w-3xl">{title}</h2>
+        <h2 className="font-ivar text-4xl md:text-6xl text-center max-w-3xl">{title}</h2>
+        <h2 className="font-ivar text-4xl md:text-6xl text-center max-w-3xl">{secondtitle}</h2>
+
 
         <div className="flex gap-3">
           {isWebLink(primary) && (

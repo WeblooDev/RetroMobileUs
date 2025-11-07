@@ -23,10 +23,17 @@ export const EventLocation: Block = {
     },
     {
       name: 'title',
-      type: 'text',
+      type: 'textarea',
       required: true,
-      defaultValue: 'Javits Convention Center, New York City',
+      defaultValue: 'Javits Convention Center',
       label: 'Center Title',
+    },
+    {
+      name: 'secondtitle',
+      type: 'textarea',
+      required: true,
+      defaultValue: 'New York City',
+      label: 'Second Title',
     },
 
     linkGroup({

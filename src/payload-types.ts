@@ -1368,6 +1368,7 @@ export interface MissionGallery {
  */
 export interface LinkBanner {
   title: string;
+  paragraph?: string | null;
   ctas?:
     | {
         link: {
@@ -1420,6 +1421,7 @@ export interface EventLocation {
   backgroundImage: string | Media;
   ribbonText: string;
   title: string;
+  secondtitle: string;
   ctas?:
     | {
         link: {
@@ -3531,6 +3533,7 @@ export interface MissionGallerySelect<T extends boolean = true> {
  */
 export interface LinkBannerSelect<T extends boolean = true> {
   title?: T;
+  paragraph?: T;
   ctas?:
     | T
     | {
@@ -3575,6 +3578,7 @@ export interface EventLocationSelect<T extends boolean = true> {
   backgroundImage?: T;
   ribbonText?: T;
   title?: T;
+  secondtitle?: T;
   ctas?:
     | T
     | {

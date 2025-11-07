@@ -15,7 +15,12 @@ export const LinkBanner: Block = {
       defaultValue: 'Retromobile Paris',
     },
 
-    // Standardized link (1 CTA)
+    {
+      name: 'paragraph',
+      type: 'text',
+      label: 'Paragraph',
+      
+    },
     linkGroup({
       appearances: false,
       overrides: {
