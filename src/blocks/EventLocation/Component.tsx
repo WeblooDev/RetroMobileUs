@@ -21,7 +21,11 @@ const EventLocation: React.FC<EventLocationBlock> = ({
   const secondary = rows[1]?.link
 
   return (
-    <section className="relative w-full min-h-[400px] md:min-h-[500px] flex items-center justify-center text-center my-16">
+<section
+  id="eventLocation"
+  className="scroll-mt-[30vh] md:scroll-mt-[35vh] relative w-full min-h-[400px] md:min-h-[500px] flex items-center justify-center text-center my-16"
+>
+
         <div className="absolute inset-0">
         <Media resource={backgroundImage} fill priority imgClassName="object-cover" />
       </div>

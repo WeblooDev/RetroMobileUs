@@ -1,5 +1,6 @@
 // src/payload/blocks/ContactBanner.ts
 import type { Block } from 'payload'
+import { link } from '@/fields/link'
 
 export const ContactBanner: Block = {
   slug: 'contactBanner',
@@ -32,5 +33,11 @@ export const ContactBanner: Block = {
       label: 'Background Color',
       defaultValue: '#8B9B5C',
     },
+    link({
+      overrides: {
+        name: 'button',
+        label: 'Button',
+      },
+    }),
   ],
 }

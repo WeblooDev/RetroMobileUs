@@ -9,7 +9,7 @@ export const ImageTitle: Block = {
     {
       name: 'eyebrow',
       type: 'text',
-      required: true,
+      required: false,
       label: 'Top Text (Eyebrow)',
       admin: { placeholder: 'e.g., Accessibility & Services' },
     },

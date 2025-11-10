@@ -69,7 +69,7 @@ const TextMediaRight: React.FC<TextVideoRightBlock> = ({
     <section className="w-[90%] ml-auto py-12 md:py-20">
       <div className="flex flex-col lg:flex-row justify-center items-center gap-8 md:gap-12">
         <div className="w-full lg:w-[50%]">
-          <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl leading-[1.9rem] md:leading-[2.2rem]">{title}</h2>
 
           <p className="mt-6 text-sm md:text-base text-black/80 max-w-prose">{description}</p>
           <p className="mt-6 text-sm md:text-base text-black/90 max-w-prose">{smallText1}</p>
@@ -85,23 +85,7 @@ const TextMediaRight: React.FC<TextVideoRightBlock> = ({
             <Media resource={video} className="absolute inset-0 h-full w-full object-cover" />
           </div>
 
-          {(showLabel || showButton) && (
-            <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-3 select-none">
-              {showLabel && (
-                <p className="tracking-[0.25em] text-xs md:text-sm text-white">{labelText}</p>
-              )}
-              {showButton && (
-                <button
-                  type="button"
-                  onClick={togglePlay}
-                  aria-label={aria}
-                  className="pointer-events-auto grid place-items-center"
-                >
-                  <img src={iconSrc} alt="" />
-                </button>
-              )}
-            </div>
-          )}
+          
         </div>
       </div>
     </section>

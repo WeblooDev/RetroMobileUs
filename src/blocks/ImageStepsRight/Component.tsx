@@ -19,15 +19,15 @@ const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({ title, steps, links, 
         </div>
 
         <div className="flex flex-col items-center md:items-start text-center md:text-left justify-center">
-          <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl leading-[1.9rem] md:leading-[2.2rem]">{title}</h2>
 
           <div className="mt-6 md:mt-8 grid grid-cols-4 gap-6 md:gap-10">
             {items.map((s, i) => (
               <div key={s?.id ?? i} className="flex flex-col items-center md:items-center">
                 {s?.heading && (
-                  <h3 className="font-ivar text-4xl md:text-5xl leading-none">{s.heading}</h3>
+                  <h3 className="font-ivar text-2xl md:text-3xl lg:text-4xl leading-[1.9rem] md:leading-[2.2rem]">{s.heading}</h3>
                 )}
-                {s?.text && <p className="mt-2 text-xs md:text-sm text-black/80">{s.text}</p>}
+                {s?.text && <p className="mt-2 text-xs md:text-sm text-black/80 text-center" >{s.text}</p>}
               </div>
             ))}
           </div>

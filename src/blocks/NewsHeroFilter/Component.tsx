@@ -92,26 +92,49 @@ const TagBadge: React.FC<{ post: Post }> = ({ post }) => {
     </span>
   )
 }
+const PostCard: React.FC<{ post: Post; showExcerpt: boolean }> = ({ post, showExcerpt }) => {
+  const overrideUrl = post.readMore?.url?.trim()
+  const isExternal = !!overrideUrl && /^https?:\/\//i.test(overrideUrl)
+  const href = overrideUrl || `/news/${post.slug}`
 
-const PostCard: React.FC<{ post: Post; showExcerpt: boolean }> = ({ post, showExcerpt }) => (
-  <Link href={`/news/${post.slug}`} className="group block overflow-hidden">
-    <div className="relative aspect-[429/237]">
-      {post.thumbnail && <Media resource={post.thumbnail} fill imgClassName="object-cover" />}
-      <TagBadge post={post} />
-    </div>
-    <div className="relative p-4 overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-black -translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0" />
-      <h3 className="relative z-10 text-[22px] font-semibold transition-colors duration-300 group-hover:text-white">
-        {post.title}
-      </h3>
-      {showExcerpt && post.excerpt && (
-        <p className="relative z-10 mt-4 line-clamp-3 text-sm transition-colors duration-300 group-hover:text-white">
-          {post.excerpt}
-        </p>
-      )}
-    </div>
-  </Link>
-)
+  const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
+    isExternal ? (
+      <a
+        href={href}
+        target={post.readMore?.newTab ? '_blank' : undefined}
+        rel={post.readMore?.newTab ? 'noopener noreferrer' : undefined}
+        className="group block overflow-hidden"
+        aria-label={`${post.title}${isExternal ? ' — external' : ''}`}
+      >
+        {children}
+      </a>
+    ) : (
+      <Link href={href} className="group block overflow-hidden" aria-label={post.title}>
+        {children}
+      </Link>
+    )
+
+  return (
+    <Wrapper>
+      <div className="relative aspect-[429/237]">
+        {post.thumbnail && <Media resource={post.thumbnail} fill imgClassName="object-cover" />}
+        <TagBadge post={post} />
+      </div>
+      <div className="relative p-4 overflow-hidden">
+        <div className="absolute inset-0 z-0 bg-black -translate-y-full transition-transform duration-300 ease-out group-hover:translate-y-0" />
+        <h3 className="relative z-10 text-xl font-semibold transition-colors duration-300 group-hover:text-white">
+          {post.title}
+        </h3>
+        {showExcerpt && post.excerpt && (
+          <p className="relative z-10 mt-4 line-clamp-3 text-sm transition-colors duration-300 group-hover:text-white">
+            {post.excerpt}
+          </p>
+        )}
+      </div>
+    </Wrapper>
+  )
+}
+
 
 const SkeletonCard: React.FC = () => (
   <div className="overflow-hidden rounded-xl">

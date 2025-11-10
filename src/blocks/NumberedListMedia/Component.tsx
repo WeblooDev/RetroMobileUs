@@ -26,8 +26,8 @@ const NumberedListMedia: React.FC<NumberedListMediaBlock> = ({
               {bullets.map((b, i) => {
                 const num = String(i + 1).padStart(2, '0')
                 return (
-                  <li key={b.id ?? i} className="flex items-start gap-4">
-                    <span className="w-[1px] h-6 bg-white/50 mt-[6px]" aria-hidden />
+                  <li key={b.id ?? i} className="flex items-center gap-4">
+                    <span className="w-[1px] h-4 bg-white/50" aria-hidden />
                     <span className="w-8 tabular-nums text-white/90">{num}</span>
                     <span className="text-sm md:text-base leading-relaxed">
                       {b.text}

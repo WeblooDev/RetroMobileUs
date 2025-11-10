@@ -35,7 +35,7 @@ const FloorPlan: React.FC<FloorPlanBlock> = ({
         <div className="w-full lg:w-[50%] flex flex-col justify-between items-start h-auto">
 
           <div className="flex flex-col gap-6">
-          <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
+          <h2 className="text-3xl md:text-4xl leading-tight">{title}</h2>
           {description && (
             <p className="mt-2 md:mt-3 text-base  ">
               {description}

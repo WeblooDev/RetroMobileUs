@@ -19,7 +19,7 @@ const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
     <section className="w-[90%] ml-auto py-12 md:py-20">
       <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-20">
         <div className="w-full lg:w-[50%]">
-          <h2 className="text-3xl md:text-6xl leading-tight">{title}</h2>
+          <h2 className="text-2xl  md:text-3xl  lg:text-4xl leading-[1.9rem] md:leading-[2.2rem]">{title}</h2>
 
           {description && <p className="mt-4 text-sm md:text-base w-[90%]">{description}</p>}
 
