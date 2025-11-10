@@ -39,7 +39,7 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
             <div className="flex flex-col lg:flex-row items-center text-white justify-center">
               <div className="flex-1 px-6 md:px-10 py-6 md:py-8 flex items-start gap-6 justify-end">
                 <h4 className="uppercase text-lg">{month}</h4>
-                <h3 className="text-3xl md:text-4xl lg:text-8xl">{dateRange}</h3>
+                <h3 className="text-3xl md:text-4xl lg:text-6xl">{dateRange}</h3>
                 <h4 className="uppercase text-base lg:text-lg">{year}</h4>
               </div>
 
@@ -50,11 +50,11 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
 
                 <div className="flex flex-col gap-2">
                   <div className="flex items-baseline gap-2">
-                    <span className="font-ivar text-2xl md:text-3xl lg:text-5xl leading-none">{openHour}</span>
+                    <span className="font-ivar text-2xl md:text-3xl lg:text-4xl leading-none">{openHour}</span>
                     <span className="uppercase text-sm md:text-base">AM</span>
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="font-ivar text-2xl md:text-3xl lg:text-5xl leading-none">{closeHour}</span>
+                    <span className="font-ivar text-2xl md:text-3xl lg:text-4xl leading-none">{closeHour}</span>
                     <span className="uppercase text-sm md:text-base">PM</span>
                   </div>
                 </div>

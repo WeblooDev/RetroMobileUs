@@ -20,7 +20,7 @@ const CenteredBannerCTA: React.FC<CenteredBannerCTABlock> = ({
       {showTopLine && <div className="h-px w-[96%] mx-auto bg-white" />}
 
       <div className="container py-8 md:py-16 flex flex-col text-center items-center gap-4">
-        <h2 className="text-2xl md:text-5xl max-w-2xl">{title}</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl leading-[1.9rem] md:leading-[2.2rem] max-w-2xl">{title}</h2>
 
         {description && <p className=" text-xs md:text-base  max-w-2xl mx-auto">{description}</p>}
 

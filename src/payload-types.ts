@@ -425,6 +425,13 @@ export interface Post {
    * Short description for the card
    */
   excerpt?: string | null;
+  /**
+   * If set, clicking the card uses this link (external or internal).
+   */
+  readMore?: {
+    url?: string | null;
+    newTab?: boolean | null;
+  };
   layout: (BlogHero | BlogTwoColumn)[];
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
@@ -1491,6 +1498,25 @@ export interface ContactBanner {
    */
   phone?: string | null;
   backgroundColor?: string | null;
+  button: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactBanner';
@@ -2406,7 +2432,7 @@ export interface TeamGrid {
  * via the `definition` "ImageTitle".
  */
 export interface ImageTitle {
-  eyebrow: string;
+  eyebrow?: string | null;
   title: string;
   description: string;
   image: string | Media;
@@ -3631,6 +3657,16 @@ export interface ContactBannerSelect<T extends boolean = true> {
   subtitle?: T;
   phone?: T;
   backgroundColor?: T;
+  button?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -4518,6 +4554,12 @@ export interface PostsSelect<T extends boolean = true> {
   tags?: T;
   thumbnailBadge?: T;
   excerpt?: T;
+  readMore?:
+    | T
+    | {
+        url?: T;
+        newTab?: T;
+      };
   layout?:
     | T
     | {

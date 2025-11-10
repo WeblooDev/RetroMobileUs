@@ -13,6 +13,7 @@ import type { Media as MediaType } from '@/payload-types'
 import type { LitePost } from './Component'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 
 const PostsCarouselClient: React.FC<{
@@ -66,60 +67,94 @@ const router = useRouter()
         className="w-full"
       >
         <CarouselContent className="-ml-2 md:-ml-4">
-          {posts.map((p) => {
-            const slug = `/news/${p.slug}`
-            const thumb: MediaType | null | undefined = p.thumbnail
+     {posts.map((p) => {
+  const slug = `/news/${p.slug}`
+  const thumb: MediaType | null | undefined = p.thumbnail
 
-            return (
-              <CarouselItem
-                key={p.id}
-                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 min-w-0"
-              >
-<article
-  className="group relative h-full overflow-hidden cursor-pointer  "
-  role="link"
-  tabIndex={0}
-  onClick={() => router.push(slug)}
-  onKeyDown={(e) => {
+  // ✅ override logic
+  const overrideUrl = p.readMore?.url?.trim()
+  const href = overrideUrl || slug
+  const isExternal = /^https?:\/\//i.test(href)
+  const newTab = !!p.readMore?.newTab
+
+  const go = () => {
+    if (isExternal) {
+      if (newTab) window.open(href, '_blank', 'noopener,noreferrer')
+      else window.location.href = href
+    } else {
+      router.push(href)
+    }
+  }
+
+  const onKey = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      router.push(slug)
+      go()
     }
-  }}
+  }
+
+  return (
+    <CarouselItem
+      key={p.id}
+      className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 min-w-0"
+    >
+      <article
+        className="group relative h-full overflow-hidden cursor-pointer"
+        role="link"
+        tabIndex={0}
+        onClick={go}
+        onKeyDown={onKey}
+        aria-label={`${p.title}${isExternal ? ' (external)' : ''}`}
+      >
+        <div className="relative aspect-[16/9] w-full">
+          {thumb && (
+            <Media
+              resource={thumb}
+              fill
+              imgClassName="object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-300 will-change-[filter]"
+            />
+          )}
+        </div>
+
+        <div className="relative overflow-hidden">
+          <div className="pointer-events-none absolute inset-0 z-0 bg-black opacity-0 -translate-y-full transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0" />
+          <div className="relative z-10 p-4 md:p-6 flex flex-col gap-3">
+            <h3 className="text-lg md:text-xl transition-colors duration-300 group-hover:text-white">
+              {p.title}
+            </h3>
+            {p.excerpt && (
+              <p className="text-sm md:text-base line-clamp-3 transition-colors duration-300 group-hover:text-white">
+                {p.excerpt}
+              </p>
+            )}
+
+            <div className="pt-2 transition-all duration-300 ease-out opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
+              {isExternal ? (
+                <Link
+                  href={href}
+                  target={newTab ? '_blank' : undefined}
+                  rel={newTab ? 'noopener noreferrer' : undefined}
+                  className="!font-inter inline-flex items-center rounded-full bg-black px-4 py-2 text-white text-sm md:text-base border border-white hover:bg-white hover:text-black transition-colors duration-300" 
+                  onClick={(e) => e.stopPropagation()} 
+                >
+                  Read More
+                </Link>
+              ) : (
+                <span onClick={(e) => e.stopPropagation()} className="!font-inter inline-flex">
+                  <Link href={href}  className="!font-helvetica inline-flex items-center rounded-full bg-black px-4 py-2 text-white text-sm md:text-base border border-white hover:bg-white hover:text-black transition-colors duration-300" 
 >
-                  <div className="relative aspect-[16/9] w-full">
-                  {thumb && (
-                    <Media
-                      resource={thumb}
-                      fill
-                      imgClassName="object-cover grayscale group-hover:grayscale-0 transition-[filter] duration-300 will-change-[filter]"
-                    />
-                  )}
-                </div>
+                    Read More
+                  </Link>
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      </article>
+    </CarouselItem>
+  )
+})}
 
-
-                  <div className="relative overflow-hidden">
-                    <div className="pointer-events-none absolute inset-0 z-0 bg-black opacity-0 -translate-y-full transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0" />
-                    <div className="relative z-10 p-4 md:p-6 flex flex-col gap-3">
-                      <h3 className="text-lg md:text-3xl  transition-colors duration-300 group-hover:text-white">
-                        {p.title}
-                      </h3>
-                      {p.excerpt && (
-                        <p className="text-sm md:text-base line-clamp-3 transition-colors duration-300 group-hover:text-white">
-                          {p.excerpt}
-                        </p>
-                      )}
-                      <div className="pt-2 transition-all duration-300 ease-out opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
-                        <CMSLink url={slug} type="custom" appearance="black" size="ctaNormal">
-                          Read More
-                        </CMSLink>
-                      </div>
-                    </div>
-                  </div>
-                </article>
-              </CarouselItem>
-            )
-          })}
         </CarouselContent>
       </Carousel>
 

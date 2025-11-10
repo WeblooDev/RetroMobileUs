@@ -47,19 +47,10 @@ export default function SponsorsFilterClient({
               const logo = mediaUrl(p.logo)
               return (
                 <article key={p.id} className="group relative overflow-hidden rounded border border-[#B9B9B9] bg-white">
-                  <div className="relative aspect-[280/200] w-full">
-                    <div className="absolute inset-0 -translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
-                      <Image
-                        src={bg}
-                        alt={p.name}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30 opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100" />
-                    </div>
+                  <div className="relative aspect-[280/100] w-full flex flex-col justify-center items-center">
+                  
 
-                    <div className="absolute left-1/2 top-4 -translate-x-1/2 px-4">
+                    <div className="relative px-4">
                       <Image
                         src={logo}
                         alt={`${p.name} logo`}
@@ -70,8 +61,8 @@ export default function SponsorsFilterClient({
                     </div>
 
                     {showDescriptions && (
-                      <div className="absolute inset-x-0 bottom-0">
-                        <div className="m-4 rounded px-3 py-2 text-xs md:text-sm text-black transition-colors duration-500 ease-out group-hover:text-white">
+                      <div className="flex justify-center">
+                        <div className="m-4 rounded px-3 py-2 text-xs md:text-sm text-black transition-colors duration-500 ease-out  text-center w-[80%]">
                           {p.description}
                         </div>
                       </div>

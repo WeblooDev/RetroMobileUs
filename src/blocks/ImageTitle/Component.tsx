@@ -12,8 +12,8 @@ export default function ImageTitle({
   const cta = button as any
 
   return (
-    <section className="container py-10 md:py-16">
-      <div className="flex justify-center items-center gap-2 py-8">
+    <section className="container py-10 md:py-12">
+      <div className="flex justify-center items-center gap-2 ">
         {eyebrow && (
           <p className="text-xs md:text-base italic">{eyebrow}</p>
         )}
@@ -21,7 +21,7 @@ export default function ImageTitle({
 
       <div className="flex flex-col-reverse lg:flex-row items-center gap-8 md:gap-12">
         <div className="flex flex-col text-start items-start gap-6 w-full lg:w-[50%]">
-          <h2 className="text-3xl md:text-4xl lg:text-6xl leading-tight">{title}</h2>
+          <h2 className="text-2xl md:text-4xl lg:text-4xl leading-tight">{title}</h2>
 
           {description && (
             <p className="mt-2 text-sm md:text-base max-w-prose">

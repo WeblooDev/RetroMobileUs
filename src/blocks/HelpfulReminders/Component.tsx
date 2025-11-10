@@ -23,7 +23,7 @@ const HelpfulReminders: React.FC<HelpfulRemindersBlock> = ({
       >
         <div className=" py-8 md:py-12 flex flex-col lg:flex-row items-center justify-between gap-8 md:gap-12">
           <div className="w-full lg:w-[50%] ">
-            <h2 className="text-3xl md:text-4xl lg:text-6xl leading-tight text-white">{title}</h2>
+            <h2 className="text-2xl md:text-4xl lg:text-4xl leading-tight text-white">{title}</h2>
 
             {intro && (
               <p className="mt-2 text-sm md:text-base text-white">

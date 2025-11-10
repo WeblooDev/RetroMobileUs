@@ -5,6 +5,7 @@ import PostsCarouselClient from './PostsCarouselClient'
 
 export type LitePost = Pick<Post, 'id' | 'title' | 'slug' | 'excerpt' | 'publishedAt'> & {
   thumbnail?: MediaType | null
+  readMore?: { url?: string | null; newTab?: boolean | null } // <—
 }
 
 export default async function PostsCarousel({ title, viewAll }: PostsCarouselBlock) {
@@ -22,6 +23,7 @@ export default async function PostsCarousel({ title, viewAll }: PostsCarouselBlo
       excerpt: true,
       publishedAt: true,
       thumbnail: true,
+      readMore: { url: true, newTab: true },
     },
     where: { _status: { equals: 'published' } },
   })

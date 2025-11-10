@@ -1,5 +1,6 @@
 import React from 'react'
 import type { ContactBanner as ContactBannerBlock } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 
 const toTelHref = (phone?: string | null) =>
   phone ? `tel:${phone.trim().replace(/(?!^\+)[^\d]/g, '')}` : ''
@@ -7,11 +8,13 @@ const toTelHref = (phone?: string | null) =>
 const ContactBanner: React.FC<ContactBannerBlock> = ({
   title,
   subtitle,
-  phone,          
+  phone,
   backgroundColor,
+  button,
 }) => {
   const bg = backgroundColor && backgroundColor.trim() ? backgroundColor : '#8B9B5C'
   const telHref = toTelHref(phone)
+  const cta = button as any
 
   return (
     <section className="w-full">
@@ -33,6 +36,13 @@ const ContactBanner: React.FC<ContactBannerBlock> = ({
             </a>
           </p>
         )}
+
+           <CMSLink
+                {...cta}
+                appearance="black"
+                size="ctaBig"
+                className="inline-flex"
+              />
       </div>
     </section>
   )
