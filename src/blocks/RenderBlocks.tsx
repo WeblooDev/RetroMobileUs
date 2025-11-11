@@ -83,6 +83,7 @@ import ImageTitle from './ImageTitle/Component'
 import ContactCards from './ContactCards/Component'
 import ProgramHighlight from './ProgramHighlight/Component'
 import NumberedListMedia from './NumberedListMedia/Component'
+import Faq from './Faq/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -165,7 +166,9 @@ const blockComponents = {
     imageTitle: ImageTitle,
       contactCards: ContactCards,
       programHighlight: ProgramHighlight, 
-      numberedListMedia: NumberedListMedia      
+      numberedListMedia: NumberedListMedia,
+        faq: Faq,
+  
 
 
 

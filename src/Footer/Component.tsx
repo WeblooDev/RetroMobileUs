@@ -93,28 +93,36 @@ export async function Footer() {
 
         <div className="flex justify-between flex-col items-center font-inter text-center gap-2 md:flex-row md:gap-4">
           {footerData?.copyright && (
-            <p className="text-sm  text-[#9D9D9D] uppercase ">
+            <p className="text-sm  text-[#9D9D9D] uppercase flex gap-1 items-center ">
               &copy; {new Date().getFullYear()}{' '}
-              <Link
-                href="https://www.dupontregistrygroup.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-black hover:underline"
+              <p
+               
+                className="text-black "
               >
                 RETROMOBILE.
-              </Link>{' '}
+              </p>{' '}
               All Rights Reserved.
             </p>
           )}
           <div className=" hidden sm:flex  flex-wrap justify-center gap-4">
+             <Link
+                href="https://www.dupontregistry.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm underline  text-[#9D9D9D] hover:text-black"
+              >
+               Terms and Conditions
+              </Link>
             <Link
-              href="https://www.dupontregistry.com/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm underline  text-[#9D9D9D] hover:text-black"
-            >
-              Privacy Policy
-            </Link>
+                href="https://www.dupontregistry.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm underline  text-[#9D9D9D] hover:text-black"
+              >
+                Privacy Policy
+              </Link>
+
+         
          
           </div>
         </div>
