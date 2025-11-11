@@ -13,11 +13,74 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import FloatingTicketCTA from '@/components/FloatingTicketCTA'
-
+import Script from 'next/script'
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={cn(inter.variable)} lang="en" suppressHydrationWarning>
       <head>
+   <Script
+          id="tixpub-embed"
+          src="https://admin.unityeventsolutions.com/scripts/tixpub/tpbootstrap.js"
+          strategy="afterInteractive"
+          data-baseurl="https://admin.unityeventsolutions.com/tix-pub"
+          data-css="https://admin.unityeventsolutions.com/content/tixpub/tpbootstrap.css"
+          data-eid="RETROMOBILE2026"
+          data-cid="5b71ef71-1c1b-428a-bca1-d10c868c56c6"
+        />
+
+
+ <Script id="unity-utm-capture" strategy="afterInteractive">
+          {`
+            (function () {
+              if (typeof window === 'undefined') return;
+
+              var dcdomains = [
+                'unitytickets.com',
+                'myshowlead.com',
+                'myshowapp.com',
+                'unityeventsolutions.com',
+                'retromobile.us',
+                'retro-mobile-us.vercel.app' // staging domain
+              ];
+
+              var params = window.location.search.replace(/ +/g, '%20');
+              if (params.length > 0 && params[0] === '?') {
+                params = params.substring(1);
+              }
+
+              var finalList = '';
+
+              if (params.length > 0) {
+                var splitList = params.split('&');
+                var append = [];
+                for (var idx = 0; idx < splitList.length; idx++) {
+                  if (splitList[idx].indexOf('utm_') === 0) {
+                    append.push(splitList[idx]);
+                  }
+                }
+                finalList = append.join('&');
+              }
+
+              if (finalList.length > 0) {
+                var links = document.querySelectorAll('a[href]');
+                links.forEach(function (link) {
+                  for (var idx = 0; idx < dcdomains.length; idx++) {
+                    var domain = dcdomains[idx];
+                    var re = new RegExp('^http[s]?://[a-zA-Z.]{0,15}' + domain + '.*$');
+
+                    if (link.href.indexOf('#') < 0 && re.test(link.href)) {
+                      if (link.href.indexOf('?') < 0) {
+                        link.href = link.href + '?' + finalList;
+                      } else {
+                        link.href = link.href + '&' + finalList;
+                      }
+                    }
+                  }
+                });
+              }
+            })();
+          `}
+        </Script>
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9R48X46FZC"></script>
         <script
@@ -26,16 +89,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-
               gtag('config', 'G-9R48X46FZC', {
                 'linker': {
                   'domains': ['dupontregistry.com', 'leasing.dupontregistry.com']
-                }    
+                }
               });
             `,
           }}
         />
-
         {/* Google Tag Manager */}
         <script
           dangerouslySetInnerHTML={{
@@ -47,7 +108,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google Tag Manager */}
-
         {/* Google Tag Manager - Additional */}
         <script
           dangerouslySetInnerHTML={{
@@ -59,7 +119,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google Tag Manager - Additional */}
-
         <FacebookPixelScript />
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
@@ -81,7 +140,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-
         {/* Google Tag Manager (noscript) - Additional */}
         <noscript>
           <iframe
@@ -92,13 +150,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) - Additional */}
-
         <Providers>
           <Header />
           <BreadcrumbLayout>{children}</BreadcrumbLayout>
-
           <Footer />
-
            <FloatingTicketCTA
             title="TICKETS"
             link={{ type: 'custom', url: '/tickets', label: 'Buy now' }}
@@ -108,7 +163,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </html>
   )
 }
-
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
   openGraph: mergeOpenGraph(),
