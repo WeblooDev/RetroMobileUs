@@ -389,6 +389,7 @@ export interface Page {
     | ContactCards
     | ProgramHighlight
     | NumberedListMedia
+    | Faq
   )[];
   meta?: {
     title?: string | null;
@@ -2512,6 +2513,23 @@ export interface NumberedListMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Faq".
+ */
+export interface Faq {
+  items?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  accentColor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cars".
  */
 export interface Car {
@@ -3140,6 +3158,7 @@ export interface PagesSelect<T extends boolean = true> {
         contactCards?: T | ContactCardsSelect<T>;
         programHighlight?: T | ProgramHighlightSelect<T>;
         numberedListMedia?: T | NumberedListMediaSelect<T>;
+        faq?: T | FaqSelect<T>;
       };
   meta?:
     | T
@@ -4541,6 +4560,22 @@ export interface NumberedListMediaSelect<T extends boolean = true> {
         id?: T;
       };
   image?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Faq_select".
+ */
+export interface FaqSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  accentColor?: T;
   id?: T;
   blockName?: T;
 }
