@@ -13,11 +13,14 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import FloatingTicketCTA from '@/components/FloatingTicketCTA'
+import Script from 'next/script'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={cn(inter.variable)} lang="en" suppressHydrationWarning>
       <head>
+
+     
         {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-9R48X46FZC"></script>
         <script
