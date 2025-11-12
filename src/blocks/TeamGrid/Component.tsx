@@ -11,7 +11,7 @@ const TeamGridComponent: React.FC<TeamGridBlock> = ({ title, description, items 
     <section className="py-12 md:py-20">
       <div className="container">
         <div className="max-w-3xl mx-auto text-center mb-10 md:mb-14">
-          {title && <h2 className="text-3xl md:text-5xl lg:text-6xl mb-4">{title}</h2>}
+          {title && <h2 className="text-2xl md:text-3xl lg:text-4xl mb-4">{title}</h2>}
           {description && (
             <p className="text-sm md:text-base text-muted-foreground">{description}</p>
           )}
@@ -41,7 +41,7 @@ const TeamGridComponent: React.FC<TeamGridBlock> = ({ title, description, items 
                     )}
                   </div>
                   <div className="w-full flex flex-col gap-3 items-center md:items-start">
-                    <h3 className="text-xl md:text-2xl lg:text-3xl">{m?.name}</h3>
+                    <h3 className="text-lg md:text-xl lg:text-2xl">{m?.name}</h3>
                     {m?.role && <p className="text-sm md:text-base">{m.role}</p>}
                     {m?.email && (
                       <p className="text-sm md:text-base font-bold">

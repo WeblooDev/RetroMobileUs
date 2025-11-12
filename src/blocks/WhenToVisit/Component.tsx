@@ -30,7 +30,7 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
           <div className="absolute inset-0 bg-black/45" />
 
           <div className="absolute inset-x-0 top-10 md:top-10 flex justify-center px-6">
-            <h2 className="text-3xl md:text-5xl lg:text-[84px] text-white text-center">{title}</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-6xl text-white text-center">{title}</h2>
           </div>
           <div
             className="absolute  left-0 right-0"

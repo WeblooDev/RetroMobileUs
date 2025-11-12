@@ -15,7 +15,7 @@ export default function CharityPartners({
   return (
     <section className="w-full px-6 md:px-12 lg:px-24 py-14">
       {/* Title */}
-      <h2 className="font-ivar text-3xl md:text-5xl text-foreground mb-6 md:mb-8">{title}</h2>
+      <h2 className="font-ivar text-2xl md:text-3xl lg:text-4xl text-foreground mb-6 md:mb-8">{title}</h2>
 
       {/* Image with overlays */}
       <div className="relative w-full overflow-hidden rounded-none">

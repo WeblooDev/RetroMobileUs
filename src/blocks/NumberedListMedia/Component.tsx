@@ -14,7 +14,7 @@ const NumberedListMedia: React.FC<NumberedListMediaBlock> = ({
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-10 items-stretch h-full">
           <div className="w-full lg:w-1/2 flex flex-col justify-center gap-4">
-            <h2 className="font-ivar text-4xl md:text-6xl leading-tight mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight mb-6">
               {title}
             </h2>
 

@@ -19,7 +19,7 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
                 format: 0,
                 mode: 'normal',
                 style: '',
-                text: 'Dupont Registry Leasing',
+                text: 'Retromobile',
                 version: 1,
               },
             ],
@@ -82,7 +82,7 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
   meta: {
     description:
       'Elevating luxury vehicle transactions through trust, convenience, and expertise with duPont REGISTRY standards.',
-    title: 'Dupont Registry Leasing',
+    title: 'Retromobile',
   },
   title: 'Home',
   layout: [],

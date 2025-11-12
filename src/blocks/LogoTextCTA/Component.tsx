@@ -23,7 +23,7 @@ const LogoTextCTA: React.FC<LogoTextCTABlock> = ({
         </div>
 
         <div className="flex flex-col items-start gap-4 w-full lg:w-[55%]">
-          <h2 className="font-ivar text-3xl md:text-5xl text-foreground">{title}</h2>
+          <h2 className="font-ivar text-2xl md:text-3xl lg:text-4xl text-foreground">{title}</h2>
 
           {description && (
             <div className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-prose whitespace-pre-line">

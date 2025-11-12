@@ -1967,6 +1967,25 @@ export interface TextVideoRight {
    * Upload a video file in the Media collection.
    */
   video: string | Media;
+  button: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'textVideoRight';
@@ -4063,6 +4082,16 @@ export interface TextVideoRightSelect<T extends boolean = true> {
   smallText1?: T;
   smallText2?: T;
   video?: T;
+  button?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
   id?: T;
   blockName?: T;
 }

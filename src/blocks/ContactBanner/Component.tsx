@@ -22,7 +22,7 @@ const ContactBanner: React.FC<ContactBannerBlock> = ({
         className="w-full py-10 flex justify-center items-center"
         style={{ backgroundColor: bg }}
       >
-        <h3 className="text-white text-2xl md:text-6xl text-center">{title}</h3>
+        <h3 className="text-white text-2xl md:text-3xl lg:text-4xl text-center">{title}</h3>
       </div>
 
       <div className="py-10 text-center text-sm space-y-2">

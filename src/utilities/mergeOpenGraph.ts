@@ -10,8 +10,8 @@ const defaultOpenGraph: Metadata['openGraph'] = {
       url: `${getServerSideURL()}/mercedes-benz.webp`,
     },
   ],
-  siteName: 'Dupont Registry Leasing',
-  title: 'Dupont Registry Leasing',
+  siteName: 'Retromobile',
+  title: 'Retromobile',
 }
 
 export const mergeOpenGraph = (og?: Metadata['openGraph']): Metadata['openGraph'] => {

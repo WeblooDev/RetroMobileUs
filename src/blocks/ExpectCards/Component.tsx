@@ -9,7 +9,7 @@ const ExpectCards: React.FC<ExpectCardsBlock> = ({ title, cards }) => {
 
   return (
     <section className="container py-12">
-      <h2 className="text-3xl md:text-4xl lg:text-5xl mb-8">{title}</h2>
+      <h2 className="text-2xl md:text-3xl lg:text-4xl mb-8">{title}</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map((card, i) => {
@@ -22,7 +22,7 @@ const ExpectCards: React.FC<ExpectCardsBlock> = ({ title, cards }) => {
 
               {/* Text */}
               <div className="absolute bottom-0 left-0 right-0 text-white p-8 flex flex-col gap-2 bg-gradient-to-t from-black/60 to-transparent">
-                <h3 className="text-xl md:text-3xl">{card.title}</h3>
+                <h3 className="text-xl md:text-2xl lg:text-3xl">{card.title}</h3>
                 <p className="mt-1 text-xs md:text-base text-white/90">{card.description}</p>
               </div>
             </div>

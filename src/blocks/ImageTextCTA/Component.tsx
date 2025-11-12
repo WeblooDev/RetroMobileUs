@@ -29,7 +29,7 @@ const ImageTextCTA: React.FC<ImageTextCTABlock> = ({
 
         {/* Text */}
         <div className="flex flex-col gap-6 w-full lg:w-[55%] justify-center">
-          <h2 className="text-2xl md:text-6xl">{title}</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl">{title}</h2>
           {description && <p className="text-base md:text-base md:w-1/2">{description}</p>}
 
           {primary?.label && primaryUrl && (

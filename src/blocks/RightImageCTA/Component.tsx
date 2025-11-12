@@ -13,7 +13,7 @@ const RightImageCTA: React.FC<RightImageCTABlock> = ({ title, description, image
       <div className="container  lg:py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="font-ivar text-4xl md:text-6xl leading-tight">{title}</h2>
+            <h2 className="font-ivar text-2xl md:text-3xl lg:text-4xl leading-tight">{title}</h2>
 
             {description && (
               <p className="mt-6 max-w-[560px] text-sm md:text-base text-black/80">{description}</p>

@@ -1,4 +1,5 @@
 import type { Block } from 'payload'
+import { link } from '@/fields/link'
 
 export const TextVideoRight: Block = {
   slug: 'textVideoRight',
@@ -38,6 +39,12 @@ export const TextVideoRight: Block = {
       label: 'Right Video',
       admin: { description: 'Upload a video file in the Media collection.' },
     },
+    link({
+      overrides: {
+        name: 'button',
+        label: 'Button',
+      },
+    }),
   ],
 }
 
