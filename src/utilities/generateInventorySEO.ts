@@ -28,31 +28,31 @@ export function generateInventorySEOContent(filters: SEOFilters): SEOContent {
   if (filters.brand && filters.model) {
     // Make + Model Page Formula
     return {
-      title: `${filters.brand} ${filters.model} Lease - Best Car Lease Deals | duPont REGISTRY Leasing`,
-      description: `Lease the ${filters.brand} ${filters.model} with exclusive deals at duPont REGISTRY Leasing. Find the best car lease offers, compare prices, and drive your ${filters.brand} today.`,
+      title: `${filters.brand} ${filters.model} Lease - Best Car Lease Deals | Retromobile`,
+      description: `Lease the ${filters.brand} ${filters.model} with exclusive deals at Retromobile. Find the best car lease offers, compare prices, and drive your ${filters.brand} today.`,
       h1Title: `${filters.brand} ${filters.model} Lease Offers`,
       h1Description: `Discover exclusive ${filters.brand} ${filters.model} lease deals with flexible terms and competitive pricing. Drive your dream ${filters.brand} today.`,
     }
   } else if (filters.brand) {
     // Make Page Formula
     return {
-      title: `${filters.brand} Lease Deals - Best Car Lease Offers | duPont REGISTRY Leasing`,
-      description: `Discover ${filters.brand} lease deals with flexible terms at duPont REGISTRY Leasing. Compare the best car lease offers and drive your ${filters.brand} for less today.`,
+      title: `${filters.brand} Lease Deals - Best Car Lease Offers | Retromobile`,
+      description: `Discover ${filters.brand} lease deals with flexible terms at Retromobile. Compare the best car lease offers and drive your ${filters.brand} for less today.`,
       h1Title: `${filters.brand} Lease Deals`,
       h1Description: `Explore ${filters.brand} lease offers with competitive rates and flexible terms. Find the best ${filters.brand} lease deals available.`,
     }
   } else if (filters.price) {
     // Price-based pages
     return {
-      title: `Luxury Cars in ${filters.price} Price Range | duPont REGISTRY Leasing`,
-      description: 'Find luxury vehicles in your price range at duPont REGISTRY Leasing.',
+      title: `Luxury Cars in ${filters.price} Price Range | Retromobile`,
+      description: 'Find luxury vehicles in your price range at Retromobile.',
       h1Title: `Luxury Cars in ${filters.price} Price Range`,
-      h1Description: 'Find luxury vehicles in your price range at duPont REGISTRY Leasing.',
+      h1Description: 'Find luxury vehicles in your price range at Retromobile.',
     }
   } else {
     // Default inventory page
     return {
-      title: 'Luxury Car Inventory | duPont REGISTRY Leasing',
+      title: 'Luxury Car Inventory | Retromobile',
       description: 'Browse our exclusive selection of luxury vehicles available for lease.',
       h1Title: 'Exclusive NEW CAR Inventory, curated for you',
       h1Description:

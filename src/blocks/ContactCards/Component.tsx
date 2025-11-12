@@ -17,7 +17,7 @@ const ContactCards: React.FC<ContactCardsBlock> = ({ title, cards = [] }) => {
               </div>
             )}
             <div className="flex flex-col gap-2 items-start text-start">
-              <h3 className="text-2xl md:text-3xl ">{c?.cardTitle}</h3>
+              <h3 className="text-xl md:text-2xl ">{c?.cardTitle}</h3>
               {c?.email && (
                 <Link href={`mailto:${c.email}`} className="font-semibold">
                   {c.email}

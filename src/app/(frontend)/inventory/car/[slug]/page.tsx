@@ -24,7 +24,7 @@ export async function generateMetadata({
   const car = cars[0]
   if (!car || !car.slug) {
     return {
-      title: 'Car Not Found | duPont REGISTRY Leasing',
+      title: 'Car Not Found | Retromobile',
       description: 'Explore top luxury car brands available for lease.',
     }
   }
@@ -33,10 +33,10 @@ export async function generateMetadata({
   const brandName = typeof car.brand === 'object' && car.brand?.name ? car.brand.name : 'Luxury'
 
   const priceText = car.hidePrice ? 'Contact for Price' : `$${car.price.toLocaleString()}/mo`
-  const metaTitle = `${car.year} ${brandName} ${car.model} - Lease from ${priceText} | duPont REGISTRY Leasing`
+  const metaTitle = `${car.year} ${brandName} ${car.model} - Lease from ${priceText} | Retromobile`
   const metaDescription = car.hidePrice
-    ? `Lease the ${car.year} ${brandName} ${car.model} with exclusive specials at duPont REGISTRY Leasing. Contact for pricing. Apply now!`
-    : `Lease the ${car.year} ${brandName} ${car.model} starting at ${priceText} with exclusive specials at duPont REGISTRY Leasing. Apply now!`
+    ? `Lease the ${car.year} ${brandName} ${car.model} with exclusive specials at Retromobile. Contact for pricing. Apply now!`
+    : `Lease the ${car.year} ${brandName} ${car.model} starting at ${priceText} with exclusive specials at Retromobile. Apply now!`
 
   const image =
     typeof car.image === 'string'

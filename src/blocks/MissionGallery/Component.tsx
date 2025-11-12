@@ -15,7 +15,7 @@ const MissionGallery: React.FC<MissionGalleryBlock> = ({
   return (
     <section className="w-full px-6 md:px-12 lg:px-24 py-16">
       <div className="max-w-3xl mx-auto text-center mb-10 md:mb-14">
-        <h2 className="text-4xl md:text-6xl">{title}</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl">{title}</h2>
         {description && (
           <p className="mt-4 text-sm md:text-base w-full md:w-[85%] mx-auto">{description}</p>
         )}

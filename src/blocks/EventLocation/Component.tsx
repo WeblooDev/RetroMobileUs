@@ -30,13 +30,13 @@ const EventLocation: React.FC<EventLocationBlock> = ({
         <Media resource={backgroundImage} fill priority imgClassName="object-cover" />
       </div>
 
-      <div className="absolute -top-10 left-0 px-10 py-8 bg-[#8B9B5C] text-white font-ivar text-3xl md:text-6xl">
+      <div className="absolute -top-10 left-0 px-10 py-8 bg-[#8B9B5C] text-white font-ivar text-3xl md:text-4xl lg:text-5xl">
         {ribbonText}
       </div>
 
       <div className="relative z-10 text-white px-6 flex flex-col items-center gap-6">
-        <h2 className="font-ivar text-4xl md:text-6xl text-center max-w-3xl">{title}</h2>
-        <h2 className="font-ivar text-4xl md:text-6xl text-center max-w-3xl">{secondtitle}</h2>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl text-center ">{title}</h2>
+        <h2 className="text-3xl md:text-4xl lg:text-5xl text-center">{secondtitle}</h2>
 
 
         <div className="flex gap-3">

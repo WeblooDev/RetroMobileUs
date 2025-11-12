@@ -11,7 +11,7 @@ const TextWithCTAs: React.FC<TextWithCTAsBlock> = ({ title, links }) => {
   return (
     <section className="container py-12">
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl w-full lg:w-[50%]">{title}</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl w-full lg:w-[50%]">{title}</h2>
 
         <div className="flex items-start  flex-col md:flex-row justify-start lg:justify-end gap-2 lg:gap-6 w-full lg:w-[50%]">
           {primary && (

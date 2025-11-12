@@ -235,6 +235,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ProgramHighlight,
                 NumberedListMedia,
                 Faq,
+       
               ],
               required: true,
               admin: {

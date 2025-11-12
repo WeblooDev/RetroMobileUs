@@ -11,11 +11,11 @@ const ProgramHighlight: React.FC<ProgramHighlightBlock> = ({
     <section className="container py-16 md:py-24">
       <div className="flex flex-col lg:flex-row gap-10 items-stretch h-full">
         <div className="w-full lg:w-1/2 flex flex-col justify-center gap-6 h-auto">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight mb-6">
             {title}
           </h2>
 
-          <p className="text-sm md:text-base mb-6 ">
+          <p className="text-sm md:text-base">
             {intro}
           </p>
 
