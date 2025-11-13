@@ -66,19 +66,19 @@ export function CountdownTimer({
 
       <div className="w-px bg-white/50" />
 
-      <div className="flex flex-col justify-between text-white gap-2">
-        <div className="flex items-center justify-start gap-4">
-          <h3 className="text-2xl md:text-4xl">{pad(timeLeft.days)}</h3>
-          <h3 className="text-2xl md:text-3xl font-light uppercase">Days</h3>
+      <div className="flex flex-col justify-center text-white gap-2">
+        <div className="flex items-center justify-start gap-2 flex-col ">
+          <h3 className="text-4xl md:text-5xl lg:text-7xl py-2 px-4 bg-[#8B9B5C] rounded-xl">{pad(timeLeft.days)}</h3>
+          <h3 className="text-base md:text-xl font-light uppercase">Days</h3>
         </div>
-        <div className="flex items-center justify-start gap-4">
+        {/* <div className="flex items-center justify-start gap-4">
           <h3 className="text-2xl md:text-4xl">{pad(timeLeft.hours)}</h3>
           <h3 className="text-2xl md:text-3xl font-light uppercase">Hrs</h3>
         </div>
         <div className="flex items-center justify-start gap-4">
           <h3 className="text-2xl md:text-4xl">{pad(timeLeft.minutes)}</h3>
           <h3 className="text-2xl md:text-3xl font-light uppercase">Min</h3>
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -83,7 +83,9 @@ import ImageTitle from './ImageTitle/Component'
 import ContactCards from './ContactCards/Component'
 import ProgramHighlight from './ProgramHighlight/Component'
 import NumberedListMedia from './NumberedListMedia/Component'
-import Faq from './Faq/Component'
+import GalleriesList from './GalleriesList/Component'
+import FaqTabs from './FaqTabs/Component'
+
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -162,12 +164,16 @@ const blockComponents = {
   knowBeforeYouGo: KnowBeforeYouGo,
   sponsorsFilterGrid: SponsorsFilterGrid,
   logosCarousel: LogosCarousel,
-    teamGrid: TeamGridComponent,
-    imageTitle: ImageTitle,
-      contactCards: ContactCards,
-      programHighlight: ProgramHighlight, 
-      numberedListMedia: NumberedListMedia,
-        faq: Faq,
+  teamGrid: TeamGridComponent,
+  imageTitle: ImageTitle,
+  contactCards: ContactCards,
+  programHighlight: ProgramHighlight, 
+  numberedListMedia: NumberedListMedia,
+  
+  galleriesList: GalleriesList,
+  faqTabs: FaqTabs,
+
+        
  
   
 
