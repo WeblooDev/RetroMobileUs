@@ -79,6 +79,9 @@ export interface Config {
     'page-settings': PageSetting;
     partnerCategories: PartnerCategory;
     partners: Partner;
+    galleries: Gallery;
+    faqCategories: FaqCategory;
+    faqs: Faq;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -102,6 +105,9 @@ export interface Config {
     'page-settings': PageSettingsSelect<false> | PageSettingsSelect<true>;
     partnerCategories: PartnerCategoriesSelect<false> | PartnerCategoriesSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
+    galleries: GalleriesSelect<false> | GalleriesSelect<true>;
+    faqCategories: FaqCategoriesSelect<false> | FaqCategoriesSelect<true>;
+    faqs: FaqsSelect<false> | FaqsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -389,7 +395,8 @@ export interface Page {
     | ContactCards
     | ProgramHighlight
     | NumberedListMedia
-    | Faq
+    | GalleriesList
+    | FaqTabs
   )[];
   meta?: {
     title?: string | null;
@@ -2532,20 +2539,45 @@ export interface NumberedListMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Faq".
+ * via the `definition` "GalleriesList".
  */
-export interface Faq {
-  items?:
-    | {
-        question: string;
-        answer: string;
-        id?: string | null;
-      }[]
-    | null;
+export interface GalleriesList {
+  title: string;
+  description?: string | null;
+  limit?: number | null;
+  /**
+   * e.g. #7A8E57 (olive)
+   */
+  backgroundColor?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'galleriesList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqTabs".
+ */
+export interface FaqTabs {
+  /**
+   * Leave empty to include all categories (by order asc).
+   */
+  categories?: (string | FaqCategory)[] | null;
   accentColor?: string | null;
   id?: string | null;
   blockName?: string | null;
-  blockType: 'faq';
+  blockType: 'faqTabs';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqCategories".
+ */
+export interface FaqCategory {
+  id: string;
+  name: string;
+  slug: string;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2672,6 +2704,63 @@ export interface Partner {
   description: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries".
+ */
+export interface Gallery {
+  id: string;
+  title: string;
+  intro?: string | null;
+  thumbnail: string | Media;
+  images: {
+    image: string | Media;
+    caption?: string | null;
+    id?: string | null;
+  }[];
+  /**
+   * Leave empty to use internal /galleries/[slug]
+   */
+  readMore?: {
+    url?: string | null;
+    newTab?: boolean | null;
+  };
+  slug?: string | null;
+  slugLock?: boolean | null;
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs".
+ */
+export interface Faq {
+  id: string;
+  question: string;
+  answer: string;
+  answer2: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  category: string | FaqCategory;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2892,6 +2981,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'partners';
         value: string | Partner;
+      } | null)
+    | ({
+        relationTo: 'galleries';
+        value: string | Gallery;
+      } | null)
+    | ({
+        relationTo: 'faqCategories';
+        value: string | FaqCategory;
+      } | null)
+    | ({
+        relationTo: 'faqs';
+        value: string | Faq;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -3177,7 +3278,8 @@ export interface PagesSelect<T extends boolean = true> {
         contactCards?: T | ContactCardsSelect<T>;
         programHighlight?: T | ProgramHighlightSelect<T>;
         numberedListMedia?: T | NumberedListMediaSelect<T>;
-        faq?: T | FaqSelect<T>;
+        galleriesList?: T | GalleriesListSelect<T>;
+        faqTabs?: T | FaqTabsSelect<T>;
       };
   meta?:
     | T
@@ -4594,16 +4696,22 @@ export interface NumberedListMediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Faq_select".
+ * via the `definition` "GalleriesList_select".
  */
-export interface FaqSelect<T extends boolean = true> {
-  items?:
-    | T
-    | {
-        question?: T;
-        answer?: T;
-        id?: T;
-      };
+export interface GalleriesListSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  limit?: T;
+  backgroundColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FaqTabs_select".
+ */
+export interface FaqTabsSelect<T extends boolean = true> {
+  categories?: T;
   accentColor?: T;
   id?: T;
   blockName?: T;
@@ -4908,6 +5016,59 @@ export interface PartnersSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries_select".
+ */
+export interface GalleriesSelect<T extends boolean = true> {
+  title?: T;
+  intro?: T;
+  thumbnail?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
+  readMore?:
+    | T
+    | {
+        url?: T;
+        newTab?: T;
+      };
+  slug?: T;
+  slugLock?: T;
+  publishedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqCategories_select".
+ */
+export interface FaqCategoriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "faqs_select".
+ */
+export interface FaqsSelect<T extends boolean = true> {
+  question?: T;
+  answer?: T;
+  answer2?: T;
+  category?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -5437,6 +5598,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'galleries';
+          value: string | Gallery;
         } | null);
     global?: string | null;
     user?: (string | null) | User;

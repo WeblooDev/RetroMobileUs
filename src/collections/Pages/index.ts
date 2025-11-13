@@ -97,7 +97,8 @@ import ImageTitle from '@/blocks/ImageTitle/config'
 import ContactCards from '@/blocks/ContactCards/config'
 import ProgramHighlight from '@/blocks/ProgramHighlight/Config'
 import NumberedListMedia from '@/blocks/NumberedListMedia/config'
-import Faq from '@/blocks/Faq/config'
+import GalleriesList from '@/blocks/GalleriesList/config'
+import FaqTabs from '@/blocks/FaqTabs/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -234,7 +235,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 ContactCards,
                 ProgramHighlight,
                 NumberedListMedia,
-                Faq,
+                GalleriesList,
+                FaqTabs,
        
               ],
               required: true,

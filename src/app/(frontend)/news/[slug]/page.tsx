@@ -55,7 +55,7 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
                 )}
                 <div className="absolute inset-0 flex items-center w-full">
                   <div className="container mx-auto text-white">
-                    <h1 className="text-3xl md:text-5xl leading-[6rem] w-full lg:w-[65%]">{hero.title}</h1>
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl w-full lg:w-[75%]">{hero.title}</h1>
                     
                     {hero.description && ( 
                       <p className="mt-3 max-w-2xl text-white text-sm">{hero.description}</p>
