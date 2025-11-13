@@ -2,11 +2,9 @@
 
 import { useEffect, useState, useCallback, useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
-import { CMSLink } from '@/components/Link'
 
 type Props = {
   title?: string
-  link?: any
   /** Auto-open threshold in viewport heights (100 = 100vh) */
   openAtVh?: number
 }
@@ -15,7 +13,6 @@ const DURATION_MS = 500
 
 export default function FloatingTicketCTA({
   title = 'TICKETS',
-  link,
   openAtVh = 80,
 }: Props) {
   const [mounted, setMounted] = useState(false)
@@ -148,18 +145,14 @@ export default function FloatingTicketCTA({
             >
               <h3 className="text-xl tracking-wide leading-none">{title}</h3>
 
-              {link ? (
-                <CMSLink
-                  {...link}
-                  className="inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
-                  aria-label="Buy tickets"
-                >
-                  Buy now
-                  <Image src="/arrowright.svg" alt="" width={14} height={14} />
-                </CMSLink>
-              ) : (
-                <span className="text-base opacity-80">Buy now</span>
-              )}
+              <button
+                type="button"
+                className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
+                aria-label="Buy tickets"
+              >
+                Buy now
+                <Image src="/arrowright.svg" alt="" width={14} height={14} />
+              </button>
             </div>
 
             <button

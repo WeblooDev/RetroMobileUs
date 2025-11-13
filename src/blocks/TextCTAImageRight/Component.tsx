@@ -24,18 +24,14 @@ const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
           {boldLine && <p className="mt-3 font-semibold text-sm md:text-base">{boldLine}</p>}
           {primary && (
             <div className="mt-6">
-            <TixpubButton
-        label={primary.label || "Buy Tickets"}
-        variant="olive"
-        size="ctaBig"
-        className="tixpub-buytix"
-      />
-
-                  </div>
-
-
+              <TixpubButton
+                label={primary.label || "Buy Tickets"}
+                variant="olive"
+                size="ctaBig"
+                className="tixpub-buytix"
+              />
+            </div>
           )}
-        <a className="tixpub-buytix">Buy Tickets Link</a>
         </div>
         <div className="relative aspect-[674/414] w-full lg:w-[50%]">
           {image && <Media resource={image} fill imgClassName="object-cover" />}

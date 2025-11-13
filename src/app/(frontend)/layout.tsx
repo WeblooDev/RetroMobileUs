@@ -13,70 +13,87 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import FloatingTicketCTA from '@/components/FloatingTicketCTA'
+import { UnityTicketsScript } from '@/components/UnityTicketsScript'
 import Script from 'next/script'
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={cn(inter.variable)} lang="en" suppressHydrationWarning>
       <head>
-   <Script
-          id="tixpub-embed"
-          src="https://admin.unityeventsolutions.com/scripts/tixpub/tpbootstrap.js"
-          strategy="afterInteractive"
-          data-baseurl="https://admin.unityeventsolutions.com/tix-pub"
-          data-css="https://admin.unityeventsolutions.com/content/tixpub/tpbootstrap.css"
-          data-eid="RETROMOBILE2026"
-          data-cid="5b71ef71-1c1b-428a-bca1-d10c868c56c6"
-        />
-
-
- <Script id="unity-utm-capture" strategy="afterInteractive">
+        <Script id="unity-utm-capture" strategy="afterInteractive">
           {`
             (function () {
               if (typeof window === 'undefined') return;
 
-              var dcdomains = [
-                'unitytickets.com',
-                'myshowlead.com',
-                'myshowapp.com',
-                'unityeventsolutions.com',
-                'retromobile.us',
-                'retro-mobile-us.vercel.app' // staging domain
-              ];
+              function processLinks() {
+                var dcdomains = [
+                  'unitytickets.com',
+                  'myshowlead.com',
+                  'myshowapp.com',
+                  'unityeventsolutions.com',
+                  'retromobile.us',
+                  'retro-mobile-us.vercel.app'
+                ];
 
-              var params = window.location.search.replace(/ +/g, '%20');
-              if (params.length > 0 && params[0] === '?') {
-                params = params.substring(1);
-              }
-
-              var finalList = '';
-
-              if (params.length > 0) {
-                var splitList = params.split('&');
-                var append = [];
-                for (var idx = 0; idx < splitList.length; idx++) {
-                  if (splitList[idx].indexOf('utm_') === 0) {
-                    append.push(splitList[idx]);
-                  }
+                var params = window.location.search.replace(/ +/g, '%20');
+                if (params.length > 0 && params[0] === '?') {
+                  params = params.substring(1);
                 }
-                finalList = append.join('&');
-              }
 
-              if (finalList.length > 0) {
-                var links = document.querySelectorAll('a[href]');
-                links.forEach(function (link) {
-                  for (var idx = 0; idx < dcdomains.length; idx++) {
-                    var domain = dcdomains[idx];
-                    var re = new RegExp('^http[s]?://[a-zA-Z.]{0,15}' + domain + '.*$');
+                var finalList = '';
 
-                    if (link.href.indexOf('#') < 0 && re.test(link.href)) {
-                      if (link.href.indexOf('?') < 0) {
-                        link.href = link.href + '?' + finalList;
-                      } else {
-                        link.href = link.href + '&' + finalList;
-                      }
+                if (params.length > 0) {
+                  var splitList = params.split('&');
+                  var append = [];
+                  for (var idx = 0; idx < splitList.length; idx++) {
+                    if (splitList[idx].indexOf('utm_') === 0) {
+                      append.push(splitList[idx]);
                     }
                   }
+                  finalList = append.join('&');
+                }
+
+                if (finalList.length > 0) {
+                  var links = document.querySelectorAll('a[href]');
+                  links.forEach(function (link) {
+                    for (var idx = 0; idx < dcdomains.length; idx++) {
+                      var domain = dcdomains[idx];
+                      var re = new RegExp('^http[s]?://[a-zA-Z.]{0,15}' + domain + '.*$');
+
+                      if (link.href.indexOf('#') < 0 && re.test(link.href)) {
+                        if (link.href.indexOf('?') < 0) {
+                          link.href = link.href + '?' + finalList;
+                        } else {
+                          link.href = link.href + '&' + finalList;
+                        }
+                      }
+                    }
+                  });
+                }
+              }
+
+              // Process links when DOM is ready
+              if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', processLinks);
+              } else {
+                processLinks();
+              }
+
+              // Re-process links when new content is added (for dynamic content)
+              if (typeof MutationObserver !== 'undefined') {
+                var observer = new MutationObserver(function(mutations) {
+                  var hasNewLinks = false;
+                  mutations.forEach(function(mutation) {
+                    mutation.addedNodes.forEach(function(node) {
+                      if (node.nodeType === 1 && (node.tagName === 'A' || node.querySelector('a'))) {
+                        hasNewLinks = true;
+                      }
+                    });
+                  });
+                  if (hasNewLinks) {
+                    processLinks();
+                  }
                 });
+                observer.observe(document.body, { childList: true, subtree: true });
               }
             })();
           `}
@@ -150,14 +167,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) - Additional */}
+        <UnityTicketsScript />
         <Providers>
           <Header />
           <BreadcrumbLayout>{children}</BreadcrumbLayout>
           <Footer />
-           <FloatingTicketCTA
-            title="TICKETS"
-            link={{ type: 'custom', url: '/tickets', label: 'Buy now' }}
-          />
+          <FloatingTicketCTA title="TICKETS" />
         </Providers>
       </body>
     </html>
