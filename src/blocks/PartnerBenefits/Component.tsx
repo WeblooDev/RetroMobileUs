@@ -10,7 +10,7 @@ const PartnerBenefits: React.FC<PartnerBenefitsBlock> = ({ title, description, c
     <section className="w-full">
       <div className="container  pt-10 md:pt-16">
         <h2 className="text-2xl md:text-3xl lg:text-4xl ">{title}</h2>
-        {description && <p className="mt-4 text-base w-[40%]">{description}</p>}
+        {description && <p className="mt-4 text-base w-full md:w-[40%]">{description}</p>}
       </div>
 
       <div className="container py-10 md:py-14">
