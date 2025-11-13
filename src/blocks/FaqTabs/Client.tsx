@@ -36,8 +36,7 @@ export default function FaqTabsClient({
 
   return (
     <section className="container py-10 md:py-14">
-      {/* Tabs */}
-      <div className="mb-8 flex justify-between gap-12">
+      <div className="mb-8 flex flex-col md:flex-row justify-between gap-6 md:gap-12">
         {categories.map((c, i) => {
           const isActive = i === activeIdx
           return (
