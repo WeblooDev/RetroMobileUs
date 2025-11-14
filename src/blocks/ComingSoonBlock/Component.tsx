@@ -33,18 +33,21 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   const bg = (backgroundImage as Media) || null
   const bgUrl = (bg as any)?.url as string | undefined
 
-  // 👇 Always target next year
   const targetDate = targetInNextYear(Number(countdownMonth), Number(countdownDay))
 
   return (
     <main className="relative min-h-screen overflow-hidden">
       {bgUrl && (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${bgUrl})` }}
-          aria-hidden
-        >
-          <div className="absolute inset-0 bg-background/80 grid-pattern" />
+        <div className="absolute inset-0" aria-hidden>
+          <video
+            src={bgUrl}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 grid-pattern" />
         </div>
       )}
 

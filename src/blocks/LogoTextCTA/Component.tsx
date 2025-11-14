@@ -38,6 +38,7 @@ const LogoTextCTA: React.FC<LogoTextCTABlock> = ({
                 appearance="black"
                 size="ctaBig"
                 className="inline-flex"
+                newTab
               />
             </div>
           )}

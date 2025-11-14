@@ -1437,6 +1437,7 @@ export interface EventLocation {
   ribbonText: string;
   title: string;
   secondtitle: string;
+  description: string;
   ctas?:
     | {
         link: {
@@ -3745,6 +3746,7 @@ export interface EventLocationSelect<T extends boolean = true> {
   ribbonText?: T;
   title?: T;
   secondtitle?: T;
+  description?: T;
   ctas?:
     | T
     | {
