@@ -8,6 +8,7 @@ import { Media } from '@/components/Media'
 import { CTAButton } from '@/components/CTAButton'
 import { cn } from '@/lib/utils'
 import { useScrollHeader } from './useScrollHeader'
+import { CMSLink } from '@/components/Link'
 
 type Props = HeaderDoc
 
@@ -121,14 +122,11 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
 
             <div className="hidden md:flex items-center gap-3">
               {ctaLink?.link?.label && ctaLink.link.url && (
-                <CTAButton href={ctaLink.link.url} variant="olive">
-                  {ctaLink.link.label}
-                </CTAButton>
+                <CMSLink url={ctaLink.link.url} appearance="olive" label={ctaLink.link.label} size="ctaBig"/>
+
               )}
               {secondaryCTA?.link?.label && secondaryCTA.link.url && (
-                <CTAButton href={secondaryCTA.link.url} variant="outlineWhite">
-                  {secondaryCTA.link.label}
-                </CTAButton>
+                <CMSLink url={secondaryCTA.link.url} appearance="outlineWhite" label={secondaryCTA.link.label} size="ctaBig" newTab/>
               )}
             </div>
 
@@ -210,26 +208,25 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
               })}
 
               {/* Mobile CTAs */}
-              <div className="pt-4 space-y-3">
+              <div className="pt-4 space-y-3 flex flex-col items-start">
                 {ctaLink?.link?.label && ctaLink.link.url && (
-                  <CTAButton
-                    href={ctaLink.link.url}
-                    className="w-full"
-                    variant="olive"
-                    size="normal"
+                  <CMSLink
+                    url={ctaLink.link.url}
+                    appearance="olive"
+                    size="ctaBig"
                   >
                     {ctaLink.link.label}
-                  </CTAButton>
+                  </CMSLink>
                 )}
                 {secondaryCTA?.link?.label && secondaryCTA.link.url && (
-                  <CTAButton
-                    href={secondaryCTA.link.url}
-                    className="w-full"
-                    variant="outlineWhite"
-                    size="normal"
+                  <CMSLink
+                    url={secondaryCTA.link.url}
+                    appearance="outlineWhite"
+                    size="ctaBig"
+                    newTab
                   >
                     {secondaryCTA.link.label}
-                  </CTAButton>
+                  </CMSLink>
                 )}
               </div>
             </div>

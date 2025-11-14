@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Media } from '@/components/Media'
 import { CTAButton } from '@/components/CTAButton'
 import type { EventLocation as EventLocationBlock } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 
 const isWebLink = (l: unknown): l is { url: string; label: string } =>
   !!l &&
@@ -13,8 +14,9 @@ const EventLocation: React.FC<EventLocationBlock> = ({
   backgroundImage,
   ribbonText,
   title,
-  secondtitle,
+  secondtitle,  
   ctas,
+  description,
 }) => {
   const rows = ctas ?? []
   const primary = rows[0]?.link
@@ -37,32 +39,23 @@ const EventLocation: React.FC<EventLocationBlock> = ({
       <div className="relative z-10 text-white px-6 flex flex-col items-center gap-6">
         <h2 className="text-3xl md:text-4xl lg:text-5xl text-center ">{title}</h2>
         <h2 className="text-3xl md:text-4xl lg:text-5xl text-center">{secondtitle}</h2>
+        <p className="text-base lg:text-lg text-center w-[80%]">{description}</p>
 
 
         <div className="flex gap-3">
           {isWebLink(primary) && (
-            <Link href={primary.url} aria-label={primary.label}>
-              <CTAButton variant="olive" size="big">
-                {primary.label}
-              </CTAButton>
-            </Link>
+            <CMSLink url={primary.url} label={primary.label} appearance="olive" size="ctaBig" newTab/>
           )}
 
           {isWebLink(secondary) && (
-            <Link href={secondary.url} aria-label={secondary.label}>
-              <CTAButton
-                variant="outlineWhite"
-                size="big"
-                className="border-[#8B9B5C] text-[#8B9B5C] hover:bg-[#8B9B5C] hover:text-white"
-              >
-                {secondary.label}
-              </CTAButton>
-            </Link>
+            <CMSLink url={secondary.url} label={secondary.label} appearance="outlineWhite" size="ctaBig" newTab/>
           )}
         </div>
       </div>
     </section>
   )
 }
+
+
 
 export default EventLocation

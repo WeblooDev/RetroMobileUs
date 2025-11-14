@@ -36,6 +36,13 @@ export const EventLocation: Block = {
       label: 'Second Title',
     },
 
+    {
+      name: 'description',
+      type: 'textarea',
+      required: true,
+      defaultValue: 'Description',
+      label: 'Description',
+    },
     linkGroup({
       appearances: false,
       overrides: {

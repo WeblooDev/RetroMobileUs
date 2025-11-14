@@ -26,11 +26,12 @@ const LinkBanner: React.FC<LinkBannerBlock> = ({ title, ctas, linkBgColor, right
           {link?.label && hasWebUrl && (
             <Link
               href={link.url!}
-              target={link.newTab ? '_blank' : undefined}
+              target='_blank' 
               rel={link.newTab ? 'noopener noreferrer' : undefined}
               aria-label={link.label}
               className="flex gap-4 items-center px-6 py-3 text-white"
               style={{ backgroundColor: bg }}
+              
             >
               <h3 className="text-2xl md:text-3xl lg:text-4xl">{link.label}</h3>
               <ArrowUpRight className="h-[29px] w-[35px]" />
