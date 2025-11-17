@@ -3,6 +3,11 @@ import { getGlobal } from '@/utilities/getGlobals'
 import { CMSLink } from '@/components/Link'
 import type { Footer as FooterType } from '@/payload-types'
 import { Media } from '@/components/Media'
+import Image from 'next/image'
+import Comexposium from '../../public/comexposium.svg'
+import duPontRegistry from '../../public/duPontREGISTRY.svg'
+
+
 
 const getCachedGlobal =
   (slug: Global, depth = 0) =>
@@ -87,7 +92,7 @@ export async function Footer() {
           </div>
         </div>
 
-        <div className="my-6 mb-6 flex justify-center items-center">
+        <div className="my-8 mb-8 flex justify-center items-center">
           <div className="border-t border-[#336] h-px w-[80%] max-w-[380px] lg:max-w-full md:w-full"></div>
         </div>
 
@@ -104,6 +109,27 @@ export async function Footer() {
               All Rights Reserved.
             </p>
           )}
+
+          <div className="flex flex-col items-center justify-center gap-4">
+              <p className='text-sm text-center'>Retromobile USA and Salon Rétromobile are trademarks of Comexposium</p>
+
+              <div className="flex gap-4 items-center">
+                    <Image
+                    src={Comexposium}
+                    alt="Comexposium"
+                    width={100}
+                    height={100}
+                    />
+                     <Image
+                    src={duPontRegistry}
+                    alt="Comexposium"
+                    width={100}
+                    height={100}
+                    />
+                
+              </div>
+          </div>
+
           <div className=" hidden sm:flex  flex-wrap justify-center gap-4">
              <Link
                 href="https://www.dupontregistry.com/privacy"
