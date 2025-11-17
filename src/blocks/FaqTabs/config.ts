@@ -9,8 +9,9 @@ export const FaqTabs: Block = {
       name: 'categories',
       label: 'Categories to show (optional, drag to order)',
       type: 'relationship',
-      relationTo: 'faqCategories',
+      required: true,
       hasMany: true,
+      relationTo: 'faqCategories',
       admin: { description: 'Leave empty to include all categories (by order asc).' },
     },
     {
@@ -18,6 +19,7 @@ export const FaqTabs: Block = {
       type: 'text',
       label: 'Accent Color',
       defaultValue: '#7A8E57',
+      required: true,
     },
   ],
 }

@@ -7,7 +7,7 @@ export const FaqCategories: CollectionConfig = {
   fields: [
     { name: 'name', type: 'text', required: true },
     { name: 'slug', type: 'text', required: true, unique: true },
-    { name: 'order', type: 'number', defaultValue: 0 },
+    { name: 'order', type: 'number', defaultValue: 0, required: true },
   ],
   timestamps: true,
 }

@@ -5,67 +5,122 @@ import config from '@/payload.config'
 import FaqTabsClient from './Client'
 import type { FaqTabs as FaqTabsBlock, Faq, FaqCategory } from '@/payload-types'
 
-type CatLite = { id: string; name: string }
-// Use the generated type for the richText field
+type CatLite = { id: number; name: string }
 type AnswerRT = NonNullable<Faq['answer2']>
-type ItemLite = { id: string; question: string; answer2: AnswerRT }
+type ItemLite = { id: number; question: string; answer2: AnswerRT }
+type DbCat = { id: string; name: string }
+
+async function findAll<T>(
+  payload: Awaited<ReturnType<typeof getPayload>>,
+  args: Parameters<typeof payload.find>[0],
+): Promise<T[]> {
+  const pageSize = 20
+  let page = 1
+  const all: T[] = []
+
+  while (true) {
+    const res = await payload.find({
+      ...args,
+      limit: pageSize,
+      page,
+    })
+
+    all.push(...(res.docs as T[]))
+
+    if (page >= res.totalPages) break
+    page += 1
+  }
+
+  return all
+}
 
 export default async function FaqTabs(props: FaqTabsBlock) {
   const payload = await getPayload({ config })
 
-  let categories: CatLite[] = []
+  let dbCategories: DbCat[] = []
 
   if (props.categories && props.categories.length > 0) {
-    const ids = props.categories.map((c: any) => String(typeof c === 'string' ? c : c?.id))
-    const { docs } = await payload.find({
+    const ids = props.categories.map((c: any) =>
+      typeof c === 'string' ? c : String(c?.id ?? c),
+    )
+
+    const docs = await findAll<FaqCategory>(payload, {
       collection: 'faqCategories',
       where: { id: { in: ids } },
       depth: 0,
-      limit: 100,
-      select: { id: true, name: true, order: true },
+      select: { name: true, order: true },
     })
-    const orderMap = new Map(ids.map((id, i) => [id, i]))
-    categories = (docs as Pick<FaqCategory, 'id' | 'name'>[]).map(d => ({
-      id: String(d.id),
-      name: d.name || '',
-    })).sort((a, b) => (orderMap.get(a.id)! - orderMap.get(b.id)!))
+
+    const orderMap = new Map<string, number>(ids.map((id, index) => [id, index]))
+
+    dbCategories = docs
+      .map((d) => ({
+        id: String(d.id),
+        name: d.name ?? '',
+      }))
+      .sort((a, b) => (orderMap.get(a.id)! - orderMap.get(b.id)!))
   } else {
-    const { docs } = await payload.find({
+    const docs = await findAll<FaqCategory>(payload, {
       collection: 'faqCategories',
       sort: 'order',
       depth: 0,
-      limit: 100,
-      select: { id: true, name: true },
+      select: { name: true, order: true },
     })
-    categories = (docs as Pick<FaqCategory, 'id' | 'name'>[]).map(d => ({
+
+    dbCategories = docs.map((d) => ({
       id: String(d.id),
-      name: d.name || '',
+      name: d.name ?? '',
     }))
   }
 
-  const itemsByCategory: Record<string, ItemLite[]> = {}
-  for (const c of categories) {
-    const { docs } = await payload.find({
+  if (!dbCategories.length) {
+    return null
+  }
+
+  const itemsByCategory: Record<number, ItemLite[]> = {}
+  const categories: CatLite[] = []
+
+  let nextCatId = 0
+
+  for (const dbCat of dbCategories) {
+    const faqs = await findAll<Faq>(payload, {
       collection: 'faqs',
-      where: { and: [{ category: { equals: c.id } }, { _status: { equals: 'published' } }] },
+      where: {
+        and: [
+          { category: { equals: dbCat.id } },
+          { _status: { equals: 'published' } },
+        ],
+      },
       sort: 'order',
       depth: 0,
-      limit: 200,
-      select: { id: true, question: true, answer2: true }, // keep full richText
+      select: { question: true, answer2: true },
     })
-    itemsByCategory[c.id] = (docs as Pick<Faq, 'id' | 'question' | 'answer2'>[]).map(d => ({
-      id: String(d.id),
-      question: d.question || '',
-      // pass the richText JSON through as-is
-      answer2: (d.answer2 ?? { root: { type: 'root', children: [], direction: null, format: '', indent: 0, version: 1 } }) as AnswerRT,
+
+    if (!faqs.length) {
+      continue
+    }
+
+    const catId = nextCatId++
+    categories.push({ id: catId, name: dbCat.name })
+
+    itemsByCategory[catId] = faqs.map((d, index) => ({
+      id: index,
+      question: d.question ?? '',
+      answer2: d.answer2 as AnswerRT,
     }))
   }
+
+  if (!categories.length) {
+    return null
+  }
+
+  const accentColor = props.accentColor ?? '#7A8E57'
 
   return (
     <FaqTabsClient
-      categories={categories}
+      categories={categories as [CatLite, ...CatLite[]]} 
       itemsByCategory={itemsByCategory}
-      accentColor={props.accentColor ?? '#7A8E57'}
+      accentColor={accentColor}
     />
   )
 }

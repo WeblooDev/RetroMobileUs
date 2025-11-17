@@ -9,11 +9,13 @@ const GalleriesList: Block = {
     {
       name: 'description',
       type: 'textarea',
+      required: true,
       admin: { rows: 3 },
     },
     {
       name: 'limit',
       type: 'number',
+      required: true,
       defaultValue: 12,
       min: 1,
       max: 48,
@@ -21,6 +23,7 @@ const GalleriesList: Block = {
     {
       name: 'backgroundColor',
       type: 'text',
+      required: true,
       admin: { description: 'e.g. #7A8E57 (olive)' },
       defaultValue: '#7A8E57',
     },

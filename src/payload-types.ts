@@ -2544,12 +2544,12 @@ export interface NumberedListMedia {
  */
 export interface GalleriesList {
   title: string;
-  description?: string | null;
-  limit?: number | null;
+  description: string;
+  limit: number;
   /**
    * e.g. #7A8E57 (olive)
    */
-  backgroundColor?: string | null;
+  backgroundColor: string;
   id?: string | null;
   blockName?: string | null;
   blockType: 'galleriesList';
@@ -2562,8 +2562,8 @@ export interface FaqTabs {
   /**
    * Leave empty to include all categories (by order asc).
    */
-  categories?: (string | FaqCategory)[] | null;
-  accentColor?: string | null;
+  categories: (string | FaqCategory)[];
+  accentColor: string;
   id?: string | null;
   blockName?: string | null;
   blockType: 'faqTabs';
@@ -2576,7 +2576,7 @@ export interface FaqCategory {
   id: string;
   name: string;
   slug: string;
-  order?: number | null;
+  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -2713,7 +2713,7 @@ export interface Partner {
 export interface Gallery {
   id: string;
   title: string;
-  intro?: string | null;
+  intro: string;
   thumbnail: string | Media;
   images: {
     image: string | Media;
@@ -2729,7 +2729,7 @@ export interface Gallery {
   };
   slug?: string | null;
   slugLock?: boolean | null;
-  publishedAt?: string | null;
+  publishedAt: string;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -2758,7 +2758,7 @@ export interface Faq {
     [k: string]: unknown;
   };
   category: string | FaqCategory;
-  order?: number | null;
+  order: number;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;

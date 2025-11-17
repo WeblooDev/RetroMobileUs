@@ -37,7 +37,7 @@ export default async function GalleriesList({
       {title && <h2 className="text-2xl md:text-3xl lg:text-4xl mb-2">{title}</h2>}
       {description && <p className="text-black mb-6 md:mb-10">{description}</p>}
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {(docs as Gallery[]).map((g) => {
           const href = g.readMore?.url?.trim() || `/galleries/${g.slug}`
           const external = /^https?:\/\//i.test(href)
