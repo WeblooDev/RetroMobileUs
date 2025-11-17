@@ -16,7 +16,7 @@ export const Faqs: CollectionConfig = {
       required: true,
       maxDepth: 0,
     },
-    { name: 'order', type: 'number', defaultValue: 0 },
+    { name: 'order', type: 'number', defaultValue: 0, required: true },
   ],
   timestamps: true,
 }

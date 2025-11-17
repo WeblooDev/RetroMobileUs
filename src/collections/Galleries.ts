@@ -5,13 +5,13 @@ export const Galleries: CollectionConfig = {
   slug: 'galleries',
   labels: { singular: 'Gallery', plural: 'Galleries' },
   admin: { useAsTitle: 'title', defaultColumns: ['title','slug','updatedAt'] },
-  access: { read: () => true },
   fields: [
     { name: 'title', type: 'text', required: true },
     {
       name: 'intro',
       label: 'Short description',
       type: 'textarea',
+      required: true,
       admin: { rows: 3 },
     },
     { name: 'thumbnail', type: 'upload', relationTo: 'media', required: true },
@@ -27,9 +27,9 @@ export const Galleries: CollectionConfig = {
       ],
     },
 
-    // optional external override for “View Gallery” links
     {
       name: 'readMore',
+   
       type: 'group',
       fields: [
         { name: 'url', type: 'text' },
@@ -42,6 +42,7 @@ export const Galleries: CollectionConfig = {
     {
       name: 'publishedAt',
       type: 'date',
+      required: true,
       admin: { position: 'sidebar' },
       hooks: {
         beforeChange: [
