@@ -1383,29 +1383,27 @@ export interface MissionGallery {
  */
 export interface LinkBanner {
   title: string;
-  paragraph?: string | null;
-  ctas?:
-    | {
-        link: {
-          type?: ('reference' | 'custom') | null;
-          newTab?: boolean | null;
-          reference?:
-            | ({
-                relationTo: 'pages';
-                value: string | Page;
-              } | null)
-            | ({
-                relationTo: 'posts';
-                value: string | Post;
-              } | null);
-          url?: string | null;
-          label: string;
-        };
-        id?: string | null;
-      }[]
-    | null;
-  linkBgColor?: string | null;
-  rightImage?: (string | null) | Media;
+  paragraph: string;
+  ctas: {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+    };
+    id?: string | null;
+  }[];
+  image: string | Media;
+  linkBgColor: string;
   id?: string | null;
   blockName?: string | null;
   blockType: 'linkBanner';
@@ -3715,8 +3713,8 @@ export interface LinkBannerSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  image?: T;
   linkBgColor?: T;
-  rightImage?: T;
   id?: T;
   blockName?: T;
 }

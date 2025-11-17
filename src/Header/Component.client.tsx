@@ -102,7 +102,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                           style={{ height: GAP_PX, top: `-${GAP_PX}px` }}
                           aria-hidden
                         />
-                        <div className="bg-[#8B9B5C]/80 backdrop-blur-sm border border-[#8B9B5C] min-w-[220px]">
+                        <div className="bg-[#8B9B5C] backdrop-blur-sm border border-[#8B9B5C] min-w-[220px]">
                           {(item.dropdownLinks ?? []).map((dd) => (
                             <Link
                               key={dd.label}
