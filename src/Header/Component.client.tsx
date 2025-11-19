@@ -122,7 +122,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
 
             <div className="hidden md:flex items-center gap-3">
               {ctaLink?.link?.label && ctaLink.link.url && (
-                <CMSLink url={ctaLink.link.url} appearance="olive" label={ctaLink.link.label} size="ctaBig"/>
+                <CMSLink url={ctaLink.link.url} appearance="olive" label={ctaLink.link.label} size="ctaBig" className="tixpub-buytix"/>
 
               )}
               {secondaryCTA?.link?.label && secondaryCTA.link.url && (
