@@ -1,3 +1,4 @@
+import { link } from '@/fields/link'
 import type { Block } from 'payload'
 
 export const ContactCards: Block = {
@@ -14,10 +15,10 @@ export const ContactCards: Block = {
     },
     {
       name: 'cards',
-      required: true,
       type: 'array',
-      labels: { singular: 'Card', plural: 'Cards' },
+      required: true,
       minRows: 1,
+      labels: { singular: 'Card', plural: 'Cards' },
       fields: [
         {
           name: 'image',
@@ -36,8 +37,16 @@ export const ContactCards: Block = {
           name: 'email',
           type: 'email',
           label: 'Email',
-          required: true,
+          required: false,
         },
+        link({
+          overrides: {
+            name: 'link',
+            label: 'Link (optional)',
+            required: false,
+            
+          },
+        }),
       ],
     },
   ],

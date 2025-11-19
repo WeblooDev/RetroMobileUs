@@ -1,4 +1,6 @@
 import type { Block } from 'payload'
+import { link } from '@/fields/link'
+
 
 const NumberedListMedia: Block = {
   slug: 'numberedListMedia',
@@ -22,7 +24,15 @@ const NumberedListMedia: Block = {
       required: true,
       label: 'Image',
     },
-  ],
+    link({
+        overrides: {
+          name: 'link',
+          label: 'Link',
+         
+        },
+        appearances: false,
+      }), 
+    ],
 }
 
 export default NumberedListMedia

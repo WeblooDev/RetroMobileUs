@@ -188,7 +188,7 @@ export interface Page {
     links?:
       | {
           link: {
-            type?: ('reference' | 'custom') | null;
+            type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
             newTab?: boolean | null;
             reference?:
               | ({
@@ -200,11 +200,28 @@ export interface Page {
                   value: string | Post;
                 } | null);
             url?: string | null;
+            email?: string | null;
+            /**
+             * Enter phone number (e.g., +1-555-123-4567)
+             */
+            phone?: string | null;
+            /**
+             * Select the action to trigger when clicked
+             */
+            trigger?: ('trigger' | 'scroll') | null;
+            /**
+             * Additional data for the trigger (e.g., modal ID, section ID)
+             */
+            triggerData?: string | null;
             label: string;
             /**
              * Choose how the link should be rendered.
              */
-            appearance?: ('default' | 'outline') | null;
+            appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+            /**
+             * Display an arrow icon next to the link text.
+             */
+            showArrow?: boolean | null;
           };
           id?: string | null;
         }[]
@@ -397,6 +414,7 @@ export interface Page {
     | NumberedListMedia
     | GalleriesList
     | FaqTabs
+    | ImageCardGrid
   )[];
   meta?: {
     title?: string | null;
@@ -676,6 +694,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -701,7 +726,7 @@ export interface CallToActionBlock {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -713,11 +738,28 @@ export interface CallToActionBlock {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
           /**
            * Choose how the link should be rendered.
            */
           appearance?: ('default' | 'outline') | null;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -751,7 +793,7 @@ export interface ContentBlock {
         } | null;
         enableLink?: boolean | null;
         link?: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -763,11 +805,28 @@ export interface ContentBlock {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
           /**
            * Choose how the link should be rendered.
            */
-          appearance?: ('default' | 'outline') | null;
+          appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1054,7 +1113,7 @@ export interface FlexGridBoxBlock {
               img?: (string | null) | Media;
               enableLink?: boolean | null;
               link?: {
-                type?: ('reference' | 'custom') | null;
+                type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
                 newTab?: boolean | null;
                 reference?:
                   | ({
@@ -1066,11 +1125,28 @@ export interface FlexGridBoxBlock {
                       value: string | Post;
                     } | null);
                 url?: string | null;
+                email?: string | null;
+                /**
+                 * Enter phone number (e.g., +1-555-123-4567)
+                 */
+                phone?: string | null;
+                /**
+                 * Select the action to trigger when clicked
+                 */
+                trigger?: ('trigger' | 'scroll') | null;
+                /**
+                 * Additional data for the trigger (e.g., modal ID, section ID)
+                 */
+                triggerData?: string | null;
                 label: string;
                 /**
                  * Choose how the link should be rendered.
                  */
-                appearance?: ('default' | 'outline') | null;
+                appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+                /**
+                 * Display an arrow icon next to the link text.
+                 */
+                showArrow?: boolean | null;
               };
               id?: string | null;
             }[]
@@ -1125,7 +1201,7 @@ export interface CarsCarousel {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1137,11 +1213,28 @@ export interface CarsCarousel {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
           /**
            * Choose how the link should be rendered.
            */
           appearance?: ('default' | 'outline') | null;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1253,7 +1346,7 @@ export interface VideoCta {
    */
   paragraph: string;
   link: {
-    type?: ('reference' | 'custom') | null;
+    type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
     newTab?: boolean | null;
     reference?:
       | ({
@@ -1265,11 +1358,28 @@ export interface VideoCta {
           value: string | Post;
         } | null);
     url?: string | null;
+    email?: string | null;
+    /**
+     * Enter phone number (e.g., +1-555-123-4567)
+     */
+    phone?: string | null;
+    /**
+     * Select the action to trigger when clicked
+     */
+    trigger?: ('trigger' | 'scroll') | null;
+    /**
+     * Additional data for the trigger (e.g., modal ID, section ID)
+     */
+    triggerData?: string | null;
     label: string;
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'outline') | null;
+    appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+    /**
+     * Display an arrow icon next to the link text.
+     */
+    showArrow?: boolean | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -1386,7 +1496,7 @@ export interface LinkBanner {
   paragraph: string;
   ctas: {
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -1398,7 +1508,24 @@ export interface LinkBanner {
             value: string | Post;
           } | null);
       url?: string | null;
+      email?: string | null;
+      /**
+       * Enter phone number (e.g., +1-555-123-4567)
+       */
+      phone?: string | null;
+      /**
+       * Select the action to trigger when clicked
+       */
+      trigger?: ('trigger' | 'scroll') | null;
+      /**
+       * Additional data for the trigger (e.g., modal ID, section ID)
+       */
+      triggerData?: string | null;
       label: string;
+      /**
+       * Display an arrow icon next to the link text.
+       */
+      showArrow?: boolean | null;
     };
     id?: string | null;
   }[];
@@ -1439,7 +1566,7 @@ export interface EventLocation {
   ctas?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1451,7 +1578,24 @@ export interface EventLocation {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1471,7 +1615,7 @@ export interface ImageTextCTA {
   ctas?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1483,7 +1627,24 @@ export interface ImageTextCTA {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1506,7 +1667,7 @@ export interface ContactBanner {
   phone?: string | null;
   backgroundColor?: string | null;
   button: {
-    type?: ('reference' | 'custom') | null;
+    type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
     newTab?: boolean | null;
     reference?:
       | ({
@@ -1518,11 +1679,28 @@ export interface ContactBanner {
           value: string | Post;
         } | null);
     url?: string | null;
+    email?: string | null;
+    /**
+     * Enter phone number (e.g., +1-555-123-4567)
+     */
+    phone?: string | null;
+    /**
+     * Select the action to trigger when clicked
+     */
+    trigger?: ('trigger' | 'scroll') | null;
+    /**
+     * Additional data for the trigger (e.g., modal ID, section ID)
+     */
+    triggerData?: string | null;
     label: string;
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'outline') | null;
+    appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+    /**
+     * Display an arrow icon next to the link text.
+     */
+    showArrow?: boolean | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -1602,7 +1780,7 @@ export interface LogoTextCTA {
    * Optional call-to-action link.
    */
   cta: {
-    type?: ('reference' | 'custom') | null;
+    type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
     newTab?: boolean | null;
     reference?:
       | ({
@@ -1614,11 +1792,28 @@ export interface LogoTextCTA {
           value: string | Post;
         } | null);
     url?: string | null;
+    email?: string | null;
+    /**
+     * Enter phone number (e.g., +1-555-123-4567)
+     */
+    phone?: string | null;
+    /**
+     * Select the action to trigger when clicked
+     */
+    trigger?: ('trigger' | 'scroll') | null;
+    /**
+     * Additional data for the trigger (e.g., modal ID, section ID)
+     */
+    triggerData?: string | null;
     label: string;
     /**
      * Choose how the link should be rendered.
      */
     appearance?: 'default' | null;
+    /**
+     * Display an arrow icon next to the link text.
+     */
+    showArrow?: boolean | null;
   };
   reverse?: boolean | null;
   id?: string | null;
@@ -1634,7 +1829,7 @@ export interface TextWithCTAs {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1646,7 +1841,24 @@ export interface TextWithCTAs {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1704,7 +1916,7 @@ export interface RightImageCTA {
   cta?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1716,7 +1928,24 @@ export interface RightImageCTA {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1841,7 +2070,7 @@ export interface MerchShowcase {
         links?:
           | {
               link: {
-                type?: ('reference' | 'custom') | null;
+                type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
                 newTab?: boolean | null;
                 reference?:
                   | ({
@@ -1853,7 +2082,24 @@ export interface MerchShowcase {
                       value: string | Post;
                     } | null);
                 url?: string | null;
+                email?: string | null;
+                /**
+                 * Enter phone number (e.g., +1-555-123-4567)
+                 */
+                phone?: string | null;
+                /**
+                 * Select the action to trigger when clicked
+                 */
+                trigger?: ('trigger' | 'scroll') | null;
+                /**
+                 * Additional data for the trigger (e.g., modal ID, section ID)
+                 */
+                triggerData?: string | null;
                 label: string;
+                /**
+                 * Display an arrow icon next to the link text.
+                 */
+                showArrow?: boolean | null;
               };
               id?: string | null;
             }[]
@@ -1900,7 +2146,7 @@ export interface TextCTAImageRight {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1912,7 +2158,24 @@ export interface TextCTAImageRight {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1938,7 +2201,7 @@ export interface ImageStepsRight {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -1950,7 +2213,24 @@ export interface ImageStepsRight {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -1974,7 +2254,7 @@ export interface TextVideoRight {
    */
   video: string | Media;
   button: {
-    type?: ('reference' | 'custom') | null;
+    type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
     newTab?: boolean | null;
     reference?:
       | ({
@@ -1986,11 +2266,28 @@ export interface TextVideoRight {
           value: string | Post;
         } | null);
     url?: string | null;
+    email?: string | null;
+    /**
+     * Enter phone number (e.g., +1-555-123-4567)
+     */
+    phone?: string | null;
+    /**
+     * Select the action to trigger when clicked
+     */
+    trigger?: ('trigger' | 'scroll') | null;
+    /**
+     * Additional data for the trigger (e.g., modal ID, section ID)
+     */
+    triggerData?: string | null;
     label: string;
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'outline') | null;
+    appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+    /**
+     * Display an arrow icon next to the link text.
+     */
+    showArrow?: boolean | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -2006,7 +2303,7 @@ export interface CenteredBannerCTA {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -2018,7 +2315,24 @@ export interface CenteredBannerCTA {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -2063,7 +2377,7 @@ export interface HelpfulLinksGrid {
     image: string | Media;
     links: {
       link: {
-        type?: ('reference' | 'custom') | null;
+        type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
         newTab?: boolean | null;
         reference?:
           | ({
@@ -2075,7 +2389,24 @@ export interface HelpfulLinksGrid {
               value: string | Post;
             } | null);
         url?: string | null;
+        email?: string | null;
+        /**
+         * Enter phone number (e.g., +1-555-123-4567)
+         */
+        phone?: string | null;
+        /**
+         * Select the action to trigger when clicked
+         */
+        trigger?: ('trigger' | 'scroll') | null;
+        /**
+         * Additional data for the trigger (e.g., modal ID, section ID)
+         */
+        triggerData?: string | null;
         label: string;
+        /**
+         * Display an arrow icon next to the link text.
+         */
+        showArrow?: boolean | null;
       };
       id?: string | null;
     }[];
@@ -2168,7 +2499,7 @@ export interface TicketIncludes {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -2180,7 +2511,24 @@ export interface TicketIncludes {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -2206,7 +2554,7 @@ export interface HelpfulReminders {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -2218,7 +2566,24 @@ export interface HelpfulReminders {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -2245,7 +2610,7 @@ export interface FloorPlan {
   links?:
     | {
         link: {
-          type?: ('reference' | 'custom') | null;
+          type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
           newTab?: boolean | null;
           reference?:
             | ({
@@ -2257,7 +2622,24 @@ export interface FloorPlan {
                 value: string | Post;
               } | null);
           url?: string | null;
+          email?: string | null;
+          /**
+           * Enter phone number (e.g., +1-555-123-4567)
+           */
+          phone?: string | null;
+          /**
+           * Select the action to trigger when clicked
+           */
+          trigger?: ('trigger' | 'scroll') | null;
+          /**
+           * Additional data for the trigger (e.g., modal ID, section ID)
+           */
+          triggerData?: string | null;
           label: string;
+          /**
+           * Display an arrow icon next to the link text.
+           */
+          showArrow?: boolean | null;
         };
         id?: string | null;
       }[]
@@ -2338,7 +2720,7 @@ export interface PostsCarousel {
   title: string;
   viewAll: {
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -2350,11 +2732,28 @@ export interface PostsCarousel {
             value: string | Post;
           } | null);
       url?: string | null;
+      email?: string | null;
+      /**
+       * Enter phone number (e.g., +1-555-123-4567)
+       */
+      phone?: string | null;
+      /**
+       * Select the action to trigger when clicked
+       */
+      trigger?: ('trigger' | 'scroll') | null;
+      /**
+       * Additional data for the trigger (e.g., modal ID, section ID)
+       */
+      triggerData?: string | null;
       label: string;
       /**
        * Choose how the link should be rendered.
        */
-      appearance?: ('default' | 'outline') | null;
+      appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+      /**
+       * Display an arrow icon next to the link text.
+       */
+      showArrow?: boolean | null;
     };
     id?: string | null;
   }[];
@@ -2376,7 +2775,7 @@ export interface KnowBeforeYouGo {
   }[];
   cta: {
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -2388,7 +2787,24 @@ export interface KnowBeforeYouGo {
             value: string | Post;
           } | null);
       url?: string | null;
+      email?: string | null;
+      /**
+       * Enter phone number (e.g., +1-555-123-4567)
+       */
+      phone?: string | null;
+      /**
+       * Select the action to trigger when clicked
+       */
+      trigger?: ('trigger' | 'scroll') | null;
+      /**
+       * Additional data for the trigger (e.g., modal ID, section ID)
+       */
+      triggerData?: string | null;
       label: string;
+      /**
+       * Display an arrow icon next to the link text.
+       */
+      showArrow?: boolean | null;
     };
     id?: string | null;
   }[];
@@ -2463,7 +2879,7 @@ export interface ImageTitle {
   description: string;
   image: string | Media;
   button: {
-    type?: ('reference' | 'custom') | null;
+    type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
     newTab?: boolean | null;
     reference?:
       | ({
@@ -2475,11 +2891,28 @@ export interface ImageTitle {
           value: string | Post;
         } | null);
     url?: string | null;
+    email?: string | null;
+    /**
+     * Enter phone number (e.g., +1-555-123-4567)
+     */
+    phone?: string | null;
+    /**
+     * Select the action to trigger when clicked
+     */
+    trigger?: ('trigger' | 'scroll') | null;
+    /**
+     * Additional data for the trigger (e.g., modal ID, section ID)
+     */
+    triggerData?: string | null;
     label: string;
     /**
      * Choose how the link should be rendered.
      */
-    appearance?: ('default' | 'outline') | null;
+    appearance?: ('default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'link') | null;
+    /**
+     * Display an arrow icon next to the link text.
+     */
+    showArrow?: boolean | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -2494,7 +2927,11 @@ export interface ContactCards {
   cards: {
     image: string | Media;
     cardTitle: string;
-    email: string;
+    email?: string | null;
+    link?: {
+      type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
+      newTab?: boolean | null;
+    };
     id?: string | null;
   }[];
   id?: string | null;
@@ -2532,6 +2969,38 @@ export interface NumberedListMedia {
     id?: string | null;
   }[];
   image: string | Media;
+  link: {
+    type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    email?: string | null;
+    /**
+     * Enter phone number (e.g., +1-555-123-4567)
+     */
+    phone?: string | null;
+    /**
+     * Select the action to trigger when clicked
+     */
+    trigger?: ('trigger' | 'scroll') | null;
+    /**
+     * Additional data for the trigger (e.g., modal ID, section ID)
+     */
+    triggerData?: string | null;
+    label: string;
+    /**
+     * Display an arrow icon next to the link text.
+     */
+    showArrow?: boolean | null;
+  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'numberedListMedia';
@@ -2577,6 +3046,23 @@ export interface FaqCategory {
   order: number;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageCardGrid".
+ */
+export interface ImageCardGrid {
+  title: string;
+  items: {
+    text: string;
+    url: string;
+    newTab: boolean;
+    image: string | Media;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageCardGrid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3076,8 +3562,13 @@ export interface PagesSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
+                    email?: T;
+                    phone?: T;
+                    trigger?: T;
+                    triggerData?: T;
                     label?: T;
                     appearance?: T;
+                    showArrow?: T;
                   };
               id?: T;
             };
@@ -3279,6 +3770,7 @@ export interface PagesSelect<T extends boolean = true> {
         numberedListMedia?: T | NumberedListMediaSelect<T>;
         galleriesList?: T | GalleriesListSelect<T>;
         faqTabs?: T | FaqTabsSelect<T>;
+        imageCardGrid?: T | ImageCardGridSelect<T>;
       };
   meta?:
     | T
@@ -3310,8 +3802,13 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
               appearance?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -3336,8 +3833,13 @@ export interface ContentBlockSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
               appearance?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -3419,8 +3921,13 @@ export interface FlexGridBoxBlockSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
+                    email?: T;
+                    phone?: T;
+                    trigger?: T;
+                    triggerData?: T;
                     label?: T;
                     appearance?: T;
+                    showArrow?: T;
                   };
               id?: T;
             };
@@ -3479,8 +3986,13 @@ export interface CarsCarouselSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
               appearance?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -3583,8 +4095,13 @@ export interface VideoCtaSelect<T extends boolean = true> {
         newTab?: T;
         reference?: T;
         url?: T;
+        email?: T;
+        phone?: T;
+        trigger?: T;
+        triggerData?: T;
         label?: T;
         appearance?: T;
+        showArrow?: T;
       };
   id?: T;
   blockName?: T;
@@ -3709,7 +4226,12 @@ export interface LinkBannerSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -3755,7 +4277,12 @@ export interface EventLocationSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -3780,7 +4307,12 @@ export interface ImageTextCTASelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -3804,8 +4336,13 @@ export interface ContactBannerSelect<T extends boolean = true> {
         newTab?: T;
         reference?: T;
         url?: T;
+        email?: T;
+        phone?: T;
+        trigger?: T;
+        triggerData?: T;
         label?: T;
         appearance?: T;
+        showArrow?: T;
       };
   id?: T;
   blockName?: T;
@@ -3883,8 +4420,13 @@ export interface LogoTextCTASelect<T extends boolean = true> {
         newTab?: T;
         reference?: T;
         url?: T;
+        email?: T;
+        phone?: T;
+        trigger?: T;
+        triggerData?: T;
         label?: T;
         appearance?: T;
+        showArrow?: T;
       };
   reverse?: T;
   id?: T;
@@ -3906,7 +4448,12 @@ export interface TextWithCTAsSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -3967,7 +4514,12 @@ export interface RightImageCTASelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4086,7 +4638,12 @@ export interface MerchShowcaseSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
+                    email?: T;
+                    phone?: T;
+                    trigger?: T;
+                    triggerData?: T;
                     label?: T;
+                    showArrow?: T;
                   };
               id?: T;
             };
@@ -4135,7 +4692,12 @@ export interface TextCTAImageRightSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4166,7 +4728,12 @@ export interface ImageStepsRightSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4191,8 +4758,13 @@ export interface TextVideoRightSelect<T extends boolean = true> {
         newTab?: T;
         reference?: T;
         url?: T;
+        email?: T;
+        phone?: T;
+        trigger?: T;
+        triggerData?: T;
         label?: T;
         appearance?: T;
+        showArrow?: T;
       };
   id?: T;
   blockName?: T;
@@ -4214,7 +4786,12 @@ export interface CenteredBannerCTASelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4266,7 +4843,12 @@ export interface HelpfulLinksGridSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
+                    email?: T;
+                    phone?: T;
+                    trigger?: T;
+                    triggerData?: T;
                     label?: T;
+                    showArrow?: T;
                   };
               id?: T;
             };
@@ -4386,7 +4968,12 @@ export interface TicketIncludesSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4417,7 +5004,12 @@ export interface HelpfulRemindersSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4449,7 +5041,12 @@ export interface FloorPlanSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4538,8 +5135,13 @@ export interface PostsCarouselSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
               appearance?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4570,7 +5172,12 @@ export interface KnowBeforeYouGoSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
         id?: T;
       };
@@ -4637,8 +5244,13 @@ export interface ImageTitleSelect<T extends boolean = true> {
         newTab?: T;
         reference?: T;
         url?: T;
+        email?: T;
+        phone?: T;
+        trigger?: T;
+        triggerData?: T;
         label?: T;
         appearance?: T;
+        showArrow?: T;
       };
   id?: T;
   blockName?: T;
@@ -4655,6 +5267,12 @@ export interface ContactCardsSelect<T extends boolean = true> {
         image?: T;
         cardTitle?: T;
         email?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+            };
         id?: T;
       };
   id?: T;
@@ -4691,6 +5309,20 @@ export interface NumberedListMediaSelect<T extends boolean = true> {
         id?: T;
       };
   image?: T;
+  link?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        email?: T;
+        phone?: T;
+        trigger?: T;
+        triggerData?: T;
+        label?: T;
+        showArrow?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -4713,6 +5345,24 @@ export interface GalleriesListSelect<T extends boolean = true> {
 export interface FaqTabsSelect<T extends boolean = true> {
   categories?: T;
   accentColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageCardGrid_select".
+ */
+export interface ImageCardGridSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        text?: T;
+        url?: T;
+        newTab?: T;
+        image?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -4915,6 +5565,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -5364,7 +6021,7 @@ export interface Header {
    */
   ctaLink: {
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -5376,7 +6033,24 @@ export interface Header {
             value: string | Post;
           } | null);
       url?: string | null;
+      email?: string | null;
+      /**
+       * Enter phone number (e.g., +1-555-123-4567)
+       */
+      phone?: string | null;
+      /**
+       * Select the action to trigger when clicked
+       */
+      trigger?: ('trigger' | 'scroll') | null;
+      /**
+       * Additional data for the trigger (e.g., modal ID, section ID)
+       */
+      triggerData?: string | null;
       label: string;
+      /**
+       * Display an arrow icon next to the link text.
+       */
+      showArrow?: boolean | null;
     };
   };
   /**
@@ -5384,7 +6058,7 @@ export interface Header {
    */
   secondaryCTA: {
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -5396,7 +6070,24 @@ export interface Header {
             value: string | Post;
           } | null);
       url?: string | null;
+      email?: string | null;
+      /**
+       * Enter phone number (e.g., +1-555-123-4567)
+       */
+      phone?: string | null;
+      /**
+       * Select the action to trigger when clicked
+       */
+      trigger?: ('trigger' | 'scroll') | null;
+      /**
+       * Additional data for the trigger (e.g., modal ID, section ID)
+       */
+      triggerData?: string | null;
       label: string;
+      /**
+       * Display an arrow icon next to the link text.
+       */
+      showArrow?: boolean | null;
     };
   };
   updatedAt?: string | null;
@@ -5422,7 +6113,7 @@ export interface Footer {
   cta: {
     label?: string | null;
     link: {
-      type?: ('reference' | 'custom') | null;
+      type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
       newTab?: boolean | null;
       reference?:
         | ({
@@ -5434,7 +6125,24 @@ export interface Footer {
             value: string | Post;
           } | null);
       url?: string | null;
+      email?: string | null;
+      /**
+       * Enter phone number (e.g., +1-555-123-4567)
+       */
+      phone?: string | null;
+      /**
+       * Select the action to trigger when clicked
+       */
+      trigger?: ('trigger' | 'scroll') | null;
+      /**
+       * Additional data for the trigger (e.g., modal ID, section ID)
+       */
+      triggerData?: string | null;
       label: string;
+      /**
+       * Display an arrow icon next to the link text.
+       */
+      showArrow?: boolean | null;
     };
   };
   /**
@@ -5447,7 +6155,7 @@ export interface Footer {
         links?:
           | {
               link: {
-                type?: ('reference' | 'custom') | null;
+                type?: ('reference' | 'custom' | 'email' | 'phone' | 'trigger') | null;
                 newTab?: boolean | null;
                 reference?:
                   | ({
@@ -5459,7 +6167,24 @@ export interface Footer {
                       value: string | Post;
                     } | null);
                 url?: string | null;
+                email?: string | null;
+                /**
+                 * Enter phone number (e.g., +1-555-123-4567)
+                 */
+                phone?: string | null;
+                /**
+                 * Select the action to trigger when clicked
+                 */
+                trigger?: ('trigger' | 'scroll') | null;
+                /**
+                 * Additional data for the trigger (e.g., modal ID, section ID)
+                 */
+                triggerData?: string | null;
                 label: string;
+                /**
+                 * Display an arrow icon next to the link text.
+                 */
+                showArrow?: boolean | null;
               };
               id?: string | null;
             }[]
@@ -5507,7 +6232,12 @@ export interface HeaderSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
       };
   secondaryCTA?:
@@ -5520,7 +6250,12 @@ export interface HeaderSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
       };
   updatedAt?: T;
@@ -5554,7 +6289,12 @@ export interface FooterSelect<T extends boolean = true> {
               newTab?: T;
               reference?: T;
               url?: T;
+              email?: T;
+              phone?: T;
+              trigger?: T;
+              triggerData?: T;
               label?: T;
+              showArrow?: T;
             };
       };
   copyright?: T;
@@ -5572,7 +6312,12 @@ export interface FooterSelect<T extends boolean = true> {
                     newTab?: T;
                     reference?: T;
                     url?: T;
+                    email?: T;
+                    phone?: T;
+                    trigger?: T;
+                    triggerData?: T;
                     label?: T;
+                    showArrow?: T;
                   };
               id?: T;
             };

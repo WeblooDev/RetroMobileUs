@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import { CTAButton } from '@/components/CTAButton'
 import { CMSLink } from '@/components/Link'
 
 type TwoColumnCTAProps = {

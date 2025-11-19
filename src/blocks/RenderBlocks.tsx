@@ -85,6 +85,7 @@ import ProgramHighlight from './ProgramHighlight/Component'
 import NumberedListMedia from './NumberedListMedia/Component'
 import GalleriesList from './GalleriesList/Component'
 import FaqTabs from './FaqTabs/Component'
+import ImageCardGrid from './ImageCardGrid/Component'
 
 
 const blockComponents = {
@@ -169,9 +170,9 @@ const blockComponents = {
   contactCards: ContactCards,
   programHighlight: ProgramHighlight, 
   numberedListMedia: NumberedListMedia,
-  
   galleriesList: GalleriesList,
   faqTabs: FaqTabs,
+   imageCardGrid: ImageCardGrid,
 
         
  

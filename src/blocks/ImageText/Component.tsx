@@ -38,9 +38,9 @@ export default function ImageText(props: ImageTextBlock) {
         </div>
 
 
-        <div className={`md:w-1/2 flex flex-col ${align} gap-5 justify-center`}>
-          <h2 className="font-ivar text-2xl lg:text-3xl xl:text-4xl ">{title}</h2>
-          <p className="text-base max-w-prose">{text}</p>
+        <div className={`md:w-1/2 flex flex-col ${align} gap-5 justify-center items-center`}>
+          <h2 className="font-ivar text-2xl lg:text-3xl xl:text-4xl text-center ">{title}</h2>
+          <p className="text-base max-w-prose text-center">{text}</p>
         </div>
       </div>
     </section>
