@@ -49,15 +49,13 @@ export const Header: GlobalConfig = {
       minRows: 1,
       maxRows: 12,
       fields: [
-        { name: 'label', type: 'text', required: true },
-        {
-          name: 'url',
-          type: 'text',
-          admin: {
-            description:
-              'If you leave this empty and add dropdownLinks below, this becomes a dropdown.',
-          },
-        },
+         link({
+      overrides: {
+        name: 'link',
+        label: 'Top-level link',
+        required: false, // allow "pure dropdown" items
+      },
+    }),
         {
           name: 'dropdownLinks',
           label: 'Dropdown Links',
@@ -65,8 +63,13 @@ export const Header: GlobalConfig = {
           minRows: 0,
           maxRows: 50,
           fields: [
-            { name: 'label', type: 'text', required: true },
-            { name: 'url', type: 'text', required: true },
+            link({
+          overrides: {
+            name: 'link',
+            label: 'Dropdown link',
+            required: true,
+          },
+        }),
           ],
           admin: {
             initCollapsed: true,

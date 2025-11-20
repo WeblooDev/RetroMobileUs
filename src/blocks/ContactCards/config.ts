@@ -1,4 +1,6 @@
+// src/blocks/ContactCards/config.ts
 import type { Block } from 'payload'
+import { linkGroup } from '@/fields/linkGroup'
 
 export const ContactCards: Block = {
   slug: 'contactCards',
@@ -36,8 +38,15 @@ export const ContactCards: Block = {
           name: 'email',
           type: 'email',
           label: 'Email',
-          required: true,
+          required: false,
         },
+        linkGroup({
+          overrides: {
+            name: 'link',
+            label: 'Optional Link',
+            required: false,
+          },
+        }),
       ],
     },
   ],

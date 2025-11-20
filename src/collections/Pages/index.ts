@@ -99,6 +99,7 @@ import ProgramHighlight from '@/blocks/ProgramHighlight/Config'
 import NumberedListMedia from '@/blocks/NumberedListMedia/config'
 import GalleriesList from '@/blocks/GalleriesList/config'
 import FaqTabs from '@/blocks/FaqTabs/config'
+import ImageCardGrid from '@/blocks/ImageCardGrid/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -237,6 +238,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 NumberedListMedia,
                 GalleriesList,
                 FaqTabs,
+                ImageCardGrid
        
               ],
               required: true,

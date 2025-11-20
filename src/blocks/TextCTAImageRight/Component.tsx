@@ -3,6 +3,7 @@
 import { Media } from "@/components/Media"
 import type { TextCTAImageRight as TextCTAImageRightBlock } from "@/payload-types"
 import TixpubButton from "@/components/TixpubButton"
+import { CMSLink } from "@/components/Link"
 const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
   title,
   description,
@@ -24,11 +25,12 @@ const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
           {boldLine && <p className="mt-3 font-semibold text-sm md:text-base">{boldLine}</p>}
           {primary && (
             <div className="mt-6">
-              <TixpubButton
-                label={primary.label || "Buy Tickets"}
-                variant="olive"
+              <CMSLink
+                {...primary}
+                appearance="olive"
                 size="ctaBig"
                 className="tixpub-buytix"
+               
               />
             </div>
           )}

@@ -397,6 +397,7 @@ export interface Page {
     | NumberedListMedia
     | GalleriesList
     | FaqTabs
+    | ImageCardGrid
   )[];
   meta?: {
     title?: string | null;
@@ -676,6 +677,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -1338,8 +1346,23 @@ export interface CardGrid {
     title: string;
     description: string;
     button: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
       label: string;
-      url: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'outline') | null;
     };
     spanFullOnDesktop?: boolean | null;
     id?: string | null;
@@ -2494,7 +2517,31 @@ export interface ContactCards {
   cards: {
     image: string | Media;
     cardTitle: string;
-    email: string;
+    email?: string | null;
+    link?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
     id?: string | null;
   }[];
   id?: string | null;
@@ -2577,6 +2624,40 @@ export interface FaqCategory {
   order: number;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageCardGrid".
+ */
+export interface ImageCardGrid {
+  title: string;
+  items: {
+    image: string | Media;
+    text: string;
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: ('default' | 'outline') | null;
+    };
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageCardGrid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3279,6 +3360,7 @@ export interface PagesSelect<T extends boolean = true> {
         numberedListMedia?: T | NumberedListMediaSelect<T>;
         galleriesList?: T | GalleriesListSelect<T>;
         faqTabs?: T | FaqTabsSelect<T>;
+        imageCardGrid?: T | ImageCardGridSelect<T>;
       };
   meta?:
     | T
@@ -3656,8 +3738,12 @@ export interface CardGridSelect<T extends boolean = true> {
         button?:
           | T
           | {
-              label?: T;
+              type?: T;
+              newTab?: T;
+              reference?: T;
               url?: T;
+              label?: T;
+              appearance?: T;
             };
         spanFullOnDesktop?: T;
         id?: T;
@@ -4655,6 +4741,21 @@ export interface ContactCardsSelect<T extends boolean = true> {
         image?: T;
         cardTitle?: T;
         email?: T;
+        link?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
         id?: T;
       };
   id?: T;
@@ -4713,6 +4814,32 @@ export interface GalleriesListSelect<T extends boolean = true> {
 export interface FaqTabsSelect<T extends boolean = true> {
   categories?: T;
   accentColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageCardGrid_select".
+ */
+export interface ImageCardGridSelect<T extends boolean = true> {
+  title?: T;
+  items?:
+    | T
+    | {
+        image?: T;
+        text?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -4915,6 +5042,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -5341,18 +5475,49 @@ export interface Header {
   logo: string | Media;
   navItems?:
     | {
-        label: string;
-        /**
-         * If you leave this empty and add dropdownLinks below, this becomes a dropdown.
-         */
-        url?: string | null;
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
         /**
          * If any items exist here, this nav item will render as a dropdown.
          */
         dropdownLinks?:
           | {
-              label: string;
-              url: string;
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose how the link should be rendered.
+                 */
+                appearance?: ('default' | 'outline') | null;
+              };
               id?: string | null;
             }[]
           | null;
@@ -5486,13 +5651,29 @@ export interface HeaderSelect<T extends boolean = true> {
   navItems?:
     | T
     | {
-        label?: T;
-        url?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
         dropdownLinks?:
           | T
           | {
-              label?: T;
-              url?: T;
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
               id?: T;
             };
         id?: T;
