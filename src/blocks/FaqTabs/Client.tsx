@@ -135,7 +135,7 @@ export default function FaqTabsClient({
                 role="region"
                 aria-labelledby={qId}
                 className="overflow-hidden transition-[max-height,opacity] duration-300"
-                style={{ maxHeight: isOpen ? 500 : 0, opacity: isOpen ? 1 : 0 }}
+                style={{ maxHeight: isOpen ? 700 : 0, opacity: isOpen ? 1 : 0 }}
               >
                 <div className="px-5 md:px-7 pb-5 md:pb-6 mt-2 text-sm md:text-base lg:text-lg text-black w-[90%]">
                   <RichText data={row.answer2} />
