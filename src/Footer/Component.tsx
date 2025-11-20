@@ -111,8 +111,7 @@ export async function Footer() {
           )}
 
           <div className="flex flex-col items-center justify-center gap-4">
-              <p className='text-sm text-center'>Retromobile USA and Salon Rétromobile are trademarks of Comexposium</p>
-
+              <p className='text-sm text-center'>About Rétromobile USA</p>
               <div className="flex gap-4 items-center">
                     <Image
                     src={Comexposium}

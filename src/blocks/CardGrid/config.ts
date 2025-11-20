@@ -1,8 +1,10 @@
+// src/blocks/CardGrid/config.ts
 import type { Block } from 'payload'
+import { link } from '@/fields/link'
 
 export const CardGrid: Block = {
   slug: 'cardGrid',
-  interfaceName: 'CardGrid', 
+  interfaceName: 'CardGrid',
   labels: { singular: 'Card Grid', plural: 'Card Grids' },
   fields: [
     {
@@ -24,18 +26,24 @@ export const CardGrid: Block = {
       label: 'Cards',
       labels: { singular: 'Card', plural: 'Cards' },
       fields: [
-        { name: 'image', type: 'upload', relationTo: 'media', required: true, label: 'Image' },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+          label: 'Image',
+        },
         { name: 'title', type: 'text', required: true },
         { name: 'description', type: 'textarea', required: true },
-        {
-          name: 'button',
-          type: 'group',
-          label: 'Button',
-          fields: [
-            { name: 'label', type: 'text', required: true, defaultValue: 'READ MORE' },
-            { name: 'url', type: 'text', required: true, defaultValue: '#' },
-          ],
-        },
+
+        link({
+          overrides: {
+            name: 'button',
+            label: 'Button',
+            required: false, // optional button
+          },
+        }),
+
         {
           name: 'spanFullOnDesktop',
           type: 'checkbox',
@@ -46,3 +54,5 @@ export const CardGrid: Block = {
     },
   ],
 }
+
+export default CardGrid

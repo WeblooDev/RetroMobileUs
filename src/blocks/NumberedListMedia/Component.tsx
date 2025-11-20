@@ -10,26 +10,26 @@ const NumberedListMedia: React.FC<NumberedListMediaBlock> = ({
   image,
 }) => {
   return (
-    <section className="py-16 md:py-24 bg-[#7b8d53] text-white">
+   <section className="py-12 md:py-16 md:py-24 bg-[#7b8d53] text-white">
       <div className="container">
         <div className="flex flex-col lg:flex-row gap-10 items-stretch h-full">
-          <div className="w-full lg:w-1/2 flex flex-col justify-center gap-4">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight mb-6">
+          <div className="w-full lg:w-1/2 flex flex-col justify-center items-start gap-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl leading-tight mb-4">
               {title}
             </h2>
 
-            <p className="text-xs md:text-sm opacity-90 mb-6">
+            <p className="font-ivar text-base md:text-lg ">
               {subtext}
             </p>
 
-            <ul className="space-y-5">
+            <ul className="space-y-4">
               {bullets.map((b, i) => {
                 const num = String(i + 1).padStart(2, '0')
                 return (
                   <li key={b.id ?? i} className="flex items-center gap-4">
                     <span className="w-[1px] h-4 bg-white/50" aria-hidden />
-                    <span className="w-8 tabular-nums text-white/90">{num}</span>
-                    <span className="text-sm md:text-base leading-relaxed">
+                    <span className="w-8 tabular-nums text-white">{num}</span>
+                    <span className="text-sm md:text-base">
                       {b.text}
                     </span>
                   </li>

@@ -38,14 +38,14 @@ export default function CardGrid({
                 <p className="text-sm max-w-prose mx-auto mb-5">{card.description}</p>
 
                 {card.button && (
-                  <CMSLink
-                    url={card.button.url}
-                    appearance="black"
-                    aria-label={card.button.label}
-                    size="ctaBig"
-                     label={card.button.label}  
-                  >
-                  </CMSLink>
+               
+                 <CMSLink
+               {...card.button}
+               appearance="olive"
+                size="ctaBig"
+              >
+              </CMSLink>                     
+
 
                   
                 )}

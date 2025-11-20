@@ -33,7 +33,8 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
                 label={primaryButton.label}
                 appearance="olive"
                 size="ctaBig"
-                className="inline-flex"
+                className="tixpub-buytix"
+                
               />
             )}
             {secondaryButton?.url && secondaryButton?.label && (

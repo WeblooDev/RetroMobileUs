@@ -3,6 +3,7 @@
 import { Media } from '@/components/Media'
 import { CTAButton } from '@/components/CTAButton'
 import type { ImageStepsRight as ImageStepsRightBlock } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 
 const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({ title, steps, links, image }) => {
   const [primary] = (links ?? [])
@@ -34,9 +35,7 @@ const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({ title, steps, links, 
 
           {primary && (
             <div className="mt-8">
-              <CTAButton href={primary.url!} variant="olive" size="big" aria-label={primary.label}>
-                {primary.label}
-              </CTAButton>
+              <CMSLink appearance="olive" className="tixpub-buytix" size="ctaBig" {...primary}/>
             </div>
           )}
         </div>

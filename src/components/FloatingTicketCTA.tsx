@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef, useLayoutEffect } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 type Props = {
   title?: string
@@ -145,14 +146,13 @@ export default function FloatingTicketCTA({
             >
               <h3 className="text-xl tracking-wide leading-none">{title}</h3>
 
-              <button
-                type="button"
-                className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
-                aria-label="Buy tickets"
+              <a 
+             
+                 className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
               >
                 Buy now
                 <Image src="/arrowright.svg" alt="" width={14} height={14} />
-              </button>
+              </a>
             </div>
 
             <button

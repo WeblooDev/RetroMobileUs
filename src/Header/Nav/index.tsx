@@ -12,12 +12,14 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   return (
     <nav className="flex items-center gap-3">
       {navItems.map((item, i) => {
-        const label = item?.label ?? 'Link'
-        const url = item?.url ?? '#'
-        const key = (item as any)?.id ?? `${url}-${i}`
+        const mainLink = (item as any).link
+        if (!mainLink) return null
+
+        const label = mainLink.label ?? 'Link'
+        const key = (item as any)?.id ?? `${label}-${i}`
 
         return (
-          <CMSLink key={key} appearance="link" url={url}>
+          <CMSLink key={key} appearance="link" {...mainLink}>
             {label}
           </CMSLink>
         )

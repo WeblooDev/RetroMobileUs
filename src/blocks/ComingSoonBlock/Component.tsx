@@ -2,10 +2,7 @@
 
 import React from 'react'
 import { Media } from '@/components/Media'
-import type {
-  ComingSoonBlock as ComingSoonBlockType,
-  Media as MediaType,
-} from '@/payload-types'
+import type { ComingSoonBlock as ComingSoonBlockType, Media as MediaType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { CountdownTimer } from '@/blocks/ComingSoonBlock/countdown-timer'
 
@@ -20,8 +17,24 @@ function targetInNextYear(month1to12: number, day: number) {
   return new Date(y, month1to12 - 1, safeDay, 23, 59, 59)
 }
 
-const norm = (s?: string | null) =>
-  typeof s === 'string' && s.trim() ? s : undefined
+const norm = (s?: string | null) => (typeof s === 'string' && s.trim() ? s : undefined)
+
+function MediaBackdrop({ bg }: { bg: MediaType }) {
+  return (
+    <div className="absolute inset-0" aria-hidden>
+      <Media
+        resource={bg}
+        htmlElement="div"
+        className="h-full w-full"
+        imgClassName="h-full w-full object-cover"
+        videoClassName="h-full w-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/40 grid-pattern" />
+    </div>
+  )
+}
+
+/* ---------- block ---------- */
 
 export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   backgroundImage,
@@ -35,31 +48,17 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   displayMonthYearOverride,
 }) => {
   const bg = (backgroundImage as MediaType) || null
-
-  const targetDate = targetInNextYear(
-    Number(countdownMonth),
-    Number(countdownDay),
-  )
+  const targetDate = targetInNextYear(Number(countdownMonth), Number(countdownDay))
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      {bg && (
-        <div className="absolute inset-0" aria-hidden>
-          <Media
-            resource={bg}
-            videoClassName="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40 grid-pattern" />
-        </div>
-      )}
+      {bg && <MediaBackdrop bg={bg} />}
 
-      <div className="relative z-10 flex flex-col gap-12 lg:gap-0 mt-[80px] lg:mt-0 justify-center min-h-screen container mx-auto">
-        <div className="max-w-3xl flex flex-col items-start">
-          <h2 className="text-white text-4xl md:text-6xl mb-6 mt-[80px]">
-            {title}
-          </h2>
+      <div className="container relative z-10 mx-auto mt-[80px] flex min-h-screen flex-col justify-center gap-12 lg:gap-0 lg:mt-0">
+        <div className="flex max-w-3xl flex-col items-start">
+          <h2 className="mt-[80px] mb-6 text-4xl text-white md:text-6xl">{title}</h2>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row">
             {primaryButton?.url && primaryButton?.label && (
               <CMSLink
                 type="custom"
@@ -68,9 +67,10 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
                 size="ctaBig"
                 label={primaryButton.label}
                 ariaLabel={primaryButton.label}
+                                className="tixpub-buytix"
+
               />
             )}
-
             {secondaryButton?.url && secondaryButton?.label && (
               <CMSLink
                 type="custom"
@@ -84,7 +84,6 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
           </div>
         </div>
 
-        {/* Desktop timer */}
         <div className="absolute bottom-8 right-8 hidden md:block">
           <CountdownTimer
             targetDate={targetDate}
@@ -94,7 +93,6 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
           />
         </div>
 
-        {/* Mobile timer */}
         <div className="mt-12 md:hidden">
           <CountdownTimer
             targetDate={targetDate}
