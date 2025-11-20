@@ -1,13 +1,15 @@
 'use client'
 
 import { useEffect, useState, useCallback, useRef, useLayoutEffect } from 'react'
+import { CMSLink } from '@/components/Link'
 import Image from 'next/image'
-import Link from 'next/link'
+
+
 
 type Props = {
   title?: string
-  /** Auto-open threshold in viewport heights (100 = 100vh) */
   openAtVh?: number
+  buyUrl?: string              // <-- add this
 }
 
 const DURATION_MS = 500
@@ -15,6 +17,7 @@ const DURATION_MS = 500
 export default function FloatingTicketCTA({
   title = 'TICKETS',
   openAtVh = 80,
+  buyUrl = '#',
 }: Props) {
   const [mounted, setMounted] = useState(false)
 
@@ -146,13 +149,17 @@ export default function FloatingTicketCTA({
             >
               <h3 className="text-xl tracking-wide leading-none">{title}</h3>
 
-              <a 
-             
-                 className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
-              >
+            <CMSLink
+              type="custom"
+              url={buyUrl}
+              ariaLabel="Buy tickets"
+              className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
+            >
+              <span className="inline-flex items-center gap-2">
                 Buy now
                 <Image src="/arrowright.svg" alt="" width={14} height={14} />
-              </a>
+              </span>
+            </CMSLink>
             </div>
 
             <button

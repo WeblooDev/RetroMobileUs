@@ -6,6 +6,7 @@ import { Media } from '@/components/Media'
 import Skeleton from 'react-loading-skeleton'
 import type { NewsHeroFilter as NewsHeroFilterBlock, Tag, Post } from '@/payload-types'
 import Image from 'next/image'
+import StyledSelect from '@/components/StyledSelect'
 
 type Paginated<T> = {
   docs: T[]
@@ -211,36 +212,19 @@ const NewsHeroFilter: React.FC<NewsHeroFilterBlock> = ({
 
   return (
     <>
-      <section className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden">
+      <section className="relative h-[60vh] md:h-[80vh] w-full">
         {background && <Media resource={background} fill imgClassName="object-cover" />}
-        <div className="absolute inset-0 flex flex-col items-start justify-center px-12 text-center text-white">
-          <h1 className="text-3xl md:text-6xl">{title}</h1>
+        <div className="absolute inset-0 flex flex-col items-start justify-center px-6 md:px-12 text-center text-white">
+          <h1 className="text-3xl md:text-4xl lg:text-6xl">{title}</h1>
           <div className="pointer-events-auto absolute bottom-6 w-[25%] min-w-[200px]">
-            <div className="relative">
-              <select
-                value={selected}
-                onChange={(e) => setSelected(e.target.value)}
-                className="w-full appearance-none rounded-full bg-white/95 px-5 py-3 pr-12 text-left text-2xl text-black shadow focus:outline-none !font-ivar"
-              >
-                <option value="all" className="!font-ivar">
-                  Types
-                </option>
-                {tags.map((t) => (
-                  <option key={t.id} value={t.id} className="!font-ivar">
-                    {t.name}
-                  </option>
-                ))}
-              </select>
-
-              <Image
-                src="/arrowdown.svg"
-                alt=""
-                width={20}
-                height={20}
-                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2"
-                aria-hidden
-              />
-            </div>
+           <StyledSelect
+    value={selected}
+    onChange={setSelected}
+    options={[
+      { value: 'all', label: 'All Types' },
+      ...tags.map(t => ({ value: t.id as string, label: t.name as string })),
+    ]}
+  />
           </div>
         </div>
       </section>

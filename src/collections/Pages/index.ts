@@ -100,6 +100,10 @@ import NumberedListMedia from '@/blocks/NumberedListMedia/config'
 import GalleriesList from '@/blocks/GalleriesList/config'
 import FaqTabs from '@/blocks/FaqTabs/config'
 import ImageCardGrid from '@/blocks/ImageCardGrid/config'
+import TextH2TextH2Text from '@/blocks/TextH2TextH2Text/config'
+import TextLeftImageRight from '@/blocks/TextLeftImageRight/config'
+import ImageLeftTextRightSimple from '@/blocks/ImageLeftTextRightSimple/config'
+import DarkRichText from '@/blocks/DarkRichText/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -238,7 +242,11 @@ export const Pages: CollectionConfig<'pages'> = {
                 NumberedListMedia,
                 GalleriesList,
                 FaqTabs,
-                ImageCardGrid
+                ImageCardGrid,
+                TextH2TextH2Text,
+                TextLeftImageRight,
+                ImageLeftTextRightSimple,
+                DarkRichText
        
               ],
               required: true,

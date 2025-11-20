@@ -47,3 +47,9 @@ html { scroll-behavior: smooth; }
   font-style: normal;
   font-display: swap;
 }
+
+
+.prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  color: black;
+}
+  

@@ -86,6 +86,10 @@ import NumberedListMedia from './NumberedListMedia/Component'
 import GalleriesList from './GalleriesList/Component'
 import FaqTabs from './FaqTabs/Component'
 import ImageCardGrid from './ImageCardGrid/Component'
+import TextH2TextH2Text from './TextH2TextH2Text/Component'
+import TextLeftImageRight from './TextLeftImageRight/Component'
+import ImageLeftTextRightSimple from './ImageLeftTextRightSimple/Component'
+import DarkRichText from './DarkRichText/Component'
 
 
 const blockComponents = {
@@ -174,6 +178,12 @@ const blockComponents = {
   galleriesList: GalleriesList,
   faqTabs: FaqTabs,
   imageCardGrid: ImageCardGrid,
+    textH2TextH2Text: TextH2TextH2Text,
+      textLeftImageRight: TextLeftImageRight,
+      imageLeftTextRightSimple: ImageLeftTextRightSimple,
+      darkRichText: DarkRichText,
+
+
 
         
  
