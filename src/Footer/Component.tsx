@@ -143,6 +143,15 @@ export async function Footer() {
           </div>
 
           <div className=" hidden sm:flex  flex-wrap justify-center gap-4">
+
+                <Link
+                href="/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm underline  text-[#9D9D9D] hover:text-black"
+              >
+                Privacy Policy
+              </Link>
              <Link
                 href="https://www.dupontregistry.com/privacy"
                 target="_blank"
@@ -151,14 +160,7 @@ export async function Footer() {
               >
                Terms and Conditions
               </Link>
-            <Link
-                href="https://www.dupontregistry.com/privacy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm underline  text-[#9D9D9D] hover:text-black"
-              >
-                Privacy Policy
-              </Link>
+        
 
          
          

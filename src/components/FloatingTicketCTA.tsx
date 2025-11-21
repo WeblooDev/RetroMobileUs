@@ -4,12 +4,10 @@ import { useEffect, useState, useCallback, useRef, useLayoutEffect } from 'react
 import { CMSLink } from '@/components/Link'
 import Image from 'next/image'
 
-
-
 type Props = {
   title?: string
   openAtVh?: number
-  buyUrl?: string              // <-- add this
+  buyUrl?: string
 }
 
 const DURATION_MS = 500
@@ -19,29 +17,23 @@ export default function FloatingTicketCTA({
   openAtVh = 80,
   buyUrl = '#',
 }: Props) {
-  const [mounted, setMounted] = useState(false)
 
-  // Shell/card state
-  const [minimized, setMinimized] = useState(true)   // start closed
+  const [minimized, setMinimized] = useState(true)
   const [showContent, setShowContent] = useState(false)
   const [showLine, setShowLine] = useState(true)
-
-  // If the user clicks (open/close), disable auto-open forever (until reload)
   const [userInteracted, setUserInteracted] = useState(false)
 
-  // Smooth content sizing
   const contentRef = useRef<HTMLDivElement>(null)
   const [contentMax, setContentMax] = useState(0)
 
-  // timers
   const openTimeout = useRef<number | null>(null)
   const lineInTimeout = useRef<number | null>(null)
 
   useLayoutEffect(() => {
-    if (contentRef.current) setContentMax(contentRef.current.scrollHeight)
+    if (contentRef.current) {
+      setContentMax(contentRef.current.scrollHeight)
+    }
   }, [])
-
-  useEffect(() => setMounted(true), [])
 
   const clearTimers = () => {
     if (openTimeout.current) window.clearTimeout(openTimeout.current)
@@ -55,8 +47,11 @@ export default function FloatingTicketCTA({
     setShowLine(false)
     setShowContent(false)
     setMinimized(false)
+
     openTimeout.current = window.setTimeout(() => {
-      if (contentRef.current) setContentMax(contentRef.current.scrollHeight)
+      if (contentRef.current) {
+        setContentMax(contentRef.current.scrollHeight)
+      }
       setShowContent(true)
     }, DURATION_MS)
   }
@@ -74,30 +69,38 @@ export default function FloatingTicketCTA({
     })
   }
 
-  // Auto-open only once user passes the threshold and hasn't interacted
   const onScroll = useCallback(() => {
     if (userInteracted) return
     const openPx = window.innerHeight * (openAtVh / 100)
     if (window.scrollY >= openPx && minimized) {
-      openSequence(false) // auto (no interaction mark)
+      openSequence(false)
     }
   }, [userInteracted, openAtVh, minimized])
 
   useEffect(() => {
-    // initialize state if landing mid-page
-    if (typeof window !== 'undefined') onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    if (typeof window !== 'undefined') {
+      onScroll()
+      window.addEventListener('scroll', onScroll, { passive: true })
+    }
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', onScroll)
+      }
+    }
   }, [onScroll])
 
-  useEffect(() => () => clearTimers(), [])
+  useEffect(
+    () => () => {
+      clearTimers()
+    },
+    []
+  )
 
-  if (!mounted) return null
+  // ✅ no "if (!mounted) return null"
 
   return (
     <div
       className={[
-        // mobile bottom-right, md+ right-middle
         'fixed right-4 bottom-4',
         'md:right-6 md:bottom-auto md:top-1/2 md:-translate-y-1/2',
         'z-[60]',
@@ -149,17 +152,17 @@ export default function FloatingTicketCTA({
             >
               <h3 className="text-xl tracking-wide leading-none">{title}</h3>
 
-            <CMSLink
-              type="custom"
-              url={buyUrl}
-              ariaLabel="Buy tickets"
-              className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
-            >
-              <span className="inline-flex items-center gap-2">
-                Buy now
-                <Image src="/arrowright.svg" alt="" width={14} height={14} />
-              </span>
-            </CMSLink>
+              <CMSLink
+                type="custom"
+                url={buyUrl}
+                ariaLabel="Buy tickets"
+                className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
+              >
+                <span className="inline-flex items-center gap-2">
+                  Buy now
+                  <Image src="/arrowright.svg" alt="" width={14} height={14} />
+                </span>
+              </CMSLink>
             </div>
 
             <button

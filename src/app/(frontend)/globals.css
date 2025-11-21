@@ -53,3 +53,63 @@ html { scroll-behavior: smooth; }
   color: black;
 }
   
+
+
+/* DEBUG – this should be obvious if CSS is applied */
+#hubspot-newsletter-form .hs-input {
+  border: 2px solid red !important;
+}
+
+
+/* Wrapper form spacing */
+.hero-hubspot-form-wrapper form {
+  margin-top: 2rem;
+}
+
+/* Label "Email*" */
+#hubspot-newsletter-form .hs-form-field label {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  margin-bottom: 0.5rem;
+}
+
+/* Make the email field full width */
+#hubspot-newsletter-form .hs_email {
+  width: 100%;
+}
+
+/* The actual input – single thin white line, transparent bg */
+#hubspot-newsletter-form .hs_email .hs-input {
+  width: 100%;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
+  border-radius: 0 !important;
+  padding: 0.75rem 0 !important;
+  color: #ffffff !important;
+  font-size: 16px !important;
+}
+
+/* Placeholder color */
+#hubspot-newsletter-form .hs_email .hs-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Submit button – match your olive CTA */
+#hubspot-newsletter-form .hs_submit .hs-button {
+  margin-top: 2rem;
+  background-color: #7b8d53 !important;  /* same olive as header */
+  color: #ffffff !important;
+  border-radius: 4px !important;
+  padding: 0.9rem 2.5rem !important;
+  border: none !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+#hubspot-newsletter-form .hs_submit .hs-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}

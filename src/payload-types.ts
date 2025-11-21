@@ -1295,10 +1295,6 @@ export interface ImageHero {
   backgroundImage: string | Media;
   title: string;
   description: string;
-  button: {
-    label: string;
-    url: string;
-  };
   id?: string | null;
   blockName?: string | null;
   blockType: 'imageHero';
@@ -2732,110 +2728,6 @@ export interface DarkRichText {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImageCardGrid".
- */
-export interface ImageCardGrid {
-  title: string;
-  items: {
-    image: string | Media;
-    text: string;
-    link: {
-      type?: ('reference' | 'custom') | null;
-      newTab?: boolean | null;
-      reference?:
-        | ({
-            relationTo: 'pages';
-            value: string | Page;
-          } | null)
-        | ({
-            relationTo: 'posts';
-            value: string | Post;
-          } | null);
-      url?: string | null;
-      label: string;
-      /**
-       * Choose how the link should be rendered.
-       */
-      appearance?: ('default' | 'outline') | null;
-    };
-    id?: string | null;
-  }[];
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'imageCardGrid';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
-<<<<<<< HEAD
-=======
- * via the `definition` "TextH2TextH2Text".
- */
-export interface TextH2TextH2Text {
-  intro: string;
-  intro2: string;
-  heading1: string;
-  body1: string;
-  heading2: string;
-  body2: string;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'textH2TextH2Text';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TextLeftImageRight".
- */
-export interface TextLeftImageRight {
-  title: string;
-  paragraph2?: string | null;
-  /**
-   * Plain text only. Line breaks are preserved.
-   */
-  body: string;
-  image: string | Media;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'textLeftImageRight';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImageLeftTextRightSimple".
- */
-export interface ImageLeftTextRightSimple {
-  image: string | Media;
-  paragraph1: string;
-  paragraph2?: string | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'imageLeftTextRightSimple';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DarkRichText".
- */
-export interface DarkRichText {
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'darkRichText';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
->>>>>>> code review v2 previous  branch
  * via the `definition` "cars".
  */
 export interface Car {
@@ -3858,12 +3750,6 @@ export interface ImageHeroSelect<T extends boolean = true> {
   backgroundImage?: T;
   title?: T;
   description?: T;
-  button?:
-    | T
-    | {
-        label?: T;
-        url?: T;
-      };
   id?: T;
   blockName?: T;
 }
@@ -5070,81 +4956,6 @@ export interface DarkRichTextSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImageCardGrid_select".
- */
-export interface ImageCardGridSelect<T extends boolean = true> {
-  title?: T;
-  items?:
-    | T
-    | {
-        image?: T;
-        text?: T;
-        link?:
-          | T
-          | {
-              type?: T;
-              newTab?: T;
-              reference?: T;
-              url?: T;
-              label?: T;
-              appearance?: T;
-            };
-        id?: T;
-      };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
-<<<<<<< HEAD
-=======
- * via the `definition` "TextH2TextH2Text_select".
- */
-export interface TextH2TextH2TextSelect<T extends boolean = true> {
-  intro?: T;
-  intro2?: T;
-  heading1?: T;
-  body1?: T;
-  heading2?: T;
-  body2?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TextLeftImageRight_select".
- */
-export interface TextLeftImageRightSelect<T extends boolean = true> {
-  title?: T;
-  paragraph2?: T;
-  body?: T;
-  image?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ImageLeftTextRightSimple_select".
- */
-export interface ImageLeftTextRightSimpleSelect<T extends boolean = true> {
-  image?: T;
-  paragraph1?: T;
-  paragraph2?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DarkRichText_select".
- */
-export interface DarkRichTextSelect<T extends boolean = true> {
-  content?: T;
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
->>>>>>> code review v2 previous  branch
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
