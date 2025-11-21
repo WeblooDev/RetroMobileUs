@@ -3,7 +3,7 @@ import type { Block } from 'payload'
 
 export const ImageHero: Block = {
   slug: 'imageHero',
-  interfaceName: 'ImageHero', // <- generate TS type for the component
+  interfaceName: 'ImageHero',
   labels: {
     singular: 'Image Hero',
     plural: 'Image Heroes',
@@ -28,15 +28,7 @@ export const ImageHero: Block = {
       label: 'Description',
       required: true,
     },
-    {
-      name: 'button',
-      type: 'group',
-      label: 'CTA Button',
-      fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Learn More' },
-        { name: 'url', type: 'text', required: true, defaultValue: '#' },
-      ],
-    },
+    // No button field anymore – HubSpot form is hard-coded in the component
   ],
 }
 
