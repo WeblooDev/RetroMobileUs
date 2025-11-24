@@ -153,7 +153,7 @@ export async function Footer() {
                 Privacy Policy
               </Link>
              <Link
-                href="https://www.dupontregistry.com/privacy"
+                href="/terms-and-conditions"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm underline  text-[#9D9D9D] hover:text-black"

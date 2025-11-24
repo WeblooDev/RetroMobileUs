@@ -16,6 +16,10 @@ export default function CardGrid({
           const src =
             typeof card.image === 'string' ? '' : (card.image?.url ?? '')
 
+          const isComingSoon =
+            card?.button?.label &&
+            card.button.label.trim().toLowerCase() === 'coming soon'
+
           return (
             <article key={i} className={card.spanFullOnDesktop ? 'md:col-span-2' : ''}>
               {src && (
@@ -38,16 +42,21 @@ export default function CardGrid({
                 <p className="text-sm max-w-prose mx-auto mb-5">{card.description}</p>
 
                 {card.button && (
-               
-                 <CMSLink
-               {...card.button}
-               appearance="olive"
-                size="ctaBig"
-              >
-              </CMSLink>                     
-
-
-                  
+                  <>
+                    {isComingSoon ? (
+                      <span className="inline-flex items-center justify-center rounded-full text-white  bg-[#8B9B5C] px-8 py-3 text-base  uppercase  cursor-default">
+                        {card.button.label}
+                      </span>
+                    ) : (
+                      <CMSLink
+                        {...card.button}
+                        appearance="olive"
+                        size="ctaBig"
+                      >
+                        {card.button.label}
+                      </CMSLink>
+                    )}
+                  </>
                 )}
               </div>
             </article>

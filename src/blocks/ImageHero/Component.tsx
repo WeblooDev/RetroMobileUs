@@ -34,6 +34,9 @@ export default function ImageHero(props: ImageHeroBlock) {
           /* layout */
           .hs-form {
             margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
           }
 
           /* label "Email*" */
@@ -58,7 +61,41 @@ export default function ImageHero(props: ImageHeroBlock) {
             padding: 12px 0 !important;
             color: #ffffff !important;
             font-size: 16px !important;
+            font-family: 'Inter', sans-serif !important;
           }
+
+#hubspot-newsletter-form .hs_newsletter_consent .hs-form-booleancheckbox label,
+#hubspot-newsletter-form .hs_newsletter_consent .hs-form-booleancheckbox label span {
+  font-family: "Inter", sans-serif !important;
+  font-size: 14px;
+  color: #ffffff !important;
+}
+
+/* Put checkbox + text on one line and center vertically */
+#hubspot-newsletter-form .hs_newsletter_consent .hs-form-booleancheckbox label {
+  display: flex;
+  align-items: center;
+}
+
+/* Space between the box and the text */
+#hubspot-newsletter-form .hs_newsletter_consent .hs-form-booleancheckbox input[type="checkbox"] {
+  margin: 0; /* reset default margin */
+}
+
+#hubspot-newsletter-form .hs_newsletter_consent .hs-form-booleancheckbox label span {
+  margin-left: 0.5rem; /* gap between box and text */
+}
+
+/* Hide the required * for the newsletter consent checkbox only */
+#hubspot-newsletter-form .hs_newsletter_consent .hs-form-required {
+  display: none !important;
+}
+
+/* Remove the line breaks HubSpot injects under the label */
+#hubspot-newsletter-form .hs_newsletter_consent .hs-form-booleancheckbox label span br {
+  display: none !important;
+}
+
 
         
 
