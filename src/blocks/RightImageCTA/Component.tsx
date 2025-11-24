@@ -3,6 +3,7 @@
 import { Media } from '@/components/Media'
 import { CTAButton } from '@/components/CTAButton'
 import type { RightImageCTA as RightImageCTABlock } from '@/payload-types'
+import { CMSLink } from '@/components/Link'
 
 const RightImageCTA: React.FC<RightImageCTABlock> = ({ title, description, image, cta }) => {
   const primary = cta?.[0]?.link
@@ -21,9 +22,9 @@ const RightImageCTA: React.FC<RightImageCTABlock> = ({ title, description, image
 
             {primary?.label && url && (
               <div className="mt-8">
-                <CTAButton href={url} variant="black" size="big" aria-label={primary.label}>
-                  {primary.label}
-                </CTAButton>
+                <CMSLink {...primary} appearance="olive" size="ctaBig" />
+           
+              
               </div>
             )}
           </div>
