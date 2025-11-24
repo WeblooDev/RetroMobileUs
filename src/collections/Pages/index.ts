@@ -104,6 +104,7 @@ import TextH2TextH2Text from '@/blocks/TextH2TextH2Text/config'
 import TextLeftImageRight from '@/blocks/TextLeftImageRight/config'
 import ImageLeftTextRightSimple from '@/blocks/ImageLeftTextRightSimple/config'
 import DarkRichText from '@/blocks/DarkRichText/config'
+import { HubspotFormBlock } from '@/blocks/HubspotFormBlock/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -246,7 +247,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextH2TextH2Text,
                 TextLeftImageRight,
                 ImageLeftTextRightSimple,
-                DarkRichText
+                DarkRichText,
+                HubspotFormBlock
        
               ],
               required: true,

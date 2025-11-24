@@ -1,4 +1,5 @@
 // src/payload/blocks/TextImageBlock.ts
+import { link } from '@/fields/link'
 import type { Block } from 'payload'
 
 export const TextImageBlock: Block = {
@@ -11,6 +12,12 @@ export const TextImageBlock: Block = {
   fields: [
     { name: 'title', type: 'text', required: true, label: 'Title' },
     { name: 'description', type: 'textarea', label: 'Description' },
+    link({
+      overrides: {
+        name: 'consign',
+        label: 'consign',
+      },
+    }),
     { name: 'image', type: 'upload', relationTo: 'media', required: true, label: 'Image' },
     {
       name: 'reverse',

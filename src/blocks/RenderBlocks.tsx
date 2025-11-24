@@ -90,6 +90,7 @@ import TextH2TextH2Text from './TextH2TextH2Text/Component'
 import TextLeftImageRight from './TextLeftImageRight/Component'
 import ImageLeftTextRightSimple from './ImageLeftTextRightSimple/Component'
 import DarkRichText from './DarkRichText/Component'
+import HubspotFormBlock from './HubspotFormBlock/Component'
 
 
 const blockComponents = {
@@ -182,6 +183,7 @@ const blockComponents = {
       textLeftImageRight: TextLeftImageRight,
       imageLeftTextRightSimple: ImageLeftTextRightSimple,
       darkRichText: DarkRichText,
+      hubspotFormBlock: HubspotFormBlock,
 
 
 

@@ -17,8 +17,8 @@ const LogoTextCTA: React.FC<LogoTextCTABlock> = ({
         className={`flex flex-col lg:flex-row gap-4 lg:gap-10 items-center justify-between ${reverse ? 'flex-row-reverse' : ''}`}
       >
         <div className="w-full lg:w-[45%]">
-          <div className="relative w-full max-w-[420px] aspect-[4/3]">
-            <Media resource={image} fill imgClassName="object-contain" />
+          <div className=" w-full ">
+            <Media resource={image}  imgClassName="object-cover" />
           </div>
         </div>
 

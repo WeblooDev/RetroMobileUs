@@ -29,19 +29,19 @@ export default function TicketTestPage() {
 
           <div className="flex flex-wrap gap-4">
             <button
-              className="tixpub-buytix px-6 py-3 bg-blue-500 text-white rounded"
+              className=" px-6 py-3 bg-blue-500 text-white rounded"
               onClick={() => console.log('Button clicked! Checking if Unity intercepts...')}
             >
               Blue Test Button
             </button>
 
-            <a className="tixpub-buytix px-6 py-3 bg-green-500 text-white rounded inline-block cursor-pointer">
+            <a className=" px-6 py-3 bg-green-500 text-white rounded inline-block cursor-pointer">
               Link Test
             </a>
 
             <button
               type="button"
-              className="tixpub-buytix px-6 py-3 bg-purple-500 text-white rounded"
+              className=" px-6 py-3 bg-purple-500 text-white rounded"
               onClick={() => console.log('Purple button clicked!')}
             >
               Purple Button

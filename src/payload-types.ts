@@ -402,6 +402,7 @@ export interface Page {
     | TextLeftImageRight
     | ImageLeftTextRightSimple
     | DarkRichText
+    | HubspotFormBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1241,13 +1242,49 @@ export interface ComingSoonBlock {
    * If set, replaces the automatic MONTH + YEAR.
    */
   displayMonthYearOverride?: string | null;
+  /**
+   * Main CTA (used for the BUY TICKET / early access button).
+   */
   primaryButton: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
     label: string;
-    url: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
   };
+  /**
+   * Secondary CTA button.
+   */
   secondaryButton: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
     label: string;
-    url: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
   };
   id?: string | null;
   blockName?: string | null;
@@ -1307,12 +1344,42 @@ export interface TwoColumnHero {
   backgroundImage: string | Media;
   leftTitle: string;
   primaryButton: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
     label: string;
-    url: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
   };
   secondaryButton: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
     label: string;
-    url: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
   };
   rightHeading: string;
   rightParagraph: string;
@@ -1587,6 +1654,25 @@ export interface CharityCards {
 export interface TextImageBlock {
   title: string;
   description?: string | null;
+  consign: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+    label: string;
+    /**
+     * Choose how the link should be rendered.
+     */
+    appearance?: ('default' | 'outline') | null;
+  };
   image: string | Media;
   reverse?: boolean | null;
   id?: string | null;
@@ -2728,6 +2814,17 @@ export interface DarkRichText {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HubspotFormBlock".
+ */
+export interface HubspotFormBlock {
+  title: string;
+  text?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'hubspotFormBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "cars".
  */
 export interface Car {
@@ -3432,6 +3529,7 @@ export interface PagesSelect<T extends boolean = true> {
         textLeftImageRight?: T | TextLeftImageRightSelect<T>;
         imageLeftTextRightSimple?: T | ImageLeftTextRightSimpleSelect<T>;
         darkRichText?: T | DarkRichTextSelect<T>;
+        hubspotFormBlock?: T | HubspotFormBlockSelect<T>;
       };
   meta?:
     | T
@@ -3709,14 +3807,22 @@ export interface ComingSoonBlockSelect<T extends boolean = true> {
   primaryButton?:
     | T
     | {
-        label?: T;
+        type?: T;
+        newTab?: T;
+        reference?: T;
         url?: T;
+        label?: T;
+        appearance?: T;
       };
   secondaryButton?:
     | T
     | {
-        label?: T;
+        type?: T;
+        newTab?: T;
+        reference?: T;
         url?: T;
+        label?: T;
+        appearance?: T;
       };
   id?: T;
   blockName?: T;
@@ -3763,14 +3869,22 @@ export interface TwoColumnHeroSelect<T extends boolean = true> {
   primaryButton?:
     | T
     | {
-        label?: T;
+        type?: T;
+        newTab?: T;
+        reference?: T;
         url?: T;
+        label?: T;
+        appearance?: T;
       };
   secondaryButton?:
     | T
     | {
-        label?: T;
+        type?: T;
+        newTab?: T;
+        reference?: T;
         url?: T;
+        label?: T;
+        appearance?: T;
       };
   rightHeading?: T;
   rightParagraph?: T;
@@ -3995,6 +4109,16 @@ export interface CharityCardsSelect<T extends boolean = true> {
 export interface TextImageBlockSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  consign?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+        label?: T;
+        appearance?: T;
+      };
   image?: T;
   reverse?: T;
   id?: T;
@@ -4956,6 +5080,16 @@ export interface DarkRichTextSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HubspotFormBlock_select".
+ */
+export interface HubspotFormBlockSelect<T extends boolean = true> {
+  title?: T;
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -5695,6 +5829,14 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  partnerLogos?:
+    | {
+        label?: string | null;
+        logo: string | Media;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
   cta: {
     label?: string | null;
     link: {
@@ -5832,6 +5974,14 @@ export interface FooterSelect<T extends boolean = true> {
     | {
         label?: T;
         icon?: T;
+        url?: T;
+        id?: T;
+      };
+  partnerLogos?:
+    | T
+    | {
+        label?: T;
+        logo?: T;
         url?: T;
         id?: T;
       };

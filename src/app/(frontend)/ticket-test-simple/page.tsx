@@ -26,20 +26,20 @@ export default function SimpleTicketTest() {
             <input
               type="button"
               value="Buy Tickets"
-              className="tixpub-buytix px-6 py-3 bg-green-600 text-white rounded cursor-pointer"
+              className=" px-6 py-3 bg-green-600 text-white rounded cursor-pointer"
             />
           </section>
 
           <section className="border p-6 rounded">
             <h2 className="text-2xl font-semibold mb-4">Link Test (as per Unity docs)</h2>
-            <a className="tixpub-buytix px-6 py-3 bg-blue-600 text-white rounded inline-block cursor-pointer">
+            <a className=" px-6 py-3 bg-blue-600 text-white rounded inline-block cursor-pointer">
               Buy Tickets Link
             </a>
           </section>
 
           <section className="border p-6 rounded">
             <h2 className="text-2xl font-semibold mb-4">Standard Button</h2>
-            <button className="tixpub-buytix px-6 py-3 bg-purple-600 text-white rounded">
+            <button className=" px-6 py-3 bg-purple-600 text-white rounded">
               Standard Button
             </button>
           </section>
@@ -61,7 +61,7 @@ export default function SimpleTicketTest() {
               {`// Run these in console:
 window.unity_tixpub
 document.getElementById('tixpub-simple')
-document.querySelectorAll('.tixpub-buytix')`}
+document.querySelectorAll('.')`}
             </pre>
           </section>
         </div>

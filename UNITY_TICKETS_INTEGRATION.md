@@ -49,31 +49,31 @@ Automatically appends UTM parameters to all links pointing to Unity domains:
 
 ### 2. Popup Widget Usage
 
-To trigger the ticket popup, add the `tixpub-buytix` CSS class to any button, link, or image:
+To trigger the ticket popup, add the `` CSS class to any button, link, or image:
 
 #### Button Example
 
 ```jsx
-<button className="tixpub-buytix">Buy Tickets</button>
+<button className="">Buy Tickets</button>
 ```
 
 #### Image Example
 
 ```jsx
-<img src="/ticket_button.jpg" className="tixpub-buytix" alt="Buy Tickets" />
+<img src="/ticket_button.jpg" className="" alt="Buy Tickets" />
 ```
 
 #### Link Example
 
 ```jsx
-<a className="tixpub-buytix">Buy Tickets</a>
+<a className="">Buy Tickets</a>
 ```
 
 ### 3. Components
 
 #### TixpubButton Component (src/components/TixpubButton.tsx)
 
-A reusable button component that automatically includes the `tixpub-buytix` class:
+A reusable button component that automatically includes the `` class:
 
 ```jsx
 import TixpubButton from '@/components/TixpubButton'
@@ -128,10 +128,10 @@ For other blocks using `CTAButton` component, you have two options:
 ```
 
 **Option 2: Trigger Popup**
-Add the `tixpub-buytix` class:
+Add the `` class:
 
 ```jsx
-<CTAButton className="tixpub-buytix">Buy Tickets</CTAButton>
+<CTAButton className="">Buy Tickets</CTAButton>
 ```
 
 ## UTM Tracking
@@ -210,7 +210,7 @@ This will show a debug panel with:
 ## Best Practices
 
 1. **Choose the Right Option:**
-   - Use popup (tixpub-buytix) for quick access, especially on landing pages
+   - Use popup () for quick access, especially on landing pages
    - Use full ticket site links for detailed information pages
 
 2. **UTM Parameters:**
@@ -251,7 +251,7 @@ This will show a debug panel with:
    - May need to wait a moment for script to execute
 
 4. **Button clicks do nothing**
-   - Verify element has class `tixpub-buytix`
+   - Verify element has class ``
    - Check if other JavaScript is preventing click events
    - Try the test buttons on `/ticket-test` page
 

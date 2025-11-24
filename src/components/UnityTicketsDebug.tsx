@@ -14,7 +14,7 @@ export function UnityTicketsDebug() {
   useEffect(() => {
     const checkInterval = setInterval(() => {
       const script = document.getElementById('tixpub-embed') as HTMLScriptElement
-      const buttons = document.querySelectorAll('.tixpub-buytix')
+      const buttons = document.querySelectorAll('.')
 
       setDebugInfo({
         scriptLoaded: !!script && script.src.includes('tpbootstrap.js'),
@@ -63,7 +63,7 @@ export function UnityTicketsDebug() {
           console.log('=== Unity Tickets Debug Info ===')
           console.log('Script Element:', document.getElementById('tixpub-embed'))
           console.log('Window.tixpub:', (window as any).tixpub)
-          console.log('Buttons:', document.querySelectorAll('.tixpub-buytix'))
+          console.log('Buttons:', document.querySelectorAll('.'))
           console.log('================================')
         }}
         className="mt-2 px-2 py-1 bg-white/20 hover:bg-white/30 rounded text-xs w-full"

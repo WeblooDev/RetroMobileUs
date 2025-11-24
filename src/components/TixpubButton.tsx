@@ -7,7 +7,7 @@ type Props = {
   size?: "ctaBig" | "md" | "sm"
 }
 const base =
-  "tixpub-buytix inline-flex items-center justify-center rounded-full transition focus:outline-none focus:ring-2 focus:ring-offset-2"
+  " inline-flex items-center justify-center rounded-full transition focus:outline-none focus:ring-2 focus:ring-offset-2"
 const sizeMap = {
   ctaBig: "px-7 py-3 text-base md:text-lg",
   md: "px-5 py-2.5 text-sm md:text-base",

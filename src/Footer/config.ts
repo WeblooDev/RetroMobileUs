@@ -30,6 +30,8 @@ export const Footer: GlobalConfig = {
         hidden: true,
       },
     },
+
+    // Social icons (already there)
     {
       name: 'icons',
       label: 'Social Icons',
@@ -63,6 +65,45 @@ export const Footer: GlobalConfig = {
         },
       ],
     },
+
+    // ✅ NEW – partner logos (Comexposium, duPont Registry, etc.)
+    {
+      name: 'partnerLogos',
+      label: 'Partner Logos',
+      type: 'array',
+      required: false,
+      admin: {
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: 'label',
+          label: 'Partner Name',
+          type: 'text',
+          required: false,
+          admin: {
+            placeholder: 'e.g., Comexposium',
+          },
+        },
+        {
+          name: 'logo',
+          label: 'Partner Logo',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+        },
+        {
+          name: 'url',
+          label: 'Partner URL',
+          type: 'text',
+          required: true,
+          admin: {
+            placeholder: 'https://www.partner-site.com',
+          },
+        },
+      ],
+    },
+
     {
       name: 'cta',
       type: 'group',
@@ -83,7 +124,8 @@ export const Footer: GlobalConfig = {
       type: 'text',
       required: false,
       admin: {
-        description: 'Enter full copyright line (e.g., © 2025 Your Brand. All rights reserved.)',
+        description:
+          'Enter full copyright line (e.g., © 2025 Your Brand. All rights reserved.)',
       },
     },
     {

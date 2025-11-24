@@ -15,7 +15,7 @@ The Unity Tickets script was loading successfully (showing `{loaded: true}`), bu
 
 **Timing Issue**: Unity's script was trying to initialize before Next.js/React finished rendering the ticket buttons on the page.
 
-Unity would complete its initialization and look for buttons with the `tixpub-buytix` class, but they didn't exist yet. When React finally rendered the buttons moments later, Unity had already finished looking and wasn't watching for new buttons to appear.
+Unity would complete its initialization and look for buttons with the `` class, but they didn't exist yet. When React finally rendered the buttons moments later, Unity had already finished looking and wasn't watching for new buttons to appear.
 
 ## Resolution
 

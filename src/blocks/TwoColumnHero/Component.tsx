@@ -1,11 +1,19 @@
+// src/blocks/TwoColumnHero/Component.tsx
 import type { TwoColumnHero as TwoColumnHeroBlock, Media } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 
 export default function TwoColumnHero(props: TwoColumnHeroBlock) {
-  const { backgroundImage, leftTitle, primaryButton, secondaryButton, rightHeading, rightParagraph } = props
+  const {
+    backgroundImage,
+    leftTitle,
+    primaryButton,
+    secondaryButton,
+    rightHeading,
+    rightParagraph,
+  } = props
 
   const bg = backgroundImage as Media | null
-  const bgUrl = (bg as any)?.url as string | undefined
+  const bgUrl = (bg as Media)?.url as string | undefined
 
   return (
     <section className="relative flex items-center my-16">
@@ -26,25 +34,19 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
           </h2>
 
           <div className="flex flex-col items-start sm:flex-row gap-4">
-            {primaryButton?.url && primaryButton?.label && (
+            {primaryButton && (primaryButton ).url && (primaryButton ).label && (
               <CMSLink
-                type="custom"
-                url={primaryButton.url}
-                label={primaryButton.label}
+                {...primaryButton}
                 appearance="olive"
-                size="ctaBig"
-                className="tixpub-buytix"
-                
+                size="ctaBig" 
               />
             )}
-            {secondaryButton?.url && secondaryButton?.label && (
+
+            {secondaryButton && (secondaryButton ).url && (secondaryButton ).label && (
               <CMSLink
-                type="custom"
-                url={secondaryButton.url}
-                label={secondaryButton.label}
+                {...secondaryButton}
                 appearance="black"
                 size="ctaBig"
-                className="inline-flex"
               />
             )}
           </div>
@@ -54,7 +56,7 @@ export default function TwoColumnHero(props: TwoColumnHeroBlock) {
           <h1 className="text-4xl md:text-5xl lg:text-8xl leading-[8rem] lg:leading-[6rem] text-white">
             {rightHeading}
           </h1>
-          <h3 className="text-2xl md:text-3xl lg:text-4xl  text-white uppercase">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl text-white uppercase">
             {rightParagraph}
           </h3>
         </div>
