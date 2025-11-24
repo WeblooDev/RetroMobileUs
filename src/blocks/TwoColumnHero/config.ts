@@ -1,4 +1,6 @@
+// src/blocks/TwoColumnHero/config.ts
 import type { Block } from 'payload'
+import { link } from '@/fields/link'
 
 export const TwoColumnHero: Block = {
   slug: 'twoColumnHero',
@@ -21,24 +23,34 @@ export const TwoColumnHero: Block = {
       label: 'Left Title',
       required: true,
     },
-    {
-      name: 'primaryButton',
-      type: 'group',
-      label: 'Primary Button',
-      fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Get Started' },
-        { name: 'url', type: 'text', required: true, defaultValue: '#' },
-      ],
-    },
-    {
-      name: 'secondaryButton',
-      type: 'group',
-      label: 'Secondary Button',
-      fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Learn More' },
-        { name: 'url', type: 'text', required: true, defaultValue: '#' },
-      ],
-    },
+
+    // Primary button (using shared link field)
+    link({
+      overrides: {
+        name: 'primaryButton',
+        label: 'Primary Button',
+        required: true,
+        defaultValue: {
+          type: 'custom',
+          url: '#',
+          label: 'Get Started',
+        },
+      },
+    }),
+
+    link({
+      overrides: {
+        name: 'secondaryButton',
+        label: 'Secondary Button',
+        required: true,
+        defaultValue: {
+          type: 'custom',
+          url: '#',
+          label: 'Learn More',
+        },
+      },
+    }),
+
     {
       name: 'rightHeading',
       type: 'text',

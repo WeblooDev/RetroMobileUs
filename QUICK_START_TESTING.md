@@ -126,7 +126,7 @@ Visit: https://event-preview.com/retro-ticket-testing/
 
 ### Issue: Buttons found shows 0
 
-**Solution:** No elements with `tixpub-buytix` class on page. The test page should show many buttons.
+**Solution:** No elements with `` class on page. The test page should show many buttons.
 
 ### Issue: Clicking does nothing
 
@@ -134,7 +134,7 @@ Visit: https://event-preview.com/retro-ticket-testing/
 
 - Check if `window.tixpub` exists (debug panel)
 - Look for JavaScript errors in console
-- Verify element actually has the `tixpub-buytix` class (inspect element)
+- Verify element actually has the `` class (inspect element)
 - Try on the `/ticket-test` page first
 
 ## 📞 Next Steps

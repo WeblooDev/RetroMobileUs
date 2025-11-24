@@ -1,5 +1,6 @@
 // src/blocks/ComingSoonBlock/config.ts
 import type { Block } from 'payload'
+import { link } from '@/fields/link'
 
 export const ComingSoonBlock: Block = {
   slug: 'comingSoonBlock',
@@ -82,25 +83,28 @@ export const ComingSoonBlock: Block = {
       admin: { description: 'If set, replaces the automatic MONTH + YEAR.' },
     },
 
-    // Buttons
-    {
-      name: 'primaryButton',
-      type: 'group',
-      label: 'Primary Button',
-      fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Get Early Access' },
-        { name: 'url', type: 'text', required: true, defaultValue: '#' },
-      ],
-    },
-    {
-      name: 'secondaryButton',
-      type: 'group',
-      label: 'Secondary Button',
-      fields: [
-        { name: 'label', type: 'text', required: true, defaultValue: 'Learn More' },
-        { name: 'url', type: 'text', required: true, defaultValue: '#' },
-      ],
-    },
+    // Buttons using shared link field
+    link({
+      overrides: {
+        name: 'primaryButton',
+        label: 'Primary Button',
+        required: false,
+        admin: {
+          description: 'Main CTA (used for the BUY TICKET / early access button).',
+        },
+      },
+    }),
+
+    link({
+      overrides: {
+        name: 'secondaryButton',
+        label: 'Secondary Button',
+        required: false,
+        admin: {
+          description: 'Secondary CTA button.',
+        },
+      },
+    }),
   ],
 }
 

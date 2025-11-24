@@ -154,9 +154,10 @@ export default function FloatingTicketCTA({
 
               <CMSLink
                 type="custom"
-                url={buyUrl}
+                url='https://unitytickets.com/se/RETROMOBILE2026/Ticket'
+                newTab={true}
                 ariaLabel="Buy tickets"
-                className="tixpub-buytix inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
+                className=" inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"
               >
                 <span className="inline-flex items-center gap-2">
                   Buy now

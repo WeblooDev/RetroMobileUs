@@ -15,91 +15,28 @@ import { getServerSideURL } from '@/utilities/getURL'
 import FloatingTicketCTA from '@/components/FloatingTicketCTA'
 import { UnityTicketsScript } from '@/components/UnityTicketsScript'
 import Script from 'next/script'
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={cn(inter.variable)} lang="en" suppressHydrationWarning>
       <head>
-        <Script id="unity-utm-capture" strategy="afterInteractive">
-          {`
-            (function () {
-              if (typeof window === 'undefined') return;
+        {/* === Google Tag Manager: GTM-T93HFVSB (HEAD) === */}
+        <Script
+          id="gtm-t93hfvb-head"
+          strategy="afterInteractive"
+        >{`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T93HFVSB');`}</Script>
 
-              function processLinks() {
-                var dcdomains = [
-                  'unitytickets.com',
-                  'myshowlead.com',
-                  'myshowapp.com',
-                  'unityeventsolutions.com',
-                  'retromobile.us',
-                  'retro-mobile-us.vercel.app'
-                ];
+        {/* === End Google Tag Manager: GTM-T93HFVSB (HEAD) === */}
 
-                var params = window.location.search.replace(/ +/g, '%20');
-                if (params.length > 0 && params[0] === '?') {
-                  params = params.substring(1);
-                }
-
-                var finalList = '';
-
-                if (params.length > 0) {
-                  var splitList = params.split('&');
-                  var append = [];
-                  for (var idx = 0; idx < splitList.length; idx++) {
-                    if (splitList[idx].indexOf('utm_') === 0) {
-                      append.push(splitList[idx]);
-                    }
-                  }
-                  finalList = append.join('&');
-                }
-
-                if (finalList.length > 0) {
-                  var links = document.querySelectorAll('a[href]');
-                  links.forEach(function (link) {
-                    for (var idx = 0; idx < dcdomains.length; idx++) {
-                      var domain = dcdomains[idx];
-                      var re = new RegExp('^http[s]?://[a-zA-Z.]{0,15}' + domain + '.*$');
-
-                      if (link.href.indexOf('#') < 0 && re.test(link.href)) {
-                        if (link.href.indexOf('?') < 0) {
-                          link.href = link.href + '?' + finalList;
-                        } else {
-                          link.href = link.href + '&' + finalList;
-                        }
-                      }
-                    }
-                  });
-                }
-              }
-
-              // Process links when DOM is ready
-              if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', processLinks);
-              } else {
-                processLinks();
-              }
-
-              // Re-process links when new content is added (for dynamic content)
-              if (typeof MutationObserver !== 'undefined') {
-                var observer = new MutationObserver(function(mutations) {
-                  var hasNewLinks = false;
-                  mutations.forEach(function(mutation) {
-                    mutation.addedNodes.forEach(function(node) {
-                      if (node.nodeType === 1 && (node.tagName === 'A' || node.querySelector('a'))) {
-                        hasNewLinks = true;
-                      }
-                    });
-                  });
-                  if (hasNewLinks) {
-                    processLinks();
-                  }
-                });
-                observer.observe(document.body, { childList: true, subtree: true });
-              }
-            })();
-          `}
-        </Script>
         {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9R48X46FZC"></script>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-9R48X46FZC"
+        ></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -114,18 +51,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             `,
           }}
         />
-        {/* Google Tag Manager */}
+
+        {/* Google Tag Manager (existing TXPNNJ9C) */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-TXPNNJ9C');`,
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TXPNNJ9C');`,
           }}
         />
-        {/* End Google Tag Manager */}
-        {/* Google Tag Manager - Additional */}
+        {/* Google Tag Manager (existing WLSNP8D) */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -135,7 +72,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-WLSNP8D');`,
           }}
         />
-        {/* End Google Tag Manager - Additional */}
+        {/* End existing Google Tag Managers */}
+
         <FacebookPixelScript />
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />
@@ -146,8 +84,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           content="kpzRBe3JFD3txArPg0zrleykLgItyFiw-phvIjgH8Ag"
         />
       </head>
+
       <body>
-        {/* Google Tag Manager (noscript) */}
+        {/* === Google Tag Manager (noscript) : GTM-T93HFVSB === */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-T93HFVSB"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* === End Google Tag Manager (noscript) : GTM-T93HFVSB === */}
+
+        {/* Existing GTM noscripts – keep if you still need those containers */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-TXPNNJ9C"
@@ -156,8 +106,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
-        {/* Google Tag Manager (noscript) - Additional */}
+
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WLSNP8D"
@@ -166,22 +115,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-        {/* End Google Tag Manager (noscript) - Additional */}
+        {/* End existing GTM noscripts */}
+
         <UnityTicketsScript />
         <Providers>
           <Header />
           <BreadcrumbLayout>{children}</BreadcrumbLayout>
           <Footer />
-        <FloatingTicketCTA
-        title="TICKETS"
-        buyUrl="#" // or the real unitytickets link from the working CMS button
-      />
-
         </Providers>
       </body>
     </html>
   )
 }
+
 export const metadata: Metadata = {
   metadataBase: new URL(getServerSideURL()),
   openGraph: mergeOpenGraph(),

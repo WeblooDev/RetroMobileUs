@@ -60,27 +60,22 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
 
           <div className="flex flex-col gap-4 sm:flex-row">
             {primaryButton?.url && primaryButton?.label && (
-              <CMSLink
-                type="custom"
-                url={primaryButton.url}
-                appearance="olive"
-                size="ctaBig"
-                label={primaryButton.label}
-                ariaLabel={primaryButton.label}
-                                className="tixpub-buytix"
+  <CMSLink
+    {...primaryButton }
+    appearance="olive"
+    size="ctaBig"
+ 
+  />
+)}
 
-              />
-            )}
-            {secondaryButton?.url && secondaryButton?.label && (
-              <CMSLink
-                type="custom"
-                url={secondaryButton.url}
-                label={secondaryButton.label}
-                appearance="outlineWhite"
-                size="ctaBig"
-                ariaLabel={secondaryButton.label}
-              />
-            )}
+{secondaryButton?.url && secondaryButton?.label && (
+  <CMSLink
+    {...secondaryButton}
+    appearance="outlineWhite"
+    size="ctaBig"
+  />
+)}
+
           </div>
         </div>
 

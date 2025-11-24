@@ -35,7 +35,7 @@ const ImageStepsRight: React.FC<ImageStepsRightBlock> = ({ title, steps, links, 
 
           {primary && (
             <div className="mt-8">
-              <CMSLink appearance="olive" className="tixpub-buytix" size="ctaBig" {...primary}/>
+              <CMSLink appearance="olive" className="" size="ctaBig" {...primary}/>
             </div>
           )}
         </div>

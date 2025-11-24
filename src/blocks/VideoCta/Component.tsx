@@ -27,9 +27,8 @@ export default function VideoCtaBlock({
             <div>
               <CMSLink
                 {...(link)}
-                appearance="black"
+                appearance="olive"
                 size="ctaBig"
-                className="inline-flex"
               />
             </div>
  

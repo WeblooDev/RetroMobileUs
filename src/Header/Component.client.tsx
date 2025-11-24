@@ -137,7 +137,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                   {...ctaLink.link}
                   appearance="olive"
                   size="ctaBig"
-                  className="tixpub-buytix"
+                  className=""
                 />
               )}
               {secondaryCTA?.link && (

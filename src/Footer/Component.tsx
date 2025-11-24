@@ -3,11 +3,8 @@ import { getGlobal } from '@/utilities/getGlobals'
 import { CMSLink } from '@/components/Link'
 import type { Footer as FooterType } from '@/payload-types'
 import { Media } from '@/components/Media'
-import Image from 'next/image'
-import Comexposium from '../../public/comexposium.svg'
-import duPontRegistry from '../../public/duPontREGISTRY.svg'
 
-
+type Global = 'footer' // or your actual Global type
 
 const getCachedGlobal =
   (slug: Global, depth = 0) =>
@@ -17,14 +14,16 @@ const getCachedGlobal =
 export async function Footer() {
   const footerData = (await getCachedGlobal('footer' as unknown as Global, 1)()) as FooterType
   const linkGroups = footerData?.linkGroups || []
+  const partnerLogos = footerData?.partnerLogos || []
 
   return (
     <footer className="p-6 w-full">
       <div className="container">
-        <div className=" border-t  sm:border-t-0  ">
-          <div className="flex mt-4 flex-col justify-center items-center gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-4 2xl:gap-6">
-            <div className="flex flex-col items-center xl:items-start gap-4   min-h-auto lg:min-h-[250px] justify-between">
-              <div className="w-[60%] sm:w-full md:w-fit flex justify-center items-center mb-2">
+        <div className="border-t sm:border-t-0">
+          <div className="mt-4 flex flex-col items-center justify-center gap-8 xl:flex-row xl:items-start xl:justify-between xl:gap-4 2xl:gap-6">
+            {/* LEFT COLUMN: main logo + socials */}
+            <div className="flex min-h-auto flex-col items-center justify-between gap-4 xl:items-start lg:min-h-[250px]">
+              <div className="mb-2 flex w-[60%] items-center justify-center sm:w-full md:w-fit">
                 {typeof footerData.logo === 'object' && footerData.logo?.url && (
                   <Link href="/">
                     <Media
@@ -38,7 +37,7 @@ export async function Footer() {
               </div>
 
               {Array.isArray(footerData.icons) && footerData.icons.length > 0 && (
-                <div className="w-full xl:w-[80%] p-2 md:w-fit flex items-center justify-between  gap-6 lg:gap-8 xl:gap-10">
+                <div className="flex w-full items-center justify-between gap-6 p-2 md:w-fit lg:gap-8 xl:w-[80%] xl:gap-10">
                   {footerData.icons.map((iconObj, index) => (
                     <Link
                       href={iconObj.url}
@@ -49,9 +48,9 @@ export async function Footer() {
                     >
                       <Media
                         resource={iconObj.icon}
-                        alt={`Footer Icon ${index}`}
-                        className="flex gap-6 w-[23px] h-[23px] justify-center items-center  "
-                        imgClassName="h-auto w-auto w-[23px] h-[23px] "
+                        alt={iconObj.label || `Footer Icon ${index}`}
+                        className="flex h-[23px] w-[23px] items-center justify-center"
+                        imgClassName="h-[23px] w-[23px]"
                       />
                     </Link>
                   ))}
@@ -59,15 +58,14 @@ export async function Footer() {
               )}
             </div>
 
-            <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start w-full xl:w-[60%] gap-12  md:gap-6 lg:gap-20 px-4 md:px-0">
+            {/* MIDDLE: link groups */}
+            <div className="flex w-full flex-col items-center justify-between gap-12 px-4 md:gap-6 md:px-0 lg:flex-row lg:items-start lg:gap-20 xl:w-[60%]">
               {linkGroups.map((group, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center justify-center text-center 
-                lg:items-start lg:justify-start lg:text-left gap-4
-             "
+                  className="flex flex-col items-center justify-center text-center lg:items-start lg:justify-start lg:text-left gap-4"
                 >
-                  <h4 className=" text-sm uppercase  ">{group.title}</h4>
+                  <h4 className="text-sm uppercase">{group.title}</h4>
                   <ul className="space-y-1 md:space-y-2">
                     {group.links?.map(({ link }, i) => (
                       <li key={i}>
@@ -78,7 +76,9 @@ export async function Footer() {
                 </div>
               ))}
             </div>
-            <div className="flex sm:hidden justify-between flex-col items-center font-inter text-center gap-2 ">
+
+            {/* MOBILE PRIVACY (small screens) */}
+            <div className="flex flex-col items-center justify-between gap-2 text-center font-inter sm:hidden">
               <Link
                 href="https://www.dupontregistry.com/privacy"
                 target="_blank"
@@ -87,83 +87,75 @@ export async function Footer() {
               >
                 Privacy Policy
               </Link>
-    
             </div>
           </div>
         </div>
 
-        <div className="my-8 mb-8 flex justify-center items-center">
-          <div className="border-t border-[#336] h-px w-[80%] max-w-[380px] lg:max-w-full md:w-full"></div>
+        {/* Divider */}
+        <div className="my-8 mb-8 flex items-center justify-center">
+          <div className="h-px w-[80%] max-w-[380px] border-t border-[#336] md:w-full lg:max-w-full" />
         </div>
 
-        <div className="flex justify-between flex-col items-center font-inter text-center gap-2 md:flex-row md:gap-4">
+        {/* BOTTOM ROW */}
+        <div className="flex flex-col items-center justify-between gap-2 text-center font-inter md:flex-row md:gap-4">
+          {/* Copyright block */}
           {footerData?.copyright && (
-            <p className="text-sm  text-[#9D9D9D] uppercase flex gap-1 items-center ">
-              &copy; {new Date().getFullYear()}{' '}
-              <p
-               
-                className="text-black "
-              >
-                RETROMOBILE.
-              </p>{' '}
-              All Rights Reserved.
-            </p>
+            <div className="mb-6 flex flex-col items-center gap-1 text-center md:mb-0 md:flex-row">
+              <p className="flex items-center gap-1 text-sm uppercase text-[#9D9D9D]">
+                &copy; {new Date().getFullYear()}
+              </p>
+              <p className="text-base text-black">RETROMOBILE.</p>{' '}
+              <p className="text-sm text-[#9D9D9D]">All Rights Reserved.</p>
+            </div>
           )}
 
+          {/* About + Partner logos */}
           <div className="flex flex-col items-center justify-center gap-4">
-            <Link href="/about-retromobile-usa" target="_blank" className='hover:underline'>
-              <p className='text-sm text-center'>About Rétromobile USA</p>
-              </Link>
-              <div className="flex gap-4 items-center">
-                
-                  <Link
-                href="https://www.comexposium.com/en"
-                target="_blank"> 
-                    <Image
-                    src={Comexposium}
-                    alt="Comexposium"
-                    width={100}
-                    height={100}
-                    />
-                     </Link>
+            <Link href="/about-retromobile-usa" target="_blank" className="hover:underline">
+              <p className="text-sm text-center md:text-lg">About Rétromobile USA</p>
+            </Link>
 
-
-                        <Link
-                href="https://www.dupontregistrygroup.com/#dupont_home"
-                target="_blank">
-                     <Image
-                    src={duPontRegistry}
-                    alt="Comexposium"
-                    width={100}
-                    height={100}
-                    />
+            {Array.isArray(partnerLogos) && partnerLogos.length > 0 && (
+              <div className="flex items-center gap-4">
+                {partnerLogos.map((partner, idx) =>
+                  partner.logo ? (
+                    <Link
+                      key={idx}
+                      href={partner.url || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Media
+                        resource={partner.logo}
+                        alt={partner.label || 'Partner logo'}
+                        className="w-[150px] h-auto"
+                        imgClassName="w-full h-auto object-contain"
+                      />
                     </Link>
-                
+                  ) : null,
+                )}
               </div>
+            )}
           </div>
 
-          <div className=" hidden sm:flex  flex-wrap justify-center gap-4">
-
-                <Link
-                href="/privacy-policy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm underline  text-[#9D9D9D] hover:text-black"
-              >
-                Privacy Policy
-              </Link>
-             <Link
-                href="/terms-and-conditions"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm underline  text-[#9D9D9D] hover:text-black"
-              >
-               Terms and Conditions
-              </Link>
-        
-
-         
-         
+          {/* Desktop privacy / terms */}
+          <div className="hidden flex-wrap justify-center gap-4 sm:flex">
+            <Link
+              href="/privacy-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm underline text-[#9D9D9D] hover:text-black"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms-of-use"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm underline text-[#9D9D9D] hover:text-black"
+            >
+              Terms of Use
+            </Link>
           </div>
         </div>
       </div>

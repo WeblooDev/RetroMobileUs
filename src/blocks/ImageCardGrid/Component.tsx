@@ -19,7 +19,7 @@ const ImageCardGrid: React.FC<ImageCardGridBlock> = ({ title, items = [] }) => {
           return (
             <article
               key={(id as string) ?? text}
-              className="flex w-full flex-col items-center border p-8"
+              className="flex w-full flex-col items-center border p-8 justify-between"
             >
               <CMSLink {...link} className="group  w-full h-auto flex flex-col items-center">
                 <Media

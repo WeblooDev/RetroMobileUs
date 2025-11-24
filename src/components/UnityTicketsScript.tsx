@@ -38,7 +38,7 @@ export function UnityTicketsScript() {
 
       // Check if buttons are interactive and try to initialize
       setTimeout(() => {
-        const buttons = document.querySelectorAll('.tixpub-buytix')
+        const buttons = document.querySelectorAll('.')
         console.log(`Found ${buttons.length} tixpub buttons`)
         console.log('First button:', buttons[0])
         console.log('Button click handler:', buttons[0] ? (buttons[0] as any).onclick : 'none')
@@ -78,7 +78,7 @@ export function UnityTicketsScript() {
 
           // Check if buttons now have click handlers after init
           setTimeout(() => {
-            const btn = document.querySelector('.tixpub-buytix')
+            const btn = document.querySelector('.')
             console.log('After init - Button click handler:', btn ? (btn as any).onclick : 'none')
           }, 500)
         }

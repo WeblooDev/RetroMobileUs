@@ -1,16 +1,18 @@
+import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import type { TextImageBlock as TextImageBlockType } from '@/payload-types'
 
-const TextImageBlock: React.FC<TextImageBlockType> = ({ title, description, image, reverse }) => {
+const TextImageBlock: React.FC<TextImageBlockType> = ({ title, description, image, reverse,consign }) => {
   const textOrder = reverse ? 'md:order-2' : 'md:order-1'
   const imageOrder = reverse ? 'md:order-1' : 'md:order-2'
 
   return (
     <section className="w-full bg-[#8B9B5C] text-white px-6 md:px-12 lg:px-24 py-16">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-        <div className={`flex flex-col gap-4 ${textOrder}`}>
+        <div className={`flex flex-col gap-4 items-start ${textOrder}`}>
           <h2 className="text-2xl md:text-3xl lg:text-4xl">{title}</h2>
-          {description && <p className="text-base">{description}</p>}
+          {description && <p className="text-base mb-6 w-[90%]">{description}</p>}
+          <CMSLink {...consign} appearance="white" size="ctaBig"  />
         </div>
 
         <div className={imageOrder}>

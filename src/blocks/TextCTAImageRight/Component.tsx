@@ -29,7 +29,7 @@ const TextCTAImageRight: React.FC<TextCTAImageRightBlock> = ({
                 {...primary}
                 appearance="olive"
                 size="ctaBig"
-                className="tixpub-buytix"
+                className=""
                
               />
             </div>

@@ -33,7 +33,7 @@ export function UnityTicketsScriptDelayed() {
         console.log('✅ Unity script loaded AFTER buttons rendered')
 
         setTimeout(() => {
-          const buttons = document.querySelectorAll('.tixpub-buytix')
+          const buttons = document.querySelectorAll('.')
           const firstBtn = buttons[0]
           console.log(`Found ${buttons.length} buttons`)
           console.log('First button onclick:', firstBtn ? (firstBtn as any).onclick : 'none')
