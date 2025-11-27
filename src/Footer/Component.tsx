@@ -37,7 +37,7 @@ export async function Footer() {
               </div>
 
               {Array.isArray(footerData.icons) && footerData.icons.length > 0 && (
-                <div className="flex w-full items-center justify-between gap-6 p-2 md:w-fit lg:gap-8 xl:w-[80%] xl:gap-10">
+                <div className="flex w-full items-center justify-between gap-6 p-2 md:w-fit lg:gap-6 xl:w-[80%] xl:gap-6">
                   {footerData.icons.map((iconObj, index) => (
                     <Link
                       href={iconObj.url}
