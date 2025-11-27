@@ -37,15 +37,15 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
             style={{ top: '50%', transform: 'translateY(-50%)', backgroundColor: band }}
           >
             <div className="flex flex-col lg:flex-row items-center text-white justify-center">
-              <div className="flex-1 px-6 md:px-10 py-6 md:py-8 flex items-start gap-6 justify-end">
+              <div className="flex-1 px-6 md:px-10 py-6 md:py-8 flex items-start gap-6 justify-center">
                 <h4 className="uppercase text-lg">{month}</h4>
                 <h3 className="text-3xl md:text-4xl lg:text-6xl">{dateRange}</h3>
                 <h4 className="uppercase text-base lg:text-lg">{year}</h4>
               </div>
 
-              <div className="w-px h-5 lg:h-[60px] bg-white/40 self-center" />
+              {/* <div className="w-px h-5 lg:h-[60px] bg-white/40 self-center" /> */}
 
-              <div className="flex-1 px-6 md:px-10 py-6 md:py-8 flex items-start gap-6 md:justify-start">
+              {/* <div className="flex-1 px-6 md:px-10 py-6 md:py-8 flex items-start gap-6 md:justify-start">
                 <h4 className="uppercase text-lg">From</h4>
 
                 <div className="flex flex-col gap-2">
@@ -58,7 +58,7 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
                     <span className="uppercase text-sm md:text-base">PM</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
