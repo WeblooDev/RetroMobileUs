@@ -1,6 +1,8 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { CTAButton } from '@/components/CTAButton'
+import { fadeInLeft, fadeInRight, imageReveal } from '@/utilities/animations'
 
 type Split4060Props = {
   title: string
@@ -27,9 +29,13 @@ export default function Split4060({
     <section className="container  py-14">
       <div className="flex flex-col md:flex-row items-center gap-10 md:gap-12">
         {/* Text column (40%) */}
-        <div
+        <motion.div
           className={`w-full flex flex-col gap-6 items-start ${textOrder}`}
           style={{ flexBasis: '45%' }}
+          variants={reverse ? fadeInRight : fadeInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
         >
           <h2 className="font-ivar text-3xl md:text-6xl">{title}</h2>
           <p className="text-sm md:text-base ">{description}</p>
@@ -39,23 +45,30 @@ export default function Split4060({
               {button.label}
             </CTAButton>
           )}
-        </div>
+        </motion.div>
 
         {/* Image column (60%) */}
-        <div className={`w-full ${imageOrder}`} style={{ flexBasis: '55%' }}>
+        <motion.div
+          className={`w-full ${imageOrder}`}
+          style={{ flexBasis: '55%' }}
+          variants={reverse ? fadeInLeft : fadeInRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
           {image?.url ? (
-            <div className="w-full overflow-hidden">
+            <motion.div className="w-full overflow-hidden" variants={imageReveal}>
               <img
                 src={image.url}
                 alt={imageAlt || title}
                 className="w-full h-[220px] md:h-[300px] lg:h-[340px] object-cover"
                 loading="lazy"
               />
-            </div>
+            </motion.div>
           ) : (
             <div className="w-full h-[220px] md:h-[300px] lg:h-[340px] bg-muted" />
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -1,29 +1,37 @@
+'use client'
+
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import type { CardGrid as CardGridFields } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
+import { staggerContainer, staggerItem, imageReveal } from '@/utilities/animations'
 
-export default function CardGrid({
-  columnsDesktop = '2',
-  cards = [],
-}: CardGridFields) {
-  const gridCols =
-    columnsDesktop === '1' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'
+export default function CardGrid({ columnsDesktop = '2', cards = [] }: CardGridFields) {
+  const gridCols = columnsDesktop === '1' ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2'
 
   return (
     <section className="container sm:px-6 py-12">
-      <div className={`grid ${gridCols} gap-10`}>
+      <motion.div
+        className={`grid ${gridCols} gap-10`}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
         {cards?.map((card, i) => {
-          const src =
-            typeof card.image === 'string' ? '' : (card.image?.url ?? '')
+          const src = typeof card.image === 'string' ? '' : (card.image?.url ?? '')
 
           const isComingSoon =
-            card?.button?.label &&
-            card.button.label.trim().toLowerCase() === 'coming soon'
+            card?.button?.label && card.button.label.trim().toLowerCase() === 'coming soon'
 
           return (
-            <article key={i} className={card.spanFullOnDesktop ? 'md:col-span-2' : ''}>
+            <motion.article
+              key={i}
+              className={card.spanFullOnDesktop ? 'md:col-span-2' : ''}
+              variants={staggerItem}
+            >
               {src && (
-                <div className="w-full overflow-hidden">
+                <motion.div className="w-full overflow-hidden" variants={imageReveal}>
                   <Image
                     src={src}
                     alt={card.title}
@@ -32,7 +40,7 @@ export default function CardGrid({
                     className="h-full w-full object-cover max-h-[364px]"
                     loading="lazy"
                   />
-                </div>
+                </motion.div>
               )}
 
               <div className="pt-5 text-center">
@@ -48,21 +56,17 @@ export default function CardGrid({
                         {card.button.label}
                       </span>
                     ) : (
-                      <CMSLink
-                        {...card.button}
-                        appearance="olive"
-                        size="ctaBig"
-                      >
+                      <CMSLink {...card.button} appearance="olive" size="ctaBig">
                         {card.button.label}
                       </CMSLink>
                     )}
                   </>
                 )}
               </div>
-            </article>
+            </motion.article>
           )
         })}
-      </div>
+      </motion.div>
     </section>
   )
 }

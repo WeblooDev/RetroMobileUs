@@ -133,20 +133,10 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
             {/* Desktop CTAs */}
             <div className="hidden md:flex items-center gap-3">
               {ctaLink?.link && (
-                <CMSLink
-                  {...ctaLink.link}
-                  appearance="olive"
-                  size="ctaBig"
-                  className=""
-                />
+                <CMSLink {...ctaLink.link} appearance="olive" size="ctaBig" className="" />
               )}
               {secondaryCTA?.link && (
-                <CMSLink
-                  {...secondaryCTA.link}
-                  appearance="outlineWhite"
-                  size="ctaBig"
-                  newTab
-                />
+                <CMSLink {...secondaryCTA.link} appearance="outlineWhite" size="ctaBig" newTab />
               )}
             </div>
 
@@ -238,12 +228,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
               {/* Mobile CTAs */}
               <div className="pt-4 space-y-3 flex flex-col items-start">
                 {ctaLink?.link && (
-                  <CMSLink
-                    {...ctaLink.link}
-                    appearance="olive"
-                    size="ctaBig"
-                    className="w-full"
-                  />
+                  <CMSLink {...ctaLink.link} appearance="olive" size="ctaBig" className="w-full" />
                 )}
                 {secondaryCTA?.link && (
                   <CMSLink

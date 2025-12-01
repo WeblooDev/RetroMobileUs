@@ -1,6 +1,10 @@
+'use client'
+
 import React from 'react'
+import { motion } from 'framer-motion'
 import type { TravelCards as TravelCardsBlock } from '@/payload-types'
 import { Media } from '@/components/Media'
+import { fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 const TravelCardsComponent: React.FC<TravelCardsBlock> = ({ title, items }) => {
   const cards = Array.isArray(items) ? items : []
@@ -9,12 +13,30 @@ const TravelCardsComponent: React.FC<TravelCardsBlock> = ({ title, items }) => {
     <section className="py-12 md:py-20 bg-black">
       <div className="container">
         {title && (
-          <h2 className="text-3xl md:text-5xl lg:text-6xl mb-8 md:mb-12 text-white">{title}</h2>
+          <motion.h2
+            className="text-3xl md:text-5xl lg:text-6xl mb-8 md:mb-12 text-white"
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+          >
+            {title}
+          </motion.h2>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
           {cards.map((c, i) => (
-            <article key={c?.id ?? i} className="group relative overflow-hidden">
+            <motion.article
+              key={c?.id ?? i}
+              className="group relative overflow-hidden"
+              variants={staggerItem}
+            >
               <div className="relative aspect-[433/440] w-full">
                 {c?.image && (
                   <Media
@@ -25,19 +47,13 @@ const TravelCardsComponent: React.FC<TravelCardsBlock> = ({ title, items }) => {
                   />
                 )}
                 <div className="absolute inset-x-0 bottom-0 p-4 md:p-6 text-white">
-                  {c?.subtitle && (
-                    <h3 className="text-xl md:text-2xl  mb-2">{c.subtitle}</h3>
-                  )}
-                  {c?.description && (
-                    <p className="text-sm md:text-base ">
-                      {c.description}
-                    </p>
-                  )}
+                  {c?.subtitle && <h3 className="text-xl md:text-2xl  mb-2">{c.subtitle}</h3>}
+                  {c?.description && <p className="text-sm md:text-base ">{c.description}</p>}
                 </div>
               </div>
-            </article>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

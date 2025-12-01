@@ -9,10 +9,7 @@ import type {
 } from '@/payload-types'
 import PostsCarouselClient from './PostsCarouselClient'
 
-export type LitePost = Pick<
-  Post,
-  'id' | 'title' | 'slug' | 'excerpt' | 'publishedAt'
-> & {
+export type LitePost = Pick<Post, 'id' | 'title' | 'slug' | 'excerpt' | 'publishedAt'> & {
   thumbnail?: MediaType | null
   readMore?: { url?: string | null; newTab?: boolean | null }
   // 👇 make sure tags are included (string ids OR populated Tag objects)
@@ -41,10 +38,6 @@ export default async function PostsCarousel({ title, viewAll }: PostsCarouselBlo
   })
 
   return (
-    <PostsCarouselClient
-      title={title}
-      viewAll={viewAll}
-      posts={docs as unknown as LitePost[]}
-    />
+    <PostsCarouselClient title={title} viewAll={viewAll} posts={docs as unknown as LitePost[]} />
   )
 }

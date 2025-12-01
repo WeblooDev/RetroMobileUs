@@ -85,16 +85,21 @@ export default function TwoColumnCTA({ title, button, paragraph }: TwoColumnCTAP
           <h2 className="text-2xl md:text-3xl lg:text-4xl">{title}</h2>
         </div>
 
-    
         <div id="weblooParagraph" className="w-full lg:w-[65%] flex flex-col items-start gap-4">
-          {paraText && <h3 className="text-xl md:text-2xl !leading-[2.2rem] lg:!leading-[2.2rem]">{paraText}</h3>}
-             {button && (
-            <CMSLink url={button.url} label={button.label} appearance="black" size="ctaBig">
-            </CMSLink>
+          {paraText && (
+            <h3 className="text-xl md:text-2xl !leading-[2.2rem] lg:!leading-[2.2rem]">
+              {paraText}
+            </h3>
+          )}
+          {button && (
+            <CMSLink
+              url={button.url}
+              label={button.label}
+              appearance="black"
+              size="ctaBig"
+            ></CMSLink>
           )}
         </div>
-
-       
       </div>
     </section>
   )

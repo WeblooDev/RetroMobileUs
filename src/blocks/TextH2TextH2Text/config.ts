@@ -1,4 +1,3 @@
-
 import type { Block } from 'payload'
 
 export const TextH2TextH2Text: Block = {

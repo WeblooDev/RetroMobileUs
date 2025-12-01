@@ -36,11 +36,21 @@ export default function CategoryFilter({
 
   if (isDesktop) {
     return (
-      <DesktopTabs categories={categories} active={active} onChange={onChange} className={className} />
+      <DesktopTabs
+        categories={categories}
+        active={active}
+        onChange={onChange}
+        className={className}
+      />
     )
   }
   return (
-    <MobileCarousel categories={categories} active={active} onChange={onChange} className={className} />
+    <MobileCarousel
+      categories={categories}
+      active={active}
+      onChange={onChange}
+      className={className}
+    />
   )
 }
 
@@ -92,8 +102,6 @@ function DesktopTabs({
         className ?? '',
       ].join(' ')}
     >
-     
-
       {categories.map((c, i) => {
         const isActive = active === c.id
         return (
@@ -136,10 +144,13 @@ function MobileCarousel({
   })
 
   const viewportNodeRef = useRef<HTMLDivElement | null>(null)
-  const setViewportRefs = useCallback((el: HTMLDivElement | null) => {
-    emblaViewportRef(el)
-    viewportNodeRef.current = el
-  }, [emblaViewportRef])
+  const setViewportRefs = useCallback(
+    (el: HTMLDivElement | null) => {
+      emblaViewportRef(el)
+      viewportNodeRef.current = el
+    },
+    [emblaViewportRef],
+  )
 
   const slides = useMemo(() => categories, [categories])
 
@@ -184,10 +195,6 @@ function MobileCarousel({
 
   return (
     <div className={['relative ', className ?? ''].join(' ')}>
- 
-
-
-
       <div ref={setViewportRefs} className="w-[80%] mx-auto overflow-hidden  flex justify-center">
         <div className="flex gap-6">
           {slides.map((c, i) => {
@@ -206,7 +213,6 @@ function MobileCarousel({
                     isActive ? 'text-black' : 'text-gray-400 hover:text-black',
                   ].join(' ')}
                 >
-                  
                   {c.name}
                 </button>
               </div>

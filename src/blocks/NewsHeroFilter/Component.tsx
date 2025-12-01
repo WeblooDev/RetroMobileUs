@@ -2,11 +2,13 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Media } from '@/components/Media'
 import Skeleton from 'react-loading-skeleton'
 import type { NewsHeroFilter as NewsHeroFilterBlock, Tag, Post } from '@/payload-types'
 import Image from 'next/image'
 import StyledSelect from '@/components/StyledSelect'
+import { fadeIn, fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 type Paginated<T> = {
   docs: T[]
@@ -136,7 +138,6 @@ const PostCard: React.FC<{ post: Post; showExcerpt: boolean }> = ({ post, showEx
   )
 }
 
-
 const SkeletonCard: React.FC = () => (
   <div className="overflow-hidden rounded-xl">
     <Skeleton height={Math.round((9 / 16) * 600)} />
@@ -213,23 +214,43 @@ const NewsHeroFilter: React.FC<NewsHeroFilterBlock> = ({
   return (
     <>
       <section className="relative h-[60vh] md:h-[80vh] w-full">
-        {background && <Media resource={background} fill imgClassName="object-cover" />}
+        <motion.div variants={fadeIn} initial="hidden" animate="visible">
+          {background && <Media resource={background} fill imgClassName="object-cover" />}
+        </motion.div>
         <div className="absolute inset-0 flex flex-col items-start justify-center px-6 md:px-12 text-center text-white">
-          <h1 className="text-3xl md:text-4xl lg:text-6xl">{title}</h1>
-          <div className="pointer-events-auto absolute bottom-6 w-[25%] min-w-[200px]">
-           <StyledSelect
-    value={selected}
-    onChange={setSelected}
-    options={[
-      { value: 'all', label: 'All Types' },
-      ...tags.map(t => ({ value: t.id as string, label: t.name as string })),
-    ]}
-  />
-          </div>
+          <motion.h1
+            className="text-3xl md:text-4xl lg:text-6xl"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+          >
+            {title}
+          </motion.h1>
+          <motion.div
+            className="pointer-events-auto absolute bottom-6 w-[25%] min-w-[200px]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <StyledSelect
+              value={selected}
+              onChange={setSelected}
+              options={[
+                { value: 'all', label: 'All Types' },
+                ...tags.map((t) => ({ value: t.id as string, label: t.name as string })),
+              ]}
+            />
+          </motion.div>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 py-14">
+      <motion.section
+        className="container mx-auto px-4 py-14"
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
         {loading ? (
           (() => {
             const skeletonCount = limit ?? 6
@@ -275,7 +296,7 @@ const NewsHeroFilter: React.FC<NewsHeroFilterBlock> = ({
             )}
           </>
         )}
-      </section>
+      </motion.section>
     </>
   )
 }

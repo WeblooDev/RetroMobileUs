@@ -1,17 +1,14 @@
 // src/blocks/SponsorsFilterGrid/Component.tsx
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import type {
-  SponsorsFilterGrid as SponsorsFilterGridBlock, 
-  Media,
-} from '@/payload-types'
+import type { SponsorsFilterGrid as SponsorsFilterGridBlock, Media } from '@/payload-types'
 import SponsorsFilterClient from './SponsorsFilterClient'
 
 export default async function SponsorsFilterGrid(props: SponsorsFilterGridBlock) {
   const payload = await getPayload({ config })
 
   const { docs: allCats } = await payload.find({
-    collection: 'partnerCategories', 
+    collection: 'partnerCategories',
     limit: 1000,
     depth: 0,
   })
@@ -23,7 +20,7 @@ export default async function SponsorsFilterGrid(props: SponsorsFilterGridBlock)
   }))
 
   const { docs: partners } = await payload.find({
-    collection: 'partners', 
+    collection: 'partners',
     limit: 1000,
     depth: 1,
   })

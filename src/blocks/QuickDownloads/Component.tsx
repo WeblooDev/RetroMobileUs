@@ -1,11 +1,13 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import Image from "next/image"
-import { useCallback } from "react"
-import type { QuickDownloads as QuickDownloadsBlock } from "@/payload-types"
-import { Media } from "@/components/Media"
-import downloadIcon from "../../../public/download.svg"
+import Link from 'next/link'
+import Image from 'next/image'
+import { useCallback } from 'react'
+import { motion } from 'framer-motion'
+import type { QuickDownloads as QuickDownloadsBlock } from '@/payload-types'
+import { Media } from '@/components/Media'
+import downloadIcon from '../../../public/download.svg'
+import { fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 const QuickDownloads: React.FC<QuickDownloadsBlock> = ({ title, items }) => {
   const rows = items ?? []
@@ -15,35 +17,50 @@ const QuickDownloads: React.FC<QuickDownloadsBlock> = ({ title, items }) => {
       const res = await fetch(url)
       const blob = await res.blob()
       const objectUrl = URL.createObjectURL(blob)
-      const a = document.createElement("a")
+      const a = document.createElement('a')
       a.href = objectUrl
-      a.download = suggestedName || url.split("/").pop() || "download"
+      a.download = suggestedName || url.split('/').pop() || 'download'
       document.body.appendChild(a)
       a.click()
       a.remove()
       URL.revokeObjectURL(objectUrl)
     } catch (e) {
-      console.error("Download failed:", e)
-      window.open(url, "_blank", "noopener,noreferrer")
+      console.error('Download failed:', e)
+      window.open(url, '_blank', 'noopener,noreferrer')
     }
   }, [])
 
   return (
     <section className="container py-12 md:py-20">
-      <h2 className="text-3xl md:text-5xl leading-tight mb-20">{title}</h2>
+      <motion.h2
+        className="text-3xl md:text-5xl leading-tight mb-20"
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
+        {title}
+      </motion.h2>
 
-      <div className="mt-6 md:mt-10 space-y-10 md:space-y-14">
+      <motion.div
+        className="mt-6 md:mt-10 space-y-10 md:space-y-14"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
         {rows.map((row, i) => {
-          const fileObj = (row?.file && typeof row.file === "object" ? (row.file as any) : undefined)
+          const fileObj = row?.file && typeof row.file === 'object' ? (row.file as any) : undefined
           const fileUrl: string | undefined = fileObj?.url
           const externalUrl: string | undefined = row?.externalUrl || undefined
-          const label = row?.linkLabel || "DOWNLOAD"
+          const label = row?.linkLabel || 'DOWNLOAD'
           const newTab = row?.newTab
 
           return (
-            <div
+            <motion.div
               key={row?.id ?? i}
               className="flex justify-between items-center gap-6 md:gap-10 w-full"
+              variants={staggerItem}
             >
               <div className="flex items-center gap-6 md:gap-10 w-[70%]">
                 <div className="w-[50%] relative aspect-[429/237] overflow-hidden rounded-md">
@@ -51,9 +68,7 @@ const QuickDownloads: React.FC<QuickDownloadsBlock> = ({ title, items }) => {
                 </div>
                 <div className="flex flex-col items-start justify-start w-[50%] gap-4">
                   {row?.subtitle && (
-                    <h3 className="text-base md:text-xl tracking-wide uppercase">
-                      {row.subtitle}
-                    </h3>
+                    <h3 className="text-base md:text-xl tracking-wide uppercase">{row.subtitle}</h3>
                   )}
                   {row?.description && (
                     <p className="mt-2 text-sm md:text-base text-black max-w-prose">
@@ -84,7 +99,7 @@ const QuickDownloads: React.FC<QuickDownloadsBlock> = ({ title, items }) => {
                 ) : externalUrl ? (
                   <Link
                     href={externalUrl}
-                    {...(newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    {...(newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                     className="inline-flex items-center gap-2 text-sm md:text-base underline underline-offset-[6px] decoration-black/40 hover:decoration-black transition"
                     aria-label={label}
                   >
@@ -100,10 +115,10 @@ const QuickDownloads: React.FC<QuickDownloadsBlock> = ({ title, items }) => {
                   </Link>
                 ) : null}
               </div>
-            </div>
+            </motion.div>
           )
         })}
-      </div>
+      </motion.div>
     </section>
   )
 }

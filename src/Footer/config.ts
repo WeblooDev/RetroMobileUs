@@ -124,8 +124,7 @@ export const Footer: GlobalConfig = {
       type: 'text',
       required: false,
       admin: {
-        description:
-          'Enter full copyright line (e.g., © 2025 Your Brand. All rights reserved.)',
+        description: 'Enter full copyright line (e.g., © 2025 Your Brand. All rights reserved.)',
       },
     },
     {

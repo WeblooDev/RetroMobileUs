@@ -40,9 +40,7 @@ export default async function FaqTabs(props: FaqTabsBlock) {
   let dbCategories: DbCat[] = []
 
   if (props.categories && props.categories.length > 0) {
-    const ids = props.categories.map((c: any) =>
-      typeof c === 'string' ? c : String(c?.id ?? c),
-    )
+    const ids = props.categories.map((c: any) => (typeof c === 'string' ? c : String(c?.id ?? c)))
 
     const docs = await findAll<FaqCategory>(payload, {
       collection: 'faqCategories',
@@ -58,7 +56,7 @@ export default async function FaqTabs(props: FaqTabsBlock) {
         id: String(d.id),
         name: d.name ?? '',
       }))
-      .sort((a, b) => (orderMap.get(a.id)! - orderMap.get(b.id)!))
+      .sort((a, b) => orderMap.get(a.id)! - orderMap.get(b.id)!)
   } else {
     const docs = await findAll<FaqCategory>(payload, {
       collection: 'faqCategories',
@@ -86,10 +84,7 @@ export default async function FaqTabs(props: FaqTabsBlock) {
     const faqs = await findAll<Faq>(payload, {
       collection: 'faqs',
       where: {
-        and: [
-          { category: { equals: dbCat.id } },
-          { _status: { equals: 'published' } },
-        ],
+        and: [{ category: { equals: dbCat.id } }, { _status: { equals: 'published' } }],
       },
       sort: 'order',
       depth: 0,
@@ -118,7 +113,7 @@ export default async function FaqTabs(props: FaqTabsBlock) {
 
   return (
     <FaqTabsClient
-      categories={categories as [CatLite, ...CatLite[]]} 
+      categories={categories as [CatLite, ...CatLite[]]}
       itemsByCategory={itemsByCategory}
       accentColor={accentColor}
     />

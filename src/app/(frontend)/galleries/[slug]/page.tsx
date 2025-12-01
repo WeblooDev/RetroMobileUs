@@ -23,10 +23,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   const { docs } = await payload.find({
     collection: 'galleries',
     where: {
-      and: [
-        { slug: { equals: slug } },
-        { _status: { equals: 'published' } },
-      ],
+      and: [{ slug: { equals: slug } }, { _status: { equals: 'published' } }],
     },
     sort: '-createdAt',
     depth: 2,

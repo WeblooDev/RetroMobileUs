@@ -92,7 +92,6 @@ import ImageLeftTextRightSimple from './ImageLeftTextRightSimple/Component'
 import DarkRichText from './DarkRichText/Component'
 import HubspotFormBlock from './HubspotFormBlock/Component'
 
-
 const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
@@ -157,10 +156,10 @@ const blockComponents = {
   newsHeroFilter: NewsHeroFilter,
   blogTwoColumn: BlogTwoColumn,
   banner: BannerBlock,
-    inlineInfo: InlineInfo,
-    imageLeftTextRight: ImageLeftTextRight,
-    ticketIncludes: TicketIncludes,
-    helpfulReminders: HelpfulReminders,
+  inlineInfo: InlineInfo,
+  imageLeftTextRight: ImageLeftTextRight,
+  ticketIncludes: TicketIncludes,
+  helpfulReminders: HelpfulReminders,
   floorPlan: FloorPlan,
   stayClose: StayClose,
   travelCards: TravelCardsComponent,
@@ -173,30 +172,17 @@ const blockComponents = {
   teamGrid: TeamGridComponent,
   imageTitle: ImageTitle,
   contactCards: ContactCards,
-  programHighlight: ProgramHighlight, 
+  programHighlight: ProgramHighlight,
   numberedListMedia: NumberedListMedia,
-  
+
   galleriesList: GalleriesList,
   faqTabs: FaqTabs,
   imageCardGrid: ImageCardGrid,
-    textH2TextH2Text: TextH2TextH2Text,
-      textLeftImageRight: TextLeftImageRight,
-      imageLeftTextRightSimple: ImageLeftTextRightSimple,
-      darkRichText: DarkRichText,
-      hubspotFormBlock: HubspotFormBlock,
-
-
-
-        
- 
-  
-
-
-
-
-
-
-
+  textH2TextH2Text: TextH2TextH2Text,
+  textLeftImageRight: TextLeftImageRight,
+  imageLeftTextRightSimple: ImageLeftTextRightSimple,
+  darkRichText: DarkRichText,
+  hubspotFormBlock: HubspotFormBlock,
 }
 
 export const RenderBlocks: React.FC<{

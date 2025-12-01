@@ -17,7 +17,7 @@ export const StayClose: Block = {
       name: 'description',
       type: 'textarea',
       label: 'Description',
-       required: true, 
+      required: true,
       admin: { rows: 3 },
       defaultValue:
         'We’ve partnered with nearby hotels offering exclusive rates. All are within walking distance of the venue.',
@@ -26,7 +26,7 @@ export const StayClose: Block = {
       name: 'slides',
       type: 'array',
       label: 'Carousel Slides',
-      required: true, 
+      required: true,
       minRows: 1,
       maxRows: 12,
       fields: [
@@ -45,7 +45,6 @@ export const StayClose: Block = {
         { title: 'Rally Ready' },
       ],
     },
-  
   ],
 }
 

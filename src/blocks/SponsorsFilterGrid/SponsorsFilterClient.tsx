@@ -46,10 +46,11 @@ export default function SponsorsFilterClient({
               const bg = mediaUrl(p.backgroundImage)
               const logo = mediaUrl(p.logo)
               return (
-                <article key={p.id} className="group relative overflow-hidden rounded border border-[#B9B9B9] bg-white">
+                <article
+                  key={p.id}
+                  className="group relative overflow-hidden rounded border border-[#B9B9B9] bg-white"
+                >
                   <div className="relative aspect-[280/100] w-full flex flex-col justify-center items-center">
-                  
-
                     <div className="relative px-4">
                       <Image
                         src={logo}

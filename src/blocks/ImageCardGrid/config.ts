@@ -1,42 +1,42 @@
-import type { Block } from "payload"
-import { link } from "@/fields/link"
+import type { Block } from 'payload'
+import { link } from '@/fields/link'
 
 export const ImageCardGrid: Block = {
-  slug: "imageCardGrid",
-  interfaceName: "ImageCardGrid",
-  labels: { singular: "Image Card Grid", plural: "Image Card Grids" },
+  slug: 'imageCardGrid',
+  interfaceName: 'ImageCardGrid',
+  labels: { singular: 'Image Card Grid', plural: 'Image Card Grids' },
   fields: [
     {
-      name: "title",
-      type: "text",
+      name: 'title',
+      type: 'text',
       required: true,
-      label: "Title",
+      label: 'Title',
     },
     {
-      name: "items",
-      type: "array",
+      name: 'items',
+      type: 'array',
       required: true,
       minRows: 1,
-      labels: { singular: "Card", plural: "Cards" },
+      labels: { singular: 'Card', plural: 'Cards' },
       fields: [
         {
-          name: "image",
-          type: "upload",
-          relationTo: "media",
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
           required: true,
-          label: "Image",
+          label: 'Image',
         },
         {
-          name: "text",
-          type: "text",
+          name: 'text',
+          type: 'text',
           required: true,
-          label: "Text under image",
+          label: 'Text under image',
         },
         link({
           overrides: {
-            name: "link",
-            label: "Image Link",
-            required: true, 
+            name: 'link',
+            label: 'Image Link',
+            required: true,
           },
         }),
       ],

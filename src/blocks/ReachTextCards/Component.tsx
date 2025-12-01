@@ -1,13 +1,21 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import type { ReachTextCards as ReachTextCardsBlock } from '@/payload-types'
+import { fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 const ReachTextCards: React.FC<ReachTextCardsBlock> = ({ title, description, cards }) => {
   const items = cards ?? []
 
   return (
     <section className="w-full">
-      <div className="container pt-10 md:pt-16">
+      <motion.div
+        className="container pt-10 md:pt-16"
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
         <h2 className="text-2xl md:text-3xl lg:text-4xl ">{title}</h2>
         <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-[minmax(0,560px)_1fr] items-start gap-6">
           {description ? (
@@ -17,10 +25,16 @@ const ReachTextCards: React.FC<ReachTextCardsBlock> = ({ title, description, car
           )}
           <div className="hidden md:block h-px w-full self-center bg-black/10 mt-6 md:mt-3" />
         </div>
-      </div>
+      </motion.div>
 
       <div className="container py-10 md:py-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
           {items.map((card, i) => {
             const bg =
               typeof card.backgroundColor === 'string' && card.backgroundColor.trim()
@@ -32,18 +46,19 @@ const ReachTextCards: React.FC<ReachTextCardsBlock> = ({ title, description, car
                 : '#FFFFFF'
 
             return (
-              <div
+              <motion.div
                 key={i}
                 className="flex items-center justify-center text-center px-6 md:px-10 py-10 md:py-14"
                 style={{ backgroundColor: bg }}
+                variants={staggerItem}
               >
                 <h3 className="font-ivar text-lg md:text-xl " style={{ color }}>
                   {card.text}
                 </h3>
-              </div>
+              </motion.div>
             )
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -4,7 +4,7 @@ import { slugField } from '@/fields/slug'
 export const Galleries: CollectionConfig = {
   slug: 'galleries',
   labels: { singular: 'Gallery', plural: 'Galleries' },
-  admin: { useAsTitle: 'title', defaultColumns: ['title','slug','updatedAt'] },
+  admin: { useAsTitle: 'title', defaultColumns: ['title', 'slug', 'updatedAt'] },
   fields: [
     { name: 'title', type: 'text', required: true },
     {
@@ -29,7 +29,7 @@ export const Galleries: CollectionConfig = {
 
     {
       name: 'readMore',
-   
+
       type: 'group',
       fields: [
         { name: 'url', type: 'text' },

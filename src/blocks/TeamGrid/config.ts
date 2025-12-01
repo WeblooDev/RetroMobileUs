@@ -50,7 +50,7 @@ export const TeamGrid: Block = {
           name: 'hobDescription',
           type: 'text',
           label: 'Hob Description',
-          required: false, 
+          required: false,
         },
         {
           name: 'email',

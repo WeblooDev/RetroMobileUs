@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { Media } from '@/components/Media'
 import type { BlogTwoColumn as BlogTwoColumnBlock } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import { fadeInLeft, fadeInRight, staggerContainer, staggerItem } from '@/utilities/animations'
 
 const RelatedCard: React.FC<{ p: any }> = ({ p }) => (
   <Link href={`/news/${p?.slug}`} className="group block overflow-hidden rounded-xl border">
@@ -25,7 +29,13 @@ const BlogTwoColumn: React.FC<BlogTwoColumnBlock> = ({ left, right }) => {
 
   return (
     <section className="container mx-auto flex gap-10">
-      <div className="prose prose-neutral max-w-none w-[60%]">
+      <motion.div
+        className="prose prose-neutral max-w-none w-[60%]"
+        variants={fadeInLeft}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
         {left?.map((slice: any, idx: any) => {
           if (slice.blockType === 'textSlice') {
             return (
@@ -58,16 +68,24 @@ const BlogTwoColumn: React.FC<BlogTwoColumnBlock> = ({ left, right }) => {
           }
           return null
         })}
-      </div>
+      </motion.div>
 
-      <aside className="space-y-4 w-[40%]">
-        <h3 className="mb-4 text-lg font-semibold">Related</h3>
-        <div className="grid gap-6">
+      <motion.aside
+        className="space-y-4 w-[40%]"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
+        <motion.h3 className="mb-4 text-lg font-semibold" variants={staggerItem}>
+          Related
+        </motion.h3>
+        <motion.div className="grid gap-6" variants={staggerItem}>
           {related.slice(0, 3).map((p: any) => (
             <RelatedCard key={p?.id ?? p?.slug} p={p} />
           ))}
-        </div>
-      </aside>
+        </motion.div>
+      </motion.aside>
     </section>
   )
 }

@@ -27,9 +27,7 @@ export const generateMeta = async (args: {
 
   const ogImage = getImageURL(doc?.meta?.image)
 
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Retromobile'
-    : 'Retromobile'
+  const title = doc?.meta?.title ? doc?.meta?.title + ' | Retromobile' : 'Retromobile'
 
   // Generate canonical URL from slug
   const pathname = doc?.slug === 'home' ? '/' : `/${doc?.slug || ''}`

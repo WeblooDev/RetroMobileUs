@@ -2,7 +2,7 @@ import type { Block } from 'payload'
 
 export const CenteredHero: Block = {
   slug: 'centeredHero',
-  interfaceName: 'CenteredHero', 
+  interfaceName: 'CenteredHero',
   labels: { singular: 'Centered Hero', plural: 'Centered Heroes' },
   fields: [
     {

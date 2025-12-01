@@ -1,12 +1,16 @@
+'use client'
+
 import type { StaticImageData } from 'next/image'
 
 import { cn } from '@/utilities/ui'
 import React from 'react'
+import { motion } from 'framer-motion'
 import RichText from '@/components/RichText'
 
 import type { MediaBlock as MediaBlockProps } from '@/payload-types'
 
 import { Media } from '../../components/Media'
+import { imageReveal, fadeInUp } from '@/utilities/animations'
 
 type Props = MediaBlockProps & {
   breakout?: boolean
@@ -33,7 +37,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
   if (media && typeof media === 'object') caption = media.caption
 
   return (
-    <div
+    <motion.div
       className={cn(
         '',
         {
@@ -41,6 +45,10 @@ export const MediaBlock: React.FC<Props> = (props) => {
         },
         className,
       )}
+      variants={imageReveal}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-50px' }}
     >
       {(media || staticImage) && (
         <Media
@@ -50,7 +58,7 @@ export const MediaBlock: React.FC<Props> = (props) => {
         />
       )}
       {caption && (
-        <div
+        <motion.div
           className={cn(
             'mt-6',
             {
@@ -58,10 +66,11 @@ export const MediaBlock: React.FC<Props> = (props) => {
             },
             captionClassName,
           )}
+          variants={fadeInUp}
         >
           <RichText data={caption} enableGutter={false} />
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   )
 }

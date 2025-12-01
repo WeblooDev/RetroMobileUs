@@ -19,7 +19,7 @@ export default function StyledSelect({
   const btnRef = useRef<HTMLButtonElement | null>(null)
   const listRef = useRef<HTMLUListElement | null>(null)
 
-  const current = options.find(o => o.value === value) ?? options[0]!
+  const current = options.find((o) => o.value === value) ?? options[0]!
 
   useEffect(() => {
     const onDoc = (e: MouseEvent) => {
@@ -43,7 +43,7 @@ export default function StyledSelect({
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open}
-        onClick={() => setOpen(o => !o)}
+        onClick={() => setOpen((o) => !o)}
         className="w-full rounded-full border border-[#8B9B5C] bg-white px-4 md:px-5 py-2 md:py-3 pr-12
                    text-left text-xl md:text-2xl text-black shadow transition-colors duration-200 !font-ivar
                    hover:bg-[#8B9B5C] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#8B9B5C]/40"
@@ -62,7 +62,7 @@ export default function StyledSelect({
           role="listbox"
           className="absolute z-50 mt-2 max-h-60 w-full overflow-auto rounded-xl border  border-[#8B9B5C] bg-white shadow-lg"
         >
-          {options.map(opt => {
+          {options.map((opt) => {
             const active = opt.value === value
             return (
               <li key={opt.value}>
