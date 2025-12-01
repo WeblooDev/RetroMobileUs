@@ -52,7 +52,6 @@ export const Media: CollectionConfig = {
       'video/ogg',
       'video/*',
       'application/pdf',
-
     ],
     adminThumbnail: 'thumbnail',
     focalPoint: true,

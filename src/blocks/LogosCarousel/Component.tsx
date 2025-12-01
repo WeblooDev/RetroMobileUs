@@ -2,13 +2,10 @@
 
 import * as React from 'react'
 import Image from 'next/image'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  type CarouselApi,
-} from '@/components/ui/carousel'
+import { motion } from 'framer-motion'
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
 import type { LogosCarousel as LogosCarouselBlock, Media } from '@/payload-types'
+import { fadeInUp } from '@/utilities/animations'
 
 const mediaUrl = (m: Media) => (m as any)?.url as string
 const mediaAlt = (m: Media) =>
@@ -24,7 +21,13 @@ export default function LogosCarousel({ items }: LogosCarouselBlock) {
   const next = () => api?.scrollNext()
 
   return (
-    <section className="py-20">
+    <motion.section
+      className="py-20"
+      variants={fadeInUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-50px' }}
+    >
       <div className="container mx-auto relative">
         <button
           type="button"
@@ -58,7 +61,7 @@ export default function LogosCarousel({ items }: LogosCarouselBlock) {
         <Carousel
           opts={{ align: 'start', containScroll: 'trimSnaps', loop: true }}
           setApi={setApi}
-          className="px-10" 
+          className="px-10"
         >
           <CarouselContent className="-ml-8">
             {logos.map((row, i) => {
@@ -89,6 +92,6 @@ export default function LogosCarousel({ items }: LogosCarouselBlock) {
           </CarouselContent>
         </Carousel>
       </div>
-    </section>
+    </motion.section>
   )
 }

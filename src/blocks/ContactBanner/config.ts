@@ -19,7 +19,7 @@ export const ContactBanner: Block = {
       type: 'text',
       label: 'Subtitle (optional)',
     },
-  
+
     {
       name: 'phone',
       type: 'text',

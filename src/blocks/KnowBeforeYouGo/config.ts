@@ -41,7 +41,6 @@ export const KnowBeforeYouGo: Block = {
           label: 'Card Image',
         },
       ],
- 
     },
 
     linkGroup({

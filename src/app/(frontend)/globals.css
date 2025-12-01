@@ -20,8 +20,9 @@
   }
 }
 
-html { scroll-behavior: smooth; }
-
+html {
+  scroll-behavior: smooth;
+}
 
 @layer base {
   * {
@@ -48,18 +49,14 @@ html { scroll-behavior: smooth; }
   font-display: swap;
 }
 
-
-.prose :where(strong):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+.prose :where(strong):not(:where([class~='not-prose'], [class~='not-prose'] *)) {
   color: black;
 }
-  
-
 
 /* DEBUG – this should be obvious if CSS is applied */
 #hubspot-newsletter-form .hs-input {
   border: 2px solid red !important;
 }
-
 
 /* Wrapper form spacing */
 .hero-hubspot-form-wrapper form {
@@ -98,7 +95,7 @@ html { scroll-behavior: smooth; }
 /* Submit button – match your olive CTA */
 #hubspot-newsletter-form .hs_submit .hs-button {
   margin-top: 2rem;
-  background-color: #7b8d53 !important;  /* same olive as header */
+  background-color: #7b8d53 !important; /* same olive as header */
   color: #ffffff !important;
   border-radius: 4px !important;
   padding: 0.9rem 2.5rem !important;
@@ -106,7 +103,9 @@ html { scroll-behavior: smooth; }
   font-size: 18px !important;
   font-weight: 600 !important;
   cursor: pointer;
-  transition: opacity 150ms ease, transform 150ms ease;
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease;
 }
 
 #hubspot-newsletter-form .hs_submit .hs-button:hover {

@@ -19,7 +19,7 @@ export type CMSLinkType = {
   type?: 'custom' | 'reference' | null
   url?: string | null
   children?: React.ReactNode
-  ariaLabel?: string 
+  ariaLabel?: string
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {

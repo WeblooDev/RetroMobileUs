@@ -97,9 +97,7 @@ export default function FaqTabsClient({
                 id={qId}
                 aria-expanded={isOpen}
                 aria-controls={aId}
-                onClick={() =>
-                  setOpenIdx((prev) => (prev === globalIndex ? -1 : globalIndex))
-                }
+                onClick={() => setOpenIdx((prev) => (prev === globalIndex ? -1 : globalIndex))}
                 className="w-full flex items-center justify-between gap-6 px-5 md:px-7 py-5 md:py-8 text-left"
               >
                 <span className="text-base md:text-lg lg:text-2xl">{row.question}</span>
@@ -156,7 +154,7 @@ export default function FaqTabsClient({
               'font-ivar px-4 py-2 border text-sm md:text-base',
               page === 1
                 ? 'border-gray-300 text-gray-400 cursor-not-allowed'
-              : 'border-black hover:bg-black hover:text-white',
+                : 'border-black hover:bg-black hover:text-white',
             )}
           >
             Previous

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import type { Car, CarsCarousel as CarsCarouselTypes } from '@/payload-types'
 
 import {
@@ -16,6 +17,7 @@ import InventoryHeader from '@/components/Inventory/InventoryHeader'
 import CarCardSkeleton from '@/components/Inventory/CarCardSkeleton'
 import { ArrowRight } from 'lucide-react'
 import { CMSLink } from '@/components/Link'
+import { fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 export const CarsCarousel: React.FC<CarsCarouselTypes> = ({ title, subTitle }) => {
   const [cars, setCars] = useState<Car[]>([])
@@ -48,11 +50,23 @@ export const CarsCarousel: React.FC<CarsCarouselTypes> = ({ title, subTitle }) =
   }, [])
 
   return (
-    <section className="container">
+    <motion.section
+      className="container"
+      variants={fadeInUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-50px' }}
+    >
       <div className="w-full flex flex-col gap-2 lg:gap-4 pt-4 lg:pt-8">
         <InventoryHeader title={title} description={subTitle} icons />
         {!isLoading && (
-          <div className="flex justify-end w-full items-center text-xl font-inter lg:text-2xl">
+          <motion.div
+            className="flex justify-end w-full items-center text-xl font-inter lg:text-2xl"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <CMSLink
               type="custom"
               url="/inventory"
@@ -64,10 +78,16 @@ export const CarsCarousel: React.FC<CarsCarouselTypes> = ({ title, subTitle }) =
               </p>
               <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
             </CMSLink>
-          </div>
+          </motion.div>
         )}
         {/* Car collection */}
-        <div className="relative p-0 m-0 flex flex-col w-full overflow-hidden">
+        <motion.div
+          className="relative p-0 m-0 flex flex-col w-full overflow-hidden"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <Carousel
             plugins={[plugin.current]}
             opts={{
@@ -104,9 +124,9 @@ export const CarsCarousel: React.FC<CarsCarouselTypes> = ({ title, subTitle }) =
               <CarouselNext />
             </div>
           </Carousel>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

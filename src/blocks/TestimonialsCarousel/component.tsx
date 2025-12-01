@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
 import type { EmblaCarouselType } from 'embla-carousel'
+import { fadeIn, fadeInUp } from '@/utilities/animations'
 
 type Testimonial = {
   id: string
@@ -83,7 +85,12 @@ const TestimonialCarouselBlock: React.FC<TestimonialCarouselProps> = ({
   return (
     <div className="relative w-full overflow-hidden h-full min-h-screen">
       {/* Background image */}
-      <div className="absolute inset-0 z-0">
+      <motion.div
+        className="absolute inset-0 z-0"
+        variants={fadeIn}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="w-full h-full bg-black/50">
           <Image
             src={backgroundImage?.url}
@@ -93,9 +100,14 @@ const TestimonialCarouselBlock: React.FC<TestimonialCarouselProps> = ({
             priority
           />
         </div>
-      </div>
+      </motion.div>
 
-      <div className="relative z-10 px-4 py-20 md:py-20 max-w-full sm:max-w-[90%] mx-auto">
+      <motion.div
+        className="relative z-10 px-4 py-20 md:py-20 max-w-full sm:max-w-[90%] mx-auto"
+        variants={fadeInUp}
+        initial="hidden"
+        animate="visible"
+      >
         <div className="flex justify-center items-center">
           <Carousel
             setApi={(api) => {
@@ -209,7 +221,7 @@ const TestimonialCarouselBlock: React.FC<TestimonialCarouselProps> = ({
             </CarouselContent>
           </Carousel>
         </div>
-      </div>
+      </motion.div>
     </div>
   )
 }

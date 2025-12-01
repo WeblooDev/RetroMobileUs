@@ -1,6 +1,8 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import type { WhenToVisit as WhenToVisitBlock, Media } from '@/payload-types'
+import { fadeIn, fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 const WhenToVisit: React.FC<WhenToVisitBlock> = ({
   backgroundImage,
@@ -11,7 +13,7 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
   openHour,
   closeHour,
   bandColor,
-  subtitle
+  subtitle,
 }) => {
   const bgUrl =
     backgroundImage && typeof backgroundImage === 'object'
@@ -23,18 +25,32 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
   return (
     <section className="container relative w-full">
       {bgUrl && (
-        <div
+        <motion.div
           className="relative w-full h-[550px] lg:h-[600px] bg-cover bg-center"
           style={{ backgroundImage: `url(${bgUrl})` }}
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
           <div className="absolute inset-0 bg-black/45" />
 
-          <div className="absolute inset-x-0 top-10 md:top-10 flex justify-center px-6">
+          <motion.div
+            className="absolute inset-x-0 top-10 md:top-10 flex justify-center px-6"
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+          >
             <h2 className="text-3xl md:text-4xl lg:text-6xl text-white text-center">{title}</h2>
-          </div>
-          <div
+          </motion.div>
+          <motion.div
             className="absolute  left-0 right-0"
             style={{ top: '50%', transform: 'translateY(-50%)', backgroundColor: band }}
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
           >
             <div className="flex flex-col lg:flex-row items-center text-white justify-center">
               <div className="flex-1 px-6 md:px-10 py-6 md:py-8 flex items-start gap-6 justify-center">
@@ -60,13 +76,20 @@ const WhenToVisit: React.FC<WhenToVisitBlock> = ({
                 </div>
               </div> */}
             </div>
-          </div>
+          </motion.div>
 
-
-          <div className="absolute inset-x-0 bottom-10 md:bottom-10 flex justify-center px-6">
-            <h2 className="text-base md:text-lg lg:text-2xl text-white text-center w-[90%] md:w-[80%] lg:w-[60%]">{subtitle}</h2>
-          </div>
-        </div>
+          <motion.div
+            className="absolute inset-x-0 bottom-10 md:bottom-10 flex justify-center px-6"
+            variants={fadeInUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+          >
+            <h2 className="text-base md:text-lg lg:text-2xl text-white text-center w-[90%] md:w-[80%] lg:w-[60%]">
+              {subtitle}
+            </h2>
+          </motion.div>
+        </motion.div>
       )}
     </section>
   )

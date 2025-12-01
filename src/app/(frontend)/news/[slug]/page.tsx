@@ -55,9 +55,11 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
                 )}
                 <div className="absolute inset-0 flex items-center w-full">
                   <div className="container mx-auto text-white">
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl w-full lg:w-[75%]">{hero.title}</h1>
-                    
-                    {hero.description && ( 
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl w-full lg:w-[75%]">
+                      {hero.title}
+                    </h1>
+
+                    {hero.description && (
                       <p className="mt-3 max-w-2xl text-white text-sm">{hero.description}</p>
                     )}
                   </div>
@@ -74,7 +76,10 @@ export default async function NewsDetailPage({ params }: { params: Promise<{ slu
               .filter(Boolean) as Post[]
 
             return (
-              <section key={i} className="container mx-auto flex flex-col lg:flex-row justify-between gap-10">
+              <section
+                key={i}
+                className="container mx-auto flex flex-col lg:flex-row justify-between gap-10"
+              >
                 <div className="prose prose-neutral w-full lg:w-[60%] max-w-none">
                   {left.map((slice, idx) => {
                     if (slice.blockType === 'textSlice') {

@@ -21,7 +21,7 @@ export const ImageLeftTextRightSimple: Block = {
     {
       name: 'paragraph2',
       type: 'textarea',
-      required: false,  
+      required: false,
       label: 'Paragraph 2',
     },
   ],

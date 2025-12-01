@@ -6,7 +6,7 @@ export const PartnerCategories: CollectionConfig = {
   admin: { useAsTitle: 'name' },
   fields: [
     { name: 'name', type: 'text', required: true },
-    { name: 'slug', type: 'text', required: true, unique: true }, 
+    { name: 'slug', type: 'text', required: true, unique: true },
   ],
   timestamps: true,
 }

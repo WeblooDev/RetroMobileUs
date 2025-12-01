@@ -39,9 +39,7 @@ export default function SimpleTicketTest() {
 
           <section className="border p-6 rounded">
             <h2 className="text-2xl font-semibold mb-4">Standard Button</h2>
-            <button className=" px-6 py-3 bg-purple-600 text-white rounded">
-              Standard Button
-            </button>
+            <button className=" px-6 py-3 bg-purple-600 text-white rounded">Standard Button</button>
           </section>
 
           <section className="border p-6 rounded bg-yellow-50">

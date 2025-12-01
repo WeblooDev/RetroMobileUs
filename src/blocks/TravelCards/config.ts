@@ -33,8 +33,7 @@ export const TravelCards: Block = {
           label: 'Description',
           admin: { rows: 3 },
           required: true,
-          defaultValue:
-            'Easy access from I-10 and US-101.\nPaid parking available nearby.',
+          defaultValue: 'Easy access from I-10 and US-101.\nPaid parking available nearby.',
         },
         {
           name: 'image',

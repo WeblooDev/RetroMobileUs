@@ -248,8 +248,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 TextLeftImageRight,
                 ImageLeftTextRightSimple,
                 DarkRichText,
-                HubspotFormBlock
-       
+                HubspotFormBlock,
               ],
               required: true,
               admin: {

@@ -1,9 +1,11 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import { Media } from '@/components/Media'
 import { CTAButton } from '@/components/Button/CTAButton'
 import type { Media as MediaType } from '@/payload-types'
+import { fadeInLeft, fadeInRight, fadeIn } from '@/utilities/animations'
 
 type VideoBlockProps = {
   title: string
@@ -82,10 +84,22 @@ export const VideoBlockComponent: React.FC<VideoBlockProps> = ({
   return (
     <section className="p-4 md:p-8 ">
       <div className="flex flex-col items-center my-8 md:flex-row md:justify-between gap-8 md:my-16">
-        <div className="md:w-2/5">
+        <motion.div
+          className="md:w-2/5"
+          variants={fadeInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
           <h2 className=" text-4xl md:text-6xl xl:text-7xl">{title}</h2>
-        </div>
-        <div className="md:w-2/5 flex flex-col items-start">
+        </motion.div>
+        <motion.div
+          className="md:w-2/5 flex flex-col items-start"
+          variants={fadeInRight}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
           <p className="font-inter text-sm md:text-base mb-4">{text}</p>
           <CTAButton
             href={buttonLink || '#'}
@@ -93,13 +107,17 @@ export const VideoBlockComponent: React.FC<VideoBlockProps> = ({
             variant="transparent-light"
             arrow
           />
-        </div>
+        </motion.div>
       </div>
 
-      <div
+      <motion.div
         ref={containerRef}
         className="w-full h-[40vh] lg:h-screen relative overflow-hidden"
         onMouseMove={handleMagnet}
+        variants={fadeIn}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
       >
         {video ? (
           <Media
@@ -159,7 +177,7 @@ export const VideoBlockComponent: React.FC<VideoBlockProps> = ({
           )}
           {isPlaying ? 'PAUSE' : 'PLAY NOW'}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

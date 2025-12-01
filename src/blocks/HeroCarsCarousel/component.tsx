@@ -2,6 +2,7 @@
 
 import type React from 'react'
 import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import {
   Carousel,
   CarouselContent,
@@ -11,6 +12,7 @@ import {
 } from '@/components/ui/carousel'
 import type { Car } from '@/payload-types'
 import { CarCarouselItem } from '@/components/CarCarouselItem/CarCarouselItem'
+import { fadeIn } from '@/utilities/animations'
 
 interface HeroCarsCarouselProps {
   inventoryStyle?: boolean
@@ -53,26 +55,28 @@ export const HeroCarsCarousel: React.FC<HeroCarsCarouselProps> = ({ inventorySty
   }
 
   return (
-    <Carousel className="w-full h-full  relative">
-      <CarouselContent>
-        {cars.map((car, index) => (
-          <CarouselItem key={car.id || index}>
-            <CarCarouselItem car={car} index={index + 1} inventoryStyle={inventoryStyle} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
+    <motion.div variants={fadeIn} initial="hidden" animate="visible">
+      <Carousel className="w-full h-full  relative">
+        <CarouselContent>
+          {cars.map((car, index) => (
+            <CarouselItem key={car.id || index}>
+              <CarCarouselItem car={car} index={index + 1} inventoryStyle={inventoryStyle} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
 
-      <CarouselPrevious
-        className={`absolute ${
-          inventoryStyle ? 'left-4 md:left-[11%]' : 'left-4'
-        } top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white border-none z-20`}
-      />
+        <CarouselPrevious
+          className={`absolute ${
+            inventoryStyle ? 'left-4 md:left-[11%]' : 'left-4'
+          } top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white border-none z-20`}
+        />
 
-      <CarouselNext
-        className={`absolute ${
-          inventoryStyle ? 'right-4 md:right-[11%]' : 'right-4'
-        } top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white border-none z-20`}
-      />
-    </Carousel>
+        <CarouselNext
+          className={`absolute ${
+            inventoryStyle ? 'right-4 md:right-[11%]' : 'right-4'
+          } top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white border-none z-20`}
+        />
+      </Carousel>
+    </motion.div>
   )
 }

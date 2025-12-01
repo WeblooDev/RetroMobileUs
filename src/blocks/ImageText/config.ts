@@ -2,7 +2,7 @@ import type { Block } from 'payload'
 
 export const ImageText: Block = {
   slug: 'imageText',
-  interfaceName: 'ImageText', 
+  interfaceName: 'ImageText',
   labels: {
     singular: 'Image + Text',
     plural: 'Image + Text Blocks',

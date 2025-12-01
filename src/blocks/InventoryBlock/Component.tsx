@@ -3,12 +3,14 @@
 import type React from 'react'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import { motion } from 'framer-motion'
 import type { Brand, Car, InventoryBlock as InventoryBlockProps } from '@/payload-types'
 import CarCardSkeleton from '@/components/Inventory/CarCardSkeleton'
 import InventoryHeader from '@/components/Inventory/InventoryHeader'
 import InventoryFilters, { type CarFilters } from '@/components/Inventory/InventoryFilters'
 import InventoryCarsDisplay from '@/components/Inventory/InventoryCarsDisplay'
 import { FilteredInventoryBlock } from '@/components/CurrentSpecials/FilteredInventoryBlock'
+import { fadeInUp } from '@/utilities/animations'
 
 // Types for inventory counts
 export interface BrandCount {
@@ -190,9 +192,13 @@ export const InventoryBlock: React.FC<ExtendedInventoryBlockProps> = ({
 
   // Standard InventoryBlock logic for non-URL filtering
   return (
-    <section
+    <motion.section
       className="w-full flex flex-col h-full container gap-4 lg:gap-6 xl:gap-8 2xl:gap-10  mb-8"
       ref={topRef}
+      variants={fadeInUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-100px' }}
     >
       <InventoryHeader title={title} description={description} />
 
@@ -233,7 +239,7 @@ export const InventoryBlock: React.FC<ExtendedInventoryBlockProps> = ({
           handleNextPage={handleNextPage}
         />
       )}
-    </section>
+    </motion.section>
   )
 }
 

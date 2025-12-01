@@ -17,8 +17,8 @@ export const PostsCarousel: Block = {
       overrides: {
         name: 'viewAll',
         label: 'View All Button',
-        required: true,        
-        minRows: 1,         
+        required: true,
+        minRows: 1,
         maxRows: 1,
         defaultValue: [
           {

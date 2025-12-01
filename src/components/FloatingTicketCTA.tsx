@@ -17,7 +17,6 @@ export default function FloatingTicketCTA({
   openAtVh = 80,
   buyUrl = '#',
 }: Props) {
-
   const [minimized, setMinimized] = useState(true)
   const [showContent, setShowContent] = useState(false)
   const [showLine, setShowLine] = useState(true)
@@ -93,7 +92,7 @@ export default function FloatingTicketCTA({
     () => () => {
       clearTimers()
     },
-    []
+    [],
   )
 
   // ✅ no "if (!mounted) return null"
@@ -141,11 +140,7 @@ export default function FloatingTicketCTA({
               ref={contentRef}
               className="flex flex-col gap-2 transition-all duration-500 ease-out"
               style={{
-                maxHeight: showContent
-                  ? contentMax
-                    ? `${contentMax}px`
-                    : '1000px'
-                  : 0,
+                maxHeight: showContent ? (contentMax ? `${contentMax}px` : '1000px') : 0,
                 opacity: showContent ? 1 : 0,
                 transform: showContent ? 'scale(1)' : 'scale(0.98)',
               }}
@@ -154,7 +149,7 @@ export default function FloatingTicketCTA({
 
               <CMSLink
                 type="custom"
-                url='https://unitytickets.com/se/RETROMOBILE2026/Ticket'
+                url="https://unitytickets.com/se/RETROMOBILE2026/Ticket"
                 newTab={true}
                 ariaLabel="Buy tickets"
                 className=" inline-flex items-center gap-2 text-base underline-offset-4 hover:underline"

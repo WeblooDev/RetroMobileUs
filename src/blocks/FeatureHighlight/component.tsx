@@ -1,5 +1,15 @@
+'use client'
+
 import { CTAButton } from '@/components/Button/CTAButton'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
+import {
+  fadeInLeft,
+  fadeInRight,
+  staggerContainer,
+  staggerItem,
+  imageReveal,
+} from '@/utilities/animations'
 
 type Feature = {
   title: string
@@ -39,10 +49,17 @@ export default function FeatureHighlight({
           imagePosition === 'right' ? 'lg:grid-cols-2' : 'lg:grid-cols-2 lg:grid-flow-dense'
         }`}
       >
-        <div className={`space-y-2 ${imagePosition === 'right' ? 'lg:order-1' : 'lg:order-2'}`}>
-          <div
+        <motion.div
+          className={`space-y-2 ${imagePosition === 'right' ? 'lg:order-1' : 'lg:order-2'}`}
+          variants={imagePosition === 'right' ? fadeInRight : fadeInLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+        >
+          <motion.div
             className="relative w-full rounded-lg overflow-hidden"
             style={{ aspectRatio: aspectRatio }}
+            variants={imageReveal}
           >
             <Image
               src={image.url}
@@ -52,13 +69,22 @@ export default function FeatureHighlight({
               priority
               quality={100}
             />
-          </div>
-        </div>
-        <div
+          </motion.div>
+        </motion.div>
+        <motion.div
           className={`space-y-4 flex flex-col gap-6 justify-between h-full ${imagePosition === 'right' ? 'lg:order-2' : 'lg:order-1'}`}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
         >
-          <h2 className="text-4xl  leading-tight sm:text-5xl md:text-6xl ">{heading}</h2>
-          <div className="space-y-6 divide-y divide-white ">
+          <motion.h2
+            className="text-4xl  leading-tight sm:text-5xl md:text-6xl "
+            variants={staggerItem}
+          >
+            {heading}
+          </motion.h2>
+          <motion.div className="space-y-6 divide-y divide-white " variants={staggerItem}>
             {features.map((feature, index) => (
               <div key={index} className={index === 0 ? 'pt-0' : 'pt-6'}>
                 <h3 className="text-3xl  leading-tight">{feature.title}</h3>
@@ -67,13 +93,13 @@ export default function FeatureHighlight({
                 </p>
               </div>
             ))}
-          </div>
+          </motion.div>
           {button?.label && button?.href && (
-            <div className="flex justify-start">
+            <motion.div className="flex justify-start" variants={staggerItem}>
               <CTAButton href={button.href} text={button.label} variant="transparent-light" />
-            </div>
+            </motion.div>
           )}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

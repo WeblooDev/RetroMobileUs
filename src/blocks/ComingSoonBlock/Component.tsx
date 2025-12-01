@@ -1,10 +1,12 @@
 'use client'
 
 import React from 'react'
+import { motion } from 'framer-motion'
 import { Media } from '@/components/Media'
 import type { ComingSoonBlock as ComingSoonBlockType, Media as MediaType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { CountdownTimer } from '@/blocks/ComingSoonBlock/countdown-timer'
+import { fadeIn, staggerContainer, staggerItem, heroTitle } from '@/utilities/animations'
 
 function daysInMonth(year: number, month1to12: number) {
   return new Date(year, month1to12, 0).getDate()
@@ -52,50 +54,64 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
 
   return (
     <main className="relative min-h-screen overflow-hidden">
-      {bg && <MediaBackdrop bg={bg} />}
+      {bg && (
+        <motion.div variants={fadeIn} initial="hidden" animate="visible">
+          <MediaBackdrop bg={bg} />
+        </motion.div>
+      )}
 
       <div className="container relative z-10 mx-auto mt-[80px] flex min-h-screen flex-col justify-center gap-12 lg:gap-0 lg:mt-0">
-        <div className="flex max-w-3xl flex-col items-start">
-          <h2 className="mt-[80px] mb-6 text-4xl text-white md:text-6xl">{title}</h2>
+        <motion.div
+          className="flex max-w-3xl flex-col items-start"
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h2
+            className="mt-[80px] mb-6 text-4xl text-white md:text-6xl"
+            variants={heroTitle}
+          >
+            {title}
+          </motion.h2>
 
-          <div className="flex flex-col gap-4 sm:flex-row">
+          <motion.div className="flex flex-col gap-4 sm:flex-row" variants={staggerItem}>
             {primaryButton?.url && primaryButton?.label && (
-  <CMSLink
-    {...primaryButton }
-    appearance="olive"
-    size="ctaBig"
- 
-  />
-)}
+              <CMSLink {...primaryButton} appearance="olive" size="ctaBig" />
+            )}
 
-{secondaryButton?.url && secondaryButton?.label && (
-  <CMSLink
-    {...secondaryButton}
-    appearance="outlineWhite"
-    size="ctaBig"
-  />
-)}
+            {secondaryButton?.url && secondaryButton?.label && (
+              <CMSLink {...secondaryButton} appearance="outlineWhite" size="ctaBig" />
+            )}
+          </motion.div>
+        </motion.div>
 
-          </div>
-        </div>
-
-        <div className="absolute bottom-8 right-8 hidden md:block">
+        <motion.div
+          className="absolute bottom-8 right-8 hidden md:block"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
           <CountdownTimer
             targetDate={targetDate}
             topText={norm(countdownTopText)}
             displayDayOverride={norm(displayDayOverride)}
             displayMonthYearOverride={norm(displayMonthYearOverride)}
           />
-        </div>
+        </motion.div>
 
-        <div className="mt-12 md:hidden">
+        <motion.div
+          className="mt-12 md:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <CountdownTimer
             targetDate={targetDate}
             topText={norm(countdownTopText)}
             displayDayOverride={norm(displayDayOverride)}
             displayMonthYearOverride={norm(displayMonthYearOverride)}
           />
-        </div>
+        </motion.div>
       </div>
     </main>
   )

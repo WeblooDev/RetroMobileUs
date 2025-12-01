@@ -14,4 +14,4 @@ export const HubspotFormBlock: Block = {
   ],
 }
 
-export default HubspotFormBlock 
+export default HubspotFormBlock

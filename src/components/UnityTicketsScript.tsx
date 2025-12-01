@@ -6,7 +6,11 @@ export function UnityTicketsScript() {
   useEffect(() => {
     // Check if Unity Tickets is already loaded (by any page/component)
     // This prevents conflicts with test pages that load their own script
-    if ((window as any).unity_tixpub || document.getElementById('tixpub-embed') || document.getElementById('tixpub-simple')) {
+    if (
+      (window as any).unity_tixpub ||
+      document.getElementById('tixpub-embed') ||
+      document.getElementById('tixpub-simple')
+    ) {
       console.log('Unity Tickets already loaded, skipping duplicate load')
       return
     }

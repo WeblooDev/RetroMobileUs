@@ -50,7 +50,6 @@ export function CountdownTimer({
           </h2>
         )}
 
-
         {/* Month + Year */}
         <div className="flex items-end gap-0 md:gap-2">
           {displayMonthYearOverride ? (
@@ -68,7 +67,9 @@ export function CountdownTimer({
 
       <div className="flex flex-col justify-center text-white gap-2">
         <div className="flex items-center justify-start gap-2 flex-col ">
-          <h3 className="text-3xl md:text-5xl lg:text-7xl py-2 px-4 bg-[#8B9B5C] rounded-xl">{pad(timeLeft.days)}</h3>
+          <h3 className="text-3xl md:text-5xl lg:text-7xl py-2 px-4 bg-[#8B9B5C] rounded-xl">
+            {pad(timeLeft.days)}
+          </h3>
           <h3 className="text-base md:text-xl font-light uppercase">Days</h3>
         </div>
       </div>

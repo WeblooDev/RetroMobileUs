@@ -1,10 +1,12 @@
 'use client'
 import { CTAButton } from '@/components/Button/CTAButton'
 import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Phone } from 'lucide-react'
+import { fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 interface JourneyCTAPropsType {
   title: string
@@ -44,14 +46,26 @@ export default function JourneyCTA({
 
   return (
     <>
-      <section className="container">
-        <div className="flex flex-col gap-6 max-w-4xl px-4 py-10 md:py-16">
-          <div className="flex flex-col gap-6">
+      <motion.section
+        className="container"
+        variants={fadeInUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
+        <motion.div
+          className="flex flex-col gap-6 max-w-4xl px-4 py-10 md:py-16"
+          variants={staggerContainer}
+        >
+          <motion.div className="flex flex-col gap-6" variants={staggerItem}>
             <h2 className="text-4xl md:text-6xl  font-medium">{title}</h2>
             <p className="max-w-md text-sm md:text-base font-inter">{description}</p>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col items-start justify-start sm:flex-row gap-4">
+          <motion.div
+            className="flex flex-col items-start justify-start sm:flex-row gap-4"
+            variants={staggerItem}
+          >
             {buttons.map((button, i) => {
               return (
                 <CTAButton
@@ -64,9 +78,9 @@ export default function JourneyCTA({
                 />
               )
             })}
-          </div>
-        </div>
-      </section>
+          </motion.div>
+        </motion.div>
+      </motion.section>
 
       {/* Contact Modal using shadcn Dialog */}
       <Dialog open={showContactModal} onOpenChange={setShowContactModal}>

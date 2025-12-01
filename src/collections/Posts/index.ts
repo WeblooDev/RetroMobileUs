@@ -85,13 +85,13 @@ const Posts: CollectionConfig<'posts'> = {
       admin: { description: 'Short description for the card' },
     },
 
-     {
+    {
       name: 'readMore',
       label: 'Read more (override)',
       type: 'group',
       admin: { description: 'If set, clicking the card uses this link (external or internal).' },
       fields: [
-        { name: 'url', label: 'URL', type: 'text' },             
+        { name: 'url', label: 'URL', type: 'text' },
         { name: 'newTab', label: 'Open in new tab', type: 'checkbox', defaultValue: true },
       ],
     },

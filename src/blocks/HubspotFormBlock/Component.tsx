@@ -2,15 +2,16 @@
 
 import * as React from 'react'
 import { useEffect } from 'react'
+import { motion } from 'framer-motion'
 import type { HubspotFormBlock as HubspotFormBlockType } from '@/payload-types'
+import { fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
 
 export default function HubspotFormBlock(props: HubspotFormBlockType) {
   const { title, text } = props
 
   useEffect(() => {
     const scriptSrc = 'https://js.hsforms.net/forms/v2.js'
-    const targetSelector =
-      '#hubspot-form-ed24bcc0-2a50-4bd0-bacf-fc4fd4338434'
+    const targetSelector = '#hubspot-form-ed24bcc0-2a50-4bd0-bacf-fc4fd4338434'
 
     function createForm() {
       if (typeof window === 'undefined') return
@@ -21,7 +22,7 @@ export default function HubspotFormBlock(props: HubspotFormBlockType) {
       // avoid duplicate forms on re-renders
       targetEl.innerHTML = ''
 
-      const w = window 
+      const w = window
       if (!w.hbspt || !w.hbspt.forms) return
 
       w.hbspt.forms.create({
@@ -160,9 +161,7 @@ export default function HubspotFormBlock(props: HubspotFormBlockType) {
       })
     }
 
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      `script[src="${scriptSrc}"]`,
-    )
+    const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${scriptSrc}"]`)
 
     if (existingScript) {
       createForm()
@@ -179,22 +178,28 @@ export default function HubspotFormBlock(props: HubspotFormBlockType) {
   }, [])
 
   return (
-    <section id='contact-form' className=" my-16 px-4 py-12 bg-[#F1F1F1]">
-      <div className="container mx-auto flex flex-col gap-2 items-center text-center">
-        <h2 className="mb-4 text-2xl md:text-3xl lg:text-4xl ">
+    <section id="contact-form" className=" my-16 px-4 py-12 bg-[#F1F1F1]">
+      <motion.div
+        className="container mx-auto flex flex-col gap-2 items-center text-center"
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
+        <motion.h2 className="mb-4 text-2xl md:text-3xl lg:text-4xl " variants={staggerItem}>
           {title}
-        </h2>
+        </motion.h2>
 
         {text && (
-          <p className="mb-8  text-base lg:text-lg">
+          <motion.p className="mb-8  text-base lg:text-lg" variants={staggerItem}>
             {text}
-          </p>
+          </motion.p>
         )}
 
-        <div className="hero-hubspot-form-wrapper w-full  ">
-          <div id="hubspot-form-ed24bcc0-2a50-4bd0-bacf-fc4fd4338434"  />
-        </div>
-      </div>
+        <motion.div className="hero-hubspot-form-wrapper w-full  " variants={staggerItem}>
+          <div id="hubspot-form-ed24bcc0-2a50-4bd0-bacf-fc4fd4338434" />
+        </motion.div>
+      </motion.div>
     </section>
   )
 }

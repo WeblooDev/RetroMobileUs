@@ -2,13 +2,15 @@
 
 import * as React from 'react'
 import { useEffect } from 'react'
-import type { ImageHero as ImageHeroBlock, Media } from '@/payload-types'
+import { motion } from 'framer-motion'
+import type { ImageHero as ImageHeroBlock, Media as MediaType } from '@/payload-types'
+import { Media } from '@/components/Media'
+import { heroTitle, heroSubtitle, fadeIn } from '@/utilities/animations'
 
 export default function ImageHero(props: ImageHeroBlock) {
   const { backgroundImage, title, description } = props
 
-  const bg = backgroundImage as Media | null
-  const bgUrl = (bg as any)?.url as string | undefined
+  const bg = backgroundImage as MediaType | null
 
   useEffect(() => {
     const scriptSrc = 'https://js.hsforms.net/forms/v2.js'
@@ -151,9 +153,7 @@ export default function ImageHero(props: ImageHeroBlock) {
       })
     }
 
-    const existingScript = document.querySelector<HTMLScriptElement>(
-      `script[src="${scriptSrc}"]`,
-    )
+    const existingScript = document.querySelector<HTMLScriptElement>(`script[src="${scriptSrc}"]`)
 
     if (existingScript) {
       createForm()
@@ -171,27 +171,45 @@ export default function ImageHero(props: ImageHeroBlock) {
 
   return (
     <section className="container relative my-12 flex min-h-auto items-center px-4 py-20 md:min-h-[60vh] lg:min-h-[80vh]">
-      {bgUrl && (
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${bgUrl})` }}
+      {bg && (
+        <motion.div
+          className="absolute inset-0"
           aria-hidden
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
         >
+          <Media resource={bg} fill imgClassName="object-cover" />
           <div className="absolute inset-0 bg-black/50" />
-        </div>
+        </motion.div>
       )}
 
       <div className="relative z-10 w-[90%] px-6 lg:w-[60%]">
-        <h1 className="mb-6 text-3xl text-white md:text-4xl lg:text-5xl">
+        <motion.h1
+          className="mb-6 text-3xl text-white md:text-4xl lg:text-5xl"
+          variants={heroTitle}
+          initial="hidden"
+          animate="visible"
+        >
           {title}
-        </h1>
-        <p className="mb-8 w-[90%] text-base text-white lg:w-[70%] lg:text-lg">
+        </motion.h1>
+        <motion.p
+          className="mb-8 w-[90%] text-base text-white lg:w-[70%] lg:text-lg"
+          variants={heroSubtitle}
+          initial="hidden"
+          animate="visible"
+        >
           {description}
-        </p>
+        </motion.p>
 
-        <div className="hero-hubspot-form-wrapper max-w-[350px]">
+        <motion.div
+          className="hero-hubspot-form-wrapper max-w-[350px]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <div id="hubspot-newsletter-form" />
-        </div>
+        </motion.div>
       </div>
     </section>
   )

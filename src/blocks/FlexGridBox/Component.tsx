@@ -1,5 +1,8 @@
+'use client'
+
 import Image from 'next/image'
-import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { staggerContainer, staggerItem, imageReveal } from '@/utilities/animations'
 
 // Define the type for each item in the grid
 interface GridItem {
@@ -42,21 +45,27 @@ export default function FlexGridBox({ matrix, className = '', gap = 4 }: FlexGri
 
   return (
     <section className="container mb-8 md:mb-10 lg:mb-12 xl:mb-14 2xl:mb-16 w-full h-full min-h-screen">
-      <div
+      <motion.div
         className={`flex flex-col w-full h-screen ${className}`}
         style={{ gap: `${gap * 0.25}rem` }}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-100px' }}
       >
         {matrix.slice(0, 2).map((row, rowIndex) => (
-          <div
+          <motion.div
             key={`row-${rowIndex}`}
             className="flex-col flex md:flex-row w-full h-1/2"
             style={{ gap: `${gap * 0.25}rem` }}
+            variants={staggerItem}
           >
             {row?.items?.map((item, colIndex) => (
-              <div
+              <motion.div
                 key={`item-${rowIndex}-${colIndex}`}
                 className={`flex justify-start relative overflow-hidden h-full bg-[${item?.bgColor}] ${getOrderClass(rowIndex, colIndex)} md:order-none`}
                 style={{ flex: item.flex }}
+                variants={imageReveal}
               >
                 {item?.img && (
                   <div className="absolute inset-0 z-0">
@@ -82,11 +91,11 @@ export default function FlexGridBox({ matrix, className = '', gap = 4 }: FlexGri
                     {item.subtitle}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   )
 }

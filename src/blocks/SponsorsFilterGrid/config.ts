@@ -8,9 +8,9 @@ export const SponsorsFilterGrid: Block = {
     {
       name: 'categories',
       type: 'relationship',
-      relationTo: 'partnerCategories', 
+      relationTo: 'partnerCategories',
       hasMany: true,
-      required: false, 
+      required: false,
       admin: {
         description:
           'Optional: pick a subset to highlight elsewhere. Tabs here will still show all categories.',

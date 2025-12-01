@@ -29,7 +29,7 @@ export const VideoCta: Block = {
       required: true,
       admin: { description: 'Plain text only.' },
     },
-     link({
+    link({
       overrides: {
         label: 'Button',
       },
