@@ -20,6 +20,8 @@ export type CMSLinkType = {
   url?: string | null
   children?: React.ReactNode
   ariaLabel?: string
+    onClick?: () => void
+
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
