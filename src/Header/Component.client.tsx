@@ -34,6 +34,10 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
     if (closeTimer.current) window.clearTimeout(closeTimer.current)
   }
 
+  const closeDesktopDropdown = () => {
+    setOpenDropdown(null)
+  }
+
   // Mobile menu state
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState<string | null>(null)
@@ -41,6 +45,23 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
   useEffect(() => {
     if (!mobileMenuOpen) setMobileOpenDropdown(null)
   }, [mobileMenuOpen])
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false)
+    setMobileOpenDropdown(null)
+  }
+
+  const handleMobileNavClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement | null
+    if (!target) return
+
+    const toggleBtn = target.closest('[data-role="submenu-toggle"]')
+    if (toggleBtn) return
+    const link = target.closest('a')
+    if (link) {
+      closeMobileMenu()
+    }
+  }
 
   return (
     <header
@@ -60,8 +81,8 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
         <div className="px-6 md:px-8 py-2">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link href="/" aria-label="Home">
-              <Media resource={logo} alt="Logo" priority imgClassName="h-auto w-auto" />
+            <Link href="/" aria-label="Home" onClick={closeMobileMenu}>
+              <Media resource={logo} alt="Logo" priority imgClassName="h-16 w-auto" />
             </Link>
 
             {/* Desktop nav */}
@@ -87,6 +108,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                       className="!font-ivar flex items-center gap-1 text-sm uppercase py-2 px-4 hover:bg-[#8B9B5C]"
                       onFocus={() => hasDropdown && open(label)}
                       onBlur={scheduleClose}
+                      onClick={closeDesktopDropdown}
                     >
                       <span>{label}</span>
                       {hasDropdown && <ChevronDown className="h-4 w-4" aria-hidden />}
@@ -117,6 +139,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                                 key={ddLink.label || j}
                                 {...ddLink}
                                 className="!font-ivar block text-[14px] hover:bg-[white] hover:text-black px-6 py-2 uppercase"
+                                onClick={closeDesktopDropdown}
                               >
                                 {ddLink.label}
                               </CMSLink>
@@ -157,7 +180,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-white/15">
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-4 py-6 space-y-4" onClick={handleMobileNavClick}>
               {(navItems ?? []).map((item, idx) => {
                 const mainLink = (item as any).link
                 const hasDropdown = (item.dropdownLinks?.length ?? 0) > 0
@@ -172,7 +195,6 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                           <CMSLink
                             {...mainLink}
                             className="block text-sm py-1 px-2 !font-ivar uppercase hover:underline hover:bg-[#8B9B5C] w-fit"
-                            onClick={() => setMobileMenuOpen(false)}
                           >
                             {label}
                           </CMSLink>
@@ -181,6 +203,7 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                             aria-expanded={isOpen}
                             aria-label={`Toggle ${label} submenu`}
                             className="p-2"
+                            data-role="submenu-toggle" 
                             onClick={(e) => {
                               e.preventDefault()
                               e.stopPropagation()
@@ -203,7 +226,6 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                                   key={ddLink.label || j}
                                   {...ddLink}
                                   className="block text-sm py-1 px-2 !font-ivar uppercase hover:underline hover:bg-[#8B9B5C] w-fit"
-                                  onClick={() => setMobileMenuOpen(false)}
                                 >
                                   {ddLink.label}
                                 </CMSLink>
@@ -216,7 +238,6 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
                       <CMSLink
                         {...mainLink}
                         className="block text-sm py-1 px-2 !font-ivar uppercase hover:underline hover:bg-[#8B9B5C] w-fit"
-                        onClick={() => setMobileMenuOpen(false)}
                       >
                         {label}
                       </CMSLink>
@@ -228,7 +249,12 @@ export default function HeaderClient({ logo, navItems, ctaLink, secondaryCTA, ba
               {/* Mobile CTAs */}
               <div className="pt-4 space-y-3 flex flex-col items-start">
                 {ctaLink?.link && (
-                  <CMSLink {...ctaLink.link} appearance="olive" size="ctaBig" className="w-full" />
+                  <CMSLink
+                    {...ctaLink.link}
+                    appearance="olive"
+                    size="ctaBig"
+                    className="w-full"
+                  />
                 )}
                 {secondaryCTA?.link && (
                   <CMSLink
