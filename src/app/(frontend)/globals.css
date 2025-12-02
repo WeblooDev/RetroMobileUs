@@ -28,6 +28,10 @@ html {
   * {
     @apply border-border;
   }
+  html,
+  body {
+    @apply overflow-x-hidden;
+  }
   body {
     @apply min-h-[100vh] flex flex-col;
   }
