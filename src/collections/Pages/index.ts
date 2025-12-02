@@ -105,6 +105,7 @@ import TextLeftImageRight from '@/blocks/TextLeftImageRight/config'
 import ImageLeftTextRightSimple from '@/blocks/ImageLeftTextRightSimple/config'
 import DarkRichText from '@/blocks/DarkRichText/config'
 import { HubspotFormBlock } from '@/blocks/HubspotFormBlock/config'
+import { CenteredText } from '@/blocks/CenteredTextBlock/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -249,6 +250,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ImageLeftTextRightSimple,
                 DarkRichText,
                 HubspotFormBlock,
+                CenteredText,
               ],
               required: true,
               admin: {
