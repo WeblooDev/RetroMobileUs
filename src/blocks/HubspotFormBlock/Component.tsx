@@ -103,13 +103,13 @@ export default function HubspotFormBlock(props: HubspotFormBlockType) {
 #hubspot-form-ed24bcc0-2a50-4bd0-bacf-fc4fd4338434 .hs-button {
   background-color: #8B9B5C !important;
   color: white !important;
-  padding: 14px 40px !important;
+  padding: 10px 30px !important;
   font-family: 'Ivar', serif !important;
   text-transform: uppercase !important;
   font-size: 20px !important;
   letter-spacing: 1px !important;
   border-radius: 50px !important;
-  border: none !important;
+  border: 1px solid #8B9B5C !important;
   display: block !important;
   margin: 40px auto 0 auto !important;
   cursor: pointer;
@@ -118,7 +118,11 @@ export default function HubspotFormBlock(props: HubspotFormBlockType) {
 }
 
 #hubspot-form-ed24bcc0-2a50-4bd0-bacf-fc4fd4338434 .hs-button:hover {
-  opacity: 0.85 !important;
+
+    background-color: white !important;
+    color: black !important;
+    border-color: #8B9B5C !important;
+
   transform: translateY(-2px);
 }
 

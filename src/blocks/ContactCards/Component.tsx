@@ -7,20 +7,12 @@ import { motion } from 'framer-motion'
 import { Media } from '@/components/Media'
 import { CMSLink } from '@/components/Link'
 import type { ContactCards as ContactCardsBlock } from '@/payload-types'
-import { fadeInUp, staggerContainer, staggerItem } from '@/utilities/animations'
+import { staggerContainer, staggerItem } from '@/utilities/animations'
 
-const ContactCards: React.FC<ContactCardsBlock> = ({ title, cards = [] }) => {
+const ContactCards: React.FC<ContactCardsBlock> = ({ cards = [] }) => {
   return (
-    <section className="container mx-auto px-4 py-10">
-      <motion.h2
-        className="mb-12 text-3xl md:text-4xl"
-        variants={fadeInUp}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
-      >
-        {title}
-      </motion.h2>
+    <section className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
+ 
 
       <motion.div
         className="grid grid-cols-1 gap-6 md:grid-cols-3"

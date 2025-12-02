@@ -403,6 +403,7 @@ export interface Page {
     | ImageLeftTextRightSimple
     | DarkRichText
     | HubspotFormBlock
+    | CenteredText
   )[];
   meta?: {
     title?: string | null;
@@ -2599,7 +2600,6 @@ export interface ImageTitle {
  * via the `definition` "ContactCards".
  */
 export interface ContactCards {
-  title: string;
   cards: {
     image: string | Media;
     cardTitle: string;
@@ -2822,6 +2822,16 @@ export interface HubspotFormBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'hubspotFormBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CenteredText".
+ */
+export interface CenteredText {
+  text: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'centeredText';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3530,6 +3540,7 @@ export interface PagesSelect<T extends boolean = true> {
         imageLeftTextRightSimple?: T | ImageLeftTextRightSimpleSelect<T>;
         darkRichText?: T | DarkRichTextSelect<T>;
         hubspotFormBlock?: T | HubspotFormBlockSelect<T>;
+        centeredText?: T | CenteredTextSelect<T>;
       };
   meta?:
     | T
@@ -4923,7 +4934,6 @@ export interface ImageTitleSelect<T extends boolean = true> {
  * via the `definition` "ContactCards_select".
  */
 export interface ContactCardsSelect<T extends boolean = true> {
-  title?: T;
   cards?:
     | T
     | {
@@ -5084,6 +5094,15 @@ export interface DarkRichTextSelect<T extends boolean = true> {
  */
 export interface HubspotFormBlockSelect<T extends boolean = true> {
   title?: T;
+  text?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CenteredText_select".
+ */
+export interface CenteredTextSelect<T extends boolean = true> {
   text?: T;
   id?: T;
   blockName?: T;

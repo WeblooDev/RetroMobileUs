@@ -8,13 +8,6 @@ export const ContactCards: Block = {
   labels: { singular: 'Contact Cards', plural: 'Contact Cards' },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
-      defaultValue: 'Contact Our:',
-      label: 'Section Title',
-    },
-    {
       name: 'cards',
       required: true,
       type: 'array',

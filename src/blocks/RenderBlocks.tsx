@@ -91,6 +91,7 @@ import TextLeftImageRight from './TextLeftImageRight/Component'
 import ImageLeftTextRightSimple from './ImageLeftTextRightSimple/Component'
 import DarkRichText from './DarkRichText/Component'
 import HubspotFormBlock from './HubspotFormBlock/Component'
+import CenteredText from './CenteredTextBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -183,6 +184,7 @@ const blockComponents = {
   imageLeftTextRightSimple: ImageLeftTextRightSimple,
   darkRichText: DarkRichText,
   hubspotFormBlock: HubspotFormBlock,
+  centeredText: CenteredText,
 }
 
 export const RenderBlocks: React.FC<{
