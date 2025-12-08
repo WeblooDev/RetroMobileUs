@@ -1,20 +1,32 @@
+import type { Metadata } from 'next'
+
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { cache } from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
 import type {
   Post,
+  Media as MediaType,
   BlogHero as BlogHeroBlock,
   BlogTwoColumn as BlogTwoColumnBlock,
   TextSlice as TextSliceBlock,
   ImageSlice as ImageSliceBlock,
   Tag,
+  Config,
 } from '@/payload-types'
 import { Media } from '@/components/Media'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
+import { getServerSideURL } from '@/utilities/getURL'
+import { generateCanonical } from '@/utilities/generateCanonical'
 
-async function getPost(slug: string): Promise<Post | undefined> {
+type Args = {
+  params: Promise<{ slug: string }>
+}
+
+const getPost = cache(async (slug: string): Promise<Post | null> => {
   const payload = await getPayload({ config: configPromise })
 
   const result = await payload.find({
@@ -28,13 +40,80 @@ async function getPost(slug: string): Promise<Post | undefined> {
     limit: 1,
   })
 
-  return (result.docs?.[0] as Post | undefined) ?? undefined
+  return (result.docs?.[0] as Post | undefined) ?? null
+})
+
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise })
+  const posts = await payload.find({
+    collection: 'posts',
+    draft: false,
+    limit: 1000,
+    overrideAccess: false,
+    pagination: false,
+    select: {
+      slug: true,
+    },
+  })
+
+  return posts.docs?.map(({ slug }) => ({ slug })) ?? []
+}
+
+const getImageURL = (image?: MediaType | Config['db']['defaultIDType'] | null): string => {
+  const serverUrl = getServerSideURL()
+
+  if (image && typeof image === 'object' && 'url' in image) {
+    const ogUrl = image.sizes?.og?.url
+    return ogUrl ? serverUrl + ogUrl : serverUrl + image.url
+  }
+
+  return serverUrl + '/mercedes-benz.webp'
+}
+
+export async function generateMetadata({ params }: Args): Promise<Metadata> {
+  const { slug } = await params
+  const post = await getPost(slug)
+
+  if (!post) {
+    return {
+      title: 'News | Retromobile',
+    }
+  }
+
+  // Use SEO fields with fallbacks to post data
+  const title = post.meta?.title || post.title
+  const description = post.meta?.description || post.excerpt || ''
+  const image = post.meta?.image || post.thumbnail
+  const ogImage = getImageURL(image as MediaType | null)
+  const canonicalUrl = generateCanonical(`/news/${slug}`)
+
+  return {
+    title: `${title} | Retromobile`,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: mergeOpenGraph({
+      type: 'article',
+      title: `${title} | Retromobile`,
+      description,
+      url: `/news/${slug}`,
+      images: [{ url: ogImage }],
+      publishedTime: post.publishedAt || undefined,
+    }),
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | Retromobile`,
+      description,
+      images: [ogImage],
+    },
+  }
 }
 
 const firstTagDoc = (tags?: (string | Tag)[]) =>
   tags?.find((t): t is Tag => !!t && typeof t !== 'string')
 
-export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function NewsDetailPage({ params }: Args) {
   const { slug } = await params
   const post = await getPost(slug)
   if (!post) return notFound()
