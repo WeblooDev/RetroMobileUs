@@ -2980,6 +2980,14 @@ export interface Gallery {
     url?: string | null;
     newTab?: boolean | null;
   };
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   slug?: string | null;
   slugLock?: boolean | null;
   publishedAt: string;
@@ -5435,6 +5443,13 @@ export interface GalleriesSelect<T extends boolean = true> {
     | {
         url?: T;
         newTab?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
       };
   slug?: T;
   slugLock?: T;

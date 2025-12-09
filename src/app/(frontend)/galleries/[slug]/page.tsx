@@ -1,7 +1,10 @@
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
+import { cache } from 'react'
 import config from '@/payload.config'
 import type { Gallery, Media as MediaType } from '@/payload-types'
+import { generateMeta } from '@/utilities/generateMeta'
 import GalleryLightbox from './lightbox'
 
 type GalleryPageParams = {
@@ -14,10 +17,7 @@ type GalleryPageProps = {
 
 type GalleryImageRow = NonNullable<Gallery['images']>[number]
 
-export default async function GalleryPage({ params }: GalleryPageProps) {
-  const { slug: rawSlug } = await params
-  const slug = rawSlug.trim()
-
+const queryGalleryBySlug = cache(async ({ slug }: { slug: string }) => {
   const payload = await getPayload({ config })
 
   const { docs } = await payload.find({
@@ -30,7 +30,23 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     limit: 1,
   })
 
-  const gallery = docs[0] as Gallery | undefined
+  return docs[0] as Gallery | undefined
+})
+
+export async function generateMetadata({ params }: GalleryPageProps): Promise<Metadata> {
+  const { slug: rawSlug } = await params
+  const slug = rawSlug.trim()
+  const gallery = await queryGalleryBySlug({ slug })
+
+  return generateMeta({ doc: gallery || null, collectionSlug: 'galleries' })
+}
+
+export default async function GalleryPage({ params }: GalleryPageProps) {
+  const { slug: rawSlug } = await params
+  const slug = rawSlug.trim()
+
+  const gallery = await queryGalleryBySlug({ slug })
+
   if (!gallery || !gallery.images || gallery.images.length === 0) {
     notFound()
   }

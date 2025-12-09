@@ -1,5 +1,12 @@
 import type { CollectionConfig } from 'payload'
 import { slugField } from '@/fields/slug'
+import {
+  MetaDescriptionField,
+  MetaImageField,
+  MetaTitleField,
+  OverviewField,
+  PreviewField,
+} from '@payloadcms/plugin-seo/fields'
 
 export const Galleries: CollectionConfig = {
   slug: 'galleries',
@@ -8,36 +15,65 @@ export const Galleries: CollectionConfig = {
   fields: [
     { name: 'title', type: 'text', required: true },
     {
-      name: 'intro',
-      label: 'Short description',
-      type: 'textarea',
-      required: true,
-      admin: { rows: 3 },
-    },
-    { name: 'thumbnail', type: 'upload', relationTo: 'media', required: true },
-
-    {
-      name: 'images',
-      type: 'array',
-      required: true,
-      labels: { singular: 'Image', plural: 'Images' },
-      fields: [
-        { name: 'image', type: 'upload', relationTo: 'media', required: true },
-        { name: 'caption', type: 'text' },
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'Content',
+          fields: [
+            {
+              name: 'intro',
+              label: 'Short description',
+              type: 'textarea',
+              required: true,
+              admin: { rows: 3 },
+            },
+            { name: 'thumbnail', type: 'upload', relationTo: 'media', required: true },
+            {
+              name: 'images',
+              type: 'array',
+              required: true,
+              labels: { singular: 'Image', plural: 'Images' },
+              fields: [
+                { name: 'image', type: 'upload', relationTo: 'media', required: true },
+                { name: 'caption', type: 'text' },
+              ],
+            },
+            {
+              name: 'readMore',
+              type: 'group',
+              fields: [
+                { name: 'url', type: 'text' },
+                { name: 'newTab', type: 'checkbox', defaultValue: false },
+              ],
+              admin: { description: 'Leave empty to use internal /galleries/[slug]' },
+            },
+          ],
+        },
+        {
+          name: 'meta',
+          label: 'SEO',
+          fields: [
+            OverviewField({
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+              imagePath: 'meta.image',
+            }),
+            MetaTitleField({
+              hasGenerateFn: true,
+            }),
+            MetaImageField({
+              relationTo: 'media',
+            }),
+            MetaDescriptionField({}),
+            PreviewField({
+              hasGenerateFn: true,
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+            }),
+          ],
+        },
       ],
     },
-
-    {
-      name: 'readMore',
-
-      type: 'group',
-      fields: [
-        { name: 'url', type: 'text' },
-        { name: 'newTab', type: 'checkbox', defaultValue: false },
-      ],
-      admin: { description: 'Leave empty to use internal /galleries/[slug]' },
-    },
-
     ...slugField(),
     {
       name: 'publishedAt',
