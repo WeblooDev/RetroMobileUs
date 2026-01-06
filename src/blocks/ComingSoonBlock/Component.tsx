@@ -12,11 +12,16 @@ function daysInMonth(year: number, month1to12: number) {
   return new Date(year, month1to12, 0).getDate()
 }
 
-function targetInNextYear(month1to12: number, day: number) {
+function targetInThisOrNextYear(month1to12: number, day: number) {
   const now = new Date()
-  const y = now.getFullYear() + 1
-  const safeDay = Math.min(day, daysInMonth(y, month1to12))
-  return new Date(y, month1to12 - 1, safeDay, 23, 59, 59)
+
+  const make = (year: number) => {
+    const safeDay = Math.min(day, daysInMonth(year, month1to12))
+    return new Date(year, month1to12 - 1, safeDay, 23, 59, 59)
+  }
+
+  const thisYear = make(now.getFullYear())
+  return thisYear.getTime() >= now.getTime() ? thisYear : make(now.getFullYear() + 1)
 }
 
 const norm = (s?: string | null) => (typeof s === 'string' && s.trim() ? s : undefined)
@@ -50,7 +55,7 @@ export const ComingSoonBlock: React.FC<ComingSoonBlockType> = ({
   displayMonthYearOverride,
 }) => {
   const bg = (backgroundImage as MediaType) || null
-  const targetDate = targetInNextYear(Number(countdownMonth), Number(countdownDay))
+const targetDate = targetInThisOrNextYear(Number(countdownMonth), Number(countdownDay))
 
   return (
     <main className="relative min-h-screen overflow-hidden">

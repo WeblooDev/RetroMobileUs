@@ -13,11 +13,15 @@ import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 import { UnityTicketsScript } from '@/components/UnityTicketsScript'
 import Script from 'next/script'
+import { FirstVisitPopup } from '@/components/FirstVisitPopup/FirstVisitPopup'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html className={cn(inter.variable)} lang="en" suppressHydrationWarning>
       <head>
+
+
+        
         {/* Google Tag Manager */}
         <Script
           id="gtm-t93hfvsb"
@@ -48,6 +52,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* End Google Tag Manager (noscript) */}
 
         <UnityTicketsScript />
+
+           <FirstVisitPopup
+            title="The Retromobile team wishes you a wonderful New Year"
+            description="SEE YOU IN NEW YORK IN 2026!"
+          />
+          
         <Providers>
           <Header />
           <BreadcrumbLayout>{children}</BreadcrumbLayout>
