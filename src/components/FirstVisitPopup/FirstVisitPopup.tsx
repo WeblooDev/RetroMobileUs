@@ -2,57 +2,28 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import confetti from 'canvas-confetti'
-import firstpop from '../../../public/firstpop.webp'
+import firstpop from '../../../public/popupimage.webp'
 import { cn } from '@/utilities/ui'
 
 export function FirstVisitPopup({
   storageKey = 'first_visit_popup_seen_v1',
-  title = 'The Retromobile team wishes you a wonderful New Year',
-  description = 'SEE YOU IN NEW YORK IN 2026!',
+  title = ' Meet the Retromobile Team in Paris !',
+
+  description = "We'll be there January 27 - February 1st to celebrate Retromobile 50th.",
+  description2 = 'Come meet us on booth # 7.3C 062.',
+
   imageAlt = 'Welcome',
 }: {
   storageKey?: string
   title?: string
   description?: string
+  description2?: string
+
   imageAlt?: string
 }) {
   const [mounted, setMounted] = useState(false)
   const [open, setOpen] = useState(false)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
-
-  // Confetti helpers
-  const confettiIntervalRef = useRef<number | null>(null)
-  const burst = () => {
-    // 2 quick bursts (nice effect)
-    confetti({ particleCount: 90, spread: 70, origin: { y: 0.65 } })
-    confetti({ particleCount: 70, spread: 120, origin: { y: 0.6 } })
-  }
-
-  const startConfetti = () => {
-    burst()
-    const start = Date.now()
-    confettiIntervalRef.current = window.setInterval(() => {
-      const elapsed = Date.now() - start
-      if (elapsed > 1800) {
-        stopConfetti()
-        return
-      }
-      confetti({
-        particleCount: 12,
-        spread: 80,
-        startVelocity: 22,
-        origin: { x: Math.random(), y: 0.1 },
-      })
-    }, 180)
-  }
-
-  const stopConfetti = () => {
-    if (confettiIntervalRef.current) {
-      window.clearInterval(confettiIntervalRef.current)
-      confettiIntervalRef.current = null
-    }
-  }
 
   useEffect(() => {
     setMounted(true)
@@ -67,13 +38,7 @@ export function FirstVisitPopup({
 
   useEffect(() => {
     if (!mounted) return
-    if (open) {
-      closeBtnRef.current?.focus()
-      startConfetti()
-    } else {
-      stopConfetti()
-    }
-    return () => stopConfetti()
+    if (open) closeBtnRef.current?.focus()
   }, [open, mounted])
 
   // ESC to close
@@ -101,7 +66,7 @@ export function FirstVisitPopup({
   return (
     <div
       className={cn(
-        'fixed inset-0 z-[2147483647] flex items-center justify-center p-4',
+        'fixed inset-0 z-[2147483647] flex items-center justify-center p-3',
         open ? 'pointer-events-auto' : 'pointer-events-none',
       )}
       aria-hidden={!open}
@@ -120,7 +85,7 @@ export function FirstVisitPopup({
         role="dialog"
         aria-modal="true"
         className={cn(
-          'relative w-full max-w-[640px] overflow-hidden rounded-2xl bg-[#8B9B5C] shadow-2xl transform transition-all duration-300 ease-out',
+          'relative w-full max-w-[600px] overflow-hidden rounded-2xl bg-[#8B9B5C]/80 shadow-2xl transform transition-all duration-300 ease-out',
           open ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-3 scale-[0.98] opacity-0',
         )}
       >
@@ -134,26 +99,19 @@ export function FirstVisitPopup({
           ✕
         </button>
 
-        <div className="flex flex-col items-center text-center">
-          <p className="text-base md:text-lg font-semibold text-white p-6">{title}</p>
-
-       <div className="w-full px-8">
-            <div className="relative w-full overflow-hidden rounded-3xl aspect-[847/686]">
-                <Image
-                src={firstpop}
-                alt={imageAlt}
-                fill
-                sizes="(max-width: 768px) 100vw, 640px"
-                className="object-cover"
-                priority
-                />
+        <div className="flex flex-col items-center text-center gap-6 p-4">
+          <div className="w-full px-8">
+            <div className="mx-auto relative overflow-hidden  aspect-[399/567] max-h-[567px]">
+              <Image src={firstpop} alt={imageAlt} fill className="object-cover" priority />
             </div>
-            </div>
+          </div>
 
+          <div className="flex flex-col p-2">
+            <p className="text-base md:text-2xl  text-white ">{title}</p>
 
-          <p className="mt-3 text-sm md:text-2xl font-bold leading-relaxed text-white p-6">
-            {description}
-          </p>
+            <p className="text-sm md:text-base  text-white">{description}</p>
+            <p className="text-sm md:text-base  text-white">{description2}</p>
+          </div>
         </div>
       </div>
     </div>

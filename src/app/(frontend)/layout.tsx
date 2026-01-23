@@ -53,10 +53,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         <UnityTicketsScript />
 
-           <FirstVisitPopup
-            title="The Retromobile team wishes you a wonderful New Year"
-            description="SEE YOU IN NEW YORK IN 2026!"
-          />
+           <FirstVisitPopup          />
           
         <Providers>
           <Header />
