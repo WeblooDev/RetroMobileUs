@@ -2,39 +2,34 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import firstpop from '../../../public/popupimage.webp'
+import rightArrow from '../../../public/right-arrow.svg'
 import { cn } from '@/utilities/ui'
+import { P } from 'node_modules/framer-motion/dist/types.d-DagZKalS'
 
 export function FirstVisitPopup({
-  storageKey = 'first_visit_popup_seen_v1',
+  storageKey = 'first_visit_popup_seen_v1', // kept for compatibility, but no longer used
   title = ' Meet the Retromobile Team in Paris !',
-
   description = "We'll be there January 27 - February 1st to celebrate Retromobile 50th.",
   description2 = 'Come meet us on booth # 7.3C 062.',
-
   imageAlt = 'Welcome',
 }: {
   storageKey?: string
   title?: string
   description?: string
   description2?: string
-
   imageAlt?: string
 }) {
   const [mounted, setMounted] = useState(false)
   const [open, setOpen] = useState(false)
   const closeBtnRef = useRef<HTMLButtonElement | null>(null)
 
+  // Show on every refresh
   useEffect(() => {
     setMounted(true)
-    try {
-      const seen = window.localStorage.getItem(storageKey)
-      if (!seen) {
-        setOpen(true)
-        window.localStorage.setItem(storageKey, '1')
-      }
-    } catch {}
-  }, [storageKey])
+    setOpen(true)
+  }, [])
 
   useEffect(() => {
     if (!mounted) return
@@ -101,16 +96,39 @@ export function FirstVisitPopup({
 
         <div className="flex flex-col items-center text-center gap-6 p-4">
           <div className="w-full px-8">
-            <div className="mx-auto relative overflow-hidden  aspect-[399/567] max-h-[567px]">
+            <div className="mx-auto relative overflow-hidden aspect-[399/567] max-h-[567px]">
               <Image src={firstpop} alt={imageAlt} fill className="object-cover" priority />
             </div>
           </div>
 
           <div className="flex flex-col p-2">
-            <p className="text-base md:text-2xl  text-white ">{title}</p>
+            <p className="text-base md:text-2xl text-white">{title}</p>
+            <p className="text-sm md:text-base text-white">{description}</p>
+            <p className="text-sm md:text-base text-white">{description2}</p>
+          </div>
 
-            <p className="text-sm md:text-base  text-white">{description}</p>
-            <p className="text-sm md:text-base  text-white">{description2}</p>
+          <div className="pb-2">
+            <Link
+              href="https://calendly.com/d/ct8k-fdn-zp6/meet-the-retromobile-new-york-team?month=2026-01"
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                'group inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm md:text-base text-white transition',
+              )}
+            >
+              <p className="text-xs md:text-base underline-offset-4 group-hover:underline text-black">
+                Schedule a meeting with our sales team here
+              </p>
+
+              <span className="relative inline-flex h-4 w-4">
+                <Image
+                  src={rightArrow}
+                  alt=""
+                  fill
+                  className="object-contain transition-transform duration-200 group-hover:translate-x-[2px]"
+                />
+              </span>
+            </Link>
           </div>
         </div>
       </div>
